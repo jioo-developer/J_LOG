@@ -16,4 +16,10 @@ export const input = css`
     color: gray;
     font-size: calc(var(--fontsize-small) * 1.2);
   }
+
+  & + span {
+    font-size: var(--fontsize-small);
+    color: #ff0b00d1;
+    padding-left: 5px;
+  }
 `;

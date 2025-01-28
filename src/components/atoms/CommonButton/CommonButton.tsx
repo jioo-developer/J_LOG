@@ -1,5 +1,4 @@
 /** @jsxImportSource @emotion/react */
-import { css } from "@emotion/react";
 import { buttonVariants, themes } from "./CommonButtonStyle";
 import { ReactNode } from "react";
 interface CommonButtonProps {

@@ -1,16 +1,21 @@
 "use client";
 
-import { useState, ReactNode } from "react";
+import { ReactNode } from "react";
 
-function CommonCheckbox({ childrens }: { childrens: ReactNode[] }) {
-  const [toggle, setToggle] = useState(false);
+type propsType = {
+  childrens: ReactNode[];
+  stateValue: boolean;
+  setStateHanlder: (stateValue: boolean) => void;
+};
+
+function CommonCheckbox({ childrens, stateValue, setStateHanlder }: propsType) {
   return (
     <button
       type="button"
       className="check__toggle"
-      onClick={() => setToggle(!toggle)}
+      onClick={() => setStateHanlder(!stateValue)}
     >
-      {toggle ? childrens[0] : childrens[1]}
+      {stateValue ? childrens[0] : childrens[1]}
     </button>
   );
 }
