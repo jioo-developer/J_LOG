@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { LoginErrorHandler } from "./loginErrorHandler";
-import { Postlogin } from "./postLogin";
+import { LoginErrorHandler } from "../error";
+import { Postlogin } from "../postLogin";
+import { useRouter } from "next/navigation";
 
 type propsType = {
   id: string;
@@ -8,6 +9,7 @@ type propsType = {
 };
 // 로그인 실행 관련 로직
 const useLoginHook = () => {
+  const router = useRouter();
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: ({ id, pw }: propsType) => {
@@ -17,12 +19,15 @@ const useLoginHook = () => {
       await queryClient.invalidateQueries({
         queryKey: ["getuser"],
       });
+      router.push("/");
     },
     onError: (error) => {
       const errorMessage = LoginErrorHandler(error.message);
       if (errorMessage) {
+        window.alert(errorMessage);
         // popuprHandler({ message: errorMessage });
       } else {
+        window.alert(error.message);
         // popuprHandler({ message: "로그인 도중 에러가 발생했습니다" });
       }
     },

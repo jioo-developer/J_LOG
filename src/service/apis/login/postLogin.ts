@@ -1,10 +1,12 @@
+import { apiUrl } from "@/static/common";
+
 export async function Postlogin(id: string, password: string) {
-  const response = await fetch("/api/login", {
+  const response = await fetch(`${apiUrl}/api/login`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ id, password }), // `id`와 `password`가 올바르게 전달되는지 확인
+    body: JSON.stringify({ id, password }),
   });
 
   if (!response.ok) {
@@ -12,5 +14,5 @@ export async function Postlogin(id: string, password: string) {
     throw new Error(errorData.error);
   }
 
-  return response.json();
+  return response;
 }
