@@ -6,7 +6,9 @@ export async function middleware(request: NextRequest) {
 
   console.log("🚨 Middleware is processing:", pathname);
 
-  const token = request.cookies.get("authToken")?.value;
+  const token =
+    request.cookies.get("authToken")?.value ||
+    request.cookies.get("GoogleAuthToken")?.value;
 
   // 비로그인 상태에서 /login, /signup을 제외한 다른 경로로 접근 시 로그인 페이지로 리디렉션
   if (!token && pathname !== "/login" && pathname !== "/signup") {

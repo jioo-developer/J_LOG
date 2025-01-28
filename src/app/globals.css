@@ -73,35 +73,3 @@ button {
 body {
   background: rgba(249, 249, 249, 0.7803921569);
 }
-
-.text-blind {
-  font-size: 0;
-}
-
-.flex-set {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.page-reset {
-  margin: 0 auto;
-  max-width: 1920px;
-  min-height: 100vh;
-  flex-direction: column;
-  justify-content: flex-start;
-}
-
-.input__blind__wrap {
-  position: relative;
-
-  &:has(.check__toggle) {
-    display: flex;
-    align-items: center;
-  }
-  .check__toggle {
-    position: absolute;
-    right: 20px;
-    margin-top: 8px;
-  }
-}

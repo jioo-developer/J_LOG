@@ -8,7 +8,8 @@ import SocialLoginPage from "./(snsLogin)";
 import { useForm } from "react-hook-form";
 import { EyeOffIcon, EyeIcon } from "lucide-react";
 import { DevTool } from "@hookform/devtools";
-import useLoginHook from "@/service/apis/login/useLoginHook";
+import useLoginHook from "@/service/apis/login/hook/useLoginHook";
+import { useState } from "react";
 
 type InputTypes = {
   idRequired: string;
@@ -22,6 +23,8 @@ function LoginPage() {
     control,
     formState: { errors },
   } = useForm<InputTypes>();
+  const [showInputBlind, setShowBlind] = useState(false);
+
   const { mutate: login } = useLoginHook();
 
   function LoginHandler(data: InputTypes) {
@@ -58,7 +61,7 @@ function LoginPage() {
         <div className="input__blind__wrap">
           <CommonInput
             id="passwordRequired"
-            type="password"
+            type={showInputBlind ? "text" : "password"}
             placeholder="비밀번호를 8자리 이상 입력하세요"
             register={register}
             validation={{
@@ -67,6 +70,8 @@ function LoginPage() {
             error={errors.passwordRequired}
           />
           <CommonCheckbox
+            stateValue={showInputBlind}
+            setStateHanlder={setShowBlind}
             childrens={[
               <EyeIcon key="eye" size={20} />,
               <EyeOffIcon key="eyeOff" size={20} color="#888" />,
