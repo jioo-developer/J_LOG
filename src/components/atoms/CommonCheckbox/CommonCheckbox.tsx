@@ -2,7 +2,7 @@
 
 import { ReactNode } from "react";
 
-type propsType = {
+export type propsType = {
   childrens: ReactNode[];
   stateValue: boolean;
   setStateHanlder: (stateValue: boolean) => void;

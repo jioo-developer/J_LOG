@@ -7,7 +7,7 @@ import {
   UseFormRegister,
 } from "react-hook-form";
 import { input } from "./CommonInputStyle";
-interface CommonInputProps<T extends FieldValues> {
+export interface CommonInputProps<T extends FieldValues> {
   id: Path<T>;
   type?: "text" | "number" | "email" | "password";
   placeholder?: string;

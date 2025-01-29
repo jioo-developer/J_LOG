@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { buttonVariants, themes } from "./CommonButtonStyle";
 import { ReactNode } from "react";
-interface CommonButtonProps {
+export interface CommonButtonProps {
   children: ReactNode;
   onClick?: () => void;
   disabled?: boolean;
