@@ -4,9 +4,7 @@ export async function POST(request: NextRequest) {
   try {
     const { googleToken } = await request.json();
 
-    const response = NextResponse.json({
-      message: "로그인 성공",
-    });
+    const response = NextResponse.json({ success: true });
 
     response.cookies.set("GoogleAuthToken", googleToken, {
       httpOnly: true, // 보안상 브라우저에서 쿠키 접근 금지
@@ -19,10 +17,7 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     // 인증 실패 시 401 상태 반환
     return NextResponse.json(
-      {
-        error: (error as Error).message,
-        details: (error as Error).message,
-      },
+      { success: false, error: (error as Error).message },
       { status: 401 }
     );
   }
