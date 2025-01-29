@@ -1,7 +1,6 @@
 module.exports = {
   preset: "ts-jest",
-  setupFilesAfterEnv: ["<rootDir>/jest.setup.ts"], // 파일 경로 설정
-  testEnvironment: "jest-fixed-jsdom",
+  testEnvironment: "jest-environment-jsdom",
   verbose: true,
 
   transform: {
@@ -25,7 +24,7 @@ module.exports = {
   moduleFileExtensions: ["ts", "tsx", "js", "jsx", "json", "node"],
 
   moduleNameMapper: {
-    "\\.(css|scss)$": "<rootDir>/src/asset/__mocks__/styleMock.js",
+    "\\.(css|scss)$": "<rootDir>/src/app/_asset/__mocks__/styleMock.js",
     // 모든 CSS, SASS, SCSS 파일을 styleMock.js로 매핑하여 실제 파일을 불러오지 않도록 처리
 
     // CSS 모듈을 빈 객체로 처리 (모듈화된 CSS 처리)
