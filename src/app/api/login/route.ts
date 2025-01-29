@@ -34,19 +34,16 @@ export async function POST(request: Request) {
 }
 
 export async function DELETE() {
-  const response = NextResponse.json({
-    message: "쿠키 삭제 성공",
+  const response = new Response(JSON.stringify({ message: "쿠키 삭제 성공" }), {
+    status: 200,
+    headers: {
+      "Content-Type": "application/json",
+      "Set-Cookie": [
+        "authToken=; Path=/; HttpOnly; Secure; SameSite=None; Expires=Thu, 01 Jan 1970 00:00:00 GMT",
+        "GoogleAuthToken=; Path=/; HttpOnly; Secure; SameSite=None; Expires=Thu, 01 Jan 1970 00:00:00 GMT",
+      ].join(", "),
+    },
   });
-  // Set-Cookie 헤더 설정
-  response.headers.set(
-    "Set-Cookie",
-    "authToken=; Path=/; HttpOnly; Secure; SameSite=Strict; Expires=Thu, 01 Jan 1970 00:00:00 GMT"
-  );
-
-  response.headers.set(
-    "Set-Cookie",
-    "GoogleAuthToken=; Path=/; HttpOnly; Secure; SameSite=Strict; Expires=Thu, 01 Jan 1970 00:00:00 GMT"
-  );
 
   return response;
 }

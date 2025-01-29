@@ -2,19 +2,20 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { LoginErrorHandler } from "../error";
 import { useRouter } from "next/navigation";
 import { authService } from "@/lib/firebase";
+import { apiUrl } from "@/static/common";
 
 // 로그인 실행 관련 로직
 const useLogoutHook = () => {
   const router = useRouter();
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: () => {
-      return authService.signOut();
-    },
-    onSuccess: async () => {
-      await fetch("/api/login", {
+    mutationFn: async () => {
+      await authService.signOut();
+      await fetch(`${apiUrl}/api/login`, {
         method: "DELETE",
       });
+    },
+    onSuccess: async () => {
       queryClient.clear();
       router.push("/login");
     },
