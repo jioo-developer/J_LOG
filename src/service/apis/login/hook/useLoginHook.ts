@@ -1,10 +1,10 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { LoginErrorHandler } from "../error";
-import { Postlogin } from "../postLogin";
+import { Postlogin } from "../loginHandler";
 import { useRouter } from "next/navigation";
 
 type propsType = {
-  id: string;
+  email: string;
   pw: string;
 };
 // 로그인 실행 관련 로직
@@ -12,8 +12,8 @@ const useLoginHook = () => {
   const router = useRouter();
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: ({ id, pw }: propsType) => {
-      return Postlogin(id, pw);
+    mutationFn: ({ email, pw }: propsType) => {
+      return Postlogin(email, pw);
     },
     onSuccess: async () => {
       await queryClient.invalidateQueries({
