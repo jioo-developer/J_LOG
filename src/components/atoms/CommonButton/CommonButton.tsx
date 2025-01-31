@@ -6,7 +6,7 @@ export interface CommonButtonProps {
   onClick?: () => void;
   disabled?: boolean;
   size?: "sm" | "rg" | "md" | "lg";
-  theme: "white" | "success" | "primary" | "none";
+  theme: "white" | "success" | "primary" | "disable" | "none";
 }
 
 function CommonButton({

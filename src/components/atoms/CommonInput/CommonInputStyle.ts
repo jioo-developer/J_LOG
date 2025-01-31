@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 
-export const input = css`
+export const inputStyle = css`
   display: flex;
   width: 100%;
   alignitems: center;

@@ -1,11 +1,7 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import { useForm, FormProvider } from "react-hook-form";
 import CommonInput from "./CommonInput";
-
-type InputTypes = {
-  idRequired: string;
-  passwordRequired: string;
-};
+import { InputTypes } from "@/type/common";
 
 const Wrapper = ({ children }: { children: React.ReactNode }) => {
   const methods = useForm<InputTypes>();
@@ -17,14 +13,14 @@ describe("CommonInput", () => {
     render(
       <Wrapper>
         <CommonInput
-          id="idRequired"
+          id="emailRequired"
           type="text"
-          placeholder="아이디를 입력하세요"
+          placeholder="이메일을 입력하세요"
         />
       </Wrapper>
     );
 
-    const input = screen.getByPlaceholderText("아이디를 입력하세요");
+    const input = screen.getByPlaceholderText("이메일을 입력하세요");
     expect(input).toBeInTheDocument();
     expect(input).toHaveAttribute("type", "text");
   });
@@ -33,15 +29,15 @@ describe("CommonInput", () => {
     render(
       <Wrapper>
         <CommonInput
-          id="idRequired"
+          id="emailRequired"
           type="text"
-          placeholder="아이디를 입력하세요"
+          placeholder="이메일을 입력하세요"
         />
       </Wrapper>
     );
 
     const input = screen.getByPlaceholderText(
-      "아이디를 입력하세요"
+      "이메일을 입력하세요"
     ) as HTMLInputElement;
     fireEvent.change(input, { target: { value: "test@example.com" } });
 
@@ -53,18 +49,18 @@ describe("CommonInput", () => {
     render(
       <Wrapper>
         <CommonInput
-          id="idRequired"
+          id="emailRequired"
           type="text"
-          placeholder="아이디를 입력하세요"
-          error={methods.formState.errors.idRequired}
+          placeholder="이메일을 입력하세요"
+          validation={{ required: "이메일을 입력해야 합니다." }}
         />
       </Wrapper>
     );
 
-    const input = screen.getByPlaceholderText("아이디를 입력하세요");
+    const input = screen.getByPlaceholderText("이메일을 입력하세요");
     fireEvent.blur(input); // 입력 필드에서 벗어날 때 유효성 검사 실행
 
-    const errorMessage = await screen.findByText("이메일을 입력해 주세요.");
+    const errorMessage = await screen.findByText("이메일을 입력해야 합니다.");
     expect(errorMessage).toBeInTheDocument();
   });
 });
