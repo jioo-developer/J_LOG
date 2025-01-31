@@ -22,10 +22,10 @@ const SocialLoginPage = () => {
     }
   }
   return (
-    <div className="sns_sign flex-set">
+    <div className="sns_Sign flex-Set">
       <CommonButton theme="none" size="rg" onClick={LoginHandler}>
         {/* onClick={LoginHandler} */}
-        <div className="button_wrap">
+        <div className="button_Wrap">
           <Image
             src="/images/google.svg"
             width={20}
@@ -36,7 +36,7 @@ const SocialLoginPage = () => {
         </div>
       </CommonButton>
       <CommonButton theme="none" size="rg">
-        <div className="button_wrap">
+        <div className="button_Wrap">
           <Image
             src="/images/facebook.svg"
             alt="페이스북 로그인"

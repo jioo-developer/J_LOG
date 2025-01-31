@@ -10,11 +10,8 @@ import { EyeOffIcon, EyeIcon } from "lucide-react";
 import { DevTool } from "@hookform/devtools";
 import useLoginHook from "@/service/apis/login/hook/useLoginHook";
 import { useState } from "react";
-
-type InputTypes = {
-  idRequired: string;
-  passwordRequired: string;
-};
+import { InputTypes } from "@/type/common";
+import { useRouter } from "next/navigation";
 
 function LoginPage() {
   const {
@@ -23,16 +20,19 @@ function LoginPage() {
     control,
     formState: { errors },
   } = useForm<InputTypes>();
+
+  const router = useRouter();
+
   const [showInputBlind, setShowBlind] = useState(false);
 
   const { mutate: login } = useLoginHook();
 
   function LoginHandler(data: InputTypes) {
-    login({ id: data.idRequired, pw: data.passwordRequired });
+    login({ email: data.emailRequired, pw: data.passwordRequired });
   }
   return (
-    <div className="sign__wrap flex-set">
-      <div className="logo__wrap">
+    <div className="page-Reset sign__Wrap flex-Set ">
+      <div className="logo__Wrap">
         <Image
           src="/images/logo.svg"
           width={300}
@@ -45,33 +45,42 @@ function LoginPage() {
             height: "auto",
           }}
         />
-        <h1 className="logo__title">J.log</h1>
+        <h1 className="logo__Title">J.log</h1>
       </div>
-      <form className="sign__form" onSubmit={handleSubmit(LoginHandler)}>
+      <form className="sign__Form" onSubmit={handleSubmit(LoginHandler)}>
         <CommonInput
-          id="idRequired"
+          id="emailRequired"
           type="text"
-          placeholder="아이디를 입력하세요"
-          register={register}
+          placeholder="이메일을 입력하세요"
+          {...register("passwordRequired", {
+            required: "이메일을 입력하세요.",
+          })}
           validation={{
             required: "이메일을 입력해 주세요.",
+            pattern: {
+              value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+              message: "올바른 이메일 형식이 아닙니다.",
+            },
           }}
-          error={errors.idRequired}
+          error={errors.emailRequired}
         />
-        <div className="input__blind__wrap">
+        <div className="input__Blind__Wrap">
           <CommonInput
             id="passwordRequired"
             type={showInputBlind ? "text" : "password"}
             placeholder="비밀번호를 8자리 이상 입력하세요"
-            register={register}
-            validation={{
-              required: "비밀번호를 입력해 주세요.",
-            }}
+            {...register("passwordRequired", {
+              required: "비밀번호를 입력하세요.",
+              minLength: {
+                value: 8,
+                message: "비밀번호가 짧습니다.",
+              },
+            })}
             error={errors.passwordRequired}
           />
           <CommonCheckbox
             stateValue={showInputBlind}
-            setStateHanlder={setShowBlind}
+            setStateHandler={setShowBlind}
             childrens={[
               <EyeIcon key="eye" size={20} />,
               <EyeOffIcon key="eyeOff" size={20} color="#888" />,
@@ -89,7 +98,11 @@ function LoginPage() {
             비밀번호 변경&amp;찾기
           </span>
         </CommonButton>
-        <CommonButton theme="none" size="sm">
+        <CommonButton
+          theme="none"
+          size="sm"
+          onClick={() => router.push("/auth")}
+        >
           <span style={{ color: "var(--subTextcolor)" }}>회원가입</span>
         </CommonButton>
       </div>
