@@ -33,34 +33,36 @@
   // width
 }
 
-.text-blind {
+.text-Blind {
   font-size: 0;
 }
 
-.flex-set {
+.flex-Set {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.page-reset {
+.page-Reset {
   margin: 0 auto;
-  max-width: 1920px;
   min-height: 100vh;
   flex-direction: column;
-  justify-content: flex-start;
 }
 
-.input__blind__wrap {
+.input__Blind__Wrap {
   position: relative;
 
-  &:has(.check__toggle) {
+  .label__area {
+    width: 100%;
+  }
+
+  &:has(.check__Toggle) {
     display: flex;
     align-items: center;
   }
-  .check__toggle {
+  .check__Toggle {
     position: absolute;
-    right: 20px;
+    right: var(--gap-xlarge);
     margin-top: 8px;
   }
 }

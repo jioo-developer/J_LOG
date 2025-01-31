@@ -1,5 +1,5 @@
 import { Story } from "@/components/type";
-import CommonCheckbox, { propsType } from "./CommonCheckbox";
+import CommonCheckbox, { PropsType } from "./CommonCheckbox";
 import { BadgeCheck, Badge } from "lucide-react";
 
 export default {
@@ -13,7 +13,7 @@ export default {
     setStateHanlder: { action: "toggled" },
   },
 };
-export const Default: Story<propsType> = {
+export const Default: Story<PropsType> = {
   args: {
     childrens: [<BadgeCheck size={20} />, <Badge size={20} color="#888" />],
     stateValue: false,

@@ -7,7 +7,7 @@ export default {
   argTypes: {
     theme: {
       control: "select",
-      options: ["white", "success", "primary", "none"],
+      options: ["white", "success", "primary", "disable", "none"],
     },
     size: {
       control: "select",
@@ -28,7 +28,7 @@ export const Default: Story<CommonButtonProps> = {
   },
 };
 
-export const Disabled: Story<CommonButtonProps> = {
+export const active: Story<CommonButtonProps> = {
   args: {
     theme: "primary",
     size: "md",
@@ -46,6 +46,13 @@ export const Success: Story<CommonButtonProps> = {
 export const White: Story<CommonButtonProps> = {
   args: {
     theme: "white",
+    size: "sm",
+  },
+};
+
+export const Disabled: Story<CommonButtonProps> = {
+  args: {
+    theme: "disable",
     size: "sm",
   },
 };

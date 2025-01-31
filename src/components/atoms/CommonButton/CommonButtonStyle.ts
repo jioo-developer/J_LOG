@@ -20,6 +20,10 @@ export const themes = {
     color: var(--mainTextcolor);
     border: 0;
   `,
+  disable: css`
+    background: gray;
+    color: var(--whiteColor);
+  `,
 };
 
 // (독립) 버튼 테마 설정
@@ -31,9 +35,6 @@ export const baseButton = css`
   justify-content: center;
   border-radius: 8px;
   box-sizing: border-box;
-  &:focus {
-    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.2);
-  }
 `;
 
 // 기반이 되는 기본 default style

@@ -1,4 +1,5 @@
 /** @jsxImportSource @emotion/react */
+
 import {
   FieldError,
   FieldValues,
@@ -6,40 +7,53 @@ import {
   RegisterOptions,
   UseFormRegister,
 } from "react-hook-form";
-import { input } from "./CommonInputStyle";
+import { inputStyle } from "./CommonInputStyle";
+import { forwardRef } from "react";
+
 export interface CommonInputProps<T extends FieldValues> {
   id: Path<T>;
   type?: "text" | "number" | "email" | "password";
   placeholder?: string;
-  register?: UseFormRegister<T>; // 제네릭 타입으로 register 타입 설정
+  register?: UseFormRegister<T>;
   error?: FieldError;
-  validation?: RegisterOptions<T>; // 유효성 검사 옵션을 제네릭으로 설정
+  validation?: RegisterOptions<T>;
   value?: string | number;
+  label?: string;
 }
 
-function CommonInput<T extends FieldValues>({
-  id,
-  type = "text",
-  placeholder = "",
-  register,
-  error,
-  validation = {},
-  value,
-}: CommonInputProps<T>) {
-  return (
-    <label htmlFor={String(id)} style={{ width: "100%" }}>
-      <input
-        value={value}
-        id={String(id)}
-        type={type}
-        placeholder={placeholder}
-        css={input}
-        {...(register && register(id, validation))}
-      />
+const CommonInput = forwardRef<HTMLInputElement, CommonInputProps<FieldValues>>(
+  (
+    {
+      id,
+      type = "text",
+      placeholder = "",
+      register,
+      error,
+      validation = {},
+      value,
+      label,
+    },
+    ref
+  ) => {
+    return (
+      <label htmlFor={String(id)} className="label__area">
+        <span>{label && label}</span>
 
-      {error && <span>{error.message}</span>}
-    </label>
-  );
-}
+        <input
+          ref={ref} // ✅ ref 적용
+          value={value}
+          id={String(id)}
+          type={type}
+          placeholder={placeholder}
+          css={inputStyle}
+          {...(register && register(id, validation))}
+        />
+        {error && <span>{error.message}</span>}
+      </label>
+    );
+  }
+);
+
+CommonInput.displayName = "CommonInput";
 
 export default CommonInput;
