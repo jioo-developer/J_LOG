@@ -24,7 +24,6 @@ const SocialLoginPage = () => {
   return (
     <div className="sns_Sign flex-Set">
       <CommonButton theme="none" size="rg" onClick={LoginHandler}>
-        {/* onClick={LoginHandler} */}
         <div className="button_Wrap">
           <Image
             src="/images/google.svg"
