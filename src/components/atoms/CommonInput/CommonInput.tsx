@@ -8,7 +8,6 @@ import {
   UseFormRegister,
 } from "react-hook-form";
 import { inputStyle } from "./CommonInputStyle";
-import { forwardRef } from "react";
 
 export interface CommonInputProps<T extends FieldValues> {
   id: Path<T>;
@@ -21,38 +20,32 @@ export interface CommonInputProps<T extends FieldValues> {
   label?: string;
 }
 
-const CommonInput = forwardRef<HTMLInputElement, CommonInputProps<FieldValues>>(
-  (
-    {
-      id,
-      type = "text",
-      placeholder = "",
-      register,
-      error,
-      validation = {},
-      value,
-      label,
-    },
-    ref
-  ) => {
-    return (
-      <label htmlFor={String(id)} className="label__area">
-        <span>{label && label}</span>
+function CommonInput<T extends FieldValues>({
+  id,
+  type = "text",
+  placeholder = "",
+  register,
+  error,
+  validation = {},
+  value,
+  label,
+}: CommonInputProps<T>) {
+  return (
+    <label htmlFor={String(id)} className="label__area">
+      <span>{label && label}</span>
 
-        <input
-          ref={ref} // ✅ ref 적용
-          value={value}
-          id={String(id)}
-          type={type}
-          placeholder={placeholder}
-          css={inputStyle}
-          {...(register && register(id, validation))}
-        />
-        {error && <span>{error.message}</span>}
-      </label>
-    );
-  }
-);
+      <input
+        value={value}
+        id={String(id)}
+        type={type}
+        placeholder={placeholder}
+        css={inputStyle}
+        {...(register && register(id, validation))}
+      />
+      {error && <span>{error.message}</span>}
+    </label>
+  );
+}
 
 CommonInput.displayName = "CommonInput";
 

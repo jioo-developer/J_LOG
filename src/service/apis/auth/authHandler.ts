@@ -19,7 +19,7 @@ async function AuthHandler({ email, password, nickname }: propsType) {
     const error = await response.json();
     throw new Error(error.message);
   }
-  return response;
+  return response.json();
 }
 
 export default AuthHandler;

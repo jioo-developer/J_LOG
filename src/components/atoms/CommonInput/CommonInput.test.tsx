@@ -1,7 +1,7 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import { useForm, FormProvider } from "react-hook-form";
 import CommonInput from "./CommonInput";
-import { InputTypes } from "@/type/common";
+import { InputTypes } from "@/static/type/common";
 
 const Wrapper = ({ children }: { children: React.ReactNode }) => {
   const methods = useForm<InputTypes>();

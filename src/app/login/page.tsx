@@ -10,7 +10,7 @@ import { EyeOffIcon, EyeIcon } from "lucide-react";
 import { DevTool } from "@hookform/devtools";
 import useLoginHook from "@/service/apis/login/hook/useLoginHook";
 import { useState } from "react";
-import { InputTypes } from "@/type/common";
+import { InputTypes } from "@/static/type/common";
 import { useRouter } from "next/navigation";
 
 function LoginPage() {
@@ -52,11 +52,9 @@ function LoginPage() {
           id="emailRequired"
           type="text"
           placeholder="이메일을 입력하세요"
-          {...register("passwordRequired", {
-            required: "이메일을 입력하세요.",
-          })}
+          register={register}
           validation={{
-            required: "이메일을 입력해 주세요.",
+            required: "이메일을 입력하세요.",
             pattern: {
               value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
               message: "올바른 이메일 형식이 아닙니다.",
@@ -69,13 +67,14 @@ function LoginPage() {
             id="passwordRequired"
             type={showInputBlind ? "text" : "password"}
             placeholder="비밀번호를 8자리 이상 입력하세요"
-            {...register("passwordRequired", {
+            register={register}
+            validation={{
               required: "비밀번호를 입력하세요.",
               minLength: {
                 value: 8,
                 message: "비밀번호가 짧습니다.",
               },
-            })}
+            }}
             error={errors.passwordRequired}
           />
           <CommonCheckbox

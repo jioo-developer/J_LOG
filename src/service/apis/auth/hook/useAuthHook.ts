@@ -1,9 +1,12 @@
-import { db } from "@/lib/firebase";
 import { useMutation } from "@tanstack/react-query";
-import { updateProfile } from "firebase/auth";
-import { doc, setDoc } from "firebase/firestore";
-import { LoginErrorHandler } from "../../login/error";
+import {
+  signInWithEmailAndPassword,
+  updateProfile,
+  UserCredential,
+} from "firebase/auth";
 import AuthHandler from "../authHandler";
+import { authService } from "@/lib/firebase";
+import { useRouter } from "next/navigation";
 
 type propsType = {
   email: string;
@@ -14,18 +17,26 @@ type propsType = {
 // 회원가입 계정 생성 로직
 
 const useAuthHandler = () => {
+  const router = useRouter();
   return useMutation({
     mutationFn: async ({ email, password, nickname }: propsType) => {
       return AuthHandler({ email, password, nickname });
     },
-    onSuccess: () => {},
+    onSuccess: async (_, variables) => {
+      // 사용자 프로필 업데이트
+      const { user } = await signInWithEmailAndPassword(
+        authService,
+        variables.email,
+        variables.password
+      );
+      await updateProfile(user, {
+        displayName: variables.nickname,
+        photoURL: "/img/default.svg",
+      });
+      router.push("/login");
+    },
     onError: (error) => {
-      const errorMessage = LoginErrorHandler((error as Error).message);
-      if (errorMessage) {
-        window.alert(errorMessage);
-      } else {
-        window.alert(error.message);
-      }
+      window.alert(error.message);
     },
   });
 };
