@@ -3,7 +3,7 @@ import Header from "./Header/Header";
 import { getuser } from "@/service/apis/login/hook/getuserHook";
 
 // 비동기 함수에서 데이터 로딩
-const HydratedCarDetails = async () => {
+const HydratePage = async () => {
   const queryClient = new QueryClient();
 
   try {
@@ -24,4 +24,4 @@ const HydratedCarDetails = async () => {
   );
 };
 
-export default HydratedCarDetails;
+export default HydratePage;
