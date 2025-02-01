@@ -1,7 +1,6 @@
 "use client";
 import "./style.scss";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { InputTypes } from "@/static/type/common";
 import CommonInput from "@/components/atoms/CommonInput/CommonInput";
@@ -11,6 +10,7 @@ import AgreementForm from "./component/AgreementForm";
 import useAuthHandler from "@/service/apis/auth/hook/useAuthHook";
 import { DevTool } from "@hookform/devtools";
 import CommonCheckbox from "@/components/atoms/CommonCheckbox/CommonCheckbox";
+import Link from "next/link";
 
 interface InputType extends InputTypes {
   nickNameRequired: string;
@@ -27,8 +27,6 @@ const AuthPage = ({ nicknameData }: { nicknameData: string[] }) => {
   const [disable, setDisable] = useState(true);
   const [showInputBlind, setShowBlind] = useState(false);
 
-  const router = useRouter();
-
   const { mutate: createAccount } = useAuthHandler();
 
   async function createAccountHandler(data: InputType) {
@@ -42,8 +40,10 @@ const AuthPage = ({ nicknameData }: { nicknameData: string[] }) => {
   return (
     <div className="page-Reset auth__Wrap">
       <div className="title__Area flex-Set">
-        <button className="flex-Set" onClick={() => router.back()}>
-          <ChevronLeftIcon className="close" size={22} />
+        <button className="flex-Set">
+          <Link href="/login">
+            <ChevronLeftIcon className="close" size={22} />
+          </Link>
         </button>
         회원가입
       </div>

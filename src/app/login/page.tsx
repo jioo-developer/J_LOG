@@ -11,7 +11,7 @@ import { DevTool } from "@hookform/devtools";
 import useLoginHook from "@/service/apis/login/hook/useLoginHook";
 import { useState } from "react";
 import { InputTypes } from "@/static/type/common";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 function LoginPage() {
   const {
@@ -20,8 +20,6 @@ function LoginPage() {
     control,
     formState: { errors },
   } = useForm<InputTypes>();
-
-  const router = useRouter();
 
   const [showInputBlind, setShowBlind] = useState(false);
 
@@ -97,12 +95,10 @@ function LoginPage() {
             비밀번호 변경&amp;찾기
           </span>
         </CommonButton>
-        <CommonButton
-          theme="none"
-          size="sm"
-          onClick={() => router.push("/auth")}
-        >
-          <span style={{ color: "var(--subTextcolor)" }}>회원가입</span>
+        <CommonButton theme="none" size="sm">
+          <span style={{ color: "var(--subTextcolor)" }}>
+            <Link href="/auth">회원가입</Link>
+          </span>
         </CommonButton>
       </div>
       <DevTool control={control} />
