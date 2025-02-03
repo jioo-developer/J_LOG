@@ -1,8 +1,7 @@
 import CommonButton from "@/components/atoms/CommonButton/CommonButton";
 import Image from "next/image";
 import "./style.scss";
-import { GoogleLogin } from "@/service/apis/login/snsLogin/google/loginHandler";
-import { useRouter } from "next/navigation";
+import useGoogleHook from "@/service/apis/login/loginType/google/mutationHandler";
 
 export type objType = {
   id: string;
@@ -12,18 +11,10 @@ export type objType = {
 };
 
 const SocialLoginPage = () => {
-  const router = useRouter();
-  async function LoginHandler() {
-    try {
-      await GoogleLogin();
-      router.push("/");
-    } catch (error) {
-      window.alert((error as Error).message);
-    }
-  }
+  const { mutate } = useGoogleHook();
   return (
     <div className="sns_Sign flex-Set">
-      <CommonButton theme="none" size="rg" onClick={LoginHandler}>
+      <CommonButton theme="none" size="rg" onClick={() => mutate()}>
         <div className="button_Wrap">
           <Image
             src="/images/google.svg"

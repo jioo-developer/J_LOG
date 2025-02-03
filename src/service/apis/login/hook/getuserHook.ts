@@ -1,28 +1,33 @@
 import { authService } from "@/lib/firebase";
+import { apiUrl } from "@/static/common";
 import { QueryObserverResult, useQuery } from "@tanstack/react-query";
-import { User } from "firebase/auth";
+import { onAuthStateChanged, User } from "firebase/auth";
 
-// 로그인 호출 관련 hook
-export const getuser = (): Promise<User | null> => {
-  return new Promise((resolve, reject) => {
-    authService.onAuthStateChanged((user) => {
+export async function getUser() {
+  // Firebase Authentication 상태 변경 시 처리
+  return new Promise<User>((resolve) => {
+    onAuthStateChanged(authService, async (user) => {
       if (user) {
         resolve(user);
       } else {
-        reject("유저 정보가 없습니다.");
+        const response = await fetch(`${apiUrl}/api/login`, {
+          method: "GET",
+          credentials: "include",
+        });
+        const { user } = await response.json();
+        resolve(user);
       }
     });
   });
-};
+}
 
 const useUserQueryHook = () => {
   // User | null을 반환하는 쿼리
   const { data, isLoading, refetch, error }: QueryObserverResult<User | null> =
-    useQuery<User | null>({
+    useQuery({
       queryKey: ["getuser"],
-      queryFn: getuser,
-      staleTime: 1 * 60 * 1000, // 1분
-      notifyOnChangeProps: ["data"],
+      queryFn: getUser,
+      staleTime: 0,
     });
 
   return { data, isLoading, refetch, error };

@@ -1,29 +1,20 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { LoginErrorHandler } from "../error";
 import { useRouter } from "next/navigation";
-import { apiUrl } from "@/static/common";
-import { authService } from "@/lib/firebase";
+import { GoogleLogin } from "./loginHandler";
+import { LoginErrorHandler } from "../../error";
 
-async function LogoutHandler() {
-  if (authService.currentUser) {
-    await authService.signOut();
-  }
-
-  await fetch(`${apiUrl}/api/login`, {
-    method: "DELETE",
-    credentials: "include",
-  });
-}
-
-// 로그인 실행 관련 로직
-const useLogoutHook = () => {
+const useGoogleHook = () => {
   const router = useRouter();
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: LogoutHandler,
+    mutationFn: () => {
+      return GoogleLogin();
+    },
     onSuccess: async () => {
-      queryClient.setQueryData(["getuser"], null);
-      router.push("/login");
+      await queryClient.refetchQueries({
+        queryKey: ["getuser"],
+      });
+      router.push("/");
     },
     onError: (error) => {
       const errorMessage = LoginErrorHandler(error.message);
@@ -38,4 +29,4 @@ const useLogoutHook = () => {
   });
 };
 
-export default useLogoutHook;
+export default useGoogleHook;

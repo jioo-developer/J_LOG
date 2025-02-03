@@ -1,13 +1,12 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { LoginErrorHandler } from "../error";
-import { Postlogin } from "../loginHandler";
+import { LoginErrorHandler } from "../../error";
 import { useRouter } from "next/navigation";
-
+import { Postlogin } from "./loginHandler";
 type propsType = {
   email: string;
   pw: string;
 };
-// 로그인 실행 관련 로직
+
 const useLoginHook = () => {
   const router = useRouter();
   const queryClient = useQueryClient();
@@ -16,7 +15,7 @@ const useLoginHook = () => {
       return Postlogin(email, pw);
     },
     onSuccess: async () => {
-      await queryClient.invalidateQueries({
+      await queryClient.refetchQueries({
         queryKey: ["getuser"],
       });
       router.push("/");
