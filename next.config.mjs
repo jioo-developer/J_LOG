@@ -4,6 +4,7 @@ const nextConfig = {
     reactStrictMode: false,
     includePaths: ["asset"], // styles 폴더를 SCSS 파일의 경로로 설정
   },
+  reactStrictMode: false,
 };
 
 export default nextConfig;

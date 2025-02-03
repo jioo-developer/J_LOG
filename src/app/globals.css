@@ -43,6 +43,7 @@ img {
 }
 
 a {
+  color: #000;
   text-decoration: none;
 }
 
@@ -72,4 +73,10 @@ button {
 
 body {
   background: rgba(249, 249, 249, 0.7803921569);
+}
+
+.flex-Set {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
