@@ -8,7 +8,7 @@ import SocialLoginPage from "./(snsLogin)";
 import { useForm } from "react-hook-form";
 import { EyeOffIcon, EyeIcon } from "lucide-react";
 import { DevTool } from "@hookform/devtools";
-import useLoginHook from "@/service/apis/login/hook/useLoginHook";
+import useLoginHook from "@/service/apis/login/loginType/firebase/mutationHandler";
 import { useState } from "react";
 import { InputTypes } from "@/static/type/common";
 import { useRouter } from "next/navigation";

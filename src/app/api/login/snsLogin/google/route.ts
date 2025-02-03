@@ -1,21 +1,28 @@
 import { NextRequest, NextResponse } from "next/server";
+import { firebaseAdmin } from "@/lib/firebaseAdmin";
 
-export async function POST(request: NextRequest) {
+export async function POST(req: NextRequest) {
   try {
-    const { googleToken } = await request.json();
+    const { googleToken } = await req.json(); // 🔹 `googleToken`을 요청 body에서 가져옴
 
-    const response = NextResponse.json({ success: true });
+    // 🔹 Firebase Admin SDK로 `idToken` 검증
+    const decodedToken = await firebaseAdmin.auth().verifyIdToken(googleToken);
 
-    response.cookies.set("GoogleAuthToken", googleToken, {
-      httpOnly: true, // 보안상 브라우저에서 쿠키 접근 금지
-      secure: process.env.NODE_ENV === "production", // 프로덕션에서만 secure 사용
-      path: "/", // 쿠키가 모든 경로에서 유효
-      maxAge: 36000, // 쿠키 만료 시간 (1시간)
+    const response = NextResponse.json({
+      message: "인증 성공",
+      uid: decodedToken.uid,
     });
 
-    return response; // 성공 응답 반환
+    response.cookies.set("GoogleAuthToken", googleToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      path: "/", // 쿠키가 모든 경로에서 유효
+      maxAge: 3600, // 쿠키 만료 시간
+    });
+
+    return response;
   } catch (error) {
-    // 인증 실패 시 401 상태 반환
+    console.error("인증 실패:", error);
     return NextResponse.json(
       { success: false, error: (error as Error).message },
       { status: 401 }
