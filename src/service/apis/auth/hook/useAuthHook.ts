@@ -1,12 +1,8 @@
 import { useMutation } from "@tanstack/react-query";
-import {
-  signInWithEmailAndPassword,
-  updateProfile,
-  UserCredential,
-} from "firebase/auth";
-import AuthHandler from "../authHandler";
+import { signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { authService } from "@/lib/firebase";
 import { useRouter } from "next/navigation";
+import { AuthHandler } from "../handler/authHandler";
 
 type propsType = {
   email: string;

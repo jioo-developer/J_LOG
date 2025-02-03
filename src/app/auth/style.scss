@@ -82,7 +82,7 @@
           &::before {
             content: "*";
             color: orange;
-            font-size: 12px;
+            font-size: var(--fontsize-small);
             margin: 0 3px 0 5px;
           }
         }
