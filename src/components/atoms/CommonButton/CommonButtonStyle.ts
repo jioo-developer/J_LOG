@@ -42,22 +42,22 @@ export const baseButton = css`
 export const buttonVariants = {
   sm: css`
     ${baseButton};
-    font-size: 12px;
+    font-size: var(--fontsize-small);
     padding: 0.666em 1em;
   `,
   rg: css`
     ${baseButton};
-    font-size: 16px;
+    font-size: var(--fontsize-regular);
     padding: 0.75em 1em;
   `,
   md: css`
     ${baseButton};
-    font-size: 18px;
+    font-size: var(--fontsize-medium);
     padding: 0.888em 1.5em;
   `,
   lg: css`
     ${baseButton};
-    font-size: 20px;
+    font-size: var(--fontsize-large);
     padding: 1.2em 1.6em;
   `,
 };

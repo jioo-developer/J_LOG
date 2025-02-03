@@ -3,7 +3,6 @@ import type { NextRequest } from "next/server";
 
 export async function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
-
   console.log("🚨 Middleware is processing:", pathname);
 
   const token =
@@ -19,6 +18,8 @@ export async function middleware(request: NextRequest) {
 
   // 로그인 상태에서 /login 또는 /signup 페이지로 접근 시 메인 페이지로 리디렉션
   if (token && (pathname === "/login" || pathname === "/auth")) {
+    console.log("Redirecting to /");
+    console.log("----------------------------------");
     return NextResponse.redirect(new URL("/", request.url));
   }
 

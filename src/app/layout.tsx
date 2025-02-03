@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import TanstackProvider from "@/provider/TanstackProvider";
 import "./globals.css";
 import "../asset/common.scss";
+import Header from "@/components/modules/Header/Header";
 
 export const metadata: Metadata = {
   title: "J-LOG",
@@ -21,7 +22,10 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body>
-        <TanstackProvider>{children}</TanstackProvider>
+        <TanstackProvider>
+          <Header />
+          {children}
+        </TanstackProvider>
       </body>
     </html>
   );

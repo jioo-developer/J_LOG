@@ -11,7 +11,4 @@ if (!admin.apps.length) {
   });
 }
 
-// ID 토큰 검증 함수
-export const verifyIdToken = (token: string) => {
-  return admin.auth().verifyIdToken(token);
-};
+export const firebaseAdmin = admin;
