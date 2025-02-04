@@ -7,16 +7,17 @@ import CommonInput from "@/components/atoms/CommonInput/CommonInput";
 import CommonButton from "@/components/atoms/CommonButton/CommonButton";
 import { ChevronLeftIcon, EyeIcon, EyeOffIcon } from "lucide-react";
 import AgreementForm from "./component/AgreementForm";
-import useAuthHandler from "@/service/apis/auth/hook/useAuthHook";
+import useAuthHandler from "@/service/api-hooks/auth/hook/useAuthHook";
 import { DevTool } from "@hookform/devtools";
 import CommonCheckbox from "@/components/atoms/CommonCheckbox/CommonCheckbox";
 import Link from "next/link";
+import useNickNameQueryHook from "@/service/api-hooks/auth/hook/useGetNicknameHook";
 
 interface InputType extends InputTypes {
   nickNameRequired: string;
 }
 
-const AuthPage = ({ nicknameData }: { nicknameData: string[] }) => {
+const AuthPage = () => {
   const {
     register,
     control,
@@ -28,6 +29,8 @@ const AuthPage = ({ nicknameData }: { nicknameData: string[] }) => {
   const [showInputBlind, setShowBlind] = useState(false);
 
   const { mutate: createAccount } = useAuthHandler();
+
+  const { nicknameData } = useNickNameQueryHook();
 
   async function createAccountHandler(data: InputType) {
     createAccount({

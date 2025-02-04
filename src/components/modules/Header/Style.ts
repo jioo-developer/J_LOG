@@ -8,7 +8,7 @@ export const HeaderStyle = css`
   margin: 0 auto;
 
   .title {
-    font-size: 24px;
+    font-size: Calc(var(--fontsize-small) * 2);
     font-weight: 500;
     color: #333;
     cursor: pointer;
@@ -52,7 +52,7 @@ export const SubMenu = css`
   flex-direction: column;
   position: absolute;
   right: Calc(var(--gap-xlarge) * 2);
-  top: 80px;
+  top: Calc(var(--gap-xlarge) * 4);
   background: #fff;
   box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.1);
   z-index: 10;
@@ -81,8 +81,8 @@ export const SubMenu = css`
 `;
 
 export const GoPoster = css`
-  padding: 0 16px;
-  font-size: 20px;
+  padding: 0 var(--gap-medium);
+  font-size: var(--fontsize-large);
   border-radius: 18px;
   border: 1px solid #000;
 `;
