@@ -92,7 +92,7 @@ function LoginPage() {
       <div className="assistance">
         <CommonButton theme="none" size="sm">
           <span style={{ color: "var(--subTextcolor)" }}>
-            비밀번호 변경&amp;찾기
+            <Link href="/resetPw"> 비밀번호 변경&amp;찾기</Link>
           </span>
         </CommonButton>
         <CommonButton theme="none" size="sm">
