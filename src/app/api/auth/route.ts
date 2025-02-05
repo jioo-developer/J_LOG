@@ -7,10 +7,7 @@ export async function GET() {
   try {
     const snapshot = await getDocs(collection(db, "nickname"));
     if (snapshot.empty) {
-      return NextResponse.json(
-        { success: false, message: "닉네임 DB가 비어 있습니다." },
-        { status: 404 }
-      );
+      return NextResponse.json({ data: [] }, { status: 200 });
     }
 
     const nicknameList = snapshot.docs.map((doc) => doc.data().nickname);

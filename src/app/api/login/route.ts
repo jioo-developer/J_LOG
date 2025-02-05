@@ -1,5 +1,5 @@
-import { firebaseAdmin } from "@/lib/firebaseAdmin";
 import { NextRequest, NextResponse } from "next/server";
+import { firebaseVerifyHandler } from "./tokenVerifyHandler";
 
 export async function GET(request: NextRequest) {
   try {
@@ -8,18 +8,17 @@ export async function GET(request: NextRequest) {
       request.cookies.get("GoogleAuthToken")?.value;
 
     if (!authToken) {
-      return NextResponse.json({ message: "토큰 없음", user: null });
-    } else {
-      const decodedToken = await firebaseAdmin.auth().verifyIdToken(authToken);
-
-      const user = await firebaseAdmin.auth().getUser(decodedToken.uid);
-      return NextResponse.json({
-        user,
-      });
+      return NextResponse.json({ success: true, user: null });
     }
+
+    const user = await firebaseVerifyHandler(authToken); // 유효한 토큰으로 바로 처리
+
+    return NextResponse.json({ success: true, user });
   } catch (error) {
-    console.log((error as Error).message);
-    return NextResponse.json({ authToken: null }, { status: 401 });
+    return NextResponse.json(
+      { success: false, error: (error as Error).message },
+      { status: 401 }
+    );
   }
 }
 
@@ -27,17 +26,8 @@ export async function POST(request: Request) {
   try {
     const { token } = await request.json();
 
-    const decodedToken = await firebaseAdmin.auth().verifyIdToken(token);
-
-    if (!decodedToken) {
-      return NextResponse.json(
-        { success: false, message: "verifyIdToken 인증 실패" },
-        { status: 401 }
-      );
-    }
-
     const response = NextResponse.json({
-      message: "인증 성공",
+      message: "로그인 토큰 인증 성공",
     });
 
     response.cookies.set("authToken", token, {

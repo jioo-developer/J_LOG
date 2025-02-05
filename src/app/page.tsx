@@ -1,4 +1,4 @@
-"use client";
+import MainPage from "./(home)/Client";
 export default function Home() {
-  return <div></div>;
+  return <MainPage />;
 }

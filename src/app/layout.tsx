@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import TanstackProvider from "@/provider/TanstackProvider";
 import "./globals.css";
-import "../asset/common.scss";
+import "@/asset/common.scss";
 import Header from "@/components/modules/Header/Header";
 
 export const metadata: Metadata = {

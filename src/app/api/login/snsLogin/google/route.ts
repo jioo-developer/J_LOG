@@ -22,7 +22,6 @@ export async function POST(req: NextRequest) {
 
     return response;
   } catch (error) {
-    console.error("인증 실패:", error);
     return NextResponse.json(
       { success: false, error: (error as Error).message },
       { status: 401 }

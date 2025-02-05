@@ -1,20 +1,23 @@
-import { apiUrl } from "@/static/common";
 import ClientComponent from "./Client";
+import {
+  dehydrate,
+  HydrationBoundary,
+  QueryClient,
+} from "@tanstack/react-query";
+import { getNicknameHandler } from "@/service/api-hooks/auth/hook/useGetNicknameHook";
 
 export default async function NicknameServerComponent() {
-  try {
-    const response = await fetch(`${apiUrl}/api/auth`, {
-      method: "GET",
-      cache: "no-store",
-    });
+  const queryClient = new QueryClient();
+  await queryClient.prefetchQuery({
+    queryKey: ["getNickname"],
+    queryFn: getNicknameHandler,
+  });
 
-    if (!response.ok) {
-      const error = await response.json();
-      throw new Error(error.message);
-    }
-    const { data } = await response.json();
-    return <ClientComponent nicknameData={data} />;
-  } catch (error) {
-    return <ClientComponent nicknameData={[]} />;
-  }
+  const dehydratedState = dehydrate(queryClient);
+
+  return (
+    <HydrationBoundary state={dehydratedState}>
+      <ClientComponent />
+    </HydrationBoundary>
+  );
 }

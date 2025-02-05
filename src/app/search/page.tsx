@@ -1,19 +1,21 @@
 /** @jsxImportSource @emotion/react */
 "use client";
 import { inputStyle } from "@/components/atoms/CommonInput/CommonInputStyle";
+import { useSearchStore } from "@/store/common";
 import { css } from "@emotion/react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const SearchPage = () => {
-  const [search, setSearch] = useState("");
+  const [search, setSearchHandler] = useState("");
 
   const router = useRouter();
 
+  const { setSearch } = useSearchStore();
+
   function goSearch() {
-    // router.push("/");
-    console.log("실행");
-    // searchStore.setState({ searchText: search });
+    router.push("/");
+    setSearch(search);
   }
 
   function keydownHandler(e: React.KeyboardEvent<HTMLInputElement>) {
@@ -23,16 +25,12 @@ const SearchPage = () => {
     }
   }
 
-  useEffect(() => {
-    console.log(search);
-  }, [search]);
-
   return (
     <div className="is__white_bg" css={InputWrap}>
       <input
         placeholder="검색어를 입력하세요"
         css={inputStyle}
-        onChange={(e) => setSearch(e.target.value)}
+        onChange={(e) => setSearchHandler(e.target.value)}
         onKeyDown={(e) => {
           keydownHandler(e);
         }}

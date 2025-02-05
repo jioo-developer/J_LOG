@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 "use client";
-import useLogoutHook from "@/service/apis/login/hook/useLogoutHook";
+import useLogoutHook from "@/service/api-hooks/login/hook/useLogoutHook";
 import { ChevronDown, SearchIcon } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useRef } from "react";
@@ -9,8 +9,9 @@ import Link from "next/link";
 import { useQuery } from "@tanstack/react-query";
 import { User } from "firebase/auth";
 import { GoPoster, HeaderStyle, SubMenu, UIWrap } from "./Style";
-import { getUser } from "@/service/apis/login/hook/getuserHook";
+import { getUser } from "@/service/api-hooks/login/hook/useGetUserHook";
 import { usePathname } from "next/navigation";
+import { usePageInfoStore } from "@/store/common";
 
 const activePathName = ["/member/mypage", "/detail", "/", "/member/myBoard"];
 
@@ -35,15 +36,17 @@ function Header() {
 
   const { mutate: logoutHandler } = useLogoutHook();
 
+  const { setEditMode } = usePageInfoStore();
+
   return (
     <>
       {isActive && (
         <header className="flex-Set" css={HeaderStyle}>
           <Link href="/" className="title">
-            {user?.displayName ? user.displayName : "Loading..."}.log
+            {user ? user.displayName + ".log" : ""}
           </Link>
           <div css={UIWrap}>
-            <CommonButton theme="none">
+            <CommonButton theme="none" onClick={() => setEditMode(false)}>
               <Link href="/editor" css={GoPoster}>
                 새&nbsp;글&nbsp;작성
               </Link>
