@@ -28,9 +28,9 @@ const AuthPage = () => {
   const [disable, setDisable] = useState(true);
   const [showInputBlind, setShowBlind] = useState(false);
 
-  const { mutate: createAccount } = useAuthHandler();
-
   const { nicknameData } = useNickNameQueryHook();
+
+  const { mutate: createAccount } = useAuthHandler();
 
   async function createAccountHandler(data: InputType) {
     createAccount({
@@ -119,7 +119,6 @@ const AuthPage = () => {
           회원가입
         </CommonButton>
       </form>
-      <DevTool control={control} />
     </div>
   );
 };

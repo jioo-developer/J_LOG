@@ -20,7 +20,7 @@ async function onFileChange(files: File[]) {
         });
       })
     );
-    return { result, files };
+    return { result };
   } else {
     throw new Error("유효한 파일이 없습니다.");
   }

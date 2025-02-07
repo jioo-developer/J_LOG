@@ -7,7 +7,7 @@ export type changeHanlderType = {
   nickname: string;
 };
 
-function useNameChanger() {
+function useNameChangeHandler() {
   const user = authService.currentUser as User;
   const queryClient = useQueryClient();
   return useMutation({
@@ -42,4 +42,4 @@ function useNameChanger() {
   });
 }
 
-export default useNameChanger;
+export default useNameChangeHandler;

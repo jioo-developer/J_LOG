@@ -16,7 +16,6 @@ function LoginPage() {
   const {
     register,
     handleSubmit,
-    control,
     formState: { errors },
   } = useForm<InputTypes>();
 

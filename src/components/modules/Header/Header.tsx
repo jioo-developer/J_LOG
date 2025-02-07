@@ -3,7 +3,7 @@
 import useLogoutHook from "@/service/userAuth/login/hook/useLogoutHook";
 import { ChevronDown, SearchIcon } from "lucide-react";
 import Image from "next/image";
-import { useEffect, useRef } from "react";
+import { Suspense, useEffect, useRef } from "react";
 import CommonButton from "../../atoms/CommonButton/CommonButton";
 import Link from "next/link";
 import { useQuery } from "@tanstack/react-query";
@@ -12,6 +12,7 @@ import { GoPoster, HeaderStyle, SubMenu, UIWrap } from "./Style";
 import { getUser } from "@/service/userAuth/login/hook/useGetUserHook";
 import { usePathname } from "next/navigation";
 import { usePageInfoStore, useSearchStore } from "@/store/common";
+import { Skeleton } from "@mui/material";
 
 const activePathName = ["/mypage", "/detail", "/", "/myBoard", "/search"];
 
@@ -63,7 +64,13 @@ function Header({ accessToken }: propsType) {
               setSearch("");
             }}
           >
-            {user ? user.displayName + ".log" : ""}
+            <Suspense fallback={<Skeleton variant="text" />}>
+              {user ? (
+                user.displayName + ".log"
+              ) : (
+                <Skeleton variant="text" width={110} />
+              )}
+            </Suspense>
           </Link>
           <div css={UIWrap}>
             <CommonButton theme="none" onClick={() => setEditMode(false)}>
@@ -79,13 +86,25 @@ function Header({ accessToken }: propsType) {
             <label htmlFor="menuToggle" className="flex-Set">
               <input type="checkbox" id="menuToggle" ref={ref} />
               <figure>
-                <Image
-                  width={40}
-                  height={40}
-                  src={user?.photoURL ? user.photoURL : "/images/default.svg"}
-                  alt="프로필 이미지"
-                  referrerPolicy="no-referrer"
-                />
+                <Suspense
+                  fallback={
+                    <Skeleton variant="circular" width={40} height={40} />
+                  }
+                >
+                  {user ? (
+                    <Image
+                      width={40}
+                      height={40}
+                      src={
+                        user?.photoURL ? user.photoURL : "/images/default.svg"
+                      }
+                      alt="프로필 이미지"
+                      referrerPolicy="no-referrer"
+                    />
+                  ) : (
+                    <Skeleton variant="circular" width={40} height={40} /> // user가 로드되기 전 Skeleton 표시
+                  )}
+                </Suspense>
               </figure>
               <ChevronDown size={18} />
             </label>

@@ -5,7 +5,7 @@ import SocialDeleteHandler from "@/service/member/quit/socialquitHandler";
 import isCredential from "@/service/member/quit/credentialHandler";
 import { User } from "firebase/auth";
 import { useEffect, useState } from "react";
-import useGetQueryHandler from "../getQueryHandler";
+import useGetQueryHandler from "../../../service/member/mypage/getQueryDataHook";
 import { css } from "@emotion/react";
 import { useForm } from "react-hook-form";
 import { InputTypes } from "@/static/types/common";

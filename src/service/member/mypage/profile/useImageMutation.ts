@@ -8,15 +8,16 @@ type propsType = {
   files: File[];
 };
 
-function useImageChanger() {
+function useImageChangeHandler() {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async ({ url, files }: propsType) => {
       const uploadUrl = await storageUploadHandler(url, files);
+      const result = uploadUrl[0];
       await updateProfile(authService.currentUser as User, {
-        photoURL: uploadUrl[0],
+        photoURL: result,
       });
-      return uploadUrl[0];
+      return result;
     },
     onSuccess: async (imgurl) => {
       await queryClient.refetchQueries({
@@ -36,4 +37,4 @@ function useImageChanger() {
   });
 }
 
-export default useImageChanger;
+export default useImageChangeHandler;
