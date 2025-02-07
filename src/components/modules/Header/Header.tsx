@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 "use client";
-import useLogoutHook from "@/service/api-hooks/login/hook/useLogoutHook";
+import useLogoutHook from "@/service/userAuth/login/hook/useLogoutHook";
 import { ChevronDown, SearchIcon } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useRef } from "react";
@@ -9,13 +9,17 @@ import Link from "next/link";
 import { useQuery } from "@tanstack/react-query";
 import { User } from "firebase/auth";
 import { GoPoster, HeaderStyle, SubMenu, UIWrap } from "./Style";
-import { getUser } from "@/service/api-hooks/login/hook/useGetUserHook";
+import { getUser } from "@/service/userAuth/login/hook/useGetUserHook";
 import { usePathname } from "next/navigation";
-import { usePageInfoStore } from "@/store/common";
+import { usePageInfoStore, useSearchStore } from "@/store/common";
 
-const activePathName = ["/member/mypage", "/detail", "/", "/member/myBoard"];
+const activePathName = ["/mypage", "/detail", "/", "/myBoard", "/search"];
 
-function Header() {
+type propsType = {
+  accessToken?: string;
+};
+
+function Header({ accessToken }: propsType) {
   const pathname = usePathname();
   const ref = useRef<HTMLInputElement | null>(null);
 
@@ -23,6 +27,14 @@ function Header() {
     queryKey: ["getuser"],
     queryFn: getUser,
   });
+
+  const { mutate } = useLogoutHook();
+
+  useEffect(() => {
+    if (!accessToken && user) {
+      mutate();
+    }
+  }, [accessToken]);
 
   useEffect(() => {
     if (ref.current?.checked) {
@@ -38,19 +50,26 @@ function Header() {
 
   const { setEditMode } = usePageInfoStore();
 
+  const { setSearch } = useSearchStore();
+
   return (
     <>
       {isActive && (
         <header className="flex-Set" css={HeaderStyle}>
-          <Link href="/" className="title">
+          <Link
+            href="/"
+            className="title"
+            onClick={() => {
+              setSearch("");
+            }}
+          >
             {user ? user.displayName + ".log" : ""}
           </Link>
           <div css={UIWrap}>
             <CommonButton theme="none" onClick={() => setEditMode(false)}>
-              <Link href="/editor" css={GoPoster}>
+              <Link href="/edit" css={GoPoster}>
                 새&nbsp;글&nbsp;작성
               </Link>
-              {/* pageInfoStore.setState({ editMode: false }); */}
             </CommonButton>
             <CommonButton theme="none">
               <Link href="/search">
@@ -74,12 +93,12 @@ function Header() {
             <ul className="sub_menu" css={SubMenu}>
               <li>
                 <CommonButton theme="none">
-                  <Link href="member/myBoard">내 게시글</Link>
+                  <Link href="/mypage">마이페이지</Link>
                 </CommonButton>
               </li>
               <li>
                 <CommonButton theme="none">
-                  <Link href="member/myPage">마이페이지</Link>
+                  <Link href="/myBoard">내 게시글</Link>
                 </CommonButton>
               </li>
               <li>

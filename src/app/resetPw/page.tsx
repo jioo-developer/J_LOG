@@ -3,7 +3,7 @@
 import CommonButton from "@/components/atoms/CommonButton/CommonButton";
 import CommonInput from "@/components/atoms/CommonInput/CommonInput";
 import { authService } from "@/lib/firebase";
-import { InputTypes } from "@/static/type/common";
+import { InputTypes } from "@/static/types/common";
 import { css } from "@emotion/react";
 import { sendPasswordResetEmail } from "firebase/auth";
 import Link from "next/link";
@@ -52,10 +52,10 @@ const ResetPwPage = () => {
           error={errors.emailRequired}
         />
         <div className="button__group">
-          <CommonButton theme="none" size="rg">
+          <CommonButton type="button" theme="none" size="rg">
             <Link href="/login">취소</Link>
           </CommonButton>
-          <CommonButton theme="success" size="rg">
+          <CommonButton type="submit" theme="success" size="rg">
             확인
           </CommonButton>
         </div>

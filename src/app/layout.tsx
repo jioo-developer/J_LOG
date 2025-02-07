@@ -3,6 +3,7 @@ import TanstackProvider from "@/provider/TanstackProvider";
 import "./globals.css";
 import "@/asset/common.scss";
 import Header from "@/components/modules/Header/Header";
+import { cookies } from "next/headers";
 
 export const metadata: Metadata = {
   title: "J-LOG",
@@ -14,6 +15,11 @@ export const metadata: Metadata = {
   },
 };
 
+const cookiesStore = cookies();
+const token =
+  cookiesStore.get("authToken")?.value ||
+  cookiesStore.get("GoogleAuthToken")?.value;
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -23,7 +29,7 @@ export default function RootLayout({
     <html lang="ko">
       <body>
         <TanstackProvider>
-          <Header />
+          <Header accessToken={token} />
           {children}
         </TanstackProvider>
       </body>

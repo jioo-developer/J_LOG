@@ -6,7 +6,8 @@ export interface CommonButtonProps {
   onClick?: () => void;
   disabled?: boolean;
   size?: "sm" | "rg" | "md" | "lg";
-  theme: "white" | "success" | "primary" | "disable" | "none";
+  type?: "button" | "submit";
+  theme: "white" | "success" | "primary" | "disable" | "warnning" | "none";
 }
 
 function CommonButton({
@@ -15,12 +16,14 @@ function CommonButton({
   disabled = false,
   size = "md",
   theme,
+  type,
 }: CommonButtonProps) {
   return (
     <button
       disabled={disabled}
       css={[themes[theme], buttonVariants[size]]}
       onClick={onClick}
+      type={type ? type : "submit"}
     >
       {children}
     </button>

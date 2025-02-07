@@ -52,7 +52,7 @@ export const SubMenu = css`
   flex-direction: column;
   position: absolute;
   right: Calc(var(--gap-xlarge) * 2);
-  top: Calc(var(--gap-xlarge) * 4);
+  top: Calc(var(--gap-xlarge) * 3.3);
   background: #fff;
   box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.1);
   z-index: 10;

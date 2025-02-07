@@ -7,7 +7,6 @@ export async function GET() {
   const queryData = query(collectionRef, orderBy("timestamp", "asc"));
   try {
     const response = await getDocs(queryData);
-
     if (response.empty) {
       return NextResponse.json({ postdata: [] });
     }

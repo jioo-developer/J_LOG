@@ -24,6 +24,10 @@ export const themes = {
     background: gray;
     color: var(--whiteColor);
   `,
+  warnning: css`
+    background: rgb(255, 135, 135);
+    color: var(--whiteColor);
+  `,
 };
 
 // (독립) 버튼 테마 설정
