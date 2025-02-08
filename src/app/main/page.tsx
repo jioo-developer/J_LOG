@@ -4,7 +4,7 @@ import {
   HydrationBoundary,
   QueryClient,
 } from "@tanstack/react-query";
-import { getPostData } from "@/apis/home/useGetDataFetchHook";
+import { getPostData } from "@/apis/main/useGetDataFetchHook";
 export default async function MainPageServerComponent() {
   const queryClient = new QueryClient();
 

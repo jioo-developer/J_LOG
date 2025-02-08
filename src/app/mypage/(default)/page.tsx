@@ -4,8 +4,8 @@ import {
   HydrationBoundary,
   QueryClient,
 } from "@tanstack/react-query";
-import { getUser } from "@/apis/userAuth/login/hook/useGetUserHook";
-import { getNicknameHandler } from "@/apis/userAuth/auth/hook/useGetNicknameHook";
+import { getUser } from "@/apis/login/hook/useGetUserHook";
+import { getNicknameHandler } from "@/apis/auth/hook/useGetNicknameHook";
 export default async function MainPageServerComponent() {
   const queryClient = new QueryClient();
 

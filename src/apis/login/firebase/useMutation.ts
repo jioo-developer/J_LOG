@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { LoginErrorHandler } from "../../error";
+import { LoginErrorHandler } from "../error";
 import { useRouter } from "next/navigation";
 import { Postlogin } from "./loginHandler";
 type propsType = {

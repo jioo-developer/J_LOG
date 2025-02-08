@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 "use client";
-import useLogoutHook from "@/apis/userAuth/login/hook/useLogoutHook";
+import useLogoutHook from "@/apis/login/hook/useLogoutHook";
 import { ChevronDown, SearchIcon } from "lucide-react";
 import Image from "next/image";
 import { Suspense, useEffect, useRef } from "react";
@@ -9,7 +9,7 @@ import Link from "next/link";
 import { useQuery } from "@tanstack/react-query";
 import { User } from "firebase/auth";
 import { GoPoster, HeaderStyle, SubMenu, UIWrap } from "./Style";
-import { getUser } from "@/apis/userAuth/login/hook/useGetUserHook";
+import { getUser } from "@/apis/login/hook/useGetUserHook";
 import { usePathname } from "next/navigation";
 import { usePageInfoStore, useSearchStore } from "@/store/common";
 import { Skeleton } from "@mui/material";

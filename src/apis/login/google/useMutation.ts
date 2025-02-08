@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { GoogleLogin } from "./loginHandler";
-import { LoginErrorHandler } from "../../error";
+import { LoginErrorHandler } from "../error";
 
 const useGoogleHook = () => {
   const router = useRouter();

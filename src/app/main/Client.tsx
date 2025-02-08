@@ -3,7 +3,7 @@
 import { FirebaseData } from "@/components/type";
 import { Suspense, useEffect, useState } from "react";
 import Item from "./component/Item";
-import usePostQueryHook from "@/apis/home/useGetDataFetchHook";
+import usePostQueryHook from "@/apis/main/useGetDataFetchHook";
 import { useSearchStore } from "@/store/common";
 import { css } from "@emotion/react";
 import { Skeleton } from "@mui/material";

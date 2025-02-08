@@ -4,7 +4,7 @@ import {
   HydrationBoundary,
   QueryClient,
 } from "@tanstack/react-query";
-import { getNicknameHandler } from "@/apis/userAuth/auth/hook/useGetNicknameHook";
+import { getNicknameHandler } from "@/apis/auth/hook/useGetNicknameHook";
 
 export default async function NicknameServerComponent() {
   const queryClient = new QueryClient();
