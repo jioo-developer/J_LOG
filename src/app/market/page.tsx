@@ -1,4 +1,4 @@
-import { getCashData } from "@/apis/market/useGetCashHook";
+import { getCashHandler } from "@/apis/market/getCashHandler";
 import ClientComponent from "./Client";
 import {
   dehydrate,
@@ -10,7 +10,7 @@ export default async function MarketServerComponent() {
 
   await queryClient.prefetchQuery({
     queryKey: ["getCash"],
-    queryFn: getCashData,
+    queryFn: getCashHandler,
   });
 
   const dehydratedState = dehydrate(queryClient);

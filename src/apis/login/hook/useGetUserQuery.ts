@@ -8,6 +8,7 @@ import {
   signInWithCustomToken,
   User,
 } from "firebase/auth";
+import getUserHandler from "../handler/getUserHandler";
 
 export async function getUser() {
   // Firebase Authentication 상태 변경 시 처리
@@ -16,11 +17,7 @@ export async function getUser() {
       if (user) {
         resolve(user);
       } else {
-        const response = await fetch(`${apiUrl}/api/login`, {
-          method: "GET",
-          credentials: "include",
-        });
-        const { user } = await response.json();
+        const { user } = await getUserHandler();
         if (user) {
           let login;
           if (user.provider === "google.com") {

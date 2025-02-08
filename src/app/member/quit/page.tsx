@@ -1,8 +1,8 @@
 /** @jsxImportSource @emotion/react */
 "use client";
-import originDeleteHandler from "@/apis/member/quit/originquitHandler";
-import SocialDeleteHandler from "@/apis/member/quit/socialquitHandler";
-import isCredential from "@/apis/member/quit/credentialHandler";
+import originDeleteHandler from "@/apis/member/quit/handler/originquitHandler";
+import SocialDeleteHandler from "@/apis/member/quit/handler/socialquitHandler";
+import isCredential from "@/apis/member/quit/handler/credentialHandler";
 import { User } from "firebase/auth";
 import { useEffect, useState } from "react";
 import useGetQueryHandler from "@/apis/member/mypage/query/getMyDataQuery";
@@ -14,6 +14,7 @@ import Link from "next/link";
 import CommonInput from "@/components/atoms/CommonInput/CommonInput";
 import { useRouter } from "next/navigation";
 import { apiUrl } from "@/static/constants/common";
+import useQuitMutation from "@/apis/member/quit/useMutation";
 
 type UserType = {
   user: User;
@@ -25,9 +26,10 @@ const QuitPage = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<InputTypes>();
-  const router = useRouter();
   const { user }: UserType = useGetQueryHandler() as UserType;
   const [loginType, setType] = useState("");
+
+  const { mutate: quitHandler } = useQuitMutation();
 
   useEffect(() => {
     const Credential = isCredential(user);
@@ -41,14 +43,7 @@ const QuitPage = () => {
       } else {
         await originDeleteHandler((data as InputTypes).passwordRequired); // 1. `quitPw`를 사용하여 원래 삭제 핸들러 실행
       }
-
-      await fetch(`${apiUrl}/api/member/mypage`, {
-        method: "DELETE",
-        credentials: "include",
-        body: JSON.stringify({ user }),
-      });
-
-      router.push("/login");
+      quitHandler();
     } catch {
       //   popuprHandler({ message: "회원 탈퇴에 실패하였습니다" });
     }

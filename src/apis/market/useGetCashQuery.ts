@@ -1,16 +1,5 @@
-import { authService } from "@/lib/firebase";
-import { apiUrl } from "@/static/constants/common";
 import { QueryObserverResult, useQuery } from "@tanstack/react-query";
-import { User } from "firebase/auth";
-
-export async function getCashData() {
-  const user = authService.currentUser as User;
-  const response = await fetch(`${apiUrl}/api/market`, {
-    method: "GET",
-    body: JSON.stringify({ user: user.uid }),
-  });
-  return response.json();
-}
+import { getCashHandler } from "./getCashHandler";
 
 type CashItem = {
   cash: number;
@@ -25,7 +14,7 @@ const useCashQueryHook = () => {
     refetch,
   }: QueryObserverResult<CashItem[], Error> = useQuery({
     queryKey: ["getCash"],
-    queryFn: getCashData,
+    queryFn: getCashHandler,
     staleTime: 1 * 60 * 1000, // 1분
     notifyOnChangeProps: ["data"],
     refetchOnMount: "always",

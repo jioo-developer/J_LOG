@@ -2,26 +2,23 @@ import { authService, db } from "@/lib/firebase";
 import { apiUrl } from "@/static/constants/common";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { updateProfile, User } from "firebase/auth";
+import ChangeNicknameHandler from "./ChangeNicknameHandler";
 
 export type changeHanlderType = {
   nickname: string;
 };
 
-function useNameChangeHandler() {
-  const user = authService.currentUser as User;
+function useNameChangeMutation() {
   const queryClient = useQueryClient();
+  const user = authService.currentUser as User;
   return useMutation({
     mutationFn: async ({ nickname }: changeHanlderType) => {
-      await fetch(`${apiUrl}/api/member/mypage/profile/nickname`, {
-        method: "POST",
-        body: JSON.stringify({ id: user.uid, nickname }),
-      });
-      return nickname;
+      return ChangeNicknameHandler({ nickname, user });
       // 여기서 return 되는 nickname이 onSuccess의 params로 들어감
     },
-    onSuccess: async (nickname) => {
+    onSuccess: async (_, variables) => {
       await updateProfile(user, {
-        displayName: nickname,
+        displayName: variables.nickname,
       });
 
       await queryClient.refetchQueries({
@@ -31,7 +28,7 @@ function useNameChangeHandler() {
         if (!oldData) return oldData;
         return {
           ...oldData,
-          displayName: nickname,
+          displayName: variables.nickname,
         };
       });
     },
@@ -42,4 +39,4 @@ function useNameChangeHandler() {
   });
 }
 
-export default useNameChangeHandler;
+export default useNameChangeMutation;

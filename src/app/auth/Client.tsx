@@ -10,7 +10,7 @@ import AgreementForm from "./component/AgreementForm";
 import useAuthHandler from "@/apis/auth/useMutation";
 import CommonCheckbox from "@/components/atoms/CommonCheckbox/CommonCheckbox";
 import Link from "next/link";
-import useNickNameQueryHook from "@/apis/member/mypage/nicknameForm/useGetNicknameHook";
+import useNickNameQueryHook from "@/apis/member/mypage/query/useGetNicknameQuery";
 
 interface InputType extends InputTypes {
   nickNameRequired: string;

@@ -2,15 +2,16 @@
 "use client";
 import CommonButton from "@/components/atoms/CommonButton/CommonButton";
 import Item from "./component/Item";
-import useCashMutation from "@/apis/market/useSetCashHook";
+import useCashMutation from "@/apis/market/useMutation";
 import { useState } from "react";
-import useCashQueryHook from "@/apis/market/useGetCashHook";
 import { convertPrice } from "@/utils/convertPrice";
 import { css } from "@emotion/react";
+import useCashQueryHook from "@/apis/market/useGetCashQuery";
 
 const ItemStore = () => {
   const { CashData } = useCashQueryHook();
-  const getData = CashData[0];
+  const [getData] = CashData;
+
   const [value, setValue] = useState(0);
 
   const getItem = (val: number) => {

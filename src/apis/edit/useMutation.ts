@@ -15,10 +15,9 @@ const useCreateMutation = () => {
   return useMutation({
     mutationFn: async ({ data, pageId }: propsType) => {
       await setDoc(doc(db, "post", pageId), data);
-      return { pageId };
     },
-    onSuccess: (result) => {
-      router.push(`/pages/detail/${result.pageId}`);
+    onSuccess: (_, variables) => {
+      router.push(`/pages/detail/${variables.pageId}`);
     },
     onError: () => {
       popuprHandler({ message: "게시글 작성 중 오류가 발생하였습니다" });

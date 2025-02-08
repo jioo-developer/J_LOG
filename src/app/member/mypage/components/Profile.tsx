@@ -1,10 +1,12 @@
+/** @jsxImportSource @emotion/react */
 import ChangeFileHanlder from "@/utils/onFileChangeHandler";
 import Image from "next/image";
 import { ChangeEvent, Suspense } from "react";
-import useImageChangeHandler from "@/apis/member/mypage/profile/useImageMutation";
+import useImageChangeHandler from "@/apis/member/mypage/profile/useMutation";
 import Skeleton from "@mui/material/Skeleton";
 import CommonButton from "@/components/atoms/CommonButton/CommonButton";
 import { User } from "firebase/auth";
+import { ImageWrap, ProfileImage } from "./ProfileStyle";
 
 function ProfileComponent({ user }: { user: User }) {
   const { mutate } = useImageChangeHandler();
@@ -25,7 +27,7 @@ function ProfileComponent({ user }: { user: User }) {
   }
 
   return (
-    <div className="img_wrap flex-Set">
+    <div className="flex-Set" css={ImageWrap}>
       <input
         type="file"
         accept="image/*"
@@ -33,7 +35,7 @@ function ProfileComponent({ user }: { user: User }) {
         onChange={(e: ChangeEvent<HTMLInputElement>) => changeImageHandler(e)}
       />
 
-      <figure className="profileImg">
+      <figure css={ProfileImage}>
         <Suspense
           fallback={<Skeleton variant="circular" width={135} height={135} />}
         >
@@ -42,6 +44,7 @@ function ProfileComponent({ user }: { user: User }) {
               width={135}
               height={135}
               src={user.photoURL || "/images/default.svg"}
+              style={{ borderRadius: "50%" }}
               alt="프로필 이미지"
             />
           ) : (

@@ -1,7 +1,7 @@
 import useUserQueryHook from "@/apis/login/hook/useGetUserQuery";
 import { useQueryClient } from "@tanstack/react-query";
 import { User } from "firebase/auth";
-import useNickNameQueryHook from "../nicknameForm/useGetNicknameHook";
+import useNickNameQueryHook from "./useGetNicknameQuery";
 
 function useGetQueryHandler() {
   const queryClient = useQueryClient();

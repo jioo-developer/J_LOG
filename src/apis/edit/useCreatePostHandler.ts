@@ -1,5 +1,7 @@
+import setDataHandler from "../detail/handler/setDataHandler";
+
 // 게시글 생성 및 수정 함수
-async function CreateHandler() {
+export async function useCreateHandler() {
   const content = {
     title,
     text,

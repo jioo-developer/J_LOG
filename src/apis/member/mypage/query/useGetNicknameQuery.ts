@@ -1,5 +1,5 @@
 import { UseQueryResult, useQuery } from "@tanstack/react-query";
-import { getNicknameHandler } from "./getNicknameHandler";
+import { getNicknameHandler } from "../nicknameForm/getNicknameHandler";
 
 // ✅ useQuery 훅 (타입 올바르게 지정)
 const useNickNameQueryHook = () => {

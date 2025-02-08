@@ -8,7 +8,7 @@ type propsType = {
   files: File[];
 };
 
-function useImageChangeHandler() {
+function useImageMutation() {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async ({ url, files }: propsType) => {
@@ -37,4 +37,4 @@ function useImageChangeHandler() {
   });
 }
 
-export default useImageChangeHandler;
+export default useImageMutation;

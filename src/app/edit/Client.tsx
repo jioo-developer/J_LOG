@@ -3,10 +3,10 @@ import useGetQueryHandler from "@/apis/member/mypage/query/getMyDataQuery";
 import "./Style.scss";
 import useDetailQueryHook from "@/apis/detail/hook/useGetDetaillHook";
 import { usePageInfoStore } from "@/store/common";
-import InputForm from "./components/InputForm";
-import Priority from "./components/Priority";
+import Priority from "./components/PriorityChecker";
 import { useRouter } from "next/navigation";
 import { useCreateId } from "@/apis/detail/handler/pageInfoHandler";
+import InputForm from "./components/InputForm";
 const EditorPage = () => {
   const { user } = useGetQueryHandler();
   const { pgId: pageInfo, editMode } = usePageInfoStore();

@@ -1,4 +1,4 @@
-import { getMyData } from "@/apis/member/mypage/query/useGetMyPostQuery";
+import { getMyDataHandler } from "@/apis/member/mypage/query/useGetMyPostQuery";
 import ClientComponent from "./Client";
 import {
   dehydrate,
@@ -10,7 +10,7 @@ export default async function ServerComponent() {
 
   await queryClient.prefetchQuery({
     queryKey: ["getMyData"],
-    queryFn: getMyData,
+    queryFn: getMyDataHandler,
   });
 
   const dehydratedState = dehydrate(queryClient);

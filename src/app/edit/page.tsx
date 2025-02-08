@@ -1,29 +1,26 @@
+import { NextRequest } from "next/server";
 import ClientComponent from "./Client";
 
-// import { getDetailHandler } from "@/service/detail/hook/useGetDetaillHook";
-// import {
-//   dehydrate,
-//   HydrationBoundary,
-//   QueryClient,
-// } from "@tanstack/react-query";
-// import { NextRequest } from "next/server";
-// export default async function MarketServerComponent() {
-//   const queryClient = new QueryClient();
-//   const id = request.nextUrl.pathname.split("/").pop();
+import {
+  dehydrate,
+  HydrationBoundary,
+  QueryClient,
+} from "@tanstack/react-query";
+import { getDetailHandler } from "@/apis/detail/hook/useGetDetaillHook";
 
-//   await queryClient.prefetchQuery({
-//     queryKey: ["getDetail"],
-//     queryFn: () => getDetailHandler(id as string),
-//   });
+export default async function ServerComponent(request: NextRequest) {
+  const queryClient = new QueryClient();
+  const id = request.nextUrl.pathname.split("/").pop();
 
-//   const dehydratedState = dehydrate(queryClient);
-//   return (
-//     <HydrationBoundary state={dehydratedState}>
-//       <ClientComponent />
-//     </HydrationBoundary>
-//   );
-// }
+  await queryClient.prefetchQuery({
+    queryKey: ["getDetail"],
+    queryFn: () => getDetailHandler(id as string),
+  });
 
-export default function () {
-  return <ClientComponent />;
+  const dehydratedState = dehydrate(queryClient);
+  return (
+    <HydrationBoundary state={dehydratedState}>
+      <ClientComponent />
+    </HydrationBoundary>
+  );
 }

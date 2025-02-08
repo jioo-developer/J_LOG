@@ -1,4 +1,4 @@
-import deleteUserDB from "@/apis/member/quit/deleteDBHandler";
+import deleteUserDB from "@/apis/member/quit/handler/deleteDBHandler";
 import { deleteUser } from "firebase/auth";
 import { NextRequest } from "next/server";
 

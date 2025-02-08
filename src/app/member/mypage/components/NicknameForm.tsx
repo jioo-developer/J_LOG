@@ -1,11 +1,13 @@
+/** @jsxImportSource @emotion/react */
 import CommonButton from "@/components/atoms/CommonButton/CommonButton";
 import CommonInput from "@/components/atoms/CommonInput/CommonInput";
-import useNameChangeHandler from "@/apis/member/mypage/profile/useNameMutation";
+import useNameChangeHandler from "@/apis/member/mypage/nicknameForm/useMutation";
 import { Skeleton } from "@mui/material";
 import { User } from "firebase/auth";
 import { startTransition, Suspense, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
+import { FormEditorButton, NameWrap } from "./NicknameFormStyle";
 
 type propsType = {
   user: User;
@@ -48,7 +50,7 @@ function NicknameForm({ user, data }: propsType) {
   }
 
   return (
-    <div className="form__wrap">
+    <div css={NameWrap}>
       {!nameToggle ? (
         <div className="name_area">
           <b className="nickname">
@@ -60,7 +62,7 @@ function NicknameForm({ user, data }: propsType) {
               )}
             </Suspense>
           </b>
-          <div className="nick__editor flex-Set">
+          <div className="flex-Set" css={FormEditorButton}>
             <CommonButton
               type="button"
               theme="none"
