@@ -1,7 +1,7 @@
 "use client";
 import "./Style.scss";
-import useGetQueryHandler from "@/service/member/mypage/getQueryDataHook";
-import useMyDataQueryHook from "@/service/member/mypage/useGetMyPostData";
+import useGetQueryHandler from "@/apis/member/mypage/getQueryDataHook";
+import useMyDataQueryHook from "@/apis/member/mypage/useGetMyPostData";
 import { usePageInfoStore } from "@/store/common";
 import { Skeleton } from "@mui/material";
 import Image from "next/image";

@@ -1,11 +1,11 @@
 "use client";
 
 import { FirebaseData } from "@/components/type";
-import { useGetPageInfo } from "@/service/detail/handler/pageInfoHandler";
-import usePageDeleteHandler from "@/service/detail/hook/crud/useDeleteMutation";
-import useFavoriteMutate from "@/service/detail/hook/crud/useFavoriteMutation";
-import useDetailQueryHook from "@/service/detail/hook/useGetDetaillHook";
-import useGetQueryHandler from "@/service/member/mypage/getQueryDataHook";
+import { useGetPageInfo } from "@/apis/detail/handler/pageInfoHandler";
+import usePageDeleteHandler from "@/apis/detail/hook/crud/useDeleteMutation";
+import useFavoriteMutate from "@/apis/detail/hook/crud/useFavoriteMutation";
+import useDetailQueryHook from "@/apis/detail/hook/useGetDetaillHook";
+import useGetQueryHandler from "@/apis/member/mypage/getQueryDataHook";
 import { usePageInfoStore } from "@/store/common";
 import Image from "next/image";
 import { useRouter } from "next/navigation";

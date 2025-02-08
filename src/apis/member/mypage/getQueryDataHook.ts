@@ -1,5 +1,5 @@
-import useNickNameQueryHook from "@/service/userAuth/auth/hook/useGetNicknameHook";
-import useUserQueryHook from "@/service/userAuth/login/hook/useGetUserHook";
+import useNickNameQueryHook from "@/apis/userAuth/auth/hook/useGetNicknameHook";
+import useUserQueryHook from "@/apis/userAuth/login/hook/useGetUserHook";
 import { useQueryClient } from "@tanstack/react-query";
 import { User } from "firebase/auth";
 

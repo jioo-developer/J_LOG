@@ -7,11 +7,11 @@ import CommonInput from "@/components/atoms/CommonInput/CommonInput";
 import CommonButton from "@/components/atoms/CommonButton/CommonButton";
 import { ChevronLeftIcon, EyeIcon, EyeOffIcon } from "lucide-react";
 import AgreementForm from "./component/AgreementForm";
-import useAuthHandler from "@/service/userAuth/auth/hook/useAuthHook";
+import useAuthHandler from "@/apis/userAuth/auth/hook/useAuthHook";
 import { DevTool } from "@hookform/devtools";
 import CommonCheckbox from "@/components/atoms/CommonCheckbox/CommonCheckbox";
 import Link from "next/link";
-import useNickNameQueryHook from "@/service/userAuth/auth/hook/useGetNicknameHook";
+import useNickNameQueryHook from "@/apis/userAuth/auth/hook/useGetNicknameHook";
 
 interface InputType extends InputTypes {
   nickNameRequired: string;

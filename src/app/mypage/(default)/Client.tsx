@@ -1,5 +1,5 @@
 "use client";
-import useGetQueryHandler from "@/service/member/mypage/getQueryDataHook";
+import useGetQueryHandler from "@/apis/member/mypage/getQueryDataHook";
 import NicknameForm from "./components/NicknameForm";
 import ProfileComponent from "./components/Profile";
 import "./Style.scss";

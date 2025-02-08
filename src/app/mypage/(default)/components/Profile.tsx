@@ -1,7 +1,7 @@
 import ChangeFileHanlder from "@/utils/onFileChangeHandler";
 import Image from "next/image";
 import { ChangeEvent, Suspense } from "react";
-import useImageChangeHandler from "@/service/member/mypage/profile/useImageMutation";
+import useImageChangeHandler from "@/apis/member/mypage/profile/useImageMutation";
 import Skeleton from "@mui/material/Skeleton";
 import CommonButton from "@/components/atoms/CommonButton/CommonButton";
 import { User } from "firebase/auth";

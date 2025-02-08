@@ -7,7 +7,7 @@ import Image from "next/image";
 import SocialLoginPage from "./(snsLogin)";
 import { useForm } from "react-hook-form";
 import { EyeOffIcon, EyeIcon } from "lucide-react";
-import useLoginHook from "@/service/userAuth/login/loginType/firebase/useMutation";
+import useLoginHook from "@/apis/userAuth/login/loginType/firebase/useMutation";
 import { useState } from "react";
 import { InputTypes } from "@/static/types/common";
 import Link from "next/link";

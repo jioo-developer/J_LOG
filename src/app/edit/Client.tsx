@@ -1,7 +1,7 @@
 "use client";
-import useGetQueryHandler from "@/service/member/mypage/getQueryDataHook";
+import useGetQueryHandler from "@/apis/member/mypage/getQueryDataHook";
 import "./Style.scss";
-import useDetailQueryHook from "@/service/detail/hook/useGetDetaillHook";
+import useDetailQueryHook from "@/apis/detail/hook/useGetDetaillHook";
 import { usePageInfoStore } from "@/store/common";
 import InputForm from "./components/InputForm";
 import Priority from "./components/Priority";

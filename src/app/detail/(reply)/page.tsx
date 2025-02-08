@@ -1,11 +1,11 @@
 "use client";
 
-import useGetQueryHandler from "@/service/member/mypage/getQueryDataHook";
-import { useReplyQueryHook } from "@/service/reply/useGetReplyHook";
+import useGetQueryHandler from "@/apis/member/mypage/getQueryDataHook";
+import { useReplyQueryHook } from "@/apis/reply/useGetReplyHook";
 import ReactTextareaAutosize from "react-textarea-autosize";
 import { usePageInfoStore } from "@/store/common";
 import { useReplyContext } from "./context";
-import { useCreateHandler } from "@/service/reply/Reply/useMutationHandler";
+import { useCreateHandler } from "@/apis/reply/Reply/useMutationHandler";
 import ReplyItem from "./ReplyItem";
 
 const Reply = () => {

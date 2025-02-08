@@ -2,9 +2,9 @@
 "use client";
 import CommonButton from "@/components/atoms/CommonButton/CommonButton";
 import Item from "./component/Item";
-import useCashMutation from "@/service/market/useSetCashHook";
+import useCashMutation from "@/apis/market/useSetCashHook";
 import { useState } from "react";
-import useCashQueryHook from "@/service/market/useGetCashHook";
+import useCashQueryHook from "@/apis/market/useGetCashHook";
 import { convertPrice } from "@/utils/convertPrice";
 import { css } from "@emotion/react";
 

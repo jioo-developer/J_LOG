@@ -1,6 +1,6 @@
 import CommonButton from "@/components/atoms/CommonButton/CommonButton";
 import CommonInput from "@/components/atoms/CommonInput/CommonInput";
-import useNameChangeHandler from "@/service/member/mypage/profile/useNameMutation";
+import useNameChangeHandler from "@/apis/member/mypage/profile/useNameMutation";
 import { Skeleton } from "@mui/material";
 import { User } from "firebase/auth";
 import { Suspense, useEffect, useState } from "react";

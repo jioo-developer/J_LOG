@@ -1,11 +1,11 @@
 /** @jsxImportSource @emotion/react */
 "use client";
-import originDeleteHandler from "@/service/member/quit/originquitHandler";
-import SocialDeleteHandler from "@/service/member/quit/socialquitHandler";
-import isCredential from "@/service/member/quit/credentialHandler";
+import originDeleteHandler from "@/apis/member/quit/originquitHandler";
+import SocialDeleteHandler from "@/apis/member/quit/socialquitHandler";
+import isCredential from "@/apis/member/quit/credentialHandler";
 import { User } from "firebase/auth";
 import { useEffect, useState } from "react";
-import useGetQueryHandler from "../../../service/member/mypage/getQueryDataHook";
+import useGetQueryHandler from "../../../apis/member/mypage/getQueryDataHook";
 import { css } from "@emotion/react";
 import { useForm } from "react-hook-form";
 import { InputTypes } from "@/static/types/common";
