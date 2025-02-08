@@ -1,18 +1,14 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { collection, getDocs, query, where, orderBy } from "firebase/firestore";
-import { authService, db } from "@/lib/firebase";
-export async function GET() {
+import { db } from "@/lib/firebase";
+export async function GET(request: NextRequest) {
+  const { user } = await request.json();
   try {
-    const user = authService.currentUser;
-    if (!user) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
-
     // ✅ Firestore에서 직접 필터링하여 불필요한 데이터 조회 방지
     const collectionRef = collection(db, "post");
     const queryData = query(
       collectionRef,
-      where("writer", "==", user.uid), // ✅ Firestore에서 필터링
+      where("writer", "==", user), // ✅ Firestore에서 필터링
       orderBy("timestamp", "asc")
     );
 

@@ -1,13 +1,16 @@
 import { FirebaseData } from "@/components/type";
+import { authService } from "@/lib/firebase";
 import { apiUrl } from "@/static/constants/common";
 import { QueryObserverResult, useQuery } from "@tanstack/react-query";
 
-async function getMyData() {
-  const response = await fetch(`${apiUrl}/api/mypage`, {
-    method: "POST",
+export async function getMyData() {
+  const user = authService.currentUser?.uid;
+  const response = await fetch(`${apiUrl}/api/mypage/board`, {
+    method: "GET",
     headers: {
       "Content-Type": "application/json",
     },
+    body: JSON.stringify({ uid: user }),
   });
 
   if (!response.ok) {

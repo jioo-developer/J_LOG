@@ -1,17 +1,17 @@
 "use client";
-import { useReplyQueryHook } from "@/app/api_hooks/Reply/getReplyHook";
+
+import useGetQueryHandler from "@/service/member/mypage/getQueryDataHook";
+import { useReplyQueryHook } from "@/service/reply/useGetReplyHook";
 import ReactTextareaAutosize from "react-textarea-autosize";
-import { pageInfoStore } from "@/store/common";
-import ReplyItem from "@/app/pages/detail/_reply/ReplyItem";
-import { useReplyContext } from "@/app/pages/detail/_reply/context";
-import { useCreateHandler } from "@/app/handler/Reply/useMutationHandler";
-import useUserQueryHook from "@/app/api_hooks/login/getUserHook";
-import { User } from "firebase/auth";
+import { usePageInfoStore } from "@/store/common";
+import { useReplyContext } from "./context";
+import { useCreateHandler } from "@/service/reply/Reply/useMutationHandler";
+import ReplyItem from "./ReplyItem";
 
 const Reply = () => {
-  const id = pageInfoStore().pgId;
+  const id = usePageInfoStore().pgId;
 
-  const { data } = useUserQueryHook();
+  const { user } = useGetQueryHandler();
 
   const { replyData, isLoading } = useReplyQueryHook(id);
 
@@ -22,31 +22,30 @@ const Reply = () => {
   const createMutation = useCreateHandler();
 
   const CreateRely = async () => {
-    const user = data as User;
-    const userObj = {
-      name: user.displayName as string,
-      profile: user.photoURL ? user.photoURL : "/img/default.svg",
-      uid: user.uid as string,
-    };
-    createMutation.mutate({ user: userObj, id, comment });
-    setComment("");
+    if (user) {
+      const userObj = {
+        name: user.displayName as string,
+        profile: user.photoURL ? user.photoURL : "/img/default.svg",
+        uid: user.uid as string,
+      };
+      createMutation.mutate({ user: userObj, id, comment });
+      setComment("");
+    }
   };
 
   return (
     <>
-      {isReply &&
-        data &&
-        replyData.map((item, index) => {
-          return (
-            <ReplyItem
-              key={index}
-              item={item}
-              index={index}
-              replyData={replyData}
-              pageId={id}
-            />
-          );
-        })}
+      {replyData.map((item, index) => {
+        return (
+          <ReplyItem
+            key={index}
+            item={item}
+            index={index}
+            replyData={replyData}
+            pageId={id}
+          />
+        );
+      })}
       <form
         role="form"
         onSubmit={(e) => {

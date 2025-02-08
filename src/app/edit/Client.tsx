@@ -1,116 +1,56 @@
-/** @jsxImportSource @emotion/react */
 "use client";
-import CommonCheckbox from "@/components/atoms/CommonCheckbox/CommonCheckbox";
+import useGetQueryHandler from "@/service/member/mypage/getQueryDataHook";
 import "./Style.scss";
-import CommonInput from "@/components/atoms/CommonInput/CommonInput";
-import { useForm } from "react-hook-form";
-import { useState } from "react";
-import CommonButton from "@/components/atoms/CommonButton/CommonButton";
-import ReactTextareaAutosize from "react-textarea-autosize";
-import { inputStyle } from "@/components/atoms/CommonInput/CommonInputStyle";
-type formType = {
-  titleRequired: string;
-  contentRequired: string;
-};
+import useDetailQueryHook from "@/service/detail/hook/useGetDetaillHook";
+import { usePageInfoStore } from "@/store/common";
+import InputForm from "./components/InputForm";
+import Priority from "./components/Priority";
+import { useRouter } from "next/navigation";
+const EditorPage = () => {
+  const { user } = useGetQueryHandler();
+  const { pgId: pageInfo, editMode } = usePageInfoStore();
 
-function EditorPage() {
-  const [checked, setChecked] = useState(false);
-  const {
-    register,
-    control,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<formType>();
+  const { pageData } = useDetailQueryHook(editMode ? pageInfo : "");
+
+  const createId = useCreateId();
+
+  const router = useRouter();
+
+  // useEffect(() => {
+  //   if (!editMode) {
+  //     pageInfoStore.setState({ pgId: createId });
+  //     //edit mode가 false이기 때문에 pageid를 새로 구성 = pageData가 없음
+  //   } else {
+  //     // edit mode가 true이기 때문에 이미 pageData가 있음
+  //     const oldData = pageData as FirebaseData;
+  //     // 그래서 거짓의 값이 없을 경우 타입 단언 적용
+  //     setTitle(oldData.title);
+  //     // 이전에 있는 제목
+  //     setText(oldData.text);
+  //     // 이전에 있는 내용
+  //     const imageUrl = oldData.url;
+  //     setPreview(imageUrl);
+
+  //     setName(oldData.fileName);
+  //     // 이전에 있는 이미지
+  //   }
+  // }, [editMode, pageData]);
+
   return (
-    <div className="upload flex-Set">
-      <form role="form">
-        <CommonInput
-          id="titleRequired"
-          placeholder="제목을 입력해주세요"
-          register={register}
-          validation={{
-            required: "제목을 입력해주세요",
-          }}
-          error={errors.titleRequired}
-        />
-        <div className="textarea">
-          <ReactTextareaAutosize
-            cacheMeasurements
-            onHeightChange={(height) => {}}
-            css={inputStyle}
-            className="text"
-            autoComplete="off"
-            minRows={1}
-            id="contentRequired"
-            placeholder="내용을 입력해주세요"
-          />
-          <figure>
-            {/* {previewImg.length > 0 &&
-            previewImg.map((url, index) => (
-              <div key={index}>
-                <button
-                  type="button"
-                  className="preview_delete"
-                  data-testid="delete-button"
-                  // onClick={() => {
-                  //   const array = { image: previewImg, file: fileName };
-                  //   const result = ImageDeleteHandler({
-                  //     array,
-                  //     fileIndex: index,
-                  //   });
-                  //   setPreview(result.image);
-                  //   setName(result.files);
-                  // }}
-                >
-                  <img src="/img/close.png" alt="" />
-                </button>
-                <img src={url} alt="" className="att" key={index} />
-              </div>
-            ))} */}
-          </figure>
-        </div>
-        <input
-          type="file"
-          accept="image/*"
-          multiple
-          className="file-form"
-          id="image"
-          // onChange={async (e) => {
-          //   const { result, files } = await LoadImageHandler(e);
-          //   if (result) {
-          //     setPreview(result);
-          //     setFile(files);
-          //   }
-          // }}
-        />
-        <label htmlFor="image" className="Attachment flex-Set image-att">
-          이미지를 담아주세요
-        </label>
-        <div className="use__item flex-Set">
-          <CommonCheckbox
-            stateValue={checked}
-            setStateHandler={setChecked}
-            // onChange={(e) => {
-            //   isCheckHandler(e);
-            // }}
-          />
-          <label htmlFor="use__Check" className="check">
-            <p>노출 우선권 사용하기</p>
-          </label>
-        </div>
-        <div className="bottom_wrap flex-Set">
-          <button className="exit">
-            {/* onClick={() => router.back()} */}← &nbsp;나가기
+    <div className="upload">
+      <InputForm />
+      <Priority />
+      <div className="bottom_wrap">
+        <button className="exit" onClick={() => router.back()}>
+          ← &nbsp;나가기
+        </button>
+        <div className="cancel_wrap">
+          <button type="submit" className="post">
+            글작성
           </button>
-          <div className="cancel_wrap">
-            <CommonButton type="submit" theme="success">
-              글작성
-            </CommonButton>
-          </div>
         </div>
-      </form>
+      </div>
     </div>
   );
-}
-
+};
 export default EditorPage;

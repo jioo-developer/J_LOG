@@ -1,6 +1,5 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
-import "@/app/_asset/theme.scss";
 import { convertPrice } from "@/utils/convertPrice";
 
 type propsType = {

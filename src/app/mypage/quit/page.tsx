@@ -61,10 +61,11 @@ const QuitPage = () => {
         css={Style}
         onSubmit={handleSubmit(deleteHandler)}
       >
+        <span>정말로 회원탈퇴를 진행할까요?</span>
         {loginType === "origin" && (
           <CommonInput
             id="passwordRequired"
-            placeholder="회원탈퇴를 위해 비밀번호를 입력해주세요요"
+            placeholder="회원탈퇴를 위해 비밀번호를 입력해주세요"
             register={register}
             validation={{
               required: "비밀번호를 입력하세요.",
@@ -118,13 +119,16 @@ const Style = css`
   align-items: flex-end;
   gap: var(--gap-medium);
 
+  p {
+    var(--font-size:medium);
+  }
+
   .label__area {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     width: 100%;
-    gap: var(--gap-large);
     span {
       width: 100%;
       text-align: left;
@@ -136,7 +140,9 @@ const Style = css`
 
   .button__group {
     display: flex;
+    min-width: 200px;
     justify-content: flex-end;
     gap: 8px;
+    margin-left: auto;
   }
 `;

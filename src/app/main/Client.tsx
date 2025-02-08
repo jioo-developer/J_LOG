@@ -1,11 +1,12 @@
 /** @jsxImportSource @emotion/react */
 "use client";
 import { FirebaseData } from "@/components/type";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import Item from "./component/Item";
 import usePostQueryHook from "@/service/home/useGetDataFetchHook";
 import { useSearchStore } from "@/store/common";
 import { css } from "@emotion/react";
+import { Skeleton } from "@mui/material";
 
 const MainPage = ({}) => {
   const [postState, setState] = useState<FirebaseData[]>([]);
@@ -35,13 +36,17 @@ const MainPage = ({}) => {
       return array.map((item: FirebaseData, index: number) => {
         return <Item item={item} index={index} key={index} />;
       });
+    } else {
+      return <Skeleton variant="rectangular" />;
     }
   };
   // 게시글 랜더링 함수
 
   return (
     <div className="post_section" css={SectionStyle}>
-      {showDataHandler()}
+      <Suspense fallback={<Skeleton variant="rectangular" />}>
+        {showDataHandler()}
+      </Suspense>
     </div>
   );
 };

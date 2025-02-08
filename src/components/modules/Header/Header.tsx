@@ -14,7 +14,13 @@ import { usePathname } from "next/navigation";
 import { usePageInfoStore, useSearchStore } from "@/store/common";
 import { Skeleton } from "@mui/material";
 
-const activePathName = ["/mypage", "/detail", "/", "/myBoard", "/search"];
+const activePathName = [
+  "/mypage",
+  "/detail",
+  "/",
+  "/mypage/myboard",
+  "/search",
+];
 
 type propsType = {
   accessToken?: string;
@@ -117,7 +123,7 @@ function Header({ accessToken }: propsType) {
               </li>
               <li>
                 <CommonButton theme="none">
-                  <Link href="/myBoard">내 게시글</Link>
+                  <Link href="/mypage/myboard">내 게시글</Link>
                 </CommonButton>
               </li>
               <li>

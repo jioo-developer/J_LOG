@@ -4,6 +4,7 @@ import NicknameForm from "./components/NicknameForm";
 import ProfileComponent from "./components/Profile";
 import "./Style.scss";
 import CommonButton from "@/components/atoms/CommonButton/CommonButton";
+import Link from "next/link";
 
 function MyPage() {
   const { user, nicknameData } = useGetQueryHandler();
@@ -25,7 +26,7 @@ function MyPage() {
             <p className="withdrawal_title">회원 탈퇴</p>
             <div className="in_wrap">
               <CommonButton theme="warnning" size="rg">
-                회원 탈퇴
+                <Link href="/mypage/quit">회원탈퇴</Link>
               </CommonButton>
             </div>
           </div>
@@ -33,7 +34,7 @@ function MyPage() {
             <p className="withdrawal_title">우선권 구매</p>
             <div className="in_wrap">
               <CommonButton theme="white" size="rg">
-                구매하기
+                <Link href="/market">구매하기</Link>
               </CommonButton>
             </div>
           </div>

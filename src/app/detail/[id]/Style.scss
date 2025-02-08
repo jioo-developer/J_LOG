@@ -1,5 +1,4 @@
 .detail_wrap {
-  @include reset();
   width: 90%;
   margin-top: 20px;
   position: relative;
@@ -47,7 +46,6 @@
     }
 
     .writer_wrap {
-      @include flex();
       justify-content: space-between;
 
       .left_wrap {
@@ -76,11 +74,9 @@
       }
 
       .right_wrap {
-        @include flex();
         justify-content: space-between;
 
         button {
-          @include btn-Reset();
           color: rgb(33, 37, 41);
           font-size: 16px;
         }
@@ -95,7 +91,7 @@
   .content_wrap {
     display: flex;
     flex-direction: column;
-    @include size();
+    width: 100%;
     padding-bottom: 20px;
 
     .text {
@@ -112,7 +108,7 @@
 
     figure {
       margin-top: 20px;
-      @include size();
+      width: 100%;
       overflow: hidden;
 
       @media #{$breakpoint-mobile} {
@@ -132,7 +128,7 @@
 
     .comment {
       display: flex;
-      @include size();
+      width: 100%;
       flex-direction: column;
       margin-top: 15px;
 
@@ -159,7 +155,6 @@
           display: flex;
           gap: 8px;
           .favorite_btn {
-            @include flex();
             border: 1px solid #ddd;
             box-sizing: border-box;
             padding: 5px 10px;
