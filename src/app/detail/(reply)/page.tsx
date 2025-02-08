@@ -1,6 +1,6 @@
 "use client";
 
-import useGetQueryHandler from "@/apis/member/mypage/getQueryDataHook";
+import useGetQueryHandler from "@/apis/member/mypage/query/getMyDataQuery";
 import { useReplyQueryHook } from "@/apis/reply/useGetReplyHook";
 import ReactTextareaAutosize from "react-textarea-autosize";
 import { usePageInfoStore } from "@/store/common";

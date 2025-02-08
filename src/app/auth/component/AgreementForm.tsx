@@ -77,8 +77,8 @@ function AgreementForm({ disableHandler }: propsType) {
       <label
         htmlFor="allCheck"
         onClick={(e) => {
-          if (e.target instanceof HTMLElement && e.target.tagName !== "INPUT")
-            e.preventDefault();
+          const target = e.target as HTMLInputElement;
+          if (target.tagName !== "INPUT") e.preventDefault();
         }}
       >
         <CommonCheckbox stateValue={allCheck} setStateHandler={setAllCheck} />

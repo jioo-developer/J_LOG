@@ -1,10 +1,10 @@
+import { getNicknameHandler } from "@/apis/member/mypage/nicknameForm/getNicknameHandler";
 import ClientComponent from "./Client";
 import {
   dehydrate,
   HydrationBoundary,
   QueryClient,
 } from "@tanstack/react-query";
-import { getNicknameHandler } from "@/apis/auth/hook/useGetNicknameHook";
 
 export default async function NicknameServerComponent() {
   const queryClient = new QueryClient();

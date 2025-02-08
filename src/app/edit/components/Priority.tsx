@@ -17,7 +17,7 @@ function Priority() {
 
   useEffect(() => {
     if (isClick) {
-      router.push("/pages/member/mypage");
+      router.push("/member/mypage");
       popupInit();
     }
   }, [isClick]);

@@ -1,20 +1,5 @@
-import { apiUrl } from "@/static/constants/common";
 import { UseQueryResult, useQuery } from "@tanstack/react-query";
-
-// ✅ API 호출 함수 (반환 타입 명확히 지정)
-export async function getNicknameHandler(): Promise<string[]> {
-  const response = await fetch(`${apiUrl}/api/mypage/profile/nickname`, {
-    method: "GET",
-  });
-
-  if (!response.ok) {
-    const error = await response.json();
-    throw new Error(error.message);
-  }
-
-  const { data } = await response.json();
-  return data;
-}
+import { getNicknameHandler } from "./getNicknameHandler";
 
 // ✅ useQuery 훅 (타입 올바르게 지정)
 const useNickNameQueryHook = () => {

@@ -12,7 +12,7 @@ function useNameChangeHandler() {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async ({ nickname }: changeHanlderType) => {
-      await fetch(`${apiUrl}/api/mypage/profile/nickname`, {
+      await fetch(`${apiUrl}/api/member/mypage/profile/nickname`, {
         method: "POST",
         body: JSON.stringify({ id: user.uid, nickname }),
       });

@@ -4,13 +4,19 @@ import {
   HydrationBoundary,
   QueryClient,
 } from "@tanstack/react-query";
-import { getPostData } from "@/apis/main/useGetDataFetchHook";
+import { getUser } from "@/apis/login/hook/useGetUserQuery";
+import { getPostHandler } from "@/apis/main/getPostHanlder";
 export default async function MainPageServerComponent() {
   const queryClient = new QueryClient();
 
   await queryClient.prefetchQuery({
+    queryKey: ["getuser"],
+    queryFn: getUser,
+  });
+
+  await queryClient.prefetchQuery({
     queryKey: ["getPost"],
-    queryFn: getPostData,
+    queryFn: getPostHandler,
   });
 
   const dehydratedState = dehydrate(queryClient);

@@ -26,11 +26,10 @@ export async function getUser() {
           if (user.provider === "google.com") {
             const credential = GoogleAuthProvider.credential(user.token);
             login = await signInWithCredential(authService, credential);
-            resolve(login.user);
           } else {
             login = await signInWithCustomToken(authService, user.token);
-            resolve(login.user);
           }
+          resolve(login.user);
         } else {
           resolve(null);
         }

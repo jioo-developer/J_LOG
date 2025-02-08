@@ -5,7 +5,7 @@ import { QueryObserverResult, useQuery } from "@tanstack/react-query";
 
 export async function getMyData() {
   const user = authService.currentUser?.uid;
-  const response = await fetch(`${apiUrl}/api/mypage/board`, {
+  const response = await fetch(`${apiUrl}/api/member/mypage/board`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

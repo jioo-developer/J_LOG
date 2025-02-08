@@ -9,16 +9,16 @@ import Link from "next/link";
 import { useQuery } from "@tanstack/react-query";
 import { User } from "firebase/auth";
 import { GoPoster, HeaderStyle, SubMenu, UIWrap } from "./Style";
-import { getUser } from "@/apis/login/hook/useGetUserHook";
+import { getUser } from "@/apis/login/hook/useGetUserQuery";
 import { usePathname } from "next/navigation";
 import { usePageInfoStore, useSearchStore } from "@/store/common";
 import { Skeleton } from "@mui/material";
 
 const activePathName = [
-  "/mypage",
+  "/member/mypage",
   "/detail",
   "/",
-  "/mypage/myboard",
+  "/member/mypage/myboard",
   "/search",
 ];
 
@@ -27,37 +27,32 @@ type propsType = {
 };
 
 function Header({ accessToken }: propsType) {
-  const pathname = usePathname();
   const ref = useRef<HTMLInputElement | null>(null);
+  const pathname = usePathname();
+  const isActive = activePathName.some((path) =>
+    new RegExp(`^${path}$`).test(pathname)
+  );
 
   const { data: user } = useQuery<User | null>({
     queryKey: ["getuser"],
     queryFn: getUser,
   });
 
-  const { mutate } = useLogoutHook();
+  const { mutate: logout } = useLogoutHook();
+
+  const { setEditMode } = usePageInfoStore();
+
+  const { setSearch } = useSearchStore();
 
   useEffect(() => {
-    if (!accessToken && user) {
-      mutate();
-    }
-  }, [accessToken]);
+    if (!accessToken && user) logout();
+  }, [accessToken, user]);
 
   useEffect(() => {
     if (ref.current?.checked) {
       ref.current.checked = false;
     }
   }, [pathname]);
-
-  const isActive = activePathName.some((path) =>
-    new RegExp(`^${path}$`).test(pathname)
-  );
-
-  const { mutate: logoutHandler } = useLogoutHook();
-
-  const { setEditMode } = usePageInfoStore();
-
-  const { setSearch } = useSearchStore();
 
   return (
     <>
@@ -118,19 +113,19 @@ function Header({ accessToken }: propsType) {
             <ul className="sub_menu" css={SubMenu}>
               <li>
                 <CommonButton theme="none">
-                  <Link href="/mypage">마이페이지</Link>
+                  <Link href="/member/mypage">마이페이지</Link>
                 </CommonButton>
               </li>
               <li>
                 <CommonButton theme="none">
-                  <Link href="/mypage/myboard">내 게시글</Link>
+                  <Link href="/member/mypage/myboard">내 게시글</Link>
                 </CommonButton>
               </li>
               <li>
                 <CommonButton
                   theme="none"
                   onClick={() => {
-                    logoutHandler();
+                    logout();
                   }}
                 >
                   로그아웃

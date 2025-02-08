@@ -3,7 +3,7 @@
 import { FirebaseData } from "@/components/type";
 import { Suspense, useEffect, useState } from "react";
 import Item from "./component/Item";
-import usePostQueryHook from "@/apis/main/useGetDataFetchHook";
+import usePostQueryHook from "@/apis/main/useGetQuery";
 import { useSearchStore } from "@/store/common";
 import { css } from "@emotion/react";
 import { Skeleton } from "@mui/material";
@@ -32,13 +32,13 @@ const MainPage = ({}) => {
 
   const showDataHandler = () => {
     const array = searchInfo.isSearch ? postState : postData;
-    if (array.length > 0) {
-      return array.map((item: FirebaseData, index: number) => {
-        return <Item item={item} index={index} key={index} />;
-      });
-    } else {
-      return <Skeleton variant="rectangular" />;
+    if (array.length === 0) {
+      return <Skeleton variant="rectangular" width={300} height={300} />;
     }
+
+    return array.map((item: FirebaseData, index: number) => {
+      return <Item item={item} index={index} key={index} />;
+    });
   };
   // 게시글 랜더링 함수
 

@@ -1,7 +1,7 @@
 import CommonButton from "@/components/atoms/CommonButton/CommonButton";
 import Image from "next/image";
 import "./style.scss";
-import useGoogleHook from "@/apis/login/google/useMutation";
+import useGoogleLoginHook from "@/apis/login/google/useMutation";
 
 export type objType = {
   id: string;
@@ -11,10 +11,10 @@ export type objType = {
 };
 
 const SocialLoginPage = () => {
-  const { mutate } = useGoogleHook();
+  const { mutate } = useGoogleLoginHook();
   return (
     <div className="sns_Sign flex-Set">
-      <CommonButton theme="none" size="rg" onClick={() => mutate()}>
+      <CommonButton theme="none" size="rg" onClick={mutate}>
         <div className="button_Wrap">
           <Image
             src="/images/google.svg"

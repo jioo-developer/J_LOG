@@ -7,7 +7,7 @@ import {
   signInWithPopup,
 } from "firebase/auth";
 
-export async function GoogleLogin() {
+export async function GoogleLoginHandler() {
   // onError이 없기 때문에 try/catch를 씀
   await setPersistence(authService, browserSessionPersistence);
   // 세션에 저장

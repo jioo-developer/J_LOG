@@ -5,7 +5,7 @@ import { useGetPageInfo } from "@/apis/detail/handler/pageInfoHandler";
 import usePageDeleteHandler from "@/apis/detail/hook/crud/useDeleteMutation";
 import useFavoriteMutate from "@/apis/detail/hook/crud/useFavoriteMutation";
 import useDetailQueryHook from "@/apis/detail/hook/useGetDetaillHook";
-import useGetQueryHandler from "@/apis/member/mypage/getQueryDataHook";
+import useGetQueryHandler from "@/apis/member/mypage/query/getMyDataQuery";
 import { usePageInfoStore } from "@/store/common";
 import Image from "next/image";
 import { useRouter } from "next/navigation";

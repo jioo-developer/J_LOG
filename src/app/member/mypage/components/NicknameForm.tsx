@@ -3,8 +3,9 @@ import CommonInput from "@/components/atoms/CommonInput/CommonInput";
 import useNameChangeHandler from "@/apis/member/mypage/profile/useNameMutation";
 import { Skeleton } from "@mui/material";
 import { User } from "firebase/auth";
-import { Suspense, useEffect, useState } from "react";
+import { startTransition, Suspense, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
 
 type propsType = {
   user: User;
@@ -21,9 +22,11 @@ function NicknameForm({ user, data }: propsType) {
     handleSubmit,
     setValue,
     trigger,
+    reset,
     formState: { errors },
   } = useForm<InputType>({});
 
+  const router = useRouter();
   const [nameToggle, setnameToggle] = useState(false);
   const { mutateAsync } = useNameChangeHandler();
 
@@ -37,6 +40,11 @@ function NicknameForm({ user, data }: propsType) {
   async function changeNameHandler(data: InputType) {
     await mutateAsync({ nickname: data.nickNameRequired });
     setnameToggle(false);
+
+    startTransition(() => {
+      router.refresh(); // 서버 컴포넌트 리렌더링
+      reset(); // 클라이언트 컴포넌트 리렌더링
+    });
   }
 
   return (

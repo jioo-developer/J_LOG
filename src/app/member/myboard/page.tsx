@@ -1,4 +1,4 @@
-import { getMyData } from "@/apis/member/mypage/useGetMyPostData";
+import { getMyData } from "@/apis/member/mypage/query/useGetMyPostQuery";
 import ClientComponent from "./Client";
 import {
   dehydrate,

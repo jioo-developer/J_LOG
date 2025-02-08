@@ -1,5 +1,5 @@
 "use client";
-import useGetQueryHandler from "@/apis/member/mypage/getQueryDataHook";
+import useGetQueryHandler from "@/apis/member/mypage/query/getMyDataQuery";
 import NicknameForm from "./components/NicknameForm";
 import ProfileComponent from "./components/Profile";
 import "./Style.scss";
@@ -26,7 +26,7 @@ function MyPage() {
             <p className="withdrawal_title">회원 탈퇴</p>
             <div className="in_wrap">
               <CommonButton theme="warnning" size="rg">
-                <Link href="/mypage/quit">회원탈퇴</Link>
+                <Link href="/member/mypage/quit">회원탈퇴</Link>
               </CommonButton>
             </div>
           </div>

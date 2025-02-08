@@ -5,7 +5,7 @@ import SocialDeleteHandler from "@/apis/member/quit/socialquitHandler";
 import isCredential from "@/apis/member/quit/credentialHandler";
 import { User } from "firebase/auth";
 import { useEffect, useState } from "react";
-import useGetQueryHandler from "../../../apis/member/mypage/getQueryDataHook";
+import useGetQueryHandler from "@/apis/member/mypage/query/getMyDataQuery";
 import { css } from "@emotion/react";
 import { useForm } from "react-hook-form";
 import { InputTypes } from "@/static/types/common";
@@ -42,7 +42,7 @@ const QuitPage = () => {
         await originDeleteHandler((data as InputTypes).passwordRequired); // 1. `quitPw`를 사용하여 원래 삭제 핸들러 실행
       }
 
-      await fetch(`${apiUrl}/api/mypage`, {
+      await fetch(`${apiUrl}/api/member/mypage`, {
         method: "DELETE",
         credentials: "include",
         body: JSON.stringify({ user }),
@@ -79,7 +79,7 @@ const QuitPage = () => {
         )}
         <div className="button__group">
           <CommonButton theme="none" size="rg">
-            <Link href="/mypage">취소</Link>
+            <Link href="/member/mypage">취소</Link>
           </CommonButton>
           <CommonButton
             type={loginType === "origin" ? "submit" : "button"}

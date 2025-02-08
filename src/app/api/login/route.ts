@@ -8,12 +8,13 @@ export async function GET(request: NextRequest) {
       request.cookies.get("GoogleAuthToken")?.value;
 
     if (!authToken) {
-      return NextResponse.json({ success: true, user: null });
+      return NextResponse.json({ user: null });
     }
 
-    const user = await firebaseVerifyHandler(authToken); // 유효한 토큰으로 바로 처리
+    const user = await firebaseVerifyHandler(authToken);
+    // 유효한 토큰인지 검증
 
-    return NextResponse.json({ success: true, user });
+    return NextResponse.json({ user });
   } catch (error) {
     return NextResponse.json(
       { success: false, error: (error as Error).message },
@@ -27,7 +28,7 @@ export async function POST(request: Request) {
     const { token } = await request.json();
 
     const response = NextResponse.json({
-      message: "로그인 토큰 인증 성공",
+      message: "로그인 쿠키를 생성합니다",
     });
 
     response.cookies.set("authToken", token, {
@@ -48,7 +49,9 @@ export async function POST(request: Request) {
 }
 
 export async function DELETE() {
-  const response = NextResponse.json({ message: "로그아웃 완료, 쿠키 삭제됨" });
+  const response = NextResponse.json({
+    message: "로그아웃 완료, 쿠키 삭제를 삭제합니다",
+  });
   response.cookies.delete("authToken");
   response.cookies.delete("GoogleAuthToken");
 
