@@ -11,6 +11,8 @@ import useLoginHook from "@/apis/login/firebase/useMutation";
 import { useState } from "react";
 import { InputTypes } from "@/static/types/common";
 import Link from "next/link";
+import { QueryClient } from "@tanstack/react-query";
+import { getNicknameHandler } from "@/apis/member/mypage/nicknameForm/getNicknameHandler";
 
 function LoginPage() {
   const {
@@ -26,6 +28,7 @@ function LoginPage() {
   function LoginHandler(data: InputTypes) {
     login({ email: data.emailRequired, pw: data.passwordRequired });
   }
+
   return (
     <div className="page-Reset sign__Wrap flex-Set ">
       <div className="logo__Wrap">
@@ -89,12 +92,12 @@ function LoginPage() {
       <SocialLoginPage />
       <div className="assistance">
         <CommonButton theme="none" size="sm">
-          <span style={{ color: "var(--subTextcolor)" }}>
+          <span>
             <Link href="/resetPw"> 비밀번호 변경&amp;찾기</Link>
           </span>
         </CommonButton>
         <CommonButton theme="none" size="sm">
-          <span style={{ color: "var(--subTextcolor)" }}>
+          <span>
             <Link href="/auth">회원가입</Link>
           </span>
         </CommonButton>

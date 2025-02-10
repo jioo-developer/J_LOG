@@ -1,6 +1,4 @@
-function Priority() {
-  const { CashData } = useCashQueryHook();
-
+function PriortyChecker() {
   const isCheckHandler = (e: ChangeEvent<HTMLInputElement>) => {
     if (getData.item > 0) {
       setPriorty(e.target.checked);
@@ -17,11 +15,10 @@ function Priority() {
 
   useEffect(() => {
     if (isClick) {
-      router.push("/member/mypage");
+      router.push("/pages/member/mypage");
       popupInit();
     }
   }, [isClick]);
-
   return (
     <div className="use__item">
       <input
@@ -39,4 +36,4 @@ function Priority() {
   );
 }
 
-export default Priority;
+export default PriortyChecker;

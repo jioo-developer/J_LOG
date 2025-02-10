@@ -6,7 +6,7 @@ import { authService } from "@/lib/firebase";
 import { InputTypes } from "@/static/types/common";
 import { css } from "@emotion/react";
 import { sendPasswordResetEmail } from "firebase/auth";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 
 const ResetPwPage = () => {
@@ -15,6 +15,8 @@ const ResetPwPage = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<InputTypes>();
+
+  const router = useRouter();
 
   async function resetHandler(data: InputTypes) {
     try {
@@ -26,7 +28,6 @@ const ResetPwPage = () => {
       // popuprHandler({ message: "입력하신 메일로 비밀번호 안내드렸습니다" });
     } catch (error) {
       //   popuprHandler({ message: "올바른 이메일 형식이 아닙니다." });
-      window.alert((error as Error).message);
     }
   }
 
@@ -52,8 +53,13 @@ const ResetPwPage = () => {
           error={errors.emailRequired}
         />
         <div className="button__group">
-          <CommonButton type="button" theme="none" size="rg">
-            <Link href="/login">취소</Link>
+          <CommonButton
+            type="button"
+            theme="none"
+            size="rg"
+            onClick={() => router.back()}
+          >
+            취소
           </CommonButton>
           <CommonButton type="submit" theme="success" size="rg">
             확인
@@ -72,7 +78,7 @@ const wrap = css`
   left: 0px;
   width: 100%;
   height: 100%;
-  z-index: 10;
+  z-index: 999;
   background: rgba(0, 0, 0, 0.5);
 `;
 
@@ -109,5 +115,7 @@ const Style = css`
     display: flex;
     justify-content: flex-end;
     gap: 8px;
+    margin-left: auto;
+    min-width: 200px;
   }
 `;

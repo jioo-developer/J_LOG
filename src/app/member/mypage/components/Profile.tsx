@@ -36,21 +36,17 @@ function ProfileComponent({ user }: { user: User }) {
       />
 
       <figure css={ProfileImage}>
-        <Suspense
-          fallback={<Skeleton variant="circular" width={135} height={135} />}
-        >
-          {user ? (
-            <Image
-              width={135}
-              height={135}
-              src={user.photoURL || "/images/default.svg"}
-              style={{ borderRadius: "50%" }}
-              alt="프로필 이미지"
-            />
-          ) : (
-            <Skeleton variant="circular" width={135} height={135} />
-          )}
-        </Suspense>
+        {user ? (
+          <Image
+            width={135}
+            height={135}
+            src={user.photoURL || "/images/default.svg"}
+            style={{ borderRadius: "50%" }}
+            alt="프로필 이미지"
+          />
+        ) : (
+          <Skeleton variant="circular" width={135} height={135} />
+        )}
       </figure>
 
       <CommonButton theme="success" size="rg">

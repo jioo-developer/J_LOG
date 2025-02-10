@@ -7,10 +7,10 @@ import CommonInput from "@/components/atoms/CommonInput/CommonInput";
 import CommonButton from "@/components/atoms/CommonButton/CommonButton";
 import { ChevronLeftIcon, EyeIcon, EyeOffIcon } from "lucide-react";
 import AgreementForm from "./component/AgreementForm";
-import useAuthHandler from "@/apis/auth/useMutation";
 import CommonCheckbox from "@/components/atoms/CommonCheckbox/CommonCheckbox";
 import Link from "next/link";
 import useNickNameQueryHook from "@/apis/member/mypage/query/useGetNicknameQuery";
+import useAuthMutation from "@/apis/auth/useMutation";
 
 interface InputType extends InputTypes {
   nickNameRequired: string;
@@ -28,7 +28,7 @@ const AuthPage = () => {
 
   const { nicknameData } = useNickNameQueryHook();
 
-  const { mutate: createAccount } = useAuthHandler();
+  const { mutate: createAccount } = useAuthMutation();
 
   async function createAccountHandler(data: InputType) {
     createAccount({
@@ -42,11 +42,11 @@ const AuthPage = () => {
     <div className="page-Reset auth__Wrap">
       <div className="title__Area flex-Set">
         <button className="flex-Set">
-          <Link href="/login">
-            <ChevronLeftIcon className="close" size={22} />
+          <Link href="/login" className="close">
+            <ChevronLeftIcon size={22} />
           </Link>
+          회원가입
         </button>
-        회원가입
       </div>
       <form
         className="auth__Form"

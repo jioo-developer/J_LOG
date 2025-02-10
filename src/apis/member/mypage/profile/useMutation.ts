@@ -2,6 +2,7 @@ import { updateProfile, User } from "firebase/auth";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { authService } from "@/lib/firebase";
 import storageUploadHandler from "@/utils/storageUploadHandler";
+import { popuprHandler } from "@/utils/popupHandler";
 
 type propsType = {
   url: string[];
@@ -31,8 +32,8 @@ function useImageMutation() {
         };
       });
     },
-    onError: () => {
-      //   popuprHandler({ message: "프로필 변경에 실패하였습니다." });
+    onError: (error) => {
+      popuprHandler({ message: (error as Error).message });
     },
   });
 }

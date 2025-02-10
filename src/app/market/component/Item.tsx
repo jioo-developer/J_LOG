@@ -1,5 +1,4 @@
 /** @jsxImportSource @emotion/react */
-import { css } from "@emotion/react";
 import { convertPrice } from "@/utils/convertPrice";
 import { itemStyle } from "./Style";
 

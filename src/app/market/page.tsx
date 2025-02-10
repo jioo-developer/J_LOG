@@ -1,4 +1,4 @@
-import { getCashHandler } from "@/apis/market/getCashHandler";
+import { getCashHandler } from "@/apis/market/get/getCashHandler";
 import ClientComponent from "./Client";
 import {
   dehydrate,

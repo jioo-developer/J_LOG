@@ -58,5 +58,13 @@
     position: absolute;
     right: var(--gap-xlarge);
     margin-top: 8px;
+    z-index: 900;
   }
+}
+
+.skeleton__wrap {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 8xp;
 }

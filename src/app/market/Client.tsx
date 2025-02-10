@@ -2,13 +2,15 @@
 "use client";
 import CommonButton from "@/components/atoms/CommonButton/CommonButton";
 import Item from "./component/Item";
-import useCashMutation from "@/apis/market/useMutation";
+import useCashMutation from "@/apis/market/set/useMutation";
 import { useState } from "react";
 import { convertPrice } from "@/utils/convertPrice";
 import { css } from "@emotion/react";
-import useCashQueryHook from "@/apis/market/useGetCashQuery";
+import { useRouter } from "next/navigation";
+import useCashQueryHook from "@/apis/market/get/useGetCashQuery";
 
 const ItemStore = () => {
+  const router = useRouter();
   const { CashData } = useCashQueryHook();
   const [getData] = CashData;
 
@@ -18,6 +20,8 @@ const ItemStore = () => {
     return setValue(val);
   };
 
+  const mutation = useCashMutation();
+
   const buying = async () => {
     const money = getData.cash;
     const cash = money - value * 2500;
@@ -25,7 +29,6 @@ const ItemStore = () => {
     await mutation.mutateAsync({ cash, item: length });
   };
 
-  const mutation = useCashMutation();
   return (
     <div css={wrap} className="flex-Set">
       <div css={Style}>
@@ -36,8 +39,10 @@ const ItemStore = () => {
         </div>
         <span>현재 포인트 :{getData ? convertPrice(getData.cash) : 0} +</span>
         <div className="button__group">
-          <CommonButton theme="white">취소</CommonButton>
-          <CommonButton theme="success" onClick={() => buying()}>
+          <CommonButton theme="white" onClick={() => router.back()}>
+            취소
+          </CommonButton>
+          <CommonButton theme="success" onClick={buying}>
             확인
           </CommonButton>
         </div>

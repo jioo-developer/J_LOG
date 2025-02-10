@@ -1,126 +1,89 @@
 .upload {
-  margin: 0 auto;
   width: 50%;
   padding-top: 10px;
 
-  @media all and (max-width: 1000px) {
+  @media #{$breakpoint-mobile} {
     width: 90%;
   }
 
-  form {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    .att {
-      float: left;
-      width: 100%;
+  .bottom_wrap {
+    justify-content: space-between;
+    padding-bottom: 20px;
 
-      @media all and (max-width: 1000px) {
-        width: 90%;
+    .post {
+      @include btn();
+      width: 112px;
+      height: 45px;
+      background: rgb(32, 201, 151);
+      color: #fff;
+
+      @media #{$breakpoint-mobile} {
+        width: 70%;
       }
     }
 
-    @media all and (max-width: 1000px) {
-      height: 350px;
+    .none_text {
+      background: gray;
+      text-align: center;
+      line-height: 45px;
     }
 
-    &::placeholder {
-      color: rgb(177, 177, 177);
+    .delete {
+      @extend .post;
+      background: rgb(241, 243, 245);
+      color: #333;
+      text-align: center;
+      line-height: 45px;
+    }
+
+    .exit {
+      @include btn-Reset();
+      color: #666;
+      font-weight: 500;
+      font-size: 17px;
     }
   }
-
-  input[type="file"] {
-    display: none;
-  }
-
-  .Attachment {
-    width: 100%;
-    height: 170px;
-    border: 4px dotted #ddd;
-    box-sizing: border-box;
+  .warnning {
+    font-size: 14px;
     color: gray;
-    border-radius: 5px;
-    margin-bottom: calc(var(--gap-xlarge) * 1.5);
-    cursor: pointer;
-
-    @media all and (max-width: 1000px) {
-      height: 100px;
-    }
   }
+  figure {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    padding: 5px 10px;
+    box-sizing: border-box;
 
-  #file-upload-button {
-    display: none;
-  }
+    div {
+      position: relative;
 
-  .image-att {
-    margin-bottom: var(--gap-xlarge);
-  }
-}
-
-.bottom_wrap {
-  justify-content: space-between;
-  padding-bottom: var(--gap-xlarge);
-
-  .none_text {
-    background: gray;
-    text-align: center;
-  }
-
-  .delete {
-    background: rgb(241, 243, 245);
-    color: #333;
-    text-align: center;
-  }
-}
-.warnning {
-  font-size: var(--fontsize-regular);
-  color: gray;
-}
-figure {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: calc(var(--gap-xlarge) / 2);
-  padding: 5px 10px;
-  box-sizing: border-box;
-
-  div {
-    position: relative;
-
-    button {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      width: 26px;
-      height: 26px;
-      filter: drop-shadow(2px 4px 12px black);
-      img {
-        cursor: pointer;
+      button {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        width: 26px;
+        height: 26px;
+        filter: drop-shadow(2px 4px 12px black);
+        img {
+          cursor: pointer;
+        }
       }
     }
-  }
 
-  img {
-    width: 100%;
+    img {
+      width: 100%;
+    }
   }
 }
 
-.use__item {
-  width: 170px;
-  justify-content: space-between;
-  align-items: flex-start;
+input[type="file"] {
+  display: none;
 }
 
-textarea {
-  width: 100%;
-  height: 100px;
-  cursor: inherit;
-  resize: none;
-  overflow: hidden;
-  margin: 20px 0 10px 0;
-  border: 1px solid #dadada;
-  box-sizing: border-box;
-  text-indent: 5px;
-  padding-top: 5px;
-  background: transparent;
-  min-height: 70vh;
+#file-upload-button {
+  display: none;
+}
+
+.image-att {
+  margin-bottom: 20px;
 }

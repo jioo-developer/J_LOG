@@ -1,8 +1,5 @@
-import { authService } from "@/lib/firebase";
-import { apiUrl } from "@/static/constants/common";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { User } from "firebase/auth";
-import { getCashHandler } from "./getCashHandler";
+import { useSetCashHandler } from "./useSetCashHandler";
 
 type propsType = {
   cash: number;
@@ -13,15 +10,14 @@ const useCashMutation = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async ({ cash, item }: propsType) => {
-      await getCashHandler();
-      return { cash, item };
+      await useSetCashHandler({ cash, item });
     },
-    onSuccess: (result) => {
+    onSuccess: (_, variables) => {
       queryClient.setQueryData<propsType[]>(["getCash"], (oldData) => {
         if (!oldData) {
           return oldData;
         } else {
-          return [result];
+          return [{ cash: variables.cash, item: variables.item }];
         }
       });
       // popuprHandler({ message: "구매가 완료 되었습니다" });

@@ -8,15 +8,17 @@ export interface CommonButtonProps {
   size?: "sm" | "rg" | "md" | "lg";
   type?: "button" | "submit";
   theme: "white" | "success" | "primary" | "disable" | "warnning" | "none";
+  padding?: "none";
 }
 
 function CommonButton({
   children,
   onClick,
   disabled = false,
-  size = "md",
+  size = "rg",
   theme,
   type,
+  padding,
 }: CommonButtonProps) {
   return (
     <button
@@ -24,6 +26,7 @@ function CommonButton({
       css={[themes[theme], buttonVariants[size]]}
       onClick={onClick}
       type={type ? type : "submit"}
+      style={padding && { padding: "0 !important" }}
     >
       {children}
     </button>

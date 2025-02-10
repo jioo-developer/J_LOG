@@ -4,8 +4,10 @@ import { authService } from "@/lib/firebase";
 import { useRouter } from "next/navigation";
 import { AuthPropsType } from "@/static/types/common";
 import { AuthHandler } from "./authHandler";
+import { usePopupStore } from "@/store/popupStore";
+import { popuprHandler } from "@/utils/popupHandler";
 
-const useAuthHandler = () => {
+const useAuthMutation = () => {
   const router = useRouter();
   return useMutation({
     mutationFn: async ({ email, password, nickname }: AuthPropsType) => {
@@ -21,13 +23,14 @@ const useAuthHandler = () => {
       await updateProfile(user, {
         displayName: variables.nickname,
         photoURL: "/img/default.svg",
-      });
+      }).then(() => authService.signOut());
+
       router.push("/login");
     },
     onError: (error) => {
-      window.alert(error.message);
+      popuprHandler({ message: (error as Error).message });
     },
   });
 };
 
-export default useAuthHandler;
+export default useAuthMutation;

@@ -1,5 +1,4 @@
 .auth__Wrap {
-  width: 95%;
   gap: var(--gap-xlarge);
 
   .title__Area {
@@ -12,7 +11,7 @@
 
     .close {
       position: absolute;
-      left: 0;
+      left: 45px;
     }
   }
 }
@@ -20,14 +19,23 @@
 .auth__Form {
   display: flex;
   flex-direction: column;
+  width: 95%;
+  margin: 0 auto;
   gap: var(--gap-xlarge);
   padding-top: var(--gap-medium);
   box-sizing: border-box;
+
+  .input__Blind__Wrap {
+    .check__Toggle {
+      margin-top: 35px;
+    }
+  }
 
   .label__area {
     display: flex;
     flex-direction: column;
     gap: calc(var(--gap-small) / 1.5);
+    position: relative;
     span::after {
       content: "*";
       color: orange;

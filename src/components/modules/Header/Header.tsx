@@ -6,19 +6,18 @@ import Image from "next/image";
 import { Suspense, useEffect, useRef } from "react";
 import CommonButton from "../../atoms/CommonButton/CommonButton";
 import Link from "next/link";
-import { useQuery } from "@tanstack/react-query";
-import { User } from "firebase/auth";
 import { GoPoster, HeaderStyle, SubMenu, UIWrap } from "./Style";
-import { getUser } from "@/apis/login/hook/useGetUserQuery";
 import { usePathname } from "next/navigation";
-import { usePageInfoStore, useSearchStore } from "@/store/common";
 import { Skeleton } from "@mui/material";
+import { usePageInfoStore } from "@/store/pageInfoStore";
+import { useSearchStore } from "@/store/searchStore";
+import useGetQueryHandler from "@/apis/member/mypage/query/getMyDataQuery";
 
 const activePathName = [
   "/member/mypage",
   "/detail",
   "/",
-  "/member/mypage/myboard",
+  "/member/myboard",
   "/search",
 ];
 
@@ -33,10 +32,7 @@ function Header({ accessToken }: propsType) {
     new RegExp(`^${path}$`).test(pathname)
   );
 
-  const { data: user } = useQuery<User | null>({
-    queryKey: ["getuser"],
-    queryFn: getUser,
-  });
+  const { user } = useGetQueryHandler();
 
   const { mutate: logout } = useLogoutHook();
 
@@ -58,13 +54,7 @@ function Header({ accessToken }: propsType) {
     <>
       {isActive && (
         <header className="flex-Set" css={HeaderStyle}>
-          <Link
-            href="/"
-            className="title"
-            onClick={() => {
-              setSearch("");
-            }}
-          >
+          <Link href="/" className="title" onClick={() => setSearch("")}>
             <Suspense fallback={<Skeleton variant="text" />}>
               {user ? (
                 user.displayName + ".log"
@@ -118,16 +108,11 @@ function Header({ accessToken }: propsType) {
               </li>
               <li>
                 <CommonButton theme="none">
-                  <Link href="/member/mypage/myboard">내 게시글</Link>
+                  <Link href="/member/myboard">내 게시글</Link>
                 </CommonButton>
               </li>
               <li>
-                <CommonButton
-                  theme="none"
-                  onClick={() => {
-                    logout();
-                  }}
-                >
+                <CommonButton theme="none" onClick={logout}>
                   로그아웃
                 </CommonButton>
               </li>

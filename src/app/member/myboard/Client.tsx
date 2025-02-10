@@ -5,9 +5,8 @@ import useMyDataQueryHook from "@/apis/member/mypage/query/useGetMyPostQuery";
 import { Skeleton } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
-import { Suspense } from "react";
 import Item from "./components/Item";
-import { usePageInfoStore } from "@/store/common";
+import { usePageInfoStore } from "@/store/pageInfoStore";
 
 const MyBoardPage = () => {
   const { user } = useGetQueryHandler();
@@ -24,22 +23,22 @@ const MyBoardPage = () => {
     <div className="wrap board_wrap">
       <section className="board__header">
         <figure className="profileImg">
-          <Suspense
-            fallback={<Skeleton variant="circular" width={135} height={135} />}
-          >
-            {user ? (
-              <Image
-                width={135}
-                height={135}
-                src={user.photoURL || "/images/default.svg"}
-                alt="프로필 이미지"
-              />
-            ) : (
-              <Skeleton variant="circular" width={135} height={135} />
-            )}
-          </Suspense>
+          {user ? (
+            <Image
+              width={135}
+              height={135}
+              src={user.photoURL || "/images/default.svg"}
+              alt="프로필 이미지"
+            />
+          ) : (
+            <Skeleton variant="circular" width={135} height={135} />
+          )}
         </figure>
-        <b className="board__nickname">{user ? user.displayName : ""}</b>
+        {user ? (
+          <b className="board__nickname">{user.displayName}</b>
+        ) : (
+          <Skeleton variant="text" width={"100%"} height={35} />
+        )}
       </section>
       <section className="board__content">
         <div className="content__in">

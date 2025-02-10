@@ -4,6 +4,8 @@ import "./globals.css";
 import "@/asset/common.scss";
 import Header from "@/components/modules/Header/Header";
 import { cookies } from "next/headers";
+import { ReturnPopup } from "@/utils/popupHandler";
+import { ReactNode } from "react";
 
 export const metadata: Metadata = {
   title: "J-LOG",
@@ -22,15 +24,20 @@ const token =
 
 export default function RootLayout({
   children,
+  modal,
 }: Readonly<{
   children: React.ReactNode;
+  modal: ReactNode;
 }>) {
   return (
     <html lang="ko">
       <body>
         <TanstackProvider>
-          <Header accessToken={token} />
+          {token && <Header accessToken={token} />}
           {children}
+          {modal}
+          <div id="modal-root"></div>
+          <ReturnPopup />
         </TanstackProvider>
       </body>
     </html>

@@ -3,7 +3,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { User } from "firebase/auth";
 import useNickNameQueryHook from "./useGetNicknameQuery";
 
-function useGetQueryHandler() {
+function useGetMyInfoQueryHandler() {
   const queryClient = useQueryClient();
 
   // 캐시에서 데이터 가져오기
@@ -21,4 +21,4 @@ function useGetQueryHandler() {
   };
 }
 
-export default useGetQueryHandler;
+export default useGetMyInfoQueryHandler;

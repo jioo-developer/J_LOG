@@ -12,9 +12,8 @@ import { InputTypes } from "@/static/types/common";
 import CommonButton from "@/components/atoms/CommonButton/CommonButton";
 import Link from "next/link";
 import CommonInput from "@/components/atoms/CommonInput/CommonInput";
-import { useRouter } from "next/navigation";
-import { apiUrl } from "@/static/constants/common";
 import useQuitMutation from "@/apis/member/quit/useMutation";
+import { useRouter } from "next/navigation";
 
 type UserType = {
   user: User;
@@ -26,6 +25,9 @@ const QuitPage = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<InputTypes>();
+
+  const router = useRouter();
+
   const { user }: UserType = useGetQueryHandler() as UserType;
   const [loginType, setType] = useState("");
 
@@ -41,7 +43,7 @@ const QuitPage = () => {
       if (loginType === "sosial") {
         await SocialDeleteHandler();
       } else {
-        await originDeleteHandler((data as InputTypes).passwordRequired); // 1. `quitPw`를 사용하여 원래 삭제 핸들러 실행
+        await originDeleteHandler((data as InputTypes).passwordRequired);
       }
       quitHandler();
     } catch {
@@ -73,8 +75,8 @@ const QuitPage = () => {
           />
         )}
         <div className="button__group">
-          <CommonButton theme="none" size="rg">
-            <Link href="/member/mypage">취소</Link>
+          <CommonButton theme="none" size="rg" onClick={() => router.back()}>
+            취소
           </CommonButton>
           <CommonButton
             type={loginType === "origin" ? "submit" : "button"}

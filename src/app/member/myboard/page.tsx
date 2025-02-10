@@ -1,4 +1,4 @@
-import { getMyDataHandler } from "@/apis/member/mypage/query/useGetMyPostQuery";
+import getMyDataHandler from "@/apis/member/mypage/query/getMyDataHandler";
 import ClientComponent from "./Client";
 import {
   dehydrate,

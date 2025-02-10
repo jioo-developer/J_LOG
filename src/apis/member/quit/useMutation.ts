@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import QuitHandler from "./quitHandler";
 import { useRouter } from "next/navigation";
+import { popuprHandler } from "@/utils/popupHandler";
 
 function useQuitMutation() {
   const router = useRouter();
@@ -11,8 +12,8 @@ function useQuitMutation() {
       router.push("/login");
       queryClient.clear();
     },
-    onError: () => {
-      //   popuprHandler({ message: "프로필 변경에 실패하였습니다." });
+    onError: (error) => {
+      popuprHandler({ message: (error as Error).message });
     },
   });
 }

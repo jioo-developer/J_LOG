@@ -1,22 +1,37 @@
 "use client";
+import "./Style.scss";
 import useGetQueryHandler from "@/apis/member/mypage/query/getMyDataQuery";
 import NicknameForm from "./components/NicknameForm";
 import ProfileComponent from "./components/Profile";
-import "./Style.scss";
 import CommonButton from "@/components/atoms/CommonButton/CommonButton";
 import Link from "next/link";
+import SkeletonComponent from "./components/Skeleton";
+import { Skeleton } from "@mui/material";
 
 function MyPage() {
   const { user, nicknameData } = useGetQueryHandler();
   return (
     <div className="profile_wrap flex-Set">
       <section className="content">
-        {user && (
-          <div className="profile_area">
-            <ProfileComponent user={user} />
-            <NicknameForm user={user} data={nicknameData} />
-          </div>
-        )}
+        <div className="profile_area">
+          {user ? (
+            <>
+              <ProfileComponent user={user} />
+              <NicknameForm user={user} data={nicknameData} />
+            </>
+          ) : (
+            <>
+              <Skeleton
+                variant="circular"
+                width={160}
+                height={135}
+                style={{ marginRight: 40 }}
+              />
+              <SkeletonComponent />
+            </>
+          )}
+        </div>
+
         <div className="withdrawal">
           <div className="suggest">
             <p className="suggest_title">문의사항</p>
@@ -26,7 +41,7 @@ function MyPage() {
             <p className="withdrawal_title">회원 탈퇴</p>
             <div className="in_wrap">
               <CommonButton theme="warnning" size="rg">
-                <Link href="/member/mypage/quit">회원탈퇴</Link>
+                <Link href="/member/quit">회원탈퇴</Link>
               </CommonButton>
             </div>
           </div>

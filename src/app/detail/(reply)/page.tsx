@@ -1,17 +1,17 @@
 "use client";
-
-import useGetQueryHandler from "@/apis/member/mypage/query/getMyDataQuery";
-import { useReplyQueryHook } from "@/apis/reply/useGetReplyHook";
+import { useReplyQueryHook } from "@/app/api_hooks/Reply/getReplyHook";
 import ReactTextareaAutosize from "react-textarea-autosize";
-import { usePageInfoStore } from "@/store/common";
-import { useReplyContext } from "./context";
-import { useCreateHandler } from "@/apis/reply/Reply/useMutationHandler";
-import ReplyItem from "./ReplyItem";
+import { pageInfoStore } from "@/store/common";
+import ReplyItem from "@/app/pages/detail/_reply/ReplyItem";
+import { useReplyContext } from "@/app/pages/detail/_reply/context";
+import { useCreateHandler } from "@/app/handler/Reply/useMutationHandler";
+import useUserQueryHook from "@/app/api_hooks/login/getUserHook";
+import { User } from "firebase/auth";
 
 const Reply = () => {
-  const id = usePageInfoStore().pgId;
+  const id = pageInfoStore().pgId;
 
-  const { user } = useGetQueryHandler();
+  const { data } = useUserQueryHook();
 
   const { replyData, isLoading } = useReplyQueryHook(id);
 
@@ -22,15 +22,14 @@ const Reply = () => {
   const createMutation = useCreateHandler();
 
   const CreateRely = async () => {
-    if (user) {
-      const userObj = {
-        name: user.displayName as string,
-        profile: user.photoURL ? user.photoURL : "/img/default.svg",
-        uid: user.uid as string,
-      };
-      createMutation.mutate({ user: userObj, id, comment });
-      setComment("");
-    }
+    const user = data as User;
+    const userObj = {
+      name: user.displayName as string,
+      profile: user.photoURL ? user.photoURL : "/img/default.svg",
+      uid: user.uid as string,
+    };
+    createMutation.mutate({ user: userObj, id, comment });
+    setComment("");
   };
 
   return (

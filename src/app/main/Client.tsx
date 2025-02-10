@@ -1,12 +1,13 @@
 /** @jsxImportSource @emotion/react */
 "use client";
 import { FirebaseData } from "@/components/type";
-import { Suspense, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Item from "./component/Item";
 import usePostQueryHook from "@/apis/main/useGetQuery";
-import { useSearchStore } from "@/store/common";
 import { css } from "@emotion/react";
-import { Skeleton } from "@mui/material";
+import { useSearchStore } from "@/store/searchStore";
+import { usePopupStore } from "@/store/popupStore";
+import { popuprHandler } from "@/utils/popupHandler";
 
 const MainPage = ({}) => {
   const [postState, setState] = useState<FirebaseData[]>([]);
@@ -33,7 +34,8 @@ const MainPage = ({}) => {
   const showDataHandler = () => {
     const array = searchInfo.isSearch ? postState : postData;
     if (array.length === 0) {
-      return <Skeleton variant="rectangular" width={300} height={300} />;
+      popuprHandler({ message: "검색 결과가 존재 하지 않습니다." });
+      return null;
     }
 
     return array.map((item: FirebaseData, index: number) => {
@@ -44,9 +46,7 @@ const MainPage = ({}) => {
 
   return (
     <div className="post_section" css={SectionStyle}>
-      <Suspense fallback={<Skeleton variant="rectangular" />}>
-        {showDataHandler()}
-      </Suspense>
+      {showDataHandler()}
     </div>
   );
 };

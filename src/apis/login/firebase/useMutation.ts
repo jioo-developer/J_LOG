@@ -1,6 +1,9 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { Postlogin } from "./loginHandler";
+import errorTypeHandler from "./errorTypeHandler";
+import { usePopupStore } from "@/store/popupStore";
+import { popuprHandler } from "@/utils/popupHandler";
 type propsType = {
   email: string;
   pw: string;
@@ -20,7 +23,8 @@ const useLoginHook = () => {
       router.push("/");
     },
     onError: (error) => {
-      window.alert(error.message);
+      const errorMessage = errorTypeHandler(error);
+      popuprHandler({ message: errorMessage });
     },
   });
 };

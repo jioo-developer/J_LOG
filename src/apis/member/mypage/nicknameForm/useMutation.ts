@@ -3,6 +3,8 @@ import { apiUrl } from "@/static/constants/common";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { updateProfile, User } from "firebase/auth";
 import ChangeNicknameHandler from "./ChangeNicknameHandler";
+import { usePopupStore } from "@/store/popupStore";
+import { popuprHandler } from "@/utils/popupHandler";
 
 export type changeHanlderType = {
   nickname: string;
@@ -33,8 +35,7 @@ function useNameChangeMutation() {
       });
     },
     onError: (error) => {
-      window.alert((error as Error).message);
-      //   popuprHandler({ message: "닉네임을 변경에 실패하였습니다." });
+      popuprHandler({ message: (error as Error).message });
     },
   });
 }

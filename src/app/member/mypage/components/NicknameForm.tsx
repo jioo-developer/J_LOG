@@ -23,7 +23,6 @@ function NicknameForm({ user, data }: propsType) {
     register,
     handleSubmit,
     setValue,
-    trigger,
     reset,
     formState: { errors },
   } = useForm<InputType>({});
@@ -37,7 +36,7 @@ function NicknameForm({ user, data }: propsType) {
     if (user?.displayName) {
       setValue("nickNameRequired", user.displayName as string);
     }
-  }, [user?.displayName, setValue, trigger]);
+  }, [user?.displayName, setValue]);
 
   async function changeNameHandler(data: InputType) {
     await mutateAsync({ nickname: data.nickNameRequired });
@@ -54,13 +53,11 @@ function NicknameForm({ user, data }: propsType) {
       {!nameToggle ? (
         <div className="name_area">
           <b className="nickname">
-            <Suspense fallback={<Skeleton variant="text" />}>
-              {user ? (
-                user.displayName + ".log"
-              ) : (
-                <Skeleton variant="text" width={"100%"} />
-              )}
-            </Suspense>
+            {user ? (
+              user.displayName + ".log"
+            ) : (
+              <Skeleton variant="text" width={"100%"} />
+            )}
           </b>
           <div className="flex-Set" css={FormEditorButton}>
             <CommonButton
@@ -91,7 +88,7 @@ function NicknameForm({ user, data }: propsType) {
               }}
               error={errors.nickNameRequired}
             />
-            <div className="nick__editor flex-Set">
+            <div className="flex-Set" css={FormEditorButton}>
               <CommonButton theme="none" size="rg">
                 수정완료
               </CommonButton>

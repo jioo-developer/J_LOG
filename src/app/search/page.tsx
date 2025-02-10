@@ -1,10 +1,10 @@
 /** @jsxImportSource @emotion/react */
 "use client";
 import { inputStyle } from "@/components/atoms/CommonInput/CommonInputStyle";
-import { useSearchStore } from "@/store/common";
+import { useSearchStore } from "@/store/searchStore";
 import { css } from "@emotion/react";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const SearchPage = () => {
   const [search, setSearchHandler] = useState("");
@@ -47,13 +47,15 @@ const InputWrap = css`
   margin: 0 auto;
   justify-content: center;
   & > input {
-    height: 70px;
+    height: 100px;
     margin-top: Calc(var(--gap-xlarge) * 2);
     border-radius: 0;
     text-indent: 20px !important;
     outline: none;
-    &:placehorder {
-      font-size: var(--fontsize-large);
+    font-size: Calc(var(--fontsize-large) * 1.5);
+
+    &::placeholder {
+      font-size: Calc(var(--fontsize-large) * 1.5);
     }
   }
 `;

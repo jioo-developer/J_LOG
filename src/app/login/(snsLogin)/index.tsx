@@ -15,7 +15,7 @@ const SocialLoginPage = () => {
   return (
     <div className="sns_Sign flex-Set">
       <CommonButton theme="none" size="rg" onClick={mutate}>
-        <div className="button_Wrap">
+        <div className="button_in_Wrap">
           <Image
             src="/images/google.svg"
             width={20}
@@ -26,7 +26,7 @@ const SocialLoginPage = () => {
         </div>
       </CommonButton>
       <CommonButton theme="none" size="rg">
-        <div className="button_Wrap">
+        <div className="button_in_Wrap">
           <Image
             src="/images/facebook.svg"
             alt="페이스북 로그인"
