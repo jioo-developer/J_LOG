@@ -28,7 +28,7 @@ export default function PageComponent({ pageData }: propsType) {
           </div>
           <div className="right_wrap flex-Set">
             <CommonButton theme="none" size="rg">
-              <Link href="/edit">수정</Link>
+              <Link href="/detail/updateEdit">수정</Link>
             </CommonButton>
             <CommonButton
               theme="none"

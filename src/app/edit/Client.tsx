@@ -4,10 +4,12 @@ import "./Style.scss";
 import InputForm from "./components/InputForm/InputForm";
 import Uploader from "./components/uploader/Uploader";
 import PriortyChecker from "./components/PriortyChecker/PriortyChecker";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import CommonButton from "@/components/atoms/CommonButton/CommonButton";
 import Link from "next/link";
 import useCreateHandler from "./handler/postHandler/useCreateHandler";
+import { usePathname } from "next/navigation";
+import { useEditDetailStore } from "../detail/updateEdit/store";
 
 export type InputType = {
   titleRequired: string;
@@ -21,12 +23,24 @@ export type imageInfo = {
 };
 
 function EditPage() {
+  const pathName = usePathname();
   const checkRef = useRef<HTMLInputElement | null>(null);
   const [imageInfoArray, setImage] = useState<imageInfo>({
     url: [],
     files: [],
     fileName: [],
   });
+
+  const { checked, imageInfo } = useEditDetailStore();
+
+  useEffect(() => {
+    if (pathName !== "/edit") {
+      if (checked && checkRef.current) {
+        checkRef.current.checked = true;
+      }
+      setImage(imageInfo);
+    }
+  }, [pathName]);
 
   function getUploadDataHandler({ url, files, fileName }: imageInfo) {
     setImage((prev) => ({

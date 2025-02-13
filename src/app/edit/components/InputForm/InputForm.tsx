@@ -8,6 +8,8 @@ import Image from "next/image";
 import { usePageInfoStore } from "@/store/pageInfoStore";
 import { Form, TextArea } from "./Style";
 import { InputType } from "../../Client";
+import { usePathname } from "next/navigation";
+import { useEditDetailStore } from "@/app/detail/updateEdit/store";
 
 type propsType = {
   imageUrl: string[];
@@ -15,6 +17,8 @@ type propsType = {
 };
 
 function InputForm({ imageUrl, formHandler }: propsType) {
+  const pathName = usePathname();
+
   const {
     register,
     handleSubmit,
@@ -23,12 +27,20 @@ function InputForm({ imageUrl, formHandler }: propsType) {
     formState: { errors },
   } = useForm<InputType>();
 
-  const { setPgId } = usePageInfoStore();
   const createId = useCreateId();
 
+  const { formData } = useEditDetailStore();
+
+  const { setPgId } = usePageInfoStore();
+
   useEffect(() => {
-    setPgId(createId);
-  }, []);
+    if (pathName === "/edit") {
+      setPgId(createId);
+    } else {
+      setValue("titleRequired", formData.title);
+      setValue("contentRequired", formData.text);
+    }
+  }, [pathName]);
 
   return (
     <form role="form" css={Form} onSubmit={handleSubmit(formHandler)}>
