@@ -1,13 +1,13 @@
 /** @jsxImportSource @emotion/react */
 "use client";
-import { FirebaseData } from "@/components/type";
 import { useEffect, useState } from "react";
 import Item from "./component/Item";
-import usePostQueryHook from "@/apis/main/useGetQuery";
+import usePostQueryHook from "@/apis/main/query/useGetQuery";
 import { css } from "@emotion/react";
 import { useSearchStore } from "@/store/searchStore";
 import { usePopupStore } from "@/store/popupStore";
 import { popuprHandler } from "@/utils/popupHandler";
+import { FirebaseData } from "@/static/types/common";
 
 const MainPage = ({}) => {
   const [postState, setState] = useState<FirebaseData[]>([]);

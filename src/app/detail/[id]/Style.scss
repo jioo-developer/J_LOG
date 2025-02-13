@@ -77,7 +77,6 @@
         justify-content: space-between;
 
         button {
-          @include btn-Reset();
           color: rgb(33, 37, 41);
           font-size: 16px;
         }
@@ -109,7 +108,7 @@
 
     figure {
       margin-top: 20px;
-      @include size();
+      width: 100%;
       overflow: hidden;
 
       @media all and (max-width: 1000px) {
@@ -217,7 +216,6 @@
         }
 
         .form-control {
-          @include input-text();
           width: 100%;
           margin-bottom: 0;
           margin-top: 10px;
@@ -261,11 +259,9 @@
       }
 
       .btn {
-        @include flex();
         padding: 0 15px;
         margin-left: auto;
         height: 35px;
-        @include btn-Reset();
         font-size: 16px;
         background: #12b886;
         color: #fff;

@@ -8,7 +8,7 @@ import {
   signInWithCustomToken,
   User,
 } from "firebase/auth";
-import getUserHandler from "../handler/getUserHandler";
+import getUserHandler from "./getUserHandler";
 
 export async function getUser() {
   // Firebase Authentication 상태 변경 시 처리

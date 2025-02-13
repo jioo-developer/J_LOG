@@ -110,12 +110,4 @@ const Style = css`
       color: rgb(61, 61, 62);
     }
   }
-
-  .button__group {
-    display: flex;
-    justify-content: flex-end;
-    gap: 8px;
-    margin-left: auto;
-    min-width: 200px;
-  }
 `;

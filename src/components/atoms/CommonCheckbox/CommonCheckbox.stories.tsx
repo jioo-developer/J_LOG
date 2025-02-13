@@ -1,4 +1,4 @@
-import { Story } from "@/components/type";
+import { Story } from "@/static/types/common";
 import CommonCheckbox, { PropsType } from "./CommonCheckbox";
 import { BadgeCheck, Badge } from "lucide-react";
 

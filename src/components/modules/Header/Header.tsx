@@ -26,6 +26,10 @@ type propsType = {
 };
 
 function Header({ accessToken }: propsType) {
+  useEffect(() => {
+    if (!accessToken) return;
+  }, [accessToken]);
+
   const ref = useRef<HTMLInputElement | null>(null);
   const pathname = usePathname();
   const isActive = activePathName.some((path) =>

@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
-import { FirebaseData } from "@/components/type";
+
+import { FirebaseData } from "@/static/types/common";
 import Image from "next/image";
 
 type propsType = {

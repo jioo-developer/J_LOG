@@ -33,7 +33,7 @@ export default function RootLayout({
     <html lang="ko">
       <body>
         <TanstackProvider>
-          {token && <Header accessToken={token} />}
+          <Header accessToken={token} />
           {children}
           {modal}
           <div id="modal-root"></div>

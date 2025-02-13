@@ -17,10 +17,14 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   const { user, cash, item } = await request.json();
 
-  const Ref = doc(db, "cash", user.uid as string);
+  try {
+    const Ref = doc(db, "cash", user.uid as string);
 
-  await updateDoc(Ref, {
-    cash: cash,
-    item: item,
-  });
+    await updateDoc(Ref, {
+      cash: cash,
+      item: item,
+    });
+  } catch (error) {
+    throw new Error((error as Error).message);
+  }
 }

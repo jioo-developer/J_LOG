@@ -1,25 +1,20 @@
-import { Dispatch, SetStateAction } from "react";
 import { create } from "zustand";
 
 // PopupMessageStore 상태 타입 정의
 type PopupMessageStoreState = {
   message: string;
   type: "alert" | "confirm" | "prompt";
-  isClick: boolean;
-  state?: Dispatch<SetStateAction<string>>; // Prompt에 사용할 setState 함수
+  callback?: () => void; // callback을 상태로 추가
   setMessage: (message: string) => void;
   setType: (type: "alert" | "confirm" | "prompt") => void;
-  setIsClick: (isClick: boolean) => void;
-  setState: (state: Dispatch<SetStateAction<string>> | undefined) => void;
+  setCallback: (callback?: () => void) => void; // callback 설정 함수 추가
 };
 
 // Zustand store 생성
 export const usePopupStore = create<PopupMessageStoreState>((set) => ({
   message: "",
   type: "alert", // 기본값 설정
-  isClick: false,
-  state: undefined, // Prompt 팝업에서 사용할 setState를 설정하기 위한 상태
-
+  callback: undefined, // 초기에는 callback이 없음
   // 메시지 설정 함수
   setMessage: (message: string) => {
     set((state) => {
@@ -40,18 +35,13 @@ export const usePopupStore = create<PopupMessageStoreState>((set) => ({
     });
   },
 
-  // 클릭 상태 설정 함수
-  setIsClick: (isClick: boolean) => {
+  // callback 설정 함수
+  setCallback: (callback?: () => void) => {
     set((state) => {
-      if (state.isClick !== isClick) {
-        return { isClick };
+      if (state.callback !== callback) {
+        return { callback };
       }
       return state;
     });
-  },
-
-  // 상태 업데이트 함수 (Prompt 팝업에 필요한 state 설정)
-  setState: (state: Dispatch<SetStateAction<string>> | undefined) => {
-    set({ state }); // setState에 값을 저장
   },
 }));

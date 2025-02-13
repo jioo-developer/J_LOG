@@ -1,65 +1,37 @@
+/** @jsxImportSource @emotion/react */
 import { Controller, useForm } from "react-hook-form";
 import CommonInput from "@/components/atoms/CommonInput/CommonInput";
 import ReactTextareaAutosize from "react-textarea-autosize";
-import CommonButton from "@/components/atoms/CommonButton/CommonButton";
-import Link from "next/link";
-import { useEffect, useState } from "react";
-import { usePageInfoStore } from "@/store/common";
-import { useCreateId } from "@/apis/edit/useCreatePageId";
-import useDetailQueryHook from "@/app/api/detail/useDetailQuery";
-import { getDetailHandler } from "@/app/api/detail/getDetailHandler";
-import { FirebaseData } from "@/components/type";
+import { useEffect } from "react";
+import { useCreateId } from "@/app/edit/handler/postHandler/usePageId";
+import Image from "next/image";
+import { usePageInfoStore } from "@/store/pageInfoStore";
+import { Form, TextArea } from "./Style";
+import { InputType } from "../../Client";
 
-type InputType = {
-  titleRequired: string;
-  contentRequired: string;
+type propsType = {
+  imageUrl: string[];
+  formHandler: (data: InputType) => void;
 };
-function InputForm() {
+
+function InputForm({ imageUrl, formHandler }: propsType) {
   const {
     register,
     handleSubmit,
+    control,
     setValue,
     formState: { errors },
   } = useForm<InputType>();
 
+  const { setPgId } = usePageInfoStore();
   const createId = useCreateId();
-  const { editMode, setPgId } = usePageInfoStore();
-  const [previewImg, setPreview] = useState<string[]>([]);
-
-  async function getPrevDataHandler() {
-    return await getDetailHandler(createId);
-    // 그래서 거짓의 값이 없을 경우 타입 단언 적용
-  }
-
-  // function ImageDeleteHandler(index: number) {
-  //   handler
-  //   const array = { image: previewImg };
-  //   const result = ImageDeleteHandler({
-  //     array,
-  //     fileIndex: index,
-  //   });
-  //   setPreview(result.image);
-  //   setName(result.files);
-  // }
 
   useEffect(() => {
-    const fetchData = async () => {
-      if (!editMode) {
-        // editMode가 false이면 새로운 pageId 생성
-        setPgId(createId);
-      } else {
-        const prevData = (await getPrevDataHandler()) as FirebaseData;
-        setValue("titleRequired", prevData.title);
-        setValue("contentRequired", prevData.text);
-        setPreview(prevData.url);
-      }
-    };
-
-    fetchData();
-  }, [editMode]);
+    setPgId(createId);
+  }, []);
 
   return (
-    <form role="form">
+    <form role="form" css={Form} onSubmit={handleSubmit(formHandler)}>
       <CommonInput
         id="titleRequired"
         placeholder="제목을 입력해주세요"
@@ -71,12 +43,14 @@ function InputForm() {
       />
       <div className="textarea">
         <Controller
+          control={control}
           name="contentRequired"
           rules={{
             required: "내용을 입력해주세요.",
           }} // Validation 규칙
           render={({ field }) => (
             <ReactTextareaAutosize
+              css={TextArea}
               {...field}
               id="contentRequired"
               placeholder="내용을 입력해주세요."
@@ -86,30 +60,19 @@ function InputForm() {
             />
           )}
         />
-        <figure>
-          {previewImg.map((url, index) => (
-            <div key={index}>
-              <button
-                type="button"
-                className="preview_delete"
-                data-testid="delete-button"
-                // onClick={() => ImageDeleteHandler(index)}
-              >
-                <img src="/img/close.png" alt="" />
-              </button>
-              <img src={url} alt="" className="att" key={index} />
-            </div>
+        {imageUrl.length > 0 &&
+          imageUrl.map((url, index) => (
+            <Image
+              src={url}
+              alt="업로드 이미지"
+              sizes="100vw"
+              style={{
+                width: "100%",
+                height: "auto",
+              }}
+              key={index}
+            />
           ))}
-        </figure>
-      </div>
-
-      <div className="bottom_wrap flex-Set">
-        <CommonButton theme="none" size="rg">
-          <Link href="/">← &nbsp;나가기</Link>
-        </CommonButton>
-        <CommonButton theme="success" type="submit" size="rg">
-          글작성
-        </CommonButton>
       </div>
     </form>
   );

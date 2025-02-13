@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { LoginErrorHandler } from "../handler/errorHandler";
+import { LoginErrorHandler } from "../../../utils/errorHandler";
 import { useRouter } from "next/navigation";
 import { apiUrl } from "@/static/constants/common";
 import { authService } from "@/lib/firebase";

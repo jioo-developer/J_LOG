@@ -5,7 +5,7 @@ import {
   HydrationBoundary,
   QueryClient,
 } from "@tanstack/react-query";
-export default async function MainPageServerComponent() {
+export default async function ServerComponent() {
   const queryClient = new QueryClient();
 
   await queryClient.prefetchQuery({

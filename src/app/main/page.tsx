@@ -5,8 +5,8 @@ import {
   QueryClient,
 } from "@tanstack/react-query";
 import { getUser } from "@/apis/login/hook/useGetUserQuery";
-import { getPostHandler } from "@/apis/main/getPostHanlder";
-export default async function MainPageServerComponent() {
+import { getPostHandler } from "@/apis/main/query/getPostHanlder";
+export default async function ServerComponent() {
   const queryClient = new QueryClient();
 
   await queryClient.prefetchQuery({

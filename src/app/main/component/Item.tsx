@@ -1,9 +1,9 @@
 /** @jsxImportSource @emotion/react */
-import { FirebaseData } from "@/components/type";
 import Image from "next/image";
 import Link from "next/link";
 import { postItemStyle, writeWrap } from "./Style";
 import { usePageInfoStore } from "@/store/pageInfoStore";
+import { FirebaseData } from "@/static/types/common";
 
 type itemProps = {
   item: FirebaseData;

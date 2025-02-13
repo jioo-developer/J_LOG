@@ -4,28 +4,21 @@ export const Form = css`
   display: flex;
   flex-direction: column;
   width: 100%;
+  gap: var(--gap-large);
 `;
 
 export const TextArea = css`
-    .textarea {
-      width: 100%;
-      outline: 0;
-      border: 0;
-      text-indent: 7px;
-      font-size: 18px;
-      border: 1px solid #eee;
-      box-sizing: border-box;
-      min-height: 600px;
-      margin-bottom: 30px;
-      padding-top: 15px;
-      position: relative;
-
-      .att {
-        float: left;
-        width: 100%;
-
-        @media all and (max-width: 1000px) {
-          width: 90%;
-          height: auto;
-        }
+  width: 100%;
+  outline: 0;
+  border: 0;
+  text-indent: 7px;
+  font-size: 18px;
+  border: 1px solid #eee;
+  box-sizing: border-box;
+  min-height: 600px;
+  position: relative;
+  cursor: inherit;
+  resize: none;
+  overflow: hidden;
+  padding: var(--gap-medium) 0 0 Calc(var(--gap-small) * 0.5);
 `;

@@ -6,7 +6,7 @@ import {
   QueryClient,
 } from "@tanstack/react-query";
 
-export default async function NicknameServerComponent() {
+export default async function ServerComponent() {
   const queryClient = new QueryClient();
   await queryClient.prefetchQuery({
     queryKey: ["getNickname"],

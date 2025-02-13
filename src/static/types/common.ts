@@ -23,7 +23,10 @@ export type FirebaseData = {
   favorite: number;
   text: string;
   writer: string;
-  id: string;
   priority?: boolean;
   replyLength?: number;
+};
+
+export type Story<T> = {
+  args: Partial<T>;
 };

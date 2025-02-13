@@ -1,8 +1,6 @@
-// confirmPopup.stories.ts
-import { Popup } from "@/stories/atoms/Popup";
+import CommonPopup from "@/components/atoms/CommonPopup/CommonPopup";
 import ConfirmPopup from "./ConfirmPopup";
-import ButtonGroup from "../ButtonGroup/ButtonGroup";
-import { Button } from "@/stories/atoms/Button";
+import CommonButton from "@/components/atoms/CommonButton/CommonButton";
 
 export default {
   title: "MODULES/ConfirmPopup",
@@ -17,11 +15,11 @@ export default {
 
 export const Default = {
   render: () => (
-    <Popup type="confirm" top customText="제목" subText="내용">
-      <ButtonGroup>
-        <Button>취소</Button>
-        <Button theme="success">확인</Button>
-      </ButtonGroup>
-    </Popup>
+    <CommonPopup type="confirm" top customText="제목" subText="내용">
+      <div className="button__group">
+        <CommonButton theme="white">취소</CommonButton>
+        <CommonButton theme="success">확인</CommonButton>
+      </div>
+    </CommonPopup>
   ),
 };

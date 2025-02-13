@@ -2,26 +2,17 @@
 import CommonPopup from "@/components/atoms/CommonPopup/CommonPopup";
 import ConfirmPopup from "@/components/modules/Popup/Confirm/ConfirmPopup";
 import { usePopupStore } from "@/store/popupStore";
-import { Dispatch, SetStateAction } from "react";
 
 type popupPropsType = {
   message: string;
   type?: string;
-  state?: (params?: any) => void | Dispatch<SetStateAction<string>> | undefined;
-};
-
-export function popupInit() {
-  usePopupStore.setState({ message: "", isClick: false });
-}
-
-const isSetState = (state: any): state is Dispatch<SetStateAction<string>> => {
-  return typeof state === "function";
+  callback?: () => void;
 };
 
 export const popuprHandler = ({
   message,
   type = "alert",
-  state,
+  callback,
 }: popupPropsType) => {
   if (type === "alert") {
     usePopupStore.setState({
@@ -31,28 +22,18 @@ export const popuprHandler = ({
     usePopupStore.setState({
       message,
       type,
+      callback,
     });
-  } else if (type === "prompt") {
-    if (isSetState(state)) {
-      usePopupStore.setState({
-        message,
-        state: state,
-        type,
-      });
-    }
   }
 };
 
 export const ReturnPopup = () => {
-  const popupMsg = usePopupStore();
-  const popupType = popupMsg.type;
-  if (popupMsg.message !== "") {
-    if (popupType === "alert") {
+  const { message, type, callback } = usePopupStore();
+  if (message !== "") {
+    if (type === "alert") {
       return <CommonPopup />;
-    } else if (popupType === "confirm") {
+    } else if (type === "confirm") {
       return <ConfirmPopup />;
-    } else if (popupType === "prompt") {
-      // return <PromptPopup />;
     }
   }
 };

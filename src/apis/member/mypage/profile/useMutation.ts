@@ -1,8 +1,8 @@
 import { updateProfile, User } from "firebase/auth";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { authService } from "@/lib/firebase";
-import storageUploadHandler from "@/utils/storageUploadHandler";
 import { popuprHandler } from "@/utils/popupHandler";
+import { profileHandler } from "./handler";
 
 type propsType = {
   url: string[];
@@ -13,12 +13,12 @@ function useImageMutation() {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async ({ url, files }: propsType) => {
-      const uploadUrl = await storageUploadHandler(url, files);
-      const result = uploadUrl[0];
+      const user = authService.currentUser?.uid as string;
+      const resultUrl = await profileHandler({ user, url, files });
       await updateProfile(authService.currentUser as User, {
-        photoURL: result,
+        photoURL: resultUrl,
       });
-      return result;
+      return resultUrl;
     },
     onSuccess: async (imgurl) => {
       await queryClient.refetchQueries({

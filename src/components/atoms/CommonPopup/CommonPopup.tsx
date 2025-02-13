@@ -10,7 +10,6 @@ import {
   whiteBox,
   whiteBoxWrapper,
 } from "./Style";
-import { popupInit } from "@/utils/popupHandler";
 
 type propsType = {
   type?: "alert" | string;
@@ -33,7 +32,7 @@ const CommonPopup = ({
   children,
   customText = "",
 }: propsType) => {
-  const { message } = usePopupStore();
+  const { message, setMessage } = usePopupStore();
 
   return (
     <>
@@ -61,7 +60,7 @@ const CommonPopup = ({
             </p>
           )}
           {type === "alert" ? (
-            <CommonButton theme="success" onClick={popupInit}>
+            <CommonButton theme="success" onClick={() => setMessage("")}>
               확인
             </CommonButton>
           ) : (

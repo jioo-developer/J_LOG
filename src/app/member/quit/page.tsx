@@ -1,8 +1,8 @@
 /** @jsxImportSource @emotion/react */
 "use client";
-import originDeleteHandler from "@/apis/member/quit/handler/originquitHandler";
-import SocialDeleteHandler from "@/apis/member/quit/handler/socialquitHandler";
-import isCredential from "@/apis/member/quit/handler/credentialHandler";
+import originDeleteHandler from "@/app/member/quit/handler/originquitHandler";
+import SocialDeleteHandler from "@/app/member/quit/handler/socialquitHandler";
+import isCredential from "@/app/member/quit/handler/credentialHandler";
 import { User } from "firebase/auth";
 import { useEffect, useState } from "react";
 import useGetQueryHandler from "@/apis/member/mypage/query/getMyDataQuery";

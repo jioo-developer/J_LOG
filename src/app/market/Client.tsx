@@ -2,12 +2,12 @@
 "use client";
 import CommonButton from "@/components/atoms/CommonButton/CommonButton";
 import Item from "./component/Item";
-import useCashMutation from "@/apis/market/set/useMutation";
+import useCashMutation from "@/apis/market/useMutation";
 import { useState } from "react";
 import { convertPrice } from "@/utils/convertPrice";
 import { css } from "@emotion/react";
 import { useRouter } from "next/navigation";
-import useCashQueryHook from "@/apis/market/get/useGetCashQuery";
+import useCashQueryHook from "@/apis/market/query/useGetCashQuery";
 
 const ItemStore = () => {
   const router = useRouter();

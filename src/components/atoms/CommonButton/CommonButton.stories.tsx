@@ -1,4 +1,4 @@
-import { Story } from "@/components/type";
+import { Story } from "@/static/types/common";
 import CommonButton, { CommonButtonProps } from "./CommonButton";
 export default {
   title: "Components/CommonButton",

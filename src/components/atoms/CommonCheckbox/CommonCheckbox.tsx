@@ -24,6 +24,7 @@ function CommonCheckbox({ childrens, stateValue, setStateHandler }: PropsType) {
     <button
       type="button"
       className="check__Toggle"
+      style={{ maxHeight: 25 }}
       onClick={() => {
         setStateHandler(!stateValue);
       }}

@@ -1,18 +1,15 @@
 import CommonButton from "@/components/atoms/CommonButton/CommonButton";
 import CommonPopup from "@/components/atoms/CommonPopup/CommonPopup";
 import { usePopupStore } from "@/store/popupStore";
-import { popupInit } from "@/utils/popupHandler";
 
 const ConfirmPopup = () => {
+  const { setMessage, callback } = usePopupStore();
   return (
     <CommonPopup type="confirm">
-      <CommonButton theme="white" onClick={popupInit}>
+      <CommonButton theme="white" onClick={() => setMessage("")}>
         취소
       </CommonButton>
-      <CommonButton
-        theme="success"
-        onClick={() => usePopupStore.setState({ isClick: true })}
-      >
+      <CommonButton theme="success" onClick={callback}>
         확인
       </CommonButton>
     </CommonPopup>
