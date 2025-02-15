@@ -1,15 +1,24 @@
+"use client";
+import "./Style.scss";
 import useDetailQueryHook from "@/apis/detail/query/useDetailQuery";
 import { usePopupStore } from "@/store/popupStore";
 import { popuprHandler } from "@/utils/popupHandler";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import PageComponent from "./components/pageComponent";
+import useGetMyInfoQueryHandler from "@/apis/member/mypage/query/getMyDataQuery";
+import useFavoriteQueryHook from "@/apis/detail/favorite/query/useFavoriteQuery";
 
 type propsType = {
   pageId: string;
 };
 
 const DetailPage = ({ pageId }: propsType) => {
+  const { user } = useGetMyInfoQueryHandler();
+  const { data: favoriteStatus } = useFavoriteQueryHook({
+    user: user?.uid as string,
+    pageId,
+  });
   const { pageData, isLoading } = useDetailQueryHook(pageId);
 
   const router = useRouter();
@@ -18,7 +27,6 @@ const DetailPage = ({ pageId }: propsType) => {
   useEffect(() => {
     if (!pageData) {
       popuprHandler({ message: "페이지 정보가 조회 되지 않습니다." });
-      return;
     }
   }, [pageData]);
 
@@ -39,9 +47,14 @@ const DetailPage = ({ pageId }: propsType) => {
   }
 
   return (
-    <div className="detail_wrap">
+    <div className="page-Reset detail_wrap">
       <div className="in_wrap">
-        {pageData && <PageComponent pageData={pageData} />}
+        {pageData && (
+          <PageComponent
+            pageData={pageData}
+            favoriteStatus={!!favoriteStatus}
+          />
+        )}
       </div>
     </div>
   );

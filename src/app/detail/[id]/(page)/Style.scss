@@ -1,0 +1,132 @@
+.detail_wrap {
+  width: 50%;
+  .sub_menu {
+    top: 50px;
+    right: -50px;
+
+    @media all and (max-width: 1000px) {
+      right: 0;
+    }
+  }
+
+  .sub_header {
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid #ddd;
+    box-sizing: border-box;
+    padding: 15px 0 30px 0;
+
+    @media all and (max-width: 1000px) {
+      padding: 13px 0;
+    }
+
+    h1 {
+      font-size: 40px;
+      color: rgb(52, 58, 64);
+      min-height: 40px;
+      margin-bottom: 13px;
+      letter-spacing: 1px;
+    }
+
+    .writer_wrap {
+      justify-content: space-between;
+
+      .left_wrap {
+        display: flex;
+        align-items: center;
+
+        .profile {
+          width: 30px;
+          height: 30px;
+          margin-right: 7px;
+        }
+
+        .writer {
+          color: rgb(73, 80, 87);
+          font-weight: 500;
+          margin-right: 20px;
+          font-size: 18px;
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+
+        .date {
+          color: #495057;
+        }
+      }
+
+      .right_wrap {
+        justify-content: space-between;
+
+        button {
+          color: rgb(33, 37, 41);
+          font-size: 16px;
+        }
+
+        .edit {
+          margin-right: 10px;
+        }
+      }
+    }
+  }
+
+  .content_wrap {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding-bottom: 20px;
+
+    .text {
+      margin-top: 20px;
+      font-size: 20px;
+      word-break: break-all;
+      min-height: 50px;
+      overflow: hidden;
+
+      @media all and (max-width: 1000px) {
+        margin-top: 15px;
+      }
+    }
+
+    figure {
+      margin-top: 20px;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .att {
+      width: 100%;
+      margin: 7px 0;
+    }
+
+    .comment {
+      display: flex;
+      flex-direction: column;
+      margin-top: 15px;
+
+      .favorite_wrap {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: 13px;
+        border-bottom: 1px solid #ddd;
+        box-sizing: border-box;
+        @media all and (max-width: 1000px) {
+          align-items: center;
+        }
+
+        .com_title {
+          margin-top: 5px;
+          color: #495057;
+        }
+
+        .right_box {
+          display: flex;
+          gap: 8px;
+        }
+      }
+    }
+  }
+}

@@ -4,12 +4,14 @@ import Image from "next/image";
 import Link from "next/link";
 import clipboardHanlder from "../handler/clipboardHanlder";
 import { usePageDeleteHandler } from "../handler/usePageDeleteHandler";
+import CommonImage from "@/components/atoms/CommonImage";
 
 type propsType = {
   pageData: FirebaseData;
+  favoriteStatus: boolean;
 };
 
-export default function PageComponent({ pageData }: propsType) {
+export default function PageComponent({ pageData, favoriteStatus }: propsType) {
   return (
     <>
       <section className="sub_header">
@@ -17,7 +19,9 @@ export default function PageComponent({ pageData }: propsType) {
         <div className="writer_wrap flex-Set">
           <div className="left_wrap">
             <Image
-              src={pageData?.profile ? pageData?.profile : "/img/default.svg"}
+              src={
+                pageData?.profile ? pageData?.profile : "/images/default.svg"
+              }
               width={40}
               height={40}
               alt="프로필"
@@ -28,7 +32,7 @@ export default function PageComponent({ pageData }: propsType) {
           </div>
           <div className="right_wrap flex-Set">
             <CommonButton theme="none" size="rg">
-              <Link href="/detail/updateEdit">수정</Link>
+              <Link href="/updateEditor">수정</Link>
             </CommonButton>
             <CommonButton
               theme="none"
@@ -44,7 +48,7 @@ export default function PageComponent({ pageData }: propsType) {
         <div className="grid">
           {pageData?.url?.length &&
             pageData.url.map((value, index) => (
-              <Image
+              <CommonImage
                 src={value}
                 className="att"
                 alt="업로드 이미지"
@@ -62,7 +66,7 @@ export default function PageComponent({ pageData }: propsType) {
                 공유하기
               </CommonButton>
 
-              <CommonButton theme="white">
+              <CommonButton theme="white" disabled={favoriteStatus}>
                 <span>👍</span>추천&nbsp;{pageData?.favorite}
               </CommonButton>
             </div>

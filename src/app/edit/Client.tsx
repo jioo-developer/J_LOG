@@ -9,7 +9,7 @@ import CommonButton from "@/components/atoms/CommonButton/CommonButton";
 import Link from "next/link";
 import useCreateHandler from "./handler/postHandler/useCreateHandler";
 import { usePathname } from "next/navigation";
-import { useEditDetailStore } from "../detail/updateEdit/store";
+import { useEditDetailStore } from "../updateEditor/store";
 
 export type InputType = {
   titleRequired: string;
@@ -31,7 +31,8 @@ function EditPage() {
     fileName: [],
   });
 
-  const { checked, imageInfo } = useEditDetailStore();
+  const { checked, imageInfo, formData } = useEditDetailStore();
+  console.log(checked, imageInfo, formData);
 
   useEffect(() => {
     if (pathName !== "/edit") {
@@ -63,10 +64,7 @@ function EditPage() {
 
   return (
     <div className="upload">
-      <InputForm
-        imageUrl={imageInfoArray.url}
-        formHandler={getFormDataHander}
-      />
+      <InputForm formHandler={getFormDataHander} />
       <PriortyChecker ref={checkRef} />
       <Uploader data={imageInfoArray} setImageHandler={getUploadDataHandler} />
       <div className="bottom_wrap flex-Set">

@@ -1,6 +1,8 @@
+"use client";
+import "./Style.scss";
 import useGetMyInfoQueryHandler from "@/apis/member/mypage/query/getMyDataQuery";
 import { useReplyQueryHook } from "@/apis/detail/reply/query/getReplyDataQuery";
-import { useReplyMutation } from "../../../apis/detail/reply/hook/create/useMutation";
+import { useReplyMutation } from "../../../../apis/detail/reply/hook/create/useMutation";
 import ReplyItem from "./components/ReplyItem";
 import createReplyHandler from "./handler/createReplyHandler";
 import TextAreaComponent, {

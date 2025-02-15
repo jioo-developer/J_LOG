@@ -34,6 +34,7 @@
   },
   "devDependencies": {
     "@hookform/devtools": "^4.3.3",
+    "@storybook/react": "^8.5.1",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.2.0",
     "@types/jest": "^29.5.14",

@@ -1,0 +1,66 @@
+.reply_wrap {
+  display: flex;
+  width: 50%;
+  margin: 0 auto;
+  flex-direction: column;
+  padding: 20px 0;
+  border-bottom: 1px solid #ddd;
+  box-sizing: border-box;
+
+  .user_info {
+    display: flex;
+    align-items: center;
+
+    .user_text {
+      float: left;
+      display: flex;
+      flex-direction: column;
+      .reply_name {
+        font-size: 16px;
+        color: #333;
+      }
+    }
+    .edit_comment {
+      margin-left: auto;
+
+      .btns {
+        width: 44%;
+        text-decoration: underline;
+        color: #495057;
+
+        &:hover {
+          color: #12b886;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
+  .reply_text {
+    margin-top: 15px;
+  }
+
+  .form-control {
+    width: 100%;
+    margin-bottom: 0;
+    margin-top: 10px;
+
+    &::placeholder {
+      color: #000;
+    }
+  }
+
+  .btn {
+    font-size: 14px;
+    padding: 0 10px;
+    cursor: pointer;
+  }
+
+  .none {
+    display: none;
+  }
+
+  .block {
+    display: block;
+  }
+}

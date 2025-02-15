@@ -22,7 +22,7 @@ const useAuthMutation = () => {
       );
       await updateProfile(user, {
         displayName: variables.nickname,
-        photoURL: "/img/default.svg",
+        photoURL: "/images/default.svg",
       }).then(() => authService.signOut());
 
       router.push("/login");

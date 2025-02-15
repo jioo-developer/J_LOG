@@ -14,7 +14,6 @@ export default async function ServerComponent() {
   });
 
   const dehydratedState = dehydrate(queryClient);
-  console.log(dehydratedState + "dehydrate");
   return (
     <HydrationBoundary state={dehydratedState}>
       <ClientComponent />

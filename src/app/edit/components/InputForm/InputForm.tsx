@@ -4,19 +4,17 @@ import CommonInput from "@/components/atoms/CommonInput/CommonInput";
 import ReactTextareaAutosize from "react-textarea-autosize";
 import { useEffect } from "react";
 import { useCreateId } from "@/app/edit/handler/postHandler/usePageId";
-import Image from "next/image";
 import { usePageInfoStore } from "@/store/pageInfoStore";
 import { Form, TextArea } from "./Style";
 import { InputType } from "../../Client";
-import { usePathname } from "next/navigation";
-import { useEditDetailStore } from "@/app/detail/updateEdit/store";
+import { usePathname, useRouter } from "next/navigation";
+import { useEditDetailStore } from "@/app/updateEditor/store";
 
 type propsType = {
-  imageUrl: string[];
   formHandler: (data: InputType) => void;
 };
 
-function InputForm({ imageUrl, formHandler }: propsType) {
+function InputForm({ formHandler }: propsType) {
   const pathName = usePathname();
 
   const {
@@ -72,19 +70,6 @@ function InputForm({ imageUrl, formHandler }: propsType) {
             />
           )}
         />
-        {imageUrl.length > 0 &&
-          imageUrl.map((url, index) => (
-            <Image
-              src={url}
-              alt="업로드 이미지"
-              sizes="100vw"
-              style={{
-                width: "100%",
-                height: "auto",
-              }}
-              key={index}
-            />
-          ))}
       </div>
     </form>
   );

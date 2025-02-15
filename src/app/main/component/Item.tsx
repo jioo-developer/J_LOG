@@ -14,18 +14,16 @@ function Item({ item, index }: itemProps) {
   const { setPgId } = usePageInfoStore();
 
   return (
-    <div
-      className="post"
-      key={`item-${index}`}
-      onClick={() => setPgId(item.pageId)}
-      css={postItemStyle}
-    >
-      <Link href={`/pages/detail/${item.pageId}`}>
+    <div className="post" key={`item-${index}`} css={postItemStyle}>
+      <Link
+        href={`/detail/${item.pageId}`}
+        onClick={() => setPgId(item.pageId)}
+      >
         <figure className="thumbnail">
           <Image
             width={320}
             height={180}
-            src={"/img/no-image.jpg"}
+            src={"/images/no-image.jpg"}
             alt="썸네일"
           />
         </figure>
@@ -37,7 +35,7 @@ function Item({ item, index }: itemProps) {
         <div className="writer_wrap" css={writeWrap}>
           <div className="id writter-id">
             <Image
-              src={"/img/default.svg"}
+              src={"/images/default.svg"}
               alt=""
               width={40}
               height={40}

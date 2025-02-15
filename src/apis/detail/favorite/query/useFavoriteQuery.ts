@@ -5,17 +5,17 @@ type propsType = {
   user: string;
   pageId: string;
 };
-const useDetailQueryHook = ({ user, pageId }: propsType) => {
+const useFavoriteQueryHook = ({ user, pageId }: propsType) => {
   const { data, isLoading, error }: QueryObserverResult<boolean> = useQuery({
     queryKey: ["getFavorite", pageId, user],
     queryFn: async (queryKey) => {
       const keyParams = queryKey.queryKey[1] as string;
-      return await getIsFavoriteHandler({ user, pageId });
+      return await getIsFavoriteHandler({ user, pageId: keyParams });
     },
     staleTime: 1 * 60 * 1000, // 1분
     enabled: !!pageId,
   });
 
-  return { pageData: data, isLoading, error };
+  return { data, isLoading, error };
 };
-export default useDetailQueryHook;
+export default useFavoriteQueryHook;

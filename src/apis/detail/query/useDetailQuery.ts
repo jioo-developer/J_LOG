@@ -10,7 +10,8 @@ const useDetailQueryHook = (pageId: string) => {
         const keyParams = queryKey.queryKey[1] as string;
         return await getDetailHandler(keyParams);
       },
-      staleTime: 1 * 60 * 1000, // 1분
+      staleTime: 5 * 60 * 1000, // 1분
+      gcTime: 5 * 60 * 1000,
       enabled: !!pageId,
     });
 

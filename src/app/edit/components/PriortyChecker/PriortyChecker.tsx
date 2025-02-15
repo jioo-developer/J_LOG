@@ -19,7 +19,7 @@ const PriortyChecker = forwardRef<HTMLInputElement>((_, ref) => {
   return (
     <div
       className="use__item flex-Set"
-      style={{ justifyContent: "flex-start" }}
+      style={{ justifyContent: "flex-start", gap: 8 }}
     >
       <input
         ref={ref}

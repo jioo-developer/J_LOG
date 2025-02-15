@@ -3,7 +3,6 @@ import TanstackProvider from "@/provider/TanstackProvider";
 import "./globals.css";
 import "@/asset/common.scss";
 import Header from "@/components/modules/Header/Header";
-import { cookies } from "next/headers";
 import { ReturnPopup } from "@/utils/popupHandler";
 import { ReactNode } from "react";
 
@@ -17,11 +16,6 @@ export const metadata: Metadata = {
   },
 };
 
-const cookiesStore = cookies();
-const token =
-  cookiesStore.get("authToken")?.value ||
-  cookiesStore.get("GoogleAuthToken")?.value;
-
 export default function RootLayout({
   children,
   modal,
@@ -33,7 +27,7 @@ export default function RootLayout({
     <html lang="ko">
       <body>
         <TanstackProvider>
-          <Header accessToken={token} />
+          <Header />
           {children}
           {modal}
           <div id="modal-root"></div>

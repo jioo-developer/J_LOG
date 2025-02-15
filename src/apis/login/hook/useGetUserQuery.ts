@@ -17,14 +17,14 @@ export async function getUser() {
       if (user) {
         resolve(user);
       } else {
-        const { user } = await getUserHandler();
-        if (user) {
+        const { user: userData } = await getUserHandler();
+        if (userData) {
           let login;
-          if (user.provider === "google.com") {
-            const credential = GoogleAuthProvider.credential(user.token);
+          if (userData.provider === "google.com") {
+            const credential = GoogleAuthProvider.credential(userData.token);
             login = await signInWithCredential(authService, credential);
           } else {
-            login = await signInWithCustomToken(authService, user.token);
+            login = await signInWithCustomToken(authService, userData.token);
           }
           resolve(login.user);
         } else {

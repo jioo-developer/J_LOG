@@ -39,7 +39,7 @@ const AuthPage = () => {
   }
 
   return (
-    <div className="page-Reset auth__Wrap">
+    <div className="auth__Wrap">
       <div className="title__Area flex-Set">
         <button className="flex-Set">
           <Link href="/login" className="close">

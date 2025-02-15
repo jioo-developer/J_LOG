@@ -1,12 +1,16 @@
 import { apiUrl } from "@/static/constants/common";
+import { replyType } from "./getReplyDataQuery";
 
-export async function getReplyHandler(pageId: string) {
-  const response = await fetch(`${apiUrl}/api/reply`, {
+type responseType = {
+  data: replyType;
+};
+
+export async function getReplyHandler(pageId: string): Promise<responseType> {
+  const response = await fetch(`${apiUrl}/api/reply?pageId=${pageId}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ id: pageId }),
   });
 
   if (!response.ok) {

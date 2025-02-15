@@ -38,7 +38,7 @@ const ReplyItem = ({ item, index, replyData, pageId }: propsType) => {
     <div className="reply_wrap" key={`reply-${index}`}>
       <div className="user_info">
         <Image
-          src={item.profile ? item.profile : "/img/no-image.jpg"}
+          src={item.profile ? item.profile : "/images/no-image.jpg"}
           alt=""
           width={40}
           height={40}

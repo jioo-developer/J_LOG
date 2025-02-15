@@ -8,14 +8,10 @@ import {
 } from "../../handler/imageHandler/fileChangeHandler";
 import ImageDeleteHandler from "../../handler/imageHandler/uploadImageDeleteHandler";
 
-type imageInfoWithFiles = imageInfo & {
-  files: File[];
-};
-
 // propsType 타입 정의
 type propsType = {
-  data: imageInfoWithFiles;
-  setImageHandler: ({ url, files, fileName }: imageInfoWithFiles) => void;
+  data: imageInfo;
+  setImageHandler: ({ url, files, fileName }: imageInfo) => void;
 };
 
 function Uploader({ data, setImageHandler }: propsType) {
@@ -49,33 +45,34 @@ function Uploader({ data, setImageHandler }: propsType) {
 
   return (
     <>
-      <div className="uploaded-Image">
-        {data.url.length > 0 &&
-          data.url.map((item, index) => {
+      {data.url.length > 0 && (
+        <div className="uploaded-Image">
+          {data.url.map((item, index) => {
             return (
               <>
-                <button
-                  type="button"
-                  className="preview_delete"
-                  data-testid="delete-button"
-                  onClick={() => DeleteImageHanlder(index)}
-                >
-                  <img src="/img/close.png" alt="" />
-                </button>
-                <Image
-                  src={item}
-                  key={index}
-                  sizes="100vw"
-                  alt="업로드 된 이미지"
-                  style={{
-                    width: "100%",
-                    height: "auto",
-                  }}
-                />
+                {/* <button
+                type="button"
+                className="preview_delete"
+                data-testid="delete-button"
+                onClick={() => DeleteImageHanlder(index)}
+              >
+                <img src="/images/close.png" alt="" />
+              </button> */}
+                <div className="image_wrap">
+                  <Image
+                    src={item}
+                    layout="fill"
+                    objectFit="cover"
+                    key={index}
+                    alt="업로드 된 이미지"
+                  />
+                </div>
               </>
             );
           })}
-      </div>
+        </div>
+      )}
+
       <input
         type="file"
         accept="image/*"

@@ -12,7 +12,7 @@ function Item({ item }: propsType) {
     <article>
       <figure>
         <Image
-          src={item.url[0] ? item.url[0] : "/img/no-image.jpg"}
+          src={item.url[0] ? item.url[0] : "/images/no-image.jpg"}
           width={768}
           height={400}
           alt="프로필 이미지"

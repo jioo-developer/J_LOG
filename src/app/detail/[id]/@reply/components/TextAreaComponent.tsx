@@ -19,7 +19,11 @@ export default function TextAreaComponent(submitHandler: propsType) {
     formState: { errors },
   } = useForm<textAreaType>();
   return (
-    <form role="form" onSubmit={handleSubmit(() => submitHandler)}>
+    <form
+      role="form"
+      css={formWrap}
+      onSubmit={handleSubmit(() => submitHandler)}
+    >
       <Controller
         control={control}
         name="textAreaRequired"
@@ -38,10 +42,20 @@ export default function TextAreaComponent(submitHandler: propsType) {
           />
         )}
       />
-      <CommonButton theme="success">댓글 작성</CommonButton>
+      <div css={buttonWrap}>
+        <CommonButton theme="success">댓글 작성</CommonButton>
+      </div>
     </form>
   );
 }
+
+const formWrap = css`
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  width: 50%;
+  gap: 16px;
+`;
 
 export const TextArea = css`
   width: 100%;
@@ -51,10 +65,16 @@ export const TextArea = css`
   font-size: 18px;
   border: 1px solid #eee;
   box-sizing: border-box;
-  min-height: 600px;
+  min-height: 130px;
   position: relative;
   cursor: inherit;
   resize: none;
   overflow: hidden;
+  background: transparent;
   padding: var(--gap-medium) 0 0 Calc(var(--gap-small) * 0.5);
+`;
+
+const buttonWrap = css`
+  width: 120px;
+  margin-left: auto;
 `;

@@ -72,6 +72,7 @@ export const postItemStyle = css`
 `;
 
 export const writeWrap = css`
+    display:flex;
     justify-content: space-between;
     border-top: 1px solid #eee;
     box-sizing: border-box;
