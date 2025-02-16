@@ -23,7 +23,7 @@ function Item({ item, index }: itemProps) {
           <Image
             width={320}
             height={180}
-            src={"/images/no-image.jpg"}
+            src={item.url.length > 0 ? item.url[0] : "/images/no-image.jpg"}
             alt="썸네일"
           />
         </figure>

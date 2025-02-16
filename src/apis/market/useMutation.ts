@@ -1,5 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useSetCashHandler } from "./useSetCashHandler";
+import { popuprHandler } from "@/utils/popupHandler";
+import { useRouter } from "next/navigation";
 
 type propsType = {
   cash: number;
@@ -7,12 +9,15 @@ type propsType = {
 };
 
 const useCashMutation = () => {
+  const router = useRouter();
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async ({ cash, item }: propsType) => {
       return await useSetCashHandler({ cash, item });
     },
     onSuccess: (_, variables) => {
+      popuprHandler({ message: "구매가 완료 되었습니다" });
+      router.back();
       queryClient.setQueryData<propsType[]>(["getCash"], (oldData) => {
         if (!oldData) {
           return oldData;
@@ -20,10 +25,9 @@ const useCashMutation = () => {
           return [{ cash: variables.cash, item: variables.item }];
         }
       });
-      // popuprHandler({ message: "구매가 완료 되었습니다" });
     },
     onError: () => {
-      // popuprHandler({ message: "구매 중 오류가 발생하였습니다" });
+      popuprHandler({ message: "구매 중 오류가 발생하였습니다" });
     },
   });
 };

@@ -4,9 +4,11 @@ import { User } from "firebase/auth";
 
 export async function getCashHandler() {
   const user = authService.currentUser as User;
-  const response = await fetch(`${apiUrl}/api/market`, {
+  const response = await fetch(`${apiUrl}/api/market?uid=${user.uid}`, {
     method: "GET",
-    body: JSON.stringify({ user: user.uid }),
+    headers: {
+      "Content-Type": "application/json",
+    },
   });
 
   if (!response.ok) {
@@ -14,5 +16,6 @@ export async function getCashHandler() {
     throw new Error(error.message);
   }
 
-  return response.json();
+  const { data } = await response.json();
+  return data[0];
 }

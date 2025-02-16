@@ -11,8 +11,7 @@ import useCashQueryHook from "@/apis/market/query/useGetCashQuery";
 
 const ItemStore = () => {
   const router = useRouter();
-  const { CashData } = useCashQueryHook();
-  const [getData] = CashData;
+  const { cashData } = useCashQueryHook();
 
   const [value, setValue] = useState(0);
 
@@ -23,9 +22,9 @@ const ItemStore = () => {
   const mutation = useCashMutation();
 
   const buying = async () => {
-    const money = getData.cash;
+    const money = cashData.cash;
     const cash = money - value * 2500;
-    const length = getData.item + value;
+    const length = cashData.item + value;
     await mutation.mutateAsync({ cash, item: length });
   };
 
@@ -37,7 +36,9 @@ const ItemStore = () => {
             return <Item value={item} key={item} setItem={getItem} />;
           })}
         </div>
-        <span>현재 포인트 :{getData ? convertPrice(getData.cash) : 0} +</span>
+        <span>
+          현재 포인트 :&nbsp;{cashData ? convertPrice(cashData.cash) : 0} +
+        </span>
         <div className="button__group">
           <CommonButton theme="white" onClick={() => router.back()}>
             취소

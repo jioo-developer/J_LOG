@@ -12,15 +12,15 @@ const useCashQueryHook = () => {
     error,
     isLoading,
     refetch,
-  }: QueryObserverResult<CashItem[], Error> = useQuery({
+  }: QueryObserverResult<CashItem, Error> = useQuery({
     queryKey: ["getCash"],
     queryFn: getCashHandler,
     staleTime: 5 * 60 * 1000,
   });
 
-  const CashData = data ? data : [];
+  const cashData = data ? data : { cash: 0, item: 0 };
 
-  return { CashData, error, isLoading, refetch };
+  return { cashData, error, isLoading, refetch };
 };
 
 export default useCashQueryHook;

@@ -16,13 +16,16 @@ const useCreateMutation = () => {
     mutationFn: ({ data, pageId }: propsType) => {
       return postHandler({ data, pageId });
     },
-    onSuccess: (data, variables) => {
+    onSuccess: (_, variables) => {
       router.push(`/detail/${variables.pageId}`);
-      queryClient.setQueryData<FirebaseData>(["getPage"], () => {
-        return {
-          ...variables.data,
-        };
-      });
+      queryClient.setQueryData<FirebaseData>(
+        ["getPage", variables.pageId],
+        () => {
+          return {
+            ...variables.data,
+          };
+        }
+      );
     },
     onError: (error) => {
       popuprHandler({
