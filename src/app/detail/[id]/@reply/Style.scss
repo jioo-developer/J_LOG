@@ -7,9 +7,17 @@
   border-bottom: 1px solid #ddd;
   box-sizing: border-box;
 
+  .top_wrap {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+  }
+
   .user_info {
     display: flex;
     align-items: center;
+    gap: 16px;
 
     .user_text {
       float: left;
@@ -36,10 +44,6 @@
     }
   }
 
-  .reply_text {
-    margin-top: 15px;
-  }
-
   .form-control {
     width: 100%;
     margin-bottom: 0;
@@ -62,5 +66,29 @@
 
   .block {
     display: block;
+  }
+}
+
+.edit_comment {
+  .button__group {
+    min-width: 100px;
+  }
+}
+.top_wrap {
+  margin-bottom: 20px;
+}
+
+.top_wrap + form {
+  display: flex;
+  width: 100%;
+  height: 30px;
+  flex-direction: row;
+  margin-bottom: 20px;
+
+  textarea {
+    min-height: auto;
+    padding: 0;
+    padding: 5px 0;
+    min-height: 48px;
   }
 }

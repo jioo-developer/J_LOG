@@ -22,15 +22,11 @@ export async function GET(request: NextRequest) {
   const likeSnapshot = await getDocs(likeRef);
 
   if (likeSnapshot.empty) {
-    console.log("없음");
     return NextResponse.json({ statusValue: false });
   } else {
-    console.log("있음");
     // like 컬렉션이 존재하는지 확인
-    console.log(id, uid + "재료");
     const likeDocRef = doc(db, "post", id, "like", uid);
     const likeDocSnap = await getDoc(likeDocRef);
-    console.log(likeDocSnap.exists() + "여부");
 
     // likeDocSnap이 존재하면 좋아요가 눌렸다는 의미
     return NextResponse.json({ statusValue: likeDocSnap.exists() });

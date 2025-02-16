@@ -1,5 +1,12 @@
 import { db } from "@/lib/firebase";
-import { addDoc, collection, doc, getDocs } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  deleteDoc,
+  doc,
+  getDocs,
+  updateDoc,
+} from "firebase/firestore";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {
@@ -24,10 +31,39 @@ export async function GET(request: NextRequest) {
 }
 
 export async function POST(request: NextRequest) {
-  const { id, data } = await request.json();
-  const replyCollectionRef = collection(db, "post", id, "reply");
+  const { data } = await request.json();
 
-  await addDoc(replyCollectionRef, data);
+  const replyRef = collection(db, "post", data.id, "reply");
 
-  return NextResponse.json({ result: data });
+  await addDoc(replyRef, data);
+
+  return NextResponse.json({ success: true });
+}
+
+export async function PUT(request: NextRequest) {
+  const { pageId, replyId, comment } = await request.json();
+  const collectionRef = collection(db, "post", pageId, "reply");
+
+  try {
+    const snapshot = await getDocs(collectionRef);
+    if (snapshot && !snapshot.empty) {
+      const filterDocs = snapshot.docs.filter((item) => item.id === replyId);
+      const docRef = doc(collectionRef, filterDocs[0].id);
+      await updateDoc(docRef, { comment: comment });
+      return NextResponse.json({ success: true });
+    }
+  } catch (error) {
+    return NextResponse.json({ error: (error as Error).message });
+  }
+}
+
+export async function DELETE(request: NextRequest) {
+  const { id, replyId } = await request.json();
+  const replyDocRef = doc(db, "post", id, "reply", replyId as string);
+  try {
+    await deleteDoc(replyDocRef);
+    return NextResponse.json({ success: true });
+  } catch (error) {
+    return NextResponse.json({ error: (error as Error).message });
+  }
 }

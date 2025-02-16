@@ -2,16 +2,20 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { deleteReply } from "./deleteReplyHandler";
 import { popuprHandler } from "@/utils/popupHandler";
 
+type propsType = {
+  id: string;
+  replyId: string;
+};
+
 export const useDeleteMutation = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: deleteReply,
-    onSuccess: async (result) => {
+    mutationFn: ({ id, replyId }: propsType) => {
+      return deleteReply({ id, replyId });
+    },
+    onSuccess: async () => {
       await queryClient.refetchQueries({
         queryKey: ["getReply"],
-      });
-      queryClient.setQueryData(["getReply"], () => {
-        return result;
       });
     },
     onError: () => {

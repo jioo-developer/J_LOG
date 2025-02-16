@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import CommonButton from "@/components/atoms/CommonButton/CommonButton";
 import { css } from "@emotion/react";
+import { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
 import ReactTextareaAutosize from "react-textarea-autosize";
 
@@ -10,19 +11,32 @@ export type textAreaType = {
 
 type propsType = {
   submitHandler: (data: any) => void;
+  defaultValue?: any;
 };
 
-export default function TextAreaComponent(submitHandler: propsType) {
+export default function TextAreaComponent({
+  submitHandler,
+  defaultValue,
+}: propsType) {
   const {
     handleSubmit,
     control,
+    setValue,
     formState: { errors },
   } = useForm<textAreaType>();
+
+  useEffect(() => {
+    if (defaultValue) {
+      setValue("textAreaRequired", defaultValue);
+    }
+  }, [defaultValue]);
   return (
     <form
       role="form"
       css={formWrap}
-      onSubmit={handleSubmit(() => submitHandler)}
+      onSubmit={handleSubmit((data) => {
+        submitHandler(data);
+      })}
     >
       <Controller
         control={control}
@@ -55,6 +69,7 @@ const formWrap = css`
   margin: 0 auto;
   width: 50%;
   gap: 16px;
+  margin-top: 20px;
 `;
 
 export const TextArea = css`
@@ -65,7 +80,7 @@ export const TextArea = css`
   font-size: 18px;
   border: 1px solid #eee;
   box-sizing: border-box;
-  min-height: 130px;
+  min-height: 100px;
   position: relative;
   cursor: inherit;
   resize: none;

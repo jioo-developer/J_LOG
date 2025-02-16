@@ -1,12 +1,17 @@
 import { apiUrl } from "@/static/constants/common";
 
-export async function deleteReply(data: any) {
+type propsType = {
+  id: string;
+  replyId: string;
+};
+
+export async function deleteReply({ id, replyId }: propsType) {
   const response = await fetch(`${apiUrl}/api/reply`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ data }),
+    body: JSON.stringify({ id, replyId }),
   });
 
   if (!response.ok) {
