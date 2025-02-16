@@ -9,13 +9,14 @@ import { usePopupStore } from "@/store/popupStore";
 import { useState } from "react";
 
 type propsType = {
+  user: string;
   item: replyType;
   index: number;
   replyData: replyType[];
   pageId: string;
 };
 
-const ReplyItem = ({ item, index, pageId }: propsType) => {
+const ReplyItem = ({ user, item, index, pageId }: propsType) => {
   const { setMessage } = usePopupStore();
   const { mutate } = useUpdateMutation();
   const deleteMutation = useDeleteMutation();
@@ -61,30 +62,34 @@ const ReplyItem = ({ item, index, pageId }: propsType) => {
           </div>
         </div>
         <div className="edit_comment">
-          <div className="button__group">
-            {!currentTarget ? (
-              <CommonButton
-                theme="none"
-                onClick={() => setTarget(!currentTarget)}
-              >
-                수정
-              </CommonButton>
-            ) : (
-              <CommonButton
-                theme="none"
-                onClick={() => setTarget(!currentTarget)}
-              >
-                취소
-              </CommonButton>
-            )}
-            <CommonButton
-              theme="none"
-              padding="none"
-              onClick={() => AskDeleteHandler()}
-            >
-              삭제
-            </CommonButton>
-          </div>
+          {item.uid === user && (
+            <>
+              <div className="button__group">
+                {!currentTarget ? (
+                  <CommonButton
+                    theme="none"
+                    onClick={() => setTarget(!currentTarget)}
+                  >
+                    수정
+                  </CommonButton>
+                ) : (
+                  <CommonButton
+                    theme="none"
+                    onClick={() => setTarget(!currentTarget)}
+                  >
+                    취소
+                  </CommonButton>
+                )}
+                <CommonButton
+                  theme="none"
+                  padding="none"
+                  onClick={() => AskDeleteHandler()}
+                >
+                  삭제
+                </CommonButton>
+              </div>
+            </>
+          )}
         </div>
       </div>
       {currentTarget ? (

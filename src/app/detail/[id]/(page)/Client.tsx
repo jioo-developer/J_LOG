@@ -6,14 +6,17 @@ import { popuprHandler } from "@/utils/popupHandler";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import PageComponent from "./components/pageComponent";
+import useGetMyInfoQueryHandler from "@/apis/member/mypage/query/getMyDataQuery";
+import { User } from "firebase/auth";
 type propsType = {
   pageId: string;
 };
 
 const DetailPage = ({ pageId }: propsType) => {
-  const { pageData, isLoading } = useDetailQueryHook(pageId);
   const router = useRouter();
   const { message } = usePopupStore();
+  const { user } = useGetMyInfoQueryHandler();
+  const { pageData, isLoading } = useDetailQueryHook(pageId);
 
   useEffect(() => {
     if (!pageData) {
@@ -41,7 +44,11 @@ const DetailPage = ({ pageId }: propsType) => {
     <div className="page-Reset detail_wrap">
       <div className="in_wrap">
         {pageData && (
-          <PageComponent pageData={pageData} isLoading={isLoading} />
+          <PageComponent
+            pageData={pageData}
+            user={user?.uid as string}
+            isLoading={isLoading}
+          />
         )}
       </div>
     </div>

@@ -11,11 +11,16 @@ import useFavoriteMutation from "@/apis/detail/favorite/useMutation";
 import { authService } from "@/lib/firebase";
 
 type propsType = {
+  user: string;
   pageData: FirebaseData;
   isLoading: boolean;
 };
 
-export default function PageComponent({ pageData, isLoading }: propsType) {
+export default function PageComponent({
+  user,
+  pageData,
+  isLoading,
+}: propsType) {
   const { mutate } = usePageDeleteMutation();
   const favoriteMutate = useFavoriteMutation();
   // handle delete
@@ -62,14 +67,18 @@ export default function PageComponent({ pageData, isLoading }: propsType) {
             <p className="writer">{pageData?.user}</p>
             <p className="date">{pageData?.date}</p>
           </div>
-          <div className="right_wrap flex-Set">
-            <CommonButton theme="none" size="rg">
-              <Link href="/updateEditor">수정</Link>
-            </CommonButton>
-            <CommonButton theme="none" onClick={handleDelete}>
-              삭제
-            </CommonButton>
-          </div>
+          {pageData.writer === user && (
+            <>
+              <div className="right_wrap flex-Set">
+                <CommonButton theme="none" size="rg">
+                  <Link href="/updateEditor">수정</Link>
+                </CommonButton>
+                <CommonButton theme="none" onClick={handleDelete}>
+                  삭제
+                </CommonButton>
+              </div>
+            </>
+          )}
         </div>
       </section>
       <section className="content_wrap">

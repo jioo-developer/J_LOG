@@ -43,6 +43,7 @@ const Reply = ({ pageId }: propsType) => {
               index={index}
               replyData={replyData}
               pageId={pageId}
+              user={user?.uid as string}
             />
           );
         })}
