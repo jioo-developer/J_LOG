@@ -62,6 +62,11 @@
         button {
           color: rgb(33, 37, 41);
           font-size: 16px;
+
+          a {
+            display: inline-block;
+            width: 100%;
+          }
         }
 
         .edit {

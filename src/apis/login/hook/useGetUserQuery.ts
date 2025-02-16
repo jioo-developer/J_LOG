@@ -41,7 +41,7 @@ const useUserQueryHook = () => {
     useQuery({
       queryKey: ["getuser"],
       queryFn: getUser,
-      staleTime: 0,
+      staleTime: 5 * 60 * 1000,
     });
   return { data: data ?? null, isLoading, refetch, error };
 };

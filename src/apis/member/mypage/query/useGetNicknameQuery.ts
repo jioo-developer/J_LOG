@@ -10,7 +10,7 @@ const useNickNameQueryHook = () => {
     useQuery({
       queryKey: ["getNickname"],
       queryFn: getNicknameHandler,
-      staleTime: 5 * 60 * 1000, // ✅ 5분 동안 캐시 유지 (최적화)
+      staleTime: 5 * 60 * 1000,
       enabled: !cachedData,
     });
 

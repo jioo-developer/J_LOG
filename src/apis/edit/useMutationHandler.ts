@@ -1,8 +1,8 @@
 import { popuprHandler } from "@/utils/popupHandler";
-import { useMutation } from "@tanstack/react-query";
-import { useRouter } from "next/router";
+import { QueryClient, useMutation } from "@tanstack/react-query";
 import postHandler from "./postHandler";
 import { FirebaseData } from "@/static/types/common";
+import { useRouter } from "next/navigation";
 
 type propsType = {
   data: FirebaseData;
@@ -11,15 +11,23 @@ type propsType = {
 
 const useCreateMutation = () => {
   const router = useRouter();
+  const queryClient = new QueryClient();
   return useMutation({
     mutationFn: ({ data, pageId }: propsType) => {
       return postHandler({ data, pageId });
     },
-    onSuccess: (_, variables) => {
-      router.push(`/pages/detail/${variables.pageId}`);
+    onSuccess: (data, variables) => {
+      router.push(`/detail/${variables.pageId}`);
+      queryClient.setQueryData<FirebaseData>(["getPage"], () => {
+        return {
+          ...variables.data,
+        };
+      });
     },
-    onError: () => {
-      popuprHandler({ message: "게시글 작성 중 오류가 발생하였습니다" });
+    onError: (error) => {
+      popuprHandler({
+        message: "게시글 작성 중 오류가 발생하였습니다" + error.message,
+      });
     },
   });
 };

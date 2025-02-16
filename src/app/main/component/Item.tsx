@@ -43,7 +43,7 @@ function Item({ item, index }: itemProps) {
             />
             <p className="profile_id">{item.user}</p>
           </div>
-          <p className="favorite">❤{item.favorite}</p>
+          <p className="favorite flex-Set">❤&nbsp;{item.favorite}</p>
         </div>
       </Link>
     </div>

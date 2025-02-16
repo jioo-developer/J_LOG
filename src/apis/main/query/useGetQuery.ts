@@ -7,7 +7,7 @@ const usePostQueryHook = () => {
     useQuery({
       queryKey: ["getPost"],
       queryFn: getPostHandler,
-      staleTime: 1 * 60 * 1000, // 1분
+      staleTime: 5 * 60 * 1000,
     });
 
   let postData = data ? data : [];

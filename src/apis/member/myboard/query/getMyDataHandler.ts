@@ -1,20 +1,19 @@
-import { authService } from "@/lib/firebase";
 import { apiUrl } from "@/static/constants/common";
 
-async function getMyDataHandler() {
-  const user = authService.currentUser?.uid;
-  const response = await fetch(`${apiUrl}/api/member/mypage/board`, {
+async function getMyDataHandler(user: string) {
+  console.log(user);
+  const response = await fetch(`${apiUrl}/api/member/board?uid=${user}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ uid: user }),
   });
 
   if (!response.ok) {
     const error = await response.json();
     throw new Error(error.message);
   }
-  return response.json();
+  const { data } = await response.json();
+  return data;
 }
 export default getMyDataHandler;

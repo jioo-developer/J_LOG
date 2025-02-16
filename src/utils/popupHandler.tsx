@@ -17,6 +17,7 @@ export const popuprHandler = ({
   if (type === "alert") {
     usePopupStore.setState({
       message,
+      type,
     });
   } else if (type === "confirm") {
     usePopupStore.setState({
@@ -28,7 +29,7 @@ export const popuprHandler = ({
 };
 
 export const ReturnPopup = () => {
-  const { message, type, callback } = usePopupStore();
+  const { message, type } = usePopupStore();
   if (message !== "") {
     if (type === "alert") {
       return <CommonPopup />;

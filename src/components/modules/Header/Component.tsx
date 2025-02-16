@@ -12,7 +12,7 @@ import { useSearchStore } from "@/store/searchStore";
 import useLogoutHook from "@/apis/login/hook/useLogoutHook";
 import { useQuery } from "@tanstack/react-query";
 import { User } from "firebase/auth";
-import { getUser } from "@/apis/login/hook/useGetUserQuery";
+import useUserQueryHook, { getUser } from "@/apis/login/hook/useGetUserQuery";
 import { getTokenHandler } from "@/apis/common/getTokenHandler";
 
 type propsType = {
@@ -39,18 +39,15 @@ function Header({ pathName }: propsType) {
     setToken(isTokened);
   };
 
-  const { data: user, refetch } = useQuery<User | null>({
-    queryKey: ["getuser"],
-    queryFn: getUser,
-    enabled: !!tokenState,
-    initialData: null,
-    retry: 3,
-    staleTime: 5 * 60 * 1000,
-  });
+  const { data: user, refetch } = useUserQueryHook();
 
   useEffect(() => {
-    if (tokenState) refetch();
-  }, [tokenState]);
+    if ((tokenState && !user) || !user) {
+      refetch();
+    } else {
+      fetchToken();
+    }
+  }, [tokenState, user]);
 
   useEffect(() => {
     if (typeof tokenState === "boolean" && !tokenState && user) {

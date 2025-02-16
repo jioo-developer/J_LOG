@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 import Image from "next/image";
 import { ChangeEvent } from "react";
-import { imageInfo } from "../../Client";
+import { imageInfo, uploaderType } from "../../Client";
 import {
   LoadImageHandler,
   fileNameHandler,
@@ -11,7 +11,7 @@ import ImageDeleteHandler from "../../handler/imageHandler/uploadImageDeleteHand
 // propsType 타입 정의
 type propsType = {
   data: imageInfo;
-  setImageHandler: ({ url, files, fileName }: imageInfo) => void;
+  setImageHandler: ({ url, files, fileName, isDelete }: uploaderType) => void;
 };
 
 function Uploader({ data, setImageHandler }: propsType) {
@@ -37,8 +37,9 @@ function Uploader({ data, setImageHandler }: propsType) {
     });
     setImageHandler({
       url: result.url,
-      files: result.files,
+      files: [],
       fileName: result.fileName,
+      isDelete: true,
     });
   }
   // image delete event;
@@ -50,18 +51,23 @@ function Uploader({ data, setImageHandler }: propsType) {
           {data.url.map((item, index) => {
             return (
               <>
-                {/* <button
-                type="button"
-                className="preview_delete"
-                data-testid="delete-button"
-                onClick={() => DeleteImageHanlder(index)}
-              >
-                <img src="/images/close.png" alt="" />
-              </button> */}
                 <div className="image_wrap">
+                  <button
+                    type="button"
+                    className="preview_delete"
+                    data-testid="delete-button"
+                    onClick={() => DeleteImageHanlder(index)}
+                  >
+                    <Image
+                      src="/images/close.png"
+                      width={30}
+                      height={30}
+                      alt="close"
+                    />
+                  </button>
                   <Image
                     src={item}
-                    layout="fill"
+                    fill={true}
                     objectFit="cover"
                     key={index}
                     alt="업로드 된 이미지"

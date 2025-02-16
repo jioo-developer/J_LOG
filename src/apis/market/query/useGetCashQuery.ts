@@ -15,7 +15,7 @@ const useCashQueryHook = () => {
   }: QueryObserverResult<CashItem[], Error> = useQuery({
     queryKey: ["getCash"],
     queryFn: getCashHandler,
-    staleTime: 1 * 60 * 1000, // 1분
+    staleTime: 5 * 60 * 1000,
   });
 
   const CashData = data ? data : [];

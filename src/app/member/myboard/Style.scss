@@ -24,16 +24,47 @@
 
     .content__in {
       max-width: 768px;
-      padding-top: var(--gap-xlarge);
+      padding-top: 20px;
       margin: 0 auto;
       width: 100%;
       display: flex;
       flex-direction: column;
 
-      .all_view {
-        color: rgb(32, 201, 151);
-        span {
-          color: #888;
+      article {
+        padding-bottom: 48px;
+        border-bottom: 1px solid #ddd;
+        cursor: pointer;
+      }
+
+      figure,
+      figcaption {
+        width: 100%;
+      }
+
+      figure {
+        margin: 16px 0;
+        overflow: hidden;
+      }
+
+      figcaption {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        .caption__bottom {
+          width: 100%;
+          display: flex;
+          gap: 16px;
+          p {
+            font-size: 14px;
+            color: #888;
+          }
+        }
+
+        .content__title {
+          font-size: 24px;
+        }
+        .content__text {
+          font-size: 16px;
         }
       }
     }

@@ -1,43 +1,43 @@
-import useCreateMutation from "@/apis/edit/useMutationHandler";
 import { usePageInfoStore } from "@/store/pageInfoStore";
-import { QueryClient } from "@tanstack/react-query";
-import { User } from "firebase/auth";
-import { CreateImgUrl } from "../imageHandler/storageUploadHandler";
-import { contentDataHandler } from "./useSetDataHandler";
-import { imageInfo } from "../../Client";
+import { FirebaseData } from "@/static/types/common";
+import timeData from "@/utils/timeData";
+import { authService } from "@/lib/firebase";
+import { serverTimestamp, Timestamp } from "firebase/firestore";
 
 type propsType = {
   formData: { title: string; text: string };
-  imageInfoArray: imageInfo;
+  imageInfo: string[];
   refValue: boolean;
+  fileName: string[];
+  pageId: string;
 };
 
-export default async function useCreateHandler({
+const user = authService.currentUser;
+
+export default function useCreateHandler({
   formData,
-  imageInfoArray,
+  imageInfo,
   refValue,
+  fileName,
+  pageId,
 }: propsType) {
-  const queryClient = new QueryClient();
-  const user = queryClient.getQueryData<User>(["getuser"]) || null;
+  if (!user) return;
 
-  const { mutate } = useCreateMutation();
-  const { pgId: pageId } = usePageInfoStore();
+  // 이미지 url 생성 함수
 
-  const lastImageUrl = await CreateImgUrl({
-    user: user?.uid as string,
-    image: imageInfoArray.url,
-    file: imageInfoArray.files,
-  });
-  if (lastImageUrl) {
-    const data = contentDataHandler({
-      formData,
-      pageId,
-      checked: refValue,
-      imageInfo: lastImageUrl as string[],
-      fileName: imageInfoArray.fileName,
-      user: user as User,
-    });
-
-    mutate({ data, pageId });
-  }
+  const content: FirebaseData = {
+    title: formData.title,
+    text: formData.text,
+    url: imageInfo,
+    fileName: fileName,
+    pageId,
+    priority: refValue,
+    user: user.displayName as string,
+    profile: user.photoURL as string,
+    date: `${timeData.year}년 ${timeData.month}월 ${timeData.day}일`,
+    timestamp: serverTimestamp() as Timestamp,
+    writer: user.uid,
+    favorite: 0,
+  };
+  return content;
 }

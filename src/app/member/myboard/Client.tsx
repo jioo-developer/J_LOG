@@ -1,23 +1,20 @@
 "use client";
 import "./Style.scss";
-import useGetQueryHandler from "@/apis/member/mypage/query/getMyDataQuery";
-import useMyDataQueryHook from "@/apis/member/mypage/query/useGetMyPostQuery";
+import useMyDataQueryHook from "@/apis/member/myboard/query/useGetMyPostQuery";
 import { Skeleton } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
 import Item from "./components/Item";
 import { usePageInfoStore } from "@/store/pageInfoStore";
+import CommonButton from "@/components/atoms/CommonButton/CommonButton";
+import useUserQueryHook from "@/apis/login/hook/useGetUserQuery";
 
 const MyBoardPage = () => {
-  const { user } = useGetQueryHandler();
+  const { data: user } = useUserQueryHook();
 
-  const { myData } = useMyDataQueryHook();
+  const { myData } = useMyDataQueryHook(user ? user.uid : "");
 
   const { setPgId } = usePageInfoStore();
-
-  function routeHandler(index: number) {
-    setPgId(myData[index].pageId);
-  }
 
   return (
     <div className="wrap board_wrap">
@@ -46,18 +43,20 @@ const MyBoardPage = () => {
             전체보기
             <span>&nbsp;{`(${myData.length})`}</span>
           </p>
-          {myData.map((item, index) => {
-            return (
-              <button onClick={() => routeHandler(index)}>
-                <Link
-                  key={index}
-                  href={`/pages/detail/${myData[index].pageId}`}
-                >
-                  <Item item={item} />
-                </Link>
-              </button>
-            );
-          })}
+          {myData.length > 0 &&
+            myData.map((item, index) => {
+              return (
+                <CommonButton theme="none">
+                  <Link
+                    key={index}
+                    onClick={() => setPgId(item.pageId)}
+                    href={`/detail/${myData[index].pageId}`}
+                  >
+                    <Item item={item} />
+                  </Link>
+                </CommonButton>
+              );
+            })}
         </div>
       </section>
     </div>

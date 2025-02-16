@@ -19,7 +19,7 @@ export const useReplyQueryHook = (pageId: string) => {
         const keyParams = queryKey.queryKey[1] as string;
         return await getReplyHandler(keyParams);
       },
-      staleTime: 1 * 60 * 1000, // 1분
+      staleTime: 5 * 60 * 1000,
       enabled: !!pageId,
     }
   );

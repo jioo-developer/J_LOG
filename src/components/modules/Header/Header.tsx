@@ -9,6 +9,7 @@ const activePathName = [
   "/member/myboard",
   "/search",
   "/updateEditor",
+  "/edit",
 ];
 
 function HeaderProvider() {

@@ -6,12 +6,14 @@ const ConfirmPopup = () => {
   const { setMessage, callback } = usePopupStore();
   return (
     <CommonPopup type="confirm">
-      <CommonButton theme="white" onClick={() => setMessage("")}>
-        취소
-      </CommonButton>
-      <CommonButton theme="success" onClick={callback}>
-        확인
-      </CommonButton>
+      <div className="button__group">
+        <CommonButton theme="white" onClick={() => setMessage("")}>
+          취소
+        </CommonButton>
+        <CommonButton theme="success" onClick={() => callback && callback()}>
+          확인
+        </CommonButton>
+      </div>
     </CommonPopup>
   );
 };

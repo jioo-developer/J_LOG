@@ -1,21 +1,17 @@
 import { apiUrl } from "@/static/constants/common";
 
 type propsType = {
-  user: string;
   pageId: string;
+  uid: string;
 };
 
-export async function getIsFavoriteHandler({ user, pageId }: propsType) {
-  // 쿼리 파라미터로 user와 pageId를 전달
+export async function getIsFavoriteHandler({ pageId, uid }: propsType) {
   const response = await fetch(
-    `${apiUrl}/api/detail/favorite?user=${encodeURIComponent(
-      user
-    )}&pageId=${encodeURIComponent(pageId)}`,
+    `${apiUrl}/api/detail/favorite?userUid=${encodeURIComponent(
+      uid
+    )}&id=${encodeURIComponent(pageId)}`,
     {
       method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
     }
   );
 

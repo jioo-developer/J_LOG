@@ -23,7 +23,7 @@ function Item({ item }: propsType) {
         <p className="content__text">{item.text}</p>
         <div className="caption__bottom">
           <p>{item.date}</p>
-          <p>{`${item.replyLength}개의 댓글`}</p>
+          <p>{`${item.replyLength ? item.replyLength : 0}개의 댓글`}</p>
           <p>
             ♥&nbsp;
             {item.favorite}

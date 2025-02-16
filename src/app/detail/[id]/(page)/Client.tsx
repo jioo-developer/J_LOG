@@ -6,21 +6,12 @@ import { popuprHandler } from "@/utils/popupHandler";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import PageComponent from "./components/pageComponent";
-import useGetMyInfoQueryHandler from "@/apis/member/mypage/query/getMyDataQuery";
-import useFavoriteQueryHook from "@/apis/detail/favorite/query/useFavoriteQuery";
-
 type propsType = {
   pageId: string;
 };
 
 const DetailPage = ({ pageId }: propsType) => {
-  const { user } = useGetMyInfoQueryHandler();
-  const { data: favoriteStatus } = useFavoriteQueryHook({
-    user: user?.uid as string,
-    pageId,
-  });
   const { pageData, isLoading } = useDetailQueryHook(pageId);
-
   const router = useRouter();
   const { message } = usePopupStore();
 
@@ -50,10 +41,7 @@ const DetailPage = ({ pageId }: propsType) => {
     <div className="page-Reset detail_wrap">
       <div className="in_wrap">
         {pageData && (
-          <PageComponent
-            pageData={pageData}
-            favoriteStatus={!!favoriteStatus}
-          />
+          <PageComponent pageData={pageData} isLoading={isLoading} />
         )}
       </div>
     </div>

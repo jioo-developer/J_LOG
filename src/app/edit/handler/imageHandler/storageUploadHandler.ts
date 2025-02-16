@@ -9,19 +9,20 @@ type PropsType = {
 };
 
 export async function CreateImgUrl({ user, image, file }: PropsType) {
-  const isMatch = image.filter((item) => {
-    return item.match(/data:image\/(png|jpg|jpeg|gif|bmp);base64/);
-  });
+  if (!image || image.length === 0) return [];
+
+  const isMatch = image.filter((item) =>
+    item.match(/data:image\/(png|jpg|jpeg|gif|bmp);base64/)
+  );
 
   try {
-    const imageResult = await storageUploader(user, isMatch, file);
+    const imageResult = (await storageUploader(user, isMatch, file)) ?? [];
     const newUrl = imageResult.filter((item) => item !== undefined);
     const oldUrl = image.filter((item) => item.includes("firebase"));
-    const result = [...oldUrl, ...newUrl];
-    return result;
+    return [...oldUrl, ...newUrl];
   } catch (error) {
-    // 오류 처리
     popuprHandler({ message: (error as Error).message });
+    return [];
   }
 }
 

@@ -10,6 +10,12 @@ import Link from "next/link";
 import useCreateHandler from "./handler/postHandler/useCreateHandler";
 import { usePathname } from "next/navigation";
 import { useEditDetailStore } from "../updateEditor/store";
+import useCreateMutation from "@/apis/edit/useMutationHandler";
+import { usePageInfoStore } from "@/store/pageInfoStore";
+import { FirebaseData } from "@/static/types/common";
+import { CreateImgUrl } from "./handler/imageHandler/storageUploadHandler";
+import useGetMyInfoQueryHandler from "@/apis/member/mypage/query/getMyDataQuery";
+import { User } from "firebase/auth";
 
 export type InputType = {
   titleRequired: string;
@@ -22,17 +28,23 @@ export type imageInfo = {
   files: File[];
 };
 
+export interface uploaderType extends imageInfo {
+  isDelete?: boolean;
+}
+
 function EditPage() {
   const pathName = usePathname();
   const checkRef = useRef<HTMLInputElement | null>(null);
+  const formRef = useRef<HTMLFormElement>(null);
   const [imageInfoArray, setImage] = useState<imageInfo>({
     url: [],
     files: [],
     fileName: [],
   });
-
-  const { checked, imageInfo, formData } = useEditDetailStore();
-  console.log(checked, imageInfo, formData);
+  const { user } = useGetMyInfoQueryHandler();
+  const { pgId: pageId } = usePageInfoStore();
+  const { checked, imageInfo } = useEditDetailStore();
+  const { mutate } = useCreateMutation();
 
   useEffect(() => {
     if (pathName !== "/edit") {
@@ -41,30 +53,56 @@ function EditPage() {
       }
       setImage(imageInfo);
     }
-  }, [pathName]);
+  }, [pathName, checked, imageInfo, setImage]);
 
-  function getUploadDataHandler({ url, files, fileName }: imageInfo) {
-    setImage((prev) => ({
-      url: [...prev.url, ...url],
-      files: [...prev.files, ...files],
-      fileName: [...prev.fileName, ...fileName],
-    }));
+  function getUploadDataHandler({
+    url,
+    files,
+    fileName,
+    isDelete = false,
+  }: uploaderType) {
+    if (isDelete) {
+      setImage({
+        url,
+        files,
+        fileName,
+      });
+    } else {
+      setImage((prev) => ({
+        url: [...prev.url, ...url],
+        files: [...prev.files, ...files],
+        fileName: [...prev.fileName, ...fileName],
+      }));
+    }
   }
 
-  function getFormDataHander(data: InputType) {
+  async function getFormDataHander(data: InputType) {
     const newData = { title: data.titleRequired, text: data.contentRequired };
     const PriortyChecked = !!checkRef.current?.checked;
 
-    useCreateHandler({
-      formData: newData,
-      imageInfoArray,
-      refValue: PriortyChecked,
+    const returnImageUrl = await CreateImgUrl({
+      user: (user as User).uid,
+      image: imageInfoArray.url,
+      file: imageInfoArray.files,
     });
+
+    // image url 최종 return 함수수
+
+    const content = useCreateHandler({
+      formData: newData,
+      imageInfo: returnImageUrl,
+      refValue: PriortyChecked,
+      fileName: imageInfoArray.fileName,
+      pageId,
+    });
+    if (content) {
+      mutate({ data: content, pageId });
+    }
   }
 
   return (
     <div className="upload">
-      <InputForm formHandler={getFormDataHander} />
+      <InputForm formHandler={getFormDataHander} ref={formRef} />
       <PriortyChecker ref={checkRef} />
       <Uploader data={imageInfoArray} setImageHandler={getUploadDataHandler} />
       <div className="bottom_wrap flex-Set">
@@ -74,7 +112,16 @@ function EditPage() {
           </CommonButton>
         </div>
         <div className="box_wrap">
-          <CommonButton theme="success" type="submit" size="rg">
+          <CommonButton
+            theme="success"
+            type="submit"
+            size="rg"
+            onClick={() => {
+              if (formRef && formRef.current) {
+                formRef.current.requestSubmit();
+              }
+            }}
+          >
             글작성
           </CommonButton>
         </div>

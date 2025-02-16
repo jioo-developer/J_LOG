@@ -6,26 +6,30 @@ import { HandleFavorite } from "./handler";
 type favoriteType = {
   value: number;
   id: string;
+  user: string;
 };
 
 const useFavoriteMutation = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: async ({ value, id }: favoriteType) => {
-      return HandleFavorite({ value, id });
+    mutationFn: async ({ value, id, user }: favoriteType) => {
+      return HandleFavorite({ value, id, user });
     },
-    onSuccess: (result, { id }) => {
+    onSuccess: (_, variables) => {
       queryClient.refetchQueries({
-        queryKey: ["getPage", id],
+        queryKey: ["getPage", variables.id],
       });
-      queryClient.setQueryData<FirebaseData>(["getPage", id], (oldData) => {
-        const oldValue = oldData as FirebaseData;
-        return {
-          ...oldValue,
-          result,
-        };
-      });
+      queryClient.setQueryData<FirebaseData>(
+        ["getPage", variables.id],
+        (oldData) => {
+          const oldValue = oldData as FirebaseData;
+          return {
+            ...oldValue,
+            favorite: variables.value,
+          };
+        }
+      );
     },
     onError: () => {
       popuprHandler({ message: "좋아요 반영이 되지 않았습니다." });

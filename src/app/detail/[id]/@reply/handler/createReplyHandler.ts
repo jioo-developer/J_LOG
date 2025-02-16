@@ -1,7 +1,7 @@
 import { serverTimestamp } from "firebase/firestore";
-import { timeData } from "@/app/edit/handler/postHandler/useSetDataHandler";
 import { User } from "firebase/auth";
 import { replyType } from "@/apis/detail/reply/query/getReplyDataQuery";
+import timeData from "@/utils/timeData";
 
 export type createReplyPropsType = {
   user: User;
