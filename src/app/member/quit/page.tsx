@@ -52,59 +52,43 @@ const QuitPage = () => {
   }
 
   return (
-    <>
-      <Head>
-        <title>회원탈퇴 - J.log</title>
-        <meta
-          name="description"
-          content="J.log 회원 탈퇴를 진행할 수 있는 페이지입니다."
-        />
-        <meta property="og:title" content="J.log 로그인" />
-        <meta
-          property="og:description"
-          content="J.log 회원 탈퇴를 진행할 수 있는 페이지입니다"
-        />
-        <meta property="og:image" content="/images/logo.svg" />
-      </Head>
-
-      <div className="flex-Set" css={wrap}>
-        <form
-          className="flex-Set"
-          css={Style}
-          onSubmit={handleSubmit(deleteHandler)}
-        >
-          <span>정말로 회원탈퇴를 진행할까요?</span>
-          {loginType === "origin" && (
-            <CommonInput
-              id="passwordRequired"
-              placeholder="회원탈퇴를 위해 비밀번호를 입력해주세요"
-              register={register}
-              validation={{
-                required: "비밀번호를 입력하세요.",
-                minLength: {
-                  value: 8,
-                  message: "비밀번호가 짧습니다.",
-                },
-              }}
-              error={errors.emailRequired}
-            />
-          )}
-          <div className="button__group">
-            <CommonButton theme="none" size="rg" onClick={() => router.back()}>
-              취소
-            </CommonButton>
-            <CommonButton
-              type={loginType === "origin" ? "submit" : "button"}
-              theme="success"
-              size="rg"
-              onClick={deleteHandler}
-            >
-              확인
-            </CommonButton>
-          </div>
-        </form>
-      </div>
-    </>
+    <div className="flex-Set" css={wrap}>
+      <form
+        className="flex-Set"
+        css={Style}
+        onSubmit={handleSubmit(deleteHandler)}
+      >
+        <span>정말로 회원탈퇴를 진행할까요?</span>
+        {loginType === "origin" && (
+          <CommonInput
+            id="passwordRequired"
+            placeholder="회원탈퇴를 위해 비밀번호를 입력해주세요"
+            register={register}
+            validation={{
+              required: "비밀번호를 입력하세요.",
+              minLength: {
+                value: 8,
+                message: "비밀번호가 짧습니다.",
+              },
+            }}
+            error={errors.emailRequired}
+          />
+        )}
+        <div className="button__group">
+          <CommonButton theme="none" size="rg" onClick={() => router.back()}>
+            취소
+          </CommonButton>
+          <CommonButton
+            type={loginType === "origin" ? "submit" : "button"}
+            theme="success"
+            size="rg"
+            onClick={deleteHandler}
+          >
+            확인
+          </CommonButton>
+        </div>
+      </form>
+    </div>
   );
 };
 export default QuitPage;

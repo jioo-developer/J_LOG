@@ -7,6 +7,20 @@ import {
 } from "@tanstack/react-query";
 import { firebaseVerifyHandler } from "@/app/api/login/tokenVerifyHandler";
 import { cookies } from "next/headers";
+import { Metadata } from "next";
+
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title: "내 게시글 - J.log",
+    description: "내 게시글을 확인하고 관리할 수 있는 페이지입니다.",
+    openGraph: {
+      title: "내 게시글 - J.log",
+      description: "내 게시글을 확인하고 관리할 수 있는 페이지입니다.",
+      images: ["/images/logo.svg"],
+    },
+  };
+}
+
 export default async function ServerComponent() {
   const cookieStore = cookies();
 
