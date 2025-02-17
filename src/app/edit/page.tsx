@@ -5,6 +5,20 @@ import {
   HydrationBoundary,
   QueryClient,
 } from "@tanstack/react-query";
+import { Metadata } from "next";
+
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title: "게시글 수정 - J.log",
+    description: "내 게시글을 수정할 수 있는 페이지입니다.",
+    openGraph: {
+      title: "J.log 회원정보 수정",
+      description: "내 게시글을 수정할 수 있는 페이지입니다.",
+      images: ["/images/logo.svg"],
+    },
+  };
+}
+
 export default async function ServerComponent() {
   const queryClient = new QueryClient();
 
