@@ -16,6 +16,11 @@ function Item({ item }: propsType) {
           width={768}
           height={400}
           alt="프로필 이미지"
+          sizes="100vw"
+          style={{
+            width: "100%",
+            height: "auto",
+          }}
         />
       </figure>
       <figcaption>

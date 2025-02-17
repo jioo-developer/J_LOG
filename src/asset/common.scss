@@ -76,3 +76,11 @@
   margin-left: auto;
   min-width: 200px;
 }
+
+.label__area {
+  width: 100%;
+}
+
+body:has(.post_section) {
+  position: relative;
+}

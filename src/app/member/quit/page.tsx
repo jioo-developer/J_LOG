@@ -132,6 +132,10 @@ const Style = css`
   align-items: flex-end;
   gap: var(--gap-medium);
 
+  @media all and (max-width:500px) {
+   width:90%;
+  }
+
   p {
     var(--font-size:medium);
   }

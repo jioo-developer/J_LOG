@@ -7,7 +7,6 @@ import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import PageComponent from "./components/pageComponent";
 import useGetMyInfoQueryHandler from "@/apis/member/mypage/query/getMyDataQuery";
-import { User } from "firebase/auth";
 type propsType = {
   pageId: string;
 };

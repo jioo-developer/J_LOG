@@ -7,7 +7,6 @@ export const postItemStyle = css`
   flex-direction: column;
   background: #fff;
   box-shadow: 0 4px var(--gap-medium) 0 rgba(0, 0, 0, 0.05);
-  margin: var(--gap-medium);
   position: relative;
   transition-duration: 0.35s;
   bottom: 0;

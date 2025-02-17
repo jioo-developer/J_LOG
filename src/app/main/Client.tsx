@@ -5,9 +5,11 @@ import Item from "./component/Item";
 import usePostQueryHook from "@/apis/main/query/useGetQuery";
 import { css } from "@emotion/react";
 import { useSearchStore } from "@/store/searchStore";
-import { usePopupStore } from "@/store/popupStore";
 import { popuprHandler } from "@/utils/popupHandler";
 import { FirebaseData } from "@/static/types/common";
+import CommonButton from "@/components/atoms/CommonButton/CommonButton";
+import Image from "next/image";
+import Link from "next/link";
 
 const MainPage = ({}) => {
   const [postState, setState] = useState<FirebaseData[]>([]);
@@ -45,9 +47,23 @@ const MainPage = ({}) => {
   // 게시글 랜더링 함수
 
   return (
-    <div className="post_section" css={SectionStyle}>
-      {showDataHandler()}
-    </div>
+    <>
+      <div className="post_section" css={SectionStyle}>
+        {showDataHandler()}
+      </div>
+      <div className="add_button_wrap" css={addButton}>
+        <CommonButton theme="none">
+          <Link href="/edit">
+            <Image
+              src="/images/add.svg"
+              width={60}
+              height={60}
+              alt="edit 버튼"
+            />
+          </Link>
+        </CommonButton>
+      </div>
+    </>
   );
 };
 
@@ -59,4 +75,17 @@ const SectionStyle = css`
   margin: 0 auto;
   margin-top: 32px;
   flex-wrap: wrap;
+  gap: 16px;
+  padding-bottom: 75px;
+`;
+
+const addButton = css`
+  position: fixed;
+  bottom: 0px;
+  right: 5px;
+  z-index: 800;
+
+  button {
+    padding: 0;
+  }
 `;

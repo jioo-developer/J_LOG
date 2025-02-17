@@ -27,6 +27,8 @@ const ItemStore = () => {
     const length = cashData.item + value;
     await mutation.mutateAsync({ cash, item: length });
   };
+  console.log(cashData);
+  console.log(convertPrice(cashData.cash));
 
   return (
     <div css={wrap} className="flex-Set">
@@ -76,6 +78,10 @@ const Style = css`
   flex-direction: column;
   align-items: flex-end;
   gap: var(--gap-medium);
+
+  @media all and (max-width: 500px) {
+    width: 90%;
+  }
 
   .item_area {
     display: flex;

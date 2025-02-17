@@ -6,6 +6,10 @@
     background-color: var(--whiteColor);
     height: 100%;
     border: 0;
+
+    @media all and (max-width: 1000px) {
+      padding: 0;
+    }
   }
 
   .button_in_Wrap {
@@ -16,5 +20,11 @@
     align-items: center;
     justify-content: center;
     gap: var(--gap-small);
+
+    span {
+      @media all and (max-width: 414px) {
+        font-size: 3.5vw;
+      }
+    }
   }
 }

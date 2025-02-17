@@ -32,7 +32,7 @@ const Reply = ({ pageId }: propsType) => {
   };
 
   return (
-    <>
+    <div className="reply_main_wrap">
       {replyData &&
         replyData?.length > 0 &&
         replyData.map((item, index) => {
@@ -48,7 +48,7 @@ const Reply = ({ pageId }: propsType) => {
           );
         })}
       <TextAreaComponent submitHandler={HandleCreateReply} />
-    </>
+    </div>
   );
 };
 

@@ -95,6 +95,10 @@ const Style = css`
   align-items: flex-end;
   gap: var(--gap-medium);
 
+  @media all and (max-width: 440px) {
+    width: 95%;
+  }
+
   .label__area {
     display: flex;
     justify-content: center;

@@ -70,6 +70,10 @@ const formWrap = css`
   width: 50%;
   gap: 16px;
   margin-top: 20px;
+
+  @media all and (max-width: 1000px) {
+    width: 90%;
+  }
 `;
 
 export const TextArea = css`

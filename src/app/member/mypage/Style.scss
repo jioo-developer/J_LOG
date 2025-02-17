@@ -1,6 +1,15 @@
 .profile_wrap {
   margin: 0 auto;
   width: 95%;
+  min-height: 100vh;
+
+  @media all and (max-width: 1000px) {
+    align-items: flex-start;
+  }
+
+  @media all and (max-width: 500px) {
+    padding-bottom: 75px;
+  }
 
   .content {
     width: 50%;
@@ -50,6 +59,10 @@
 
       .in_wrap {
         width: 150px;
+
+        @media all and (max-width: 1000px) {
+          width: 100%;
+        }
       }
 
       & div:not(.in_wrap) {

@@ -12,7 +12,6 @@ export const itemStyle = css`
   flex-direction: column;
   gap: 4px;
   width: 100%;
-  margin-bottom: 35px;
   cursor: pointer;
 
   &:hover {

@@ -42,6 +42,10 @@ export const UIWrap = css`
   align-items: center;
   gap: Calc(var(--gap-xlarge) * 2);
 
+  @media all and (max-width: 1000px) {
+    gap: var(--gap-large);
+  }
+
   button {
     padding: 0;
   }
@@ -85,4 +89,11 @@ export const GoPoster = css`
   font-size: var(--fontsize-large);
   border-radius: 18px;
   border: 1px solid #000;
+  min-width: 85px;
+
+  @media all and (max-width: 450px) {
+    min-width: 0;
+    border: 0;
+    padding: 0;
+  }
 `;

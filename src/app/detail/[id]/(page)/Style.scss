@@ -1,5 +1,10 @@
 .detail_wrap {
   width: 50%;
+
+  @media all and (max-width: 1000px) {
+    width: 90%;
+    min-height: auto;
+  }
   .sub_menu {
     top: 50px;
     right: -50px;
@@ -30,6 +35,16 @@
 
     .writer_wrap {
       justify-content: space-between;
+
+      @media all and (max-width: 1000px) {
+        flex-direction: column;
+        align-items: flex-start;
+
+        button {
+          padding: 0;
+          padding: 16px 16px 0 0;
+        }
+      }
 
       .left_wrap {
         display: flex;
@@ -120,6 +135,8 @@
         box-sizing: border-box;
         @media all and (max-width: 1000px) {
           align-items: center;
+          flex-direction: column;
+          gap: 16px;
         }
 
         .com_title {

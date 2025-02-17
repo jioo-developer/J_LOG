@@ -14,11 +14,16 @@ export const NameWrap = css`
       align-items: center;
       flex-direction: column;
       margin-top: calc(var(--gap-xlarge) / 2);
+      gap: calc(var(--gap-xlarge) / 2);
       width: 100%;
     }
 
     .nickname {
       font-size: calc(var(--fontsize-large) * 2.5);
+
+      @media all and (max-width: 1000px) {
+        font-size: Calc(var(--fontsize-large) * 2);
+      }
     }
   }
 `;

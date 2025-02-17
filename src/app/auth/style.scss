@@ -9,7 +9,7 @@
 
     .close {
       position: absolute;
-      left: 45px;
+      left: 2.5vw;
     }
   }
 }
@@ -22,6 +22,10 @@
   gap: var(--gap-xlarge);
   padding-top: var(--gap-medium);
   box-sizing: border-box;
+
+  @media all and (max-width: 1000px) {
+    width: 90%;
+  }
 
   .input__Blind__Wrap {
     .check__Toggle {

@@ -9,6 +9,7 @@ import usePageDeleteMutation from "@/apis/detail/action/delete/useMutation";
 import { askDeleteHandler } from "../handler/pageDeleteHandler";
 import useFavoriteMutation from "@/apis/detail/favorite/useMutation";
 import { authService } from "@/lib/firebase";
+import useMediaQuery from "@/utils/useMediaQuery";
 
 type propsType = {
   user: string;
@@ -23,6 +24,10 @@ export default function PageComponent({
 }: propsType) {
   const { mutate } = usePageDeleteMutation();
   const favoriteMutate = useFavoriteMutation();
+  const isMobile = useMediaQuery("(max-width: 450px)");
+
+  console.log(isMobile);
+
   // handle delete
   function handleDelete() {
     askDeleteHandler({
@@ -70,10 +75,18 @@ export default function PageComponent({
           {pageData.writer === user && (
             <>
               <div className="right_wrap flex-Set">
-                <CommonButton theme="none" size="rg">
+                <CommonButton
+                  theme="none"
+                  size="rg"
+                  padding={isMobile ? "none" : undefined}
+                >
                   <Link href="/updateEditor">수정</Link>
                 </CommonButton>
-                <CommonButton theme="none" onClick={handleDelete}>
+                <CommonButton
+                  theme="none"
+                  onClick={handleDelete}
+                  padding={isMobile ? "none" : undefined}
+                >
                   삭제
                 </CommonButton>
               </div>

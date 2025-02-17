@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 "use client";
-import { ChevronDown, SearchIcon } from "lucide-react";
+import { ChevronDown, PencilLine, SearchIcon } from "lucide-react";
 import Image from "next/image";
 import { Suspense, useEffect, useRef, useState } from "react";
 import CommonButton from "../../atoms/CommonButton/CommonButton";
@@ -10,10 +10,9 @@ import { Skeleton } from "@mui/material";
 import { usePageInfoStore } from "@/store/pageInfoStore";
 import { useSearchStore } from "@/store/searchStore";
 import useLogoutHook from "@/apis/login/hook/useLogoutHook";
-import { useQuery } from "@tanstack/react-query";
-import { User } from "firebase/auth";
-import useUserQueryHook, { getUser } from "@/apis/login/hook/useGetUserQuery";
+import useUserQueryHook from "@/apis/login/hook/useGetUserQuery";
 import { getTokenHandler } from "@/apis/common/getTokenHandler";
+import useMediaQuery from "@/utils/useMediaQuery";
 
 type propsType = {
   pathName: string;
@@ -25,6 +24,7 @@ function Header({ pathName }: propsType) {
   const { setEditMode } = usePageInfoStore();
   const { setSearch } = useSearchStore();
   const { mutate: logout } = useLogoutHook();
+  const isMobile = useMediaQuery("(max-width: 450px)");
 
   useEffect(() => {
     fetchToken();
@@ -68,10 +68,13 @@ function Header({ pathName }: propsType) {
       </Link>
       <div css={UIWrap}>
         <CommonButton theme="none" onClick={() => setEditMode(false)}>
-          <Link href="/edit" css={GoPoster}>
-            새&nbsp;글&nbsp;작성
-          </Link>
+          {user && (
+            <Link href="/edit" css={GoPoster}>
+              {!isMobile && "새 글 작성"}
+            </Link>
+          )}
         </CommonButton>
+
         <CommonButton theme="none">
           <Link href="/search">
             <SearchIcon style={{ marginTop: 10 }} />

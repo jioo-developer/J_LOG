@@ -1,6 +1,10 @@
 .sign__Wrap {
   max-width: 375px;
   gap: var(--gap-xlarge);
+
+  @media all and (max-width: 414px) {
+    width: 80%;
+  }
 }
 
 .logo__Wrap {
