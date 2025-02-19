@@ -14,7 +14,12 @@ const SocialLoginPage = () => {
   const { mutate } = useGoogleLoginHook();
   return (
     <div className="sns_Sign flex-Set">
-      <CommonButton theme="none" size="rg" onClick={mutate}>
+      <CommonButton
+        theme="none"
+        size="rg"
+        onClick={mutate}
+        testId="google-login"
+      >
         <div className="button_in_Wrap">
           <Image
             src="/images/google.svg"
@@ -25,7 +30,7 @@ const SocialLoginPage = () => {
           <span>구글로 시작하기</span>
         </div>
       </CommonButton>
-      <CommonButton theme="none" size="rg">
+      <CommonButton theme="none" size="rg" testId="facebook-login">
         <div className="button_in_Wrap">
           <Image
             src="/images/facebook.svg"

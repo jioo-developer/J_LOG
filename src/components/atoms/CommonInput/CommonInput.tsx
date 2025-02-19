@@ -17,6 +17,7 @@ export interface CommonInputProps<T extends FieldValues> {
   validation?: RegisterOptions<T>;
   value?: string | number;
   label?: string;
+  testId?: string;
 }
 
 function CommonInput<T extends FieldValues>({
@@ -28,6 +29,7 @@ function CommonInput<T extends FieldValues>({
   validation = {},
   value,
   label,
+  testId,
 }: CommonInputProps<T>) {
   return (
     <label htmlFor={String(id)} className="label__area">
@@ -36,6 +38,7 @@ function CommonInput<T extends FieldValues>({
       <input
         value={value}
         id={String(id)}
+        data-testid={testId}
         type={type}
         placeholder={placeholder}
         css={inputStyle}

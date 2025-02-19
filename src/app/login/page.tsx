@@ -13,7 +13,14 @@ import { InputTypes } from "@/static/types/common";
 import Link from "next/link";
 import Head from "next/head";
 
-function LoginPage() {
+// jest 테스트를 위해 작성
+interface LoginProps {
+  onSubmit?: (data: InputTypes) => Promise<void>;
+}
+
+function LoginPage({ onSubmit }: LoginProps) {
+  // jest 테스트를 위해 작성
+
   const {
     register,
     handleSubmit,
@@ -59,9 +66,15 @@ function LoginPage() {
           />
           <h1 className="logo__Title">J.log</h1>
         </div>
-        <form className="sign__Form" onSubmit={handleSubmit(LoginHandler)}>
+        <form
+          className="sign__Form"
+          data-testid="login-form"
+          onSubmit={handleSubmit(onSubmit || LoginHandler)}
+          // jest 테스트를 위해 작성
+        >
           <CommonInput
             id="emailRequired"
+            testId="emailRequired"
             type="text"
             placeholder="이메일을 입력하세요"
             register={register}
@@ -77,6 +90,7 @@ function LoginPage() {
           <div className="input__Blind__Wrap">
             <CommonInput
               id="passwordRequired"
+              testId="passwordRequired"
               type={showInputBlind ? "text" : "password"}
               placeholder="비밀번호를 8자리 이상 입력하세요"
               register={register}
@@ -90,6 +104,7 @@ function LoginPage() {
               error={errors.passwordRequired}
             />
             <CommonCheckbox
+              testId={"pwBlind"}
               stateValue={showInputBlind}
               setStateHandler={setShowBlind}
               childrens={[

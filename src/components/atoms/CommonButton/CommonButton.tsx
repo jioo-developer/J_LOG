@@ -9,6 +9,7 @@ export interface CommonButtonProps {
   type?: "button" | "submit";
   theme: "white" | "success" | "primary" | "disable" | "warnning" | "none";
   padding?: "none";
+  testId?: string;
 }
 
 function CommonButton({
@@ -19,9 +20,11 @@ function CommonButton({
   theme,
   type,
   padding,
+  testId,
 }: CommonButtonProps) {
   return (
     <button
+      data-testid={testId}
       disabled={disabled}
       css={[themes[theme], buttonVariants[size]]}
       onClick={onClick}

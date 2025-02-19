@@ -6,9 +6,15 @@ export type PropsType = {
   childrens?: ReactNode[];
   stateValue: boolean;
   setStateHandler: (stateValue: boolean) => void;
+  testId?: string;
 };
 
-function CommonCheckbox({ childrens, stateValue, setStateHandler }: PropsType) {
+function CommonCheckbox({
+  childrens,
+  stateValue,
+  setStateHandler,
+  testId,
+}: PropsType) {
   const renderContent = () => {
     if (childrens) {
       return stateValue ? childrens[0] : childrens[1];
@@ -24,6 +30,7 @@ function CommonCheckbox({ childrens, stateValue, setStateHandler }: PropsType) {
     <button
       type="button"
       className="check__Toggle"
+      data-testid={testId}
       style={{ maxHeight: 25 }}
       onClick={() => {
         setStateHandler(!stateValue);
