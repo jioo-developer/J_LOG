@@ -10,11 +10,14 @@ import { FirebaseData } from "@/static/types/common";
 import CommonButton from "@/components/atoms/CommonButton/CommonButton";
 import Image from "next/image";
 import Link from "next/link";
+import { usePageInfoStore } from "@/store/pageInfoStore";
 
 const MainPage = ({}) => {
   const [postState, setState] = useState<FirebaseData[]>([]);
 
   const { searchText } = useSearchStore();
+
+  const { setEditMode } = usePageInfoStore();
 
   const { postData } = usePostQueryHook();
 
@@ -52,7 +55,7 @@ const MainPage = ({}) => {
         {showDataHandler()}
       </div>
       <div className="add_button_wrap" css={addButton}>
-        <CommonButton theme="none">
+        <CommonButton theme="none" onClick={() => setEditMode(false)}>
           <Link href="/edit">
             <Image
               src="/images/add.svg"

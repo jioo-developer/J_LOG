@@ -1,86 +1,46 @@
+import ResetPwPage from "@/app/resetPw/page";
+import { authService } from "@/lib/firebase";
+import { popuprHandler } from "@/utils/popupHandler";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import {
+  act,
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+} from "@testing-library/react";
 import { sendPasswordResetEmail } from "firebase/auth";
-import { authService } from "../../../../Firebase";
-import { popuprHandler } from "@/app/handler/error/ErrorHandler";
-import useUserQueryHook from "@/app/api_hooks/login/getUserHook";
-import { fireEvent, render, waitFor, screen } from "@testing-library/react";
-import ResetPwPage from "@/app/pages/resetPw/page";
-import { validateEmail } from "@/app/handler/commonHandler";
-import { useRouter } from "next/navigation";
-
-jest.mock("@/app/Firebase", () => ({
-  authService: {},
-}));
 
 jest.mock("firebase/auth", () => ({
   sendPasswordResetEmail: jest.fn(),
 }));
 
-jest.mock("next/navigation", () => ({
-  useRouter: jest.fn().mockReturnValue({
-    push: jest.fn(),
-  }),
-}));
-
-jest.mock("@/app/api_hooks/login/getUserHook", () => ({
-  __esModule: true, // ES 모듈로 인식되도록 설정
-  default: jest.fn().mockReturnValue({
-    data: null, // 모의 데이터 반환
-    error: Error,
-    isLoading: false,
-  }),
-}));
-
-jest.mock("@/app/handler/error/ErrorHandler", () => ({
-  popuprHandler: jest.fn(),
-}));
-
-jest.mock("@/app/api_hooks/login/LoginErrorHandler", () => ({
-  LoginErrorHandler: jest.fn(),
-}));
-
-jest.mock("@/app/store/common", () => ({
-  popupMessageStore: jest.fn().mockReturnValue({
-    message: "",
-    isClick: false,
-    subscribe: jest.fn(),
-  }),
-}));
-
-describe("비밀번호 찾기 로직 테스트", () => {
+describe("비밀번호 찾기 페이지에 대한 기능을 테스트합니다.", () => {
   beforeEach(() => {
     jest.clearAllMocks();
-    render(<ResetPwPage />);
-
-    const { data } = useUserQueryHook();
-    expect(data).toBe(null);
+    const queryClient = new QueryClient();
+    render(
+      <QueryClientProvider client={queryClient}>
+        <ResetPwPage />
+      </QueryClientProvider>
+    );
+  });
+  test("이메일 입력 필드가 렌더링된다", () => {
+    // 이메일 입력 필드가 있는지 확인
+    const emailInput = screen.getByTestId("emailRequired");
+    expect(emailInput).toBeInTheDocument();
   });
 
-  test("취소 버튼을 누를 시 로그인 페이지로 되돌아가는 지 테스트", () => {
-    const confirmButton = screen.getByText("취소");
-    fireEvent.click(confirmButton);
-    expect(useRouter().push).toHaveBeenCalledWith("/pages/login");
-  });
+  test("유효한 이메일을 입력했을 때, 이메일 리셋 메일 전송 함수가 호출되는 지 테스트합니다.", async () => {
+    (sendPasswordResetEmail as jest.Mock).mockReturnValue(true);
+    const emailInput = screen.getByTestId("emailRequired");
+    const form = screen.getByTestId("form-test");
 
-  test("비밀번호 찾기를 위한 이메일 전송에 성공 했는지 테스트", async () => {
-    const popupTitle = screen.getByText(
-      "비밀번호를 잊어버리셨나요?"
-    ) as HTMLElement;
+    fireEvent.change(emailInput, { target: { value: "test@example.com" } });
 
-    expect(popupTitle).toBeInTheDocument();
-
-    const input = screen.getByPlaceholderText(
-      "이메일을 입력하세요."
-    ) as HTMLInputElement;
-
-    fireEvent.change(input, {
-      target: { value: "test@example.com" },
+    await act(() => {
+      fireEvent.submit(form);
     });
-
-    const isEmail = validateEmail(input.value);
-    expect(isEmail).toBe(true);
-
-    const confirmButton = screen.getByText("확인");
-    fireEvent.click(confirmButton);
 
     await waitFor(() => {
       expect(sendPasswordResetEmail).toHaveBeenCalledWith(
@@ -90,34 +50,23 @@ describe("비밀번호 찾기 로직 테스트", () => {
     });
 
     expect(popuprHandler).toHaveBeenCalledWith({
-      message: "입력하신 메일로 비밀번호 안내드렸습니다",
+      message: "입력하신 메일로 비밀번호 안내 해드렸습니다.",
     });
-    expect(useRouter().push).toHaveBeenCalledWith("/pages/login");
   });
 
-  test("비밀번호 찾기를 위한 이메일 전송에 실패 했는지 테스트", async () => {
-    const error = "올바른 이메일 형식이 아닙니다.";
+  test("올바르지 않은 이메일 형식을 입력하면 에러 메시지가 출력 되는 지 테스트합니다.", async () => {
+    const form = screen.getByTestId("form-test");
+    const emailInput = screen.getByTestId("emailRequired");
 
-    const popupTitle = screen.getByText(
-      "비밀번호를 잊어버리셨나요?"
-    ) as HTMLElement;
+    fireEvent.change(emailInput, { target: { value: "invalid-email" } });
 
-    expect(popupTitle).toBeInTheDocument();
-
-    const input = screen.getByPlaceholderText(
-      "이메일을 입력하세요."
-    ) as HTMLInputElement;
-
-    fireEvent.change(input, {
-      target: { value: "test" },
+    await act(() => {
+      fireEvent.submit(form);
     });
 
-    const isEmail = validateEmail(input.value);
-    expect(isEmail).toBe(false);
-
-    const confirmButton = screen.getByText("확인");
-    fireEvent.click(confirmButton);
-
-    expect(popuprHandler).toHaveBeenCalledWith({ message: error });
+    await waitFor(() => {
+      const errorMsg = screen.getByText("올바른 이메일 형식이 아닙니다.");
+      expect(errorMsg).toBeInTheDocument();
+    });
   });
 });

@@ -8,13 +8,21 @@ import Item from "./components/Item";
 import { usePageInfoStore } from "@/store/pageInfoStore";
 import CommonButton from "@/components/atoms/CommonButton/CommonButton";
 import useUserQueryHook from "@/apis/login/hook/useGetUserQuery";
+import { useEffect } from "react";
+import { popuprHandler } from "@/utils/popupHandler";
 
 const MyBoardPage = () => {
   const { data: user } = useUserQueryHook();
 
-  const { myData } = useMyDataQueryHook(user ? user.uid : "");
+  const { myData, isLoading } = useMyDataQueryHook(user ? user.uid : "");
 
   const { setPgId } = usePageInfoStore();
+
+  useEffect(() => {
+    if (!isLoading && myData.length === 0) {
+      popuprHandler({ message: "작성한 게시글이 없습니다." });
+    }
+  }, [isLoading]);
 
   return (
     <div className="wrap board_wrap">
@@ -42,14 +50,15 @@ const MyBoardPage = () => {
         <div className="content__in">
           <p className="all_view">
             전체보기
-            <span>&nbsp;{`(${myData.length})`}</span>
+            <span data-testid="all__view__length">
+              &nbsp;{`(${myData.length})`}
+            </span>
           </p>
           {myData.length > 0 &&
             myData.map((item, index) => {
               return (
-                <CommonButton theme="none">
+                <CommonButton theme="none" key={index}>
                   <Link
-                    key={index}
                     onClick={() => setPgId(item.pageId)}
                     href={`/detail/${myData[index].pageId}`}
                   >

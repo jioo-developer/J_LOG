@@ -38,6 +38,10 @@ jest.mock("@/apis/login/hook/useLogoutHook", () => {
   }));
 });
 
+jest.mock("@/utils/popupHandler", () => ({
+  popuprHandler: jest.fn(),
+}));
+
 jest.mock("react-hook-form", () => ({
   ...jest.requireActual("react-hook-form"),
   useForm: () => {

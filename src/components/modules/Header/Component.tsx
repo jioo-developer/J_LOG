@@ -22,7 +22,6 @@ type propsType = {
 function Header({ pathName }: propsType) {
   const ref = useRef<HTMLInputElement | null>(null);
   const [tokenState, setToken] = useState<boolean | null>(null);
-  const { setEditMode } = usePageInfoStore();
   const { setSearch } = useSearchStore();
   const { mutate: logout } = useLogoutHook();
   const isMobile = useMediaQuery("(max-width: 450px)");
@@ -68,14 +67,6 @@ function Header({ pathName }: propsType) {
         </Suspense>
       </Link>
       <div css={UIWrap}>
-        <CommonButton theme="none" onClick={() => setEditMode(false)}>
-          {user && (
-            <Link href="/edit" css={GoPoster}>
-              {!isMobile && "새 글 작성"}
-            </Link>
-          )}
-        </CommonButton>
-
         <CommonButton theme="none">
           <Link href="/search">
             <IoIosSearch style={{ marginTop: 10 }} />

@@ -9,7 +9,7 @@ import { css } from "@emotion/react";
 import { useRouter } from "next/navigation";
 import useCashQueryHook from "@/apis/market/query/useGetCashQuery";
 
-const ItemStore = () => {
+const MarketPage = () => {
   const router = useRouter();
   const { cashData } = useCashQueryHook();
 
@@ -27,8 +27,6 @@ const ItemStore = () => {
     const length = cashData.item + value;
     await mutation.mutateAsync({ cash, item: length });
   };
-  console.log(cashData);
-  console.log(convertPrice(cashData.cash));
 
   return (
     <div css={wrap} className="flex-Set">
@@ -54,7 +52,7 @@ const ItemStore = () => {
   );
 };
 
-export default ItemStore;
+export default MarketPage;
 
 const wrap = css`
   position: fixed;
