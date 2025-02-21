@@ -1,5 +1,5 @@
 "use client";
-import { SquareCheckBigIcon, SquareIcon } from "lucide-react";
+import { FaRegCheckSquare, FaRegSquare } from "react-icons/fa";
 import { ReactNode } from "react";
 
 export type PropsType = {
@@ -20,9 +20,9 @@ function CommonCheckbox({
       return stateValue ? childrens[0] : childrens[1];
     }
     return stateValue ? (
-      <SquareCheckBigIcon key="check-on" size={25} color="gray" />
+      <FaRegCheckSquare key="check-on" size={25} color="gray" />
     ) : (
-      <SquareIcon key="check-off" size={25} color="gray" />
+      <FaRegSquare key="check-off" size={25} color="gray" />
     );
   };
 
@@ -30,7 +30,7 @@ function CommonCheckbox({
     <button
       type="button"
       className="check__Toggle"
-      data-testid={testId}
+      data-testid={stateValue ? `${testId}-on` : `${testId}-off`}
       style={{ maxHeight: 25 }}
       onClick={() => {
         setStateHandler(!stateValue);

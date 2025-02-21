@@ -84,7 +84,7 @@ function NicknameForm({ user, data }: propsType) {
               validation={{
                 required: "닉네임을 입력해주세요",
                 validate: (value) =>
-                  !data.includes(value) || "이미 사용 중인 닉네임입니다",
+                  !data.includes(value) || "이미 사용중인 닉네임입니다",
               }}
               error={errors.nickNameRequired}
             />

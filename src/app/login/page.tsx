@@ -6,7 +6,7 @@ import CommonCheckbox from "@/components/atoms/CommonCheckbox/CommonCheckbox";
 import Image from "next/image";
 import SocialLoginPage from "./(snsLogin)";
 import { useForm } from "react-hook-form";
-import { EyeOffIcon, EyeIcon } from "lucide-react";
+import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
 import useLoginHook from "@/apis/login/firebase/useMutation";
 import { useState } from "react";
 import { InputTypes } from "@/static/types/common";
@@ -68,7 +68,7 @@ function LoginPage({ onSubmit }: LoginProps) {
         </div>
         <form
           className="sign__Form"
-          data-testid="login-form"
+          data-testid="form-test"
           onSubmit={handleSubmit(onSubmit || LoginHandler)}
           // jest 테스트를 위해 작성
         >
@@ -108,8 +108,8 @@ function LoginPage({ onSubmit }: LoginProps) {
               stateValue={showInputBlind}
               setStateHandler={setShowBlind}
               childrens={[
-                <EyeIcon key="eye" size={20} />,
-                <EyeOffIcon key="eyeOff" size={20} color="#888" />,
+                <IoEyeOutline key="eye" size={20} />,
+                <IoEyeOffOutline key="eyeOff" size={20} />,
               ]}
             />
           </div>

@@ -1,56 +1,14 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import LoginPage from "@/app/login/page";
-import { authService } from "@/lib/firebase";
 
 // Jest Mock
-
-jest.mock("react-hook-form", () => ({
-  ...jest.requireActual("react-hook-form"),
-  useForm: () => ({
-    control: () => ({}),
-    handleSubmit: () => jest.fn(),
-  }),
-})),
-  jest.mock("@/apis/login/hook/useGetUserQuery", () => ({
-    __esModule: true, // ES 모듈로 인식되도록 설정
-    default: jest.fn().mockReturnValue({
-      data: null, // 모의 데이터 반환
-      error: null,
-      isLoading: false,
-    }),
-  }));
-
-jest.mock("@/lib/firebase", () => ({
-  authService: {
-    signOut: jest.fn(() => Promise.resolve()),
-  },
-}));
-
-jest.mock("@/apis/login/hook/useLogoutHook", () => {
-  return jest.fn(() => ({
-    mutate: jest.fn(async () => {
-      await authService.signOut();
-    }),
-  }));
-});
 
 jest.mock("@/apis/login/firebase/useMutation", () => ({
   __esModule: true,
   default: jest.fn(() => ({
     mutate: jest.fn(),
   })),
-}));
-
-jest.mock("next/navigation", () => ({
-  useRouter: jest.fn().mockReturnValue({
-    push: jest.fn(),
-  }),
-}));
-
-jest.mock("lucide-react", () => ({
-  EyeIcon: (props: any) => <svg {...props} data-testid="eye-icon" />,
-  EyeOffIcon: (props: any) => <svg {...props} data-testid="eye-off-icon" />,
 }));
 
 test("비밀번호 보이기/숨기기 버튼이 정상 작동하는지 확인합니다", () => {
@@ -62,7 +20,7 @@ test("비밀번호 보이기/숨기기 버튼이 정상 작동하는지 확인�
     </QueryClientProvider>
   );
   const pwInput = screen.getByTestId("passwordRequired");
-  const pwBlindButton = screen.getByTestId("pwBlind");
+  const pwBlindButton = screen.getByTestId("pwBlind-off");
 
   // 기본적으로 비밀번호는 숨겨져 있어야 함
   expect(pwInput).toHaveAttribute("type", "password");
@@ -72,6 +30,7 @@ test("비밀번호 보이기/숨기기 버튼이 정상 작동하는지 확인�
   expect(pwInput).toHaveAttribute("type", "text");
 
   // 다시 클릭 -> 비밀번호가 다시 숨겨져야 함
+  const pwShowButton = screen.getByTestId("pwBlind-on");
   fireEvent.click(pwBlindButton);
   expect(pwInput).toHaveAttribute("type", "password");
 });

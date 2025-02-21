@@ -75,6 +75,7 @@ function AgreementForm({ disableHandler }: propsType) {
       <input
         type="checkbox"
         id="allCheck"
+        data-testid="allCheck_button"
         ref={checkboxRef}
         onChange={(e) => allCheckHandler(e)}
       />
@@ -97,6 +98,7 @@ function AgreementForm({ disableHandler }: propsType) {
             <div key={item.id} className="check__item flex-Set">
               <CommonCheckbox
                 key={item.id}
+                testId={item.id}
                 stateValue={checkedItems[index]}
                 setStateHandler={() => handleItemChange(index)}
               />

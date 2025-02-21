@@ -1,6 +1,5 @@
 /** @jsxImportSource @emotion/react */
 "use client";
-import { ChevronDown, PencilLine, SearchIcon } from "lucide-react";
 import Image from "next/image";
 import { Suspense, useEffect, useRef, useState } from "react";
 import CommonButton from "../../atoms/CommonButton/CommonButton";
@@ -13,6 +12,8 @@ import useLogoutHook from "@/apis/login/hook/useLogoutHook";
 import useUserQueryHook from "@/apis/login/hook/useGetUserQuery";
 import { getTokenHandler } from "@/apis/common/getTokenHandler";
 import useMediaQuery from "@/utils/useMediaQuery";
+import { FaChevronDown } from "react-icons/fa";
+import { IoIosSearch } from "react-icons/io";
 
 type propsType = {
   pathName: string;
@@ -77,7 +78,7 @@ function Header({ pathName }: propsType) {
 
         <CommonButton theme="none">
           <Link href="/search">
-            <SearchIcon style={{ marginTop: 10 }} />
+            <IoIosSearch style={{ marginTop: 10 }} />
           </Link>
         </CommonButton>
         <label htmlFor="menuToggle" className="flex-Set">
@@ -99,7 +100,7 @@ function Header({ pathName }: propsType) {
               )}
             </Suspense>
           </figure>
-          <ChevronDown size={18} />
+          <FaChevronDown size={18} />
         </label>
 
         <ul className="sub_menu" css={SubMenu}>
