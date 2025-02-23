@@ -1,0 +1,104 @@
+.reply_main_wrap {
+  @media all and (max-width: 1000px) {
+    padding-bottom: 75px;
+  }
+}
+
+.reply_wrap {
+  display: flex;
+  width: 50%;
+  margin: 0 auto;
+  flex-direction: column;
+  padding: 20px 0;
+  border-bottom: 1px solid #ddd;
+  box-sizing: border-box;
+
+  @media all and (max-width: 1000px) {
+    width: 90%;
+  }
+
+  .top_wrap {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .user_info {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    .user_text {
+      float: left;
+      display: flex;
+      flex-direction: column;
+      .reply_name {
+        font-size: 16px;
+        color: #333;
+      }
+    }
+    .edit_comment {
+      margin-left: auto;
+
+      .btns {
+        width: 44%;
+        text-decoration: underline;
+        color: #495057;
+
+        &:hover {
+          color: #12b886;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
+  .form-control {
+    width: 100%;
+    margin-bottom: 0;
+    margin-top: 10px;
+
+    &::placeholder {
+      color: #000;
+    }
+  }
+
+  .btn {
+    font-size: 14px;
+    padding: 0 10px;
+    cursor: pointer;
+  }
+
+  .none {
+    display: none;
+  }
+
+  .block {
+    display: block;
+  }
+}
+
+.edit_comment {
+  .button__group {
+    min-width: 100px;
+  }
+}
+.top_wrap {
+  margin-bottom: 20px;
+}
+
+.top_wrap + form {
+  display: flex;
+  width: 100%;
+  height: 30px;
+  flex-direction: row;
+  margin-bottom: 20px;
+
+  textarea {
+    min-height: auto;
+    padding: 0;
+    padding: 5px 0;
+    min-height: 48px;
+  }
+}

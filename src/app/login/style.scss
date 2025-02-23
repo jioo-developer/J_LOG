@@ -1,6 +1,10 @@
 .sign__Wrap {
   max-width: 375px;
   gap: var(--gap-xlarge);
+
+  @media all and (max-width: 414px) {
+    width: 80%;
+  }
 }
 
 .logo__Wrap {
@@ -32,10 +36,10 @@
   justify-content: space-between;
 
   button {
-    padding: 0;
     span {
       display: block;
       width: 100%;
+      color: var(--subTextcolor);
     }
     &:first-child span {
       text-align: left;
@@ -44,5 +48,10 @@
     &:last-child span {
       text-align: right;
     }
+  }
+
+  button a {
+    display: inline-block;
+    width: 100%;
   }
 }

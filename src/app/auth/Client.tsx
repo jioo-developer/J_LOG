@@ -2,9 +2,10 @@
 import "./style.scss";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { InputTypes } from "@/static/type/common";
+import { InputTypes } from "@/static/types/common";
 import CommonInput from "@/components/atoms/CommonInput/CommonInput";
 import CommonButton from "@/components/atoms/CommonButton/CommonButton";
+<<<<<<< HEAD
 import { ChevronLeftIcon, EyeIcon, EyeOffIcon } from "lucide-react";
 import AgreementForm from "./component/AgreementForm";
 import useAuthHandler from "@/service/api-hooks/auth/hook/useAuthHook";
@@ -12,15 +13,31 @@ import { DevTool } from "@hookform/devtools";
 import CommonCheckbox from "@/components/atoms/CommonCheckbox/CommonCheckbox";
 import Link from "next/link";
 import useNickNameQueryHook from "@/service/api-hooks/auth/hook/useGetNicknameHook";
+=======
+import AgreementForm from "@/app/auth/component/AgreementForm";
+import CommonCheckbox from "@/components/atoms/CommonCheckbox/CommonCheckbox";
+import Link from "next/link";
+import useNickNameQueryHook from "@/apis/member/mypage/query/useGetNicknameQuery";
+import useAuthMutation from "@/apis/auth/useMutation";
+import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
+import { FaChevronLeft } from "react-icons/fa";
+>>>>>>> d333fc1963018e3847176f94d92528819df0a49d
 
 interface InputType extends InputTypes {
   nickNameRequired: string;
 }
 
+<<<<<<< HEAD
 const AuthPage = () => {
+=======
+interface LoginProps {
+  onSubmit?: (data: InputType) => Promise<void>;
+}
+
+function AuthPage({ onSubmit }: LoginProps) {
+>>>>>>> d333fc1963018e3847176f94d92528819df0a49d
   const {
     register,
-    control,
     handleSubmit,
     formState: { errors },
   } = useForm<InputType>();
@@ -28,7 +45,9 @@ const AuthPage = () => {
   const [disable, setDisable] = useState(true);
   const [showInputBlind, setShowBlind] = useState(false);
 
-  const { mutate: createAccount } = useAuthHandler();
+  const { nicknameData } = useNickNameQueryHook();
+
+  const { mutate: createAccount } = useAuthMutation();
 
   const { nicknameData } = useNickNameQueryHook();
 
@@ -41,21 +60,23 @@ const AuthPage = () => {
   }
 
   return (
-    <div className="page-Reset auth__Wrap">
+    <div className="auth__Wrap">
       <div className="title__Area flex-Set">
-        <button className="flex-Set">
-          <Link href="/login">
-            <ChevronLeftIcon className="close" size={22} />
+        <button type="button" className="flex-Set">
+          <Link href="/login" className="close">
+            <FaChevronLeft size={22} />
           </Link>
+          회원가입
         </button>
-        회원가입
       </div>
       <form
         className="auth__Form"
-        onSubmit={handleSubmit(createAccountHandler)}
+        data-testid="form-test"
+        onSubmit={handleSubmit(onSubmit || createAccountHandler)}
       >
         <CommonInput
           id="emailRequired"
+          testId="emailRequired"
           label="이메일"
           type="text"
           placeholder="이메일을 입력하세요"
@@ -77,12 +98,13 @@ const AuthPage = () => {
             stateValue={showInputBlind}
             setStateHandler={setShowBlind}
             childrens={[
-              <EyeIcon key="eye" size={20} />,
-              <EyeOffIcon key="eyeOff" size={20} color="#888" />,
+              <IoEyeOutline key="eye" size={20} />,
+              <IoEyeOffOutline key="eyeOff" size={20} color="#888" />,
             ]}
           />
           <CommonInput
             id="passwordRequired"
+            testId="passwordRequired"
             label="비밀번호"
             type={showInputBlind ? "text" : "password"}
             placeholder="비밀번호를 8자리 이상 입력하세요"
@@ -100,13 +122,14 @@ const AuthPage = () => {
 
         <CommonInput
           id="nickNameRequired"
+          testId="nickNameRequired"
           label="닉네임"
           placeholder="닉네임을 입력해주세요"
           register={register}
           validation={{
             required: "닉네임을 입력해주세요",
             validate: (value) =>
-              !nicknameData.includes(value) || "이미 사용 중인 닉네임입니다",
+              !nicknameData.includes(value) || "이미 사용중인 닉네임 입니다",
           }}
           error={errors.nickNameRequired}
         />
@@ -119,9 +142,8 @@ const AuthPage = () => {
           회원가입
         </CommonButton>
       </form>
-      <DevTool control={control} />
     </div>
   );
-};
+}
 
 export default AuthPage;

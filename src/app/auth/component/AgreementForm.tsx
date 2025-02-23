@@ -20,6 +20,7 @@ type propsType = {
 
 function AgreementForm({ disableHandler }: propsType) {
   const checkboxRef = useRef<HTMLInputElement | null>(null);
+  // 전체동의 체크박스 ref
   const [allCheck, setAllCheck] = useState(false);
   // 전체 체크박스 관련 상태들
 
@@ -45,7 +46,7 @@ function AgreementForm({ disableHandler }: propsType) {
 
   useEffect(() => {
     if (checkboxRef.current) {
-      // checkedItem이 전부 true 일 때
+      // 전체 체크박스 상태 변경 함수
       if (checkedItems.every((item) => item)) {
         checkboxRef.current.checked = true;
         setAllCheck(true);
@@ -53,8 +54,11 @@ function AgreementForm({ disableHandler }: propsType) {
       } else {
         checkboxRef.current.checked = false;
         setAllCheck(false);
+        // checkedItem이 전부 false 일 때
       }
       // 전체 체크박스 상태 변경 함수
+
+      // 필수 활성화 상태 = disable 제어
       if (checkedItems[0] && checkedItems[1]) {
         disableHandler(false);
       } else {
@@ -71,14 +75,17 @@ function AgreementForm({ disableHandler }: propsType) {
       <input
         type="checkbox"
         id="allCheck"
+        data-testid="allCheck_button"
         ref={checkboxRef}
         onChange={(e) => allCheckHandler(e)}
       />
       <label
         htmlFor="allCheck"
         onClick={(e) => {
-          if (e.target instanceof HTMLElement && e.target.tagName !== "INPUT")
-            e.preventDefault();
+          const target = e.target as HTMLElement;
+          if (target.tagName !== "INPUT") {
+            e.stopPropagation(); // 이벤트 버블링을 막음
+          }
         }}
       >
         <CommonCheckbox stateValue={allCheck} setStateHandler={setAllCheck} />
@@ -91,6 +98,7 @@ function AgreementForm({ disableHandler }: propsType) {
             <div key={item.id} className="check__item flex-Set">
               <CommonCheckbox
                 key={item.id}
+                testId={item.id}
                 stateValue={checkedItems[index]}
                 setStateHandler={() => handleItemChange(index)}
               />

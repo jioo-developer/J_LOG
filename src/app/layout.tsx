@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import TanstackProvider from "@/provider/TanstackProvider";
 import "./globals.css";
-import "../asset/common.scss";
+import "@/asset/common.scss";
 import Header from "@/components/modules/Header/Header";
+import { ReturnPopup } from "@/utils/popupHandler";
+import { ReactNode } from "react";
 
 export const metadata: Metadata = {
   title: "J-LOG",
@@ -16,8 +18,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
+  modal,
 }: Readonly<{
   children: React.ReactNode;
+  modal: ReactNode;
 }>) {
   return (
     <html lang="ko">
@@ -25,6 +29,9 @@ export default function RootLayout({
         <TanstackProvider>
           <Header />
           {children}
+          {modal}
+          <div id="modal-root"></div>
+          <ReturnPopup />
         </TanstackProvider>
       </body>
     </html>

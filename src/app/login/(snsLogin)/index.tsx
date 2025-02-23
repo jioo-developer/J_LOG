@@ -1,7 +1,11 @@
 import CommonButton from "@/components/atoms/CommonButton/CommonButton";
 import Image from "next/image";
 import "./style.scss";
+<<<<<<< HEAD
 import useGoogleHook from "@/service/api-hooks/login/loginType/google/useMutation";
+=======
+import useGoogleLoginHook from "@/apis/login/google/useMutation";
+>>>>>>> d333fc1963018e3847176f94d92528819df0a49d
 
 export type objType = {
   id: string;
@@ -11,11 +15,16 @@ export type objType = {
 };
 
 const SocialLoginPage = () => {
-  const { mutate } = useGoogleHook();
+  const { mutate } = useGoogleLoginHook();
   return (
     <div className="sns_Sign flex-Set">
-      <CommonButton theme="none" size="rg" onClick={() => mutate()}>
-        <div className="button_Wrap">
+      <CommonButton
+        theme="none"
+        size="rg"
+        onClick={mutate}
+        testId="google-login"
+      >
+        <div className="button_in_Wrap">
           <Image
             src="/images/google.svg"
             width={20}
@@ -25,8 +34,8 @@ const SocialLoginPage = () => {
           <span>구글로 시작하기</span>
         </div>
       </CommonButton>
-      <CommonButton theme="none" size="rg">
-        <div className="button_Wrap">
+      <CommonButton theme="none" size="rg" testId="facebook-login">
+        <div className="button_in_Wrap">
           <Image
             src="/images/facebook.svg"
             alt="페이스북 로그인"
