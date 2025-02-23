@@ -58,9 +58,29 @@
     position: absolute;
     right: var(--gap-xlarge);
     margin-top: 8px;
+    z-index: 900;
   }
 }
 
-body:has(.is__white_bg) {
-  background: #fff;
+.skeleton__wrap {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 8xp;
+}
+
+.button__group {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-left: auto;
+  min-width: 200px;
+}
+
+.label__area {
+  width: 100%;
+}
+
+body:has(.post_section) {
+  position: relative;
 }

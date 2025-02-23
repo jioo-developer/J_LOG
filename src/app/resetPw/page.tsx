@@ -3,10 +3,11 @@
 import CommonButton from "@/components/atoms/CommonButton/CommonButton";
 import CommonInput from "@/components/atoms/CommonInput/CommonInput";
 import { authService } from "@/lib/firebase";
-import { InputTypes } from "@/static/type/common";
+import { InputTypes } from "@/static/types/common";
+import { popuprHandler } from "@/utils/popupHandler";
 import { css } from "@emotion/react";
 import { sendPasswordResetEmail } from "firebase/auth";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 
 const ResetPwPage = () => {
@@ -16,29 +17,30 @@ const ResetPwPage = () => {
     formState: { errors },
   } = useForm<InputTypes>();
 
+  const router = useRouter();
+
   async function resetHandler(data: InputTypes) {
     try {
       // 올바른 이메일 인지 검증
       await sendPasswordResetEmail(authService, data.emailRequired);
-
       // 비밀번호 찾는 이메일 보내는  함수
-      window.alert("입력하신 메일로 비밀번호 안내 해드렸습니다.");
-      // popuprHandler({ message: "입력하신 메일로 비밀번호 안내드렸습니다" });
+      popuprHandler({ message: "입력하신 메일로 비밀번호 안내 해드렸습니다." });
     } catch (error) {
-      //   popuprHandler({ message: "올바른 이메일 형식이 아닙니다." });
-      window.alert((error as Error).message);
+      popuprHandler({ message: "올바른 이메일 형식이 아닙니다." });
     }
   }
 
   return (
     <div className="flex-Set" css={wrap}>
       <form
+        data-testid="form-test"
         className="flex-Set"
         css={Style}
         onSubmit={handleSubmit(resetHandler)}
       >
         <CommonInput
           id="emailRequired"
+          testId="emailRequired"
           placeholder="이메일을 입력하세요"
           label="비밀번호를 잊어버리셨나요?"
           register={register}
@@ -52,10 +54,15 @@ const ResetPwPage = () => {
           error={errors.emailRequired}
         />
         <div className="button__group">
-          <CommonButton theme="none" size="rg">
-            <Link href="/login">취소</Link>
+          <CommonButton
+            type="button"
+            theme="none"
+            size="rg"
+            onClick={() => router.back()}
+          >
+            취소
           </CommonButton>
-          <CommonButton theme="success" size="rg">
+          <CommonButton type="submit" theme="success" size="rg">
             확인
           </CommonButton>
         </div>
@@ -72,7 +79,7 @@ const wrap = css`
   left: 0px;
   width: 100%;
   height: 100%;
-  z-index: 10;
+  z-index: 999;
   background: rgba(0, 0, 0, 0.5);
 `;
 
@@ -89,6 +96,10 @@ const Style = css`
   align-items: flex-end;
   gap: var(--gap-medium);
 
+  @media all and (max-width: 440px) {
+    width: 95%;
+  }
+
   .label__area {
     display: flex;
     justify-content: center;
@@ -103,11 +114,5 @@ const Style = css`
       margin: 0px;
       color: rgb(61, 61, 62);
     }
-  }
-
-  .button__group {
-    display: flex;
-    justify-content: flex-end;
-    gap: 8px;
   }
 `;

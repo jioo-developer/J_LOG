@@ -1,5 +1,5 @@
-/** @jsxImportSource @emotion/react */
 "use client";
+<<<<<<< HEAD
 import useLogoutHook from "@/service/api-hooks/login/hook/useLogoutHook";
 import { ChevronDown, SearchIcon } from "lucide-react";
 import Image from "next/image";
@@ -70,34 +70,35 @@ function Header() {
               </figure>
               <ChevronDown size={18} />
             </label>
+=======
+import { usePathname } from "next/navigation";
+import Component from "./Component";
 
-            <ul className="sub_menu" css={SubMenu}>
-              <li>
-                <CommonButton theme="none">
-                  <Link href="member/myBoard">내 게시글</Link>
-                </CommonButton>
-              </li>
-              <li>
-                <CommonButton theme="none">
-                  <Link href="member/myPage">마이페이지</Link>
-                </CommonButton>
-              </li>
-              <li>
-                <CommonButton
-                  theme="none"
-                  onClick={() => {
-                    logoutHandler();
-                  }}
-                >
-                  로그아웃
-                </CommonButton>
-              </li>
-            </ul>
-          </div>
-        </header>
-      )}
-    </>
-  );
+const activePathName = [
+  "/member/mypage",
+  "/detail",
+  "/",
+  "/member/myboard",
+  "/search",
+  "/updateEditor",
+  "/edit",
+];
+
+function HeaderProvider() {
+  const pathname = usePathname();
+>>>>>>> d333fc1963018e3847176f94d92528819df0a49d
+
+  function checkPathname(pathname: string) {
+    // "/" 경로가 다른 경로에 영향을 주지 않도록 예외 처리
+    return activePathName.some((path) => {
+      if (path === "/") {
+        return pathname === path; // "/"는 정확히 일치하는 경우만 true
+      }
+      return pathname.startsWith(path); // 다른 경로들은 startsWith로 처리
+    });
+  }
+
+  return checkPathname(pathname) && <Component pathName={pathname} />;
 }
 
-export default Header;
+export default HeaderProvider;

@@ -3,7 +3,7 @@ import { css } from "@emotion/react";
 export const HeaderStyle = css`
   width: 95%;
   min-height: 40px;
-  justify-content: space-between;
+  justify-content: space-between !important;
   padding-top: var(--gap-xlarge);
   margin: 0 auto;
 
@@ -42,6 +42,10 @@ export const UIWrap = css`
   align-items: center;
   gap: Calc(var(--gap-xlarge) * 2);
 
+  @media all and (max-width: 1000px) {
+    gap: var(--gap-large);
+  }
+
   button {
     padding: 0;
   }
@@ -52,7 +56,11 @@ export const SubMenu = css`
   flex-direction: column;
   position: absolute;
   right: Calc(var(--gap-xlarge) * 2);
+<<<<<<< HEAD
   top: Calc(var(--gap-xlarge) * 4);
+=======
+  top: Calc(var(--gap-xlarge) * 3.3);
+>>>>>>> d333fc1963018e3847176f94d92528819df0a49d
   background: #fff;
   box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.1);
   z-index: 10;
@@ -85,4 +93,11 @@ export const GoPoster = css`
   font-size: var(--fontsize-large);
   border-radius: 18px;
   border: 1px solid #000;
+  min-width: 85px;
+
+  @media all and (max-width: 450px) {
+    min-width: 0;
+    border: 0;
+    padding: 0;
+  }
 `;
