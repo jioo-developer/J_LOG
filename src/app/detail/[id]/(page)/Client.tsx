@@ -6,7 +6,7 @@ import { popuprHandler } from "@/utils/popupHandler";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import PageComponent from "./components/pageComponent";
-import useGetMyInfoQueryHandler from "@/apis/member/mypage/query/getMyDataQuery";
+import useUserQueryHook from "@/apis/login/hook/useGetUserQuery";
 type propsType = {
   pageId: string;
 };
@@ -14,7 +14,7 @@ type propsType = {
 const DetailPage = ({ pageId }: propsType) => {
   const router = useRouter();
   const { message } = usePopupStore();
-  const { user } = useGetMyInfoQueryHandler();
+  const { data: user } = useUserQueryHook();
   const { pageData, isLoading } = useDetailQueryHook(pageId);
 
   useEffect(() => {

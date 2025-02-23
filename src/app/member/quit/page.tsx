@@ -55,6 +55,7 @@ const QuitPage = () => {
     <div className="flex-Set" css={wrap}>
       <form
         className="flex-Set"
+        data-testid="form-test"
         css={Style}
         onSubmit={handleSubmit(deleteHandler)}
       >

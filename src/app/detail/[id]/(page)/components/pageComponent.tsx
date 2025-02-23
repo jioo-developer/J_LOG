@@ -8,7 +8,6 @@ import { Skeleton } from "@mui/material";
 import usePageDeleteMutation from "@/apis/detail/action/delete/useMutation";
 import { askDeleteHandler } from "../handler/pageDeleteHandler";
 import useFavoriteMutation from "@/apis/detail/favorite/useMutation";
-import { authService } from "@/lib/firebase";
 import useMediaQuery from "@/utils/useMediaQuery";
 
 type propsType = {
@@ -26,8 +25,6 @@ export default function PageComponent({
   const favoriteMutate = useFavoriteMutation();
   const isMobile = useMediaQuery("(max-width: 450px)");
 
-  console.log(isMobile);
-
   // handle delete
   function handleDelete() {
     askDeleteHandler({
@@ -42,7 +39,6 @@ export default function PageComponent({
   }
 
   function favoriteHandler() {
-    const user = authService.currentUser?.uid as string;
     const newFavorite = pageData.favorite;
     favoriteMutate.mutate({
       user,

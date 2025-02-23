@@ -24,5 +24,5 @@ export const useReplyQueryHook = (pageId: string) => {
     }
   );
 
-  return { replyData: data, isLoading, error };
+  return { replyData: data ?? [], isLoading, error };
 };

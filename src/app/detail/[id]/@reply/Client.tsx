@@ -1,22 +1,22 @@
 "use client";
 import "./Style.scss";
-import useGetMyInfoQueryHandler from "@/apis/member/mypage/query/getMyDataQuery";
 import { useReplyQueryHook } from "@/apis/detail/reply/query/getReplyDataQuery";
-import { useReplyMutation } from "../../../../apis/detail/reply/hook/create/useMutation";
+import { useReplyMutation } from "@/apis/detail/reply/hook/create/useMutation";
 import ReplyItem from "./components/ReplyItem";
 import createReplyHandler from "./handler/createReplyHandler";
 import TextAreaComponent, {
   textAreaType,
 } from "./components/TextAreaComponent";
+import useUserQueryHook from "@/apis/login/hook/useGetUserQuery";
 
 type propsType = {
   pageId: string;
 };
 
 const Reply = ({ pageId }: propsType) => {
-  const { user } = useGetMyInfoQueryHandler();
+  const { data: user } = useUserQueryHook();
 
-  const { replyData } = useReplyQueryHook(pageId);
+  const { replyData, isLoading } = useReplyQueryHook(pageId);
 
   const { mutate } = useReplyMutation();
 
@@ -31,17 +31,21 @@ const Reply = ({ pageId }: propsType) => {
     }
   };
 
+  if (isLoading) {
+    <div></div>;
+  }
+
+  const isActive = replyData.length > 0;
+
   return (
     <div className="reply_main_wrap">
-      {replyData &&
-        replyData?.length > 0 &&
+      {isActive &&
         replyData.map((item, index) => {
           return (
             <ReplyItem
               key={index}
               item={item}
               index={index}
-              replyData={replyData}
               pageId={pageId}
               user={user?.uid as string}
             />

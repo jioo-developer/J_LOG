@@ -74,7 +74,7 @@ function NicknameForm({ user, data }: propsType) {
         <>
           <form
             className="name_area"
-            data-testid="name_area"
+            data-testid="form-test"
             onSubmit={handleSubmit(changeNameHandler)}
           >
             <CommonInput

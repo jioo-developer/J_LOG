@@ -1,208 +1,116 @@
-import { authService } from "../../../../Firebase";
-import { popuprHandler } from "@/app/handler/error/ErrorHandler";
-import deleteDB from "@/app/handler/quit/deleteDB";
-import originDeleteHandler from "@/app/handler/quit/originquit";
-import SocialDeleteHandler from "@/app/handler/quit/socialquit";
-import isCredential from "@/app/handler/quit/userCredential/credentialHandler";
-import QuitPage from "@/app/pages/member/quit/page";
-import { popupMessageStore } from "@/store/common";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
-  act,
-  fireEvent,
   render,
   screen,
+  fireEvent,
   waitFor,
+  act,
 } from "@testing-library/react";
-import { User, deleteUser } from "firebase/auth";
-import { useRouter } from "next/navigation";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import isCredential from "@/app/member/quit/handler/credentialHandler";
+import QuitPage from "@/app/member/quit/page";
+import originDeleteHandler from "@/app/member/quit/handler/originquitHandler";
 
-jest.mock("@/app/Firebase", () => ({
-  authService: {
-    currentUser: expect.any(String),
-  },
-}));
-
-jest.mock("firebase/auth", () => ({
-  deleteUser: jest.fn(),
-}));
-
-jest.mock("next/navigation", () => ({
-  useRouter: jest.fn().mockReturnValue({
-    push: jest.fn(),
-  }),
-}));
-
-jest.mock("@/app/handler/error/ErrorHandler", () => ({
-  popuprHandler: jest.fn(),
-  popupInit: jest.fn(),
-}));
-
-jest.mock("@/app/api_hooks/login/getUserHook", () => ({
-  __esModule: true, // ES 모듈로 인식되도록 설정
+jest.mock("@/apis/login/hook/useGetUserQuery", () => ({
+  __esModule: true, // ES 모듈로 인식
   default: jest.fn().mockReturnValue({
-    data: {
-      uid: "123",
-      email: "test@example.com",
-    },
+    data: { uid: "테스터", displayName: "테스터" }, // 기본 테스트 데이터
     error: null,
     isLoading: false,
   }),
 }));
+jest.mock("@/apis/member/quit/useMutation", () => ({
+  __esModule: true,
+  default: jest.fn(() => ({
+    mutate: jest.fn(),
+  })),
+}));
 
-jest.mock("@/app/handler/quit/deleteDB", () => jest.fn());
+jest.mock("@/app/member/quit/handler/credentialHandler");
+jest.mock("@/app/member/quit/handler/originquitHandler");
+jest.mock("@/app/member/quit/handler/socialquitHandler");
 
-jest.mock("@/app/handler/quit/socialquit", () => jest.fn());
+const queryClient = new QueryClient();
 
-jest.mock("@/app/handler/quit/originquit", () => jest.fn());
-
-jest.mock("@/app/handler/quit/userCredential/credentialHandler", () =>
-  jest.fn()
-);
-
-describe("회원탈퇴 로직 테스트", () => {
-  const setQuitMock = jest.fn().mockReturnValue(true);
-  const queryClient = new QueryClient();
-  const user = expect.any(String);
-
-  beforeEach(async () => {
+describe("QuitPage 페이지의 기능을 테스트 합니다.", () => {
+  beforeEach(() => {
     jest.clearAllMocks();
-
-    render(
-      <QueryClientProvider client={queryClient}>
-        <QuitPage setQuit={setQuitMock} />
-      </QueryClientProvider>
-    );
   });
 
-  test("isCredential이 'sosial'일 때 팝업 호출 테스트", async () => {
-    (isCredential as jest.Mock).mockReturnValueOnce("sosial");
-
-    const activeBtn = screen.getByText("확인");
+  test("회원 탈퇴 모달이 정상적으로 렌더링 되는 지 테스트 합니다다.", async () => {
+    (isCredential as jest.Mock).mockReturnValue("origin");
 
     await act(async () => {
-      fireEvent.click(activeBtn);
+      render(
+        <QueryClientProvider client={queryClient}>
+          <QuitPage />
+        </QueryClientProvider>
+      );
     });
 
-    expect(popuprHandler).toHaveBeenCalledWith({
-      message: "회원탈퇴에 사용 될 2차비밀번호를 입력 해주세요",
-      type: "prompt",
-      state: expect.any(Function),
-    });
-  });
-
-  test("isCredential이 'origin'일 때 팝업 호출 테스트", async () => {
-    (isCredential as jest.Mock).mockReturnValueOnce("origin");
-
-    const activeBtn = screen.getByText("확인");
-
-    await act(async () => {
-      fireEvent.click(activeBtn);
-    });
-
-    expect(popuprHandler).toHaveBeenCalledWith({
-      message: "로그인에 사용 되는 비밀번호를 입력 해주세요",
-      type: "prompt",
-      state: expect.any(Function),
+    await waitFor(() => {
+      expect(
+        screen.getByText("정말로 회원탈퇴를 진행할까요?")
+      ).toBeInTheDocument();
+      expect(screen.getByText("취소")).toBeInTheDocument();
+      expect(screen.getByText("확인")).toBeInTheDocument();
     });
   });
 
-  test("isSosial이 false 일 때 회원 탈퇴 성공 테스트", async () => {
-    (isCredential as jest.Mock).mockReturnValueOnce("origin");
-    const activeBtn = screen.getByText("확인");
+  test("소셜 로그인 일 때 인풋이 출력하지 않는 것에 대한한 테스트를 진행 합니다", async () => {
+    (isCredential as jest.Mock).mockReturnValue("sosial");
 
     await act(async () => {
-      fireEvent.click(activeBtn);
+      render(
+        <QueryClientProvider client={queryClient}>
+          <QuitPage />
+        </QueryClientProvider>
+      );
     });
 
-    expect(popuprHandler).toHaveBeenCalledWith({
-      message: "로그인에 사용 되는 비밀번호를 입력 해주세요",
-      type: "prompt",
-      state: expect.any(Function),
+    await waitFor(() => {
+      expect(
+        screen.queryByPlaceholderText("회원탈퇴를 위해 비밀번호를 입력해주세요")
+      ).not.toBeInTheDocument();
+    });
+  });
+
+  test("일반 로그인 일 때 인풋이 출력 하는 지 테스트 합니다.", async () => {
+    (isCredential as jest.Mock).mockReturnValue("origin");
+
+    await act(async () => {
+      render(
+        <QueryClientProvider client={queryClient}>
+          <QuitPage />
+        </QueryClientProvider>
+      );
+    });
+    await waitFor(() => {
+      expect(
+        screen.getByPlaceholderText("회원탈퇴를 위해 비밀번호를 입력해주세요")
+      ).toBeInTheDocument();
+    });
+  });
+
+  test("일반 사용자 일때 비밀번호 입력 후 확인을 누를 시 정상적으로 출력 하는 지 테스트 합니다.", async () => {
+    (isCredential as jest.Mock).mockReturnValue("origin");
+
+    await act(async () => {
+      render(
+        <QueryClientProvider client={queryClient}>
+          <QuitPage />
+        </QueryClientProvider>
+      );
     });
 
-    act(() => {
-      popupMessageStore.setState({ isClick: true });
-    });
+    await waitFor(() => {
+      const form = screen.getByTestId("form-test");
+      const passwordInput = screen.getByPlaceholderText(
+        "회원탈퇴를 위해 비밀번호를 입력해주세요"
+      );
+      fireEvent.change(passwordInput, { target: { value: "testpassword" } });
 
-    expect(deleteDB).toHaveBeenCalledWith(user);
-
-    const Credential = await isCredential(user);
-
-    if (Credential === "origin") {
+      fireEvent.submit(form);
       expect(originDeleteHandler).toHaveBeenCalled();
-      await waitFor(() => {
-        expect(deleteUser).toHaveBeenCalledWith(user);
-        expect(useRouter().push).toHaveBeenCalledWith("/pages/login");
-      });
-    }
-  });
-
-  test("isSosial이 ture 일 때 회원 탈퇴 성공 테스트", async () => {
-    (isCredential as jest.Mock).mockReturnValueOnce("sosial");
-
-    const activeBtn = screen.getByText("확인");
-
-    await act(async () => {
-      fireEvent.click(activeBtn);
     });
-
-    expect(popuprHandler).toHaveBeenCalledWith({
-      message: "회원탈퇴에 사용 될 2차비밀번호를 입력 해주세요",
-      type: "prompt",
-      state: expect.any(Function),
-    });
-
-    act(() => {
-      popupMessageStore.setState({ isClick: true });
-    });
-
-    expect(deleteDB).toHaveBeenCalledWith(user);
-
-    const Credential = await isCredential(user);
-
-    if (Credential === "sosial") {
-      expect(SocialDeleteHandler).toHaveBeenCalled();
-      await waitFor(() => {
-        expect(deleteUser).toHaveBeenCalledWith(user);
-        expect(useRouter().push).toHaveBeenCalledWith("/pages/login");
-      });
-    }
-  });
-  test("회원정보 삭제 실패 로직", async () => {
-    const errorMsg = "회원 탈퇴에 실패하였습니다";
-    (isCredential as jest.Mock).mockReturnValueOnce("sosial");
-
-    (SocialDeleteHandler as jest.Mock).mockRejectedValue(new Error(errorMsg));
-
-    const activeBtn = screen.getByText("확인");
-
-    await act(async () => {
-      fireEvent.click(activeBtn);
-    });
-
-    expect(popuprHandler).toHaveBeenCalledWith({
-      message: "회원탈퇴에 사용 될 2차비밀번호를 입력 해주세요",
-      type: "prompt",
-      state: expect.any(Function),
-    });
-
-    act(() => {
-      popupMessageStore.setState({ isClick: true });
-    });
-
-    expect(deleteDB).toHaveBeenCalledWith(user);
-
-    const Credential = await isCredential(user);
-
-    if (Credential === "sosial") {
-      expect(SocialDeleteHandler).toHaveBeenCalled();
-
-      await waitFor(() => {
-        expect(popuprHandler).toHaveBeenCalledWith({
-          message: errorMsg,
-        });
-      });
-    }
   });
 });

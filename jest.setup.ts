@@ -27,6 +27,7 @@ jest.mock("@/lib/firebase", () => ({
 jest.mock("next/navigation", () => ({
   useRouter: jest.fn().mockReturnValue({
     push: jest.fn(),
+    refresh: jest.fn(),
   }),
 }));
 
@@ -45,7 +46,8 @@ jest.mock("@/utils/popupHandler", () => ({
 jest.mock("react-hook-form", () => ({
   ...jest.requireActual("react-hook-form"),
   useForm: () => {
-    let formData = {};
+    let formData: Record<string, any> = {};
+
     return {
       control: {},
       register: (name: string) => ({
@@ -55,6 +57,12 @@ jest.mock("react-hook-form", () => ({
       }),
       handleSubmit: (callback: any) => () => {
         callback(formData);
+      },
+      setValue: (name: string, value: any) => {
+        formData = { ...formData, [name]: value };
+      },
+      reset: () => {
+        formData = {};
       },
       formState: {
         errors: {

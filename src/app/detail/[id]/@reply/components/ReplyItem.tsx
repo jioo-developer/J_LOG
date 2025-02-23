@@ -12,7 +12,6 @@ type propsType = {
   user: string;
   item: replyType;
   index: number;
-  replyData: replyType[];
   pageId: string;
 };
 
@@ -68,6 +67,8 @@ const ReplyItem = ({ user, item, index, pageId }: propsType) => {
                 {!currentTarget ? (
                   <CommonButton
                     theme="none"
+                    type="button"
+                    testId="editButton"
                     onClick={() => setTarget(!currentTarget)}
                   >
                     수정
@@ -93,10 +94,12 @@ const ReplyItem = ({ user, item, index, pageId }: propsType) => {
         </div>
       </div>
       {currentTarget ? (
-        <TextAreaComponent
-          submitHandler={replyUpdateHandler}
-          defaultValue={defaultValueState}
-        />
+        <div data-testid="currentTextArea">
+          <TextAreaComponent
+            submitHandler={replyUpdateHandler}
+            defaultValue={defaultValueState}
+          />
+        </div>
       ) : (
         <p className={`reply_text`}>{item.comment}</p>
       )}

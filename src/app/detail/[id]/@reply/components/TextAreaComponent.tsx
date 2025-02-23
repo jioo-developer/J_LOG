@@ -11,28 +11,29 @@ export type textAreaType = {
 
 type propsType = {
   submitHandler: (data: any) => void;
-  defaultValue?: any;
+  defaultValue?: string;
 };
 
 export default function TextAreaComponent({
   submitHandler,
-  defaultValue,
+  defaultValue = "",
 }: propsType) {
-  const {
-    handleSubmit,
-    control,
-    setValue,
-    formState: { errors },
-  } = useForm<textAreaType>();
+  const { handleSubmit, control, setValue } = useForm<textAreaType>({
+    defaultValues: {
+      textAreaRequired: defaultValue ?? "", // defaultValue를 명시적으로 설정
+    },
+  });
 
   useEffect(() => {
     if (defaultValue) {
       setValue("textAreaRequired", defaultValue);
     }
-  }, [defaultValue]);
+  }, [defaultValue, setValue]);
+
   return (
     <form
       role="form"
+      data-testid="form-test"
       css={formWrap}
       onSubmit={handleSubmit((data) => {
         submitHandler(data);
@@ -43,12 +44,12 @@ export default function TextAreaComponent({
         name="textAreaRequired"
         rules={{
           required: "내용을 입력해주세요.",
-        }} // Validation 규칙
+        }}
         render={({ field }) => (
           <ReactTextareaAutosize
             css={TextArea}
             {...field}
-            id="contentRequired"
+            id="textAreaRequired"
             placeholder="내용을 입력해주세요."
             cacheMeasurements
             minRows={1}
@@ -56,6 +57,7 @@ export default function TextAreaComponent({
           />
         )}
       />
+
       <div css={buttonWrap}>
         <CommonButton theme="success">댓글 작성</CommonButton>
       </div>
