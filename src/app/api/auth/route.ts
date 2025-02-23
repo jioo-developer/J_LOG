@@ -1,8 +1,9 @@
 import { NextResponse } from "next/server";
 import { authService, db } from "@/lib/firebase";
-import { collection, doc, getDocs, setDoc } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 import { createUserWithEmailAndPassword, UserCredential } from "firebase/auth";
 
+<<<<<<< HEAD
 export async function GET() {
   try {
     const snapshot = await getDocs(collection(db, "nickname"));
@@ -27,6 +28,8 @@ export async function GET() {
   }
 }
 
+=======
+>>>>>>> d333fc1963018e3847176f94d92528819df0a49d
 export async function POST(request: Request) {
   const { email, password, nickname } = await request.json();
   try {
@@ -41,7 +44,7 @@ export async function POST(request: Request) {
       nickname: nickname,
     });
 
-    return NextResponse.json({ user }, { status: 200 });
+    return NextResponse.json({ status: 200 });
   } catch (error) {
     return NextResponse.json(
       {

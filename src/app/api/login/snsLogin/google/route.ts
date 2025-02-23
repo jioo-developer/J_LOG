@@ -3,10 +3,11 @@ import { firebaseAdmin } from "@/lib/firebaseAdmin";
 
 export async function POST(req: NextRequest) {
   try {
-    const { googleToken } = await req.json(); // 🔹 `googleToken`을 요청 body에서 가져옴
+    const { googleToken } = await req.json();
+    // 🔹 `googleToken`을 요청 body에서 가져옴
 
-    // 🔹 Firebase Admin SDK로 `idToken` 검증
     const decodedToken = await firebaseAdmin.auth().verifyIdToken(googleToken);
+    // 🔹 Firebase Admin SDK로 `idToken` 검증
 
     const response = NextResponse.json({
       message: "인증 성공",
@@ -22,7 +23,6 @@ export async function POST(req: NextRequest) {
 
     return response;
   } catch (error) {
-    console.error("인증 실패:", error);
     return NextResponse.json(
       { success: false, error: (error as Error).message },
       { status: 401 }
