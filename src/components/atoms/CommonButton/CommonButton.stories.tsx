@@ -1,4 +1,4 @@
-import { Story } from "@/components/type";
+import { Story } from "@/static/types/common";
 import CommonButton, { CommonButtonProps } from "./CommonButton";
 export default {
   title: "Components/CommonButton",
@@ -7,7 +7,7 @@ export default {
   argTypes: {
     theme: {
       control: "select",
-      options: ["white", "success", "primary", "disable", "none"],
+      options: ["white", "success", "primary", "disable", "warnning", "none"],
     },
     size: {
       control: "select",
@@ -53,6 +53,13 @@ export const White: Story<CommonButtonProps> = {
 export const Disabled: Story<CommonButtonProps> = {
   args: {
     theme: "disable",
+    size: "sm",
+  },
+};
+
+export const warnning: Story<CommonButtonProps> = {
+  args: {
+    theme: "warnning",
     size: "sm",
   },
 };

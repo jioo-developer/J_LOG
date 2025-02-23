@@ -1,11 +1,30 @@
 import { css } from "@emotion/react";
 
+// (독립) 버튼 테마 설정
+
+export const baseButton = css`
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  box-sizing: border-box;
+
+  a {
+    color: #fff;
+  }
+`;
+
 export const themes = {
   white: css`
     background: transparent;
     color: var(--mainTextcolor);
     border: 1px solid #d1d1d1;
     box-sizing: border-box;
+
+    a {
+      color: #000 !important;
+    }
   `,
   success: css`
     background: var(--pointTextcolor);
@@ -19,23 +38,19 @@ export const themes = {
     background: transparent;
     color: var(--mainTextcolor);
     border: 0;
+    a {
+      color: #000 !important;
+    }
   `,
   disable: css`
     background: gray;
     color: var(--whiteColor);
   `,
+  warnning: css`
+    background: rgb(255, 135, 135);
+    color: var(--whiteColor);
+  `,
 };
-
-// (독립) 버튼 테마 설정
-
-export const baseButton = css`
-  width: 100%;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 8px;
-  box-sizing: border-box;
-`;
 
 // 기반이 되는 기본 default style
 

@@ -6,21 +6,30 @@ export interface CommonButtonProps {
   onClick?: () => void;
   disabled?: boolean;
   size?: "sm" | "rg" | "md" | "lg";
-  theme: "white" | "success" | "primary" | "disable" | "none";
+  type?: "button" | "submit";
+  theme: "white" | "success" | "primary" | "disable" | "warnning" | "none";
+  padding?: "none";
+  testId?: string;
 }
 
 function CommonButton({
   children,
   onClick,
   disabled = false,
-  size = "md",
+  size = "rg",
   theme,
+  type,
+  padding,
+  testId,
 }: CommonButtonProps) {
   return (
     <button
+      data-testid={testId}
       disabled={disabled}
       css={[themes[theme], buttonVariants[size]]}
       onClick={onClick}
+      type={type ? type : "submit"}
+      style={padding && { padding: "0 !important" }}
     >
       {children}
     </button>

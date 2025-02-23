@@ -1,4 +1,4 @@
-import { Story } from "@/components/type";
+import { Story } from "@/static/types/common";
 import CommonInput, { CommonInputProps } from "./CommonInput";
 import { FieldValues, Path } from "react-hook-form";
 
