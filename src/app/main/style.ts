@@ -12,8 +12,8 @@ export const SectionStyle = css`
 
 export const addButton = css`
   position: fixed;
-  bottom: 0px;
-  right: 5px;
+  bottom: 30px;
+  right: 30px;
   z-index: 800;
 
   button {
