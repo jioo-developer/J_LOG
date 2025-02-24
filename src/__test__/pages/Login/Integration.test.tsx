@@ -1,5 +1,5 @@
 import { render, fireEvent, waitFor, screen } from "@testing-library/react";
-import LoginPage from "@/app/login/page";
+import LoginPage from "@/app/login/Client";
 import "@testing-library/jest-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import useLogoutHook from "@/apis/login/hook/useLogoutHook";

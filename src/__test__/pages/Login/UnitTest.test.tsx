@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import LoginPage from "@/app/login/page";
+import LoginPage from "@/app/login/Client";
 
 // Jest Mock
 

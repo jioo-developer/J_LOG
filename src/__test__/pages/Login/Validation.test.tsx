@@ -7,7 +7,7 @@ import {
 } from "@testing-library/react";
 import { getFormElementHandler } from "./utils";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import LoginPage from "@/app/login/page";
+import LoginPage from "@/app/login/Client";
 
 jest.mock("@/apis/login/firebase/useMutation", () => ({
   __esModule: true,
