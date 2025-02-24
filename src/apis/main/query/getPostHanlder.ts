@@ -7,10 +7,15 @@ export async function getPostHandler() {
       "Content-Type": "application/json",
     },
   });
-
   if (!response.ok) {
-    const error = await response.json();
-    throw new Error(error.message);
+    const text = await response.text();
+    console.error("Error response body:", text); // 응답 본문 출력
+    try {
+      const errorData = JSON.parse(text); // 텍스트를 JSON으로 파싱 시도
+      throw new Error(errorData.error);
+    } catch (error) {
+      throw new Error("Unexpected response format");
+    }
   }
 
   const { postdata } = await response.json();

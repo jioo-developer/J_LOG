@@ -16,8 +16,14 @@ export const getDetailHandler = async (
   });
 
   if (!response.ok) {
-    const error = await response.json();
-    throw new Error(error.message);
+    const text = await response.text();
+    console.error("Error response body:", text); // 응답 본문 출력
+    try {
+      const errorData = JSON.parse(text); // 텍스트를 JSON으로 파싱 시도
+      throw new Error(errorData.error);
+    } catch (error) {
+      throw new Error("Unexpected response format");
+    }
   }
 
   // response.json()을 통해 반환된 객체를 responseType으로 타입 지정
