@@ -7,7 +7,7 @@ type propsType = {
   item: number;
 };
 
-export async function useSetCashHandler({ cash, item }: propsType) {
+export async function setCashHandler({ cash, item }: propsType) {
   const user = authService.currentUser as User;
   const response = await fetch(`${apiUrl}/api/market`, {
     method: "POST",

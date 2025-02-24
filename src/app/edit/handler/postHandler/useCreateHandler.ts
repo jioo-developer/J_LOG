@@ -14,7 +14,7 @@ type propsType = {
 
 const user = authService.currentUser;
 
-export default function useCreateHandler({
+export default function createHandler({
   formData,
   imageInfo,
   refValue,

@@ -12,11 +12,11 @@ export function askDeleteHandler({ data, mutate }: propsType) {
   popuprHandler({
     message: "정말로 해당 글을 삭제하시겠습니까?",
     type: "confirm",
-    callback: () => useNextDeleteLogic({ data, mutate }),
+    callback: () => nextDeleteLogic({ data, mutate }),
   });
 }
 
-async function useNextDeleteLogic({ data, mutate }: propsType) {
+async function nextDeleteLogic({ data, mutate }: propsType) {
   const files = data.fileName;
   const writer = data.writer;
   const pageId = data.pageId;

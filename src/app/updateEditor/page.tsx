@@ -18,7 +18,7 @@ function UpdateEdit() {
         setFormData(pageData.title, pageData.text); // title과 text만 넘겨줘야 합니다.
       }
     }
-  }, [pageData, pgId, setChecked, setImageInfo, setFormData]);
+  }, [pageData, isLoading, pgId, setChecked, setImageInfo, setFormData]);
 
   return <EditPage />;
 }

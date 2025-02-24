@@ -28,7 +28,7 @@ export const Default: Story<CommonButtonProps> = {
   },
 };
 
-export const active: Story<CommonButtonProps> = {
+export const Active: Story<CommonButtonProps> = {
   args: {
     theme: "primary",
     size: "md",
@@ -57,7 +57,7 @@ export const Disabled: Story<CommonButtonProps> = {
   },
 };
 
-export const warnning: Story<CommonButtonProps> = {
+export const Warnning: Story<CommonButtonProps> = {
   args: {
     theme: "warnning",
     size: "sm",

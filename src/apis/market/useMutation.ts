@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useSetCashHandler } from "./useSetCashHandler";
+import { setCashHandler } from "./useSetCashHandler";
 import { popuprHandler } from "@/utils/popupHandler";
 import { useRouter } from "next/navigation";
 
@@ -13,7 +13,7 @@ const useCashMutation = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async ({ cash, item }: propsType) => {
-      return await useSetCashHandler({ cash, item });
+      return await setCashHandler({ cash, item });
     },
     onSuccess: (_, variables) => {
       popuprHandler({ message: "구매가 완료 되었습니다" });

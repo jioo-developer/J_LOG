@@ -35,7 +35,7 @@ const MainPage = ({}) => {
       );
       setState(filterArray);
     }
-  }, [searchInfo.isSearch]);
+  }, [searchInfo.isSearch, searchInfo.params]);
 
   const showDataHandler = () => {
     const array = searchInfo.isSearch ? postState : postData;
@@ -72,4 +72,3 @@ const MainPage = ({}) => {
 };
 
 export default MainPage;
-

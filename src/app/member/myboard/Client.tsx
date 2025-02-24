@@ -22,7 +22,7 @@ const MyBoardPage = () => {
     if (!isLoading && myData.length === 0) {
       popuprHandler({ message: "작성한 게시글이 없습니다." });
     }
-  }, [isLoading]);
+  }, [isLoading, myData.length]);
 
   return (
     <div className="wrap board_wrap">

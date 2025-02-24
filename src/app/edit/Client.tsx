@@ -7,7 +7,6 @@ import PriortyChecker from "./components/PriortyChecker/PriortyChecker";
 import { useEffect, useRef, useState } from "react";
 import CommonButton from "@/components/atoms/CommonButton/CommonButton";
 import Link from "next/link";
-import useCreateHandler from "./handler/postHandler/useCreateHandler";
 import { usePathname } from "next/navigation";
 import { useEditDetailStore } from "../updateEditor/store";
 import useCreateMutation from "@/apis/edit/useMutationHandler";
@@ -15,6 +14,7 @@ import { usePageInfoStore } from "@/store/pageInfoStore";
 import { CreateImgUrl } from "./handler/imageHandler/storageUploadHandler";
 import useGetMyInfoQueryHandler from "@/apis/member/mypage/query/getMyDataQuery";
 import { User } from "firebase/auth";
+import createHandler from "./handler/postHandler/useCreateHandler";
 
 export type InputType = {
   titleRequired: string;
@@ -87,7 +87,7 @@ function EditPage() {
 
     // image url 최종 return 함수수
 
-    const content = useCreateHandler({
+    const content = createHandler({
       formData: newData,
       imageInfo: returnImageUrl,
       refValue: PriortyChecked,

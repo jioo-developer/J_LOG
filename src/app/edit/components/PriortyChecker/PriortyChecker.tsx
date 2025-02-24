@@ -41,4 +41,6 @@ const PriortyChecker = forwardRef<HTMLInputElement>((_, ref) => {
   );
 });
 
+PriortyChecker.displayName = "PriortyChecker";
+
 export default PriortyChecker;
