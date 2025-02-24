@@ -1,4 +1,3 @@
-import { apiUrl } from "@/static/constants/common";
 import { replyType } from "./getReplyDataQuery";
 
 type responseType = {
@@ -6,7 +5,7 @@ type responseType = {
 };
 
 export async function getReplyHandler(pageId: string): Promise<responseType> {
-  const response = await fetch(`${apiUrl}/api/reply?pageId=${pageId}`, {
+  const response = await fetch(`/api/reply?pageId=${pageId}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

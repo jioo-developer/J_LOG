@@ -1,7 +1,5 @@
-import { apiUrl } from "@/static/constants/common";
-
 export async function pageDelete(id: string) {
-  const response = await fetch(`${apiUrl}/api/detail`, {
+  const response = await fetch(`/api/detail`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",

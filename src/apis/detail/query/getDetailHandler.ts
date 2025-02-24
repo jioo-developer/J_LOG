@@ -1,4 +1,3 @@
-import { apiUrl } from "@/static/constants/common";
 import { FirebaseData } from "@/static/types/common";
 
 type responseType = {
@@ -8,7 +7,7 @@ type responseType = {
 export const getDetailHandler = async (
   pageId: string
 ): Promise<responseType> => {
-  const response = await fetch(`${apiUrl}/api/detail?pageId=${pageId}`, {
+  const response = await fetch(`/api/detail?pageId=${pageId}`, {
     method: "GET", // GET 요청
     headers: {
       "Content-Type": "application/json",

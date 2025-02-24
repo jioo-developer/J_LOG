@@ -1,7 +1,5 @@
-import { apiUrl } from "@/static/constants/common";
-
 async function getUserHandler() {
-  const response = await fetch(`${apiUrl}/api/login`, {
+  const response = await fetch(`/api/login`, {
     method: "GET",
     credentials: "include",
   });

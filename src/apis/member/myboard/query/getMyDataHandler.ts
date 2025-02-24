@@ -1,7 +1,5 @@
-import { apiUrl } from "@/static/constants/common";
-
 async function getMyDataHandler(user: string) {
-  const response = await fetch(`${apiUrl}/api/member/board?uid=${user}`, {
+  const response = await fetch(`/api/member/board?uid=${user}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

@@ -1,5 +1,3 @@
-import { apiUrl } from "@/static/constants/common";
-
 type propsType = {
   pageId: string;
   uid: string;
@@ -7,7 +5,7 @@ type propsType = {
 
 export async function getIsFavoriteHandler({ pageId, uid }: propsType) {
   const response = await fetch(
-    `${apiUrl}/api/detail/favorite?userUid=${encodeURIComponent(
+    `/api/detail/favorite?userUid=${encodeURIComponent(
       uid
     )}&id=${encodeURIComponent(pageId)}`,
     {

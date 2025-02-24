@@ -1,5 +1,4 @@
 import { authService } from "@/lib/firebase";
-import { apiUrl } from "@/static/constants/common";
 import { QueryObserverResult, useQuery } from "@tanstack/react-query";
 import {
   GoogleAuthProvider,
