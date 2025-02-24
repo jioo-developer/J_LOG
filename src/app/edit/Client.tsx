@@ -12,7 +12,6 @@ import { usePathname } from "next/navigation";
 import { useEditDetailStore } from "../updateEditor/store";
 import useCreateMutation from "@/apis/edit/useMutationHandler";
 import { usePageInfoStore } from "@/store/pageInfoStore";
-import { FirebaseData } from "@/static/types/common";
 import { CreateImgUrl } from "./handler/imageHandler/storageUploadHandler";
 import useGetMyInfoQueryHandler from "@/apis/member/mypage/query/getMyDataQuery";
 import { User } from "firebase/auth";

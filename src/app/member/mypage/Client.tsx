@@ -1,8 +1,8 @@
 "use client";
 import "./Style.scss";
 import useGetQueryHandler from "@/apis/member/mypage/query/getMyDataQuery";
-import NicknameForm from "./components/NicknameForm";
-import ProfileComponent from "./components/Profile";
+import NicknameForm from "./components/NicknameForm/NicknameForm";
+import ProfileComponent from "./components/Profile/Profile";
 import CommonButton from "@/components/atoms/CommonButton/CommonButton";
 import Link from "next/link";
 import SkeletonComponent from "./components/Skeleton";

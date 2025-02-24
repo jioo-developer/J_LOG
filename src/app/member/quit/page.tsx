@@ -14,6 +14,7 @@ import CommonInput from "@/components/atoms/CommonInput/CommonInput";
 import useQuitMutation from "@/apis/member/quit/useMutation";
 import { useRouter } from "next/navigation";
 import Head from "next/head";
+import { popuprHandler } from "@/utils/popupHandler";
 
 type UserType = {
   user: User;
@@ -47,7 +48,7 @@ const QuitPage = () => {
       }
       quitHandler();
     } catch {
-      //   popuprHandler({ message: "회원 탈퇴에 실패하였습니다" });
+        popuprHandler({ message: "회원 탈퇴에 실패하였습니다" });
     }
   }
 
