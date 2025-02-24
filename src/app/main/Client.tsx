@@ -11,6 +11,7 @@ import CommonButton from "@/components/atoms/CommonButton/CommonButton";
 import Image from "next/image";
 import Link from "next/link";
 import { usePageInfoStore } from "@/store/pageInfoStore";
+import { addButton, SectionStyle } from "./style";
 
 const MainPage = ({}) => {
   const [postState, setState] = useState<FirebaseData[]>([]);
@@ -72,23 +73,3 @@ const MainPage = ({}) => {
 
 export default MainPage;
 
-const SectionStyle = css`
-  display: flex;
-  width: 95%;
-  margin: 0 auto;
-  margin-top: 32px;
-  flex-wrap: wrap;
-  gap: 16px;
-  padding-bottom: 75px;
-`;
-
-const addButton = css`
-  position: fixed;
-  bottom: 0px;
-  right: 5px;
-  z-index: 800;
-
-  button {
-    padding: 0;
-  }
-`;

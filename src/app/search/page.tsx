@@ -1,11 +1,7 @@
 /** @jsxImportSource @emotion/react */
 "use client";
 import { inputStyle } from "@/components/atoms/CommonInput/CommonInputStyle";
-<<<<<<< HEAD
-import { useSearchStore } from "@/store/common";
-=======
 import { useSearchStore } from "@/store/searchStore";
->>>>>>> d333fc1963018e3847176f94d92528819df0a49d
 import { css } from "@emotion/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";

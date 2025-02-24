@@ -3,6 +3,7 @@ import { LoginErrorHandler } from "../../../utils/errorHandler";
 import { useRouter } from "next/navigation";
 import { apiUrl } from "@/static/constants/common";
 import { authService } from "@/lib/firebase";
+import { popuprHandler } from "@/utils/popupHandler";
 
 async function LogoutHandler() {
   await authService.signOut();
@@ -25,13 +26,7 @@ const useLogoutHook = () => {
     },
     onError: (error) => {
       const errorMessage = LoginErrorHandler(error.message);
-      if (errorMessage) {
-        window.alert(errorMessage);
-        // popuprHandler({ message: errorMessage });
-      } else {
-        window.alert(error.message);
-        // popuprHandler({ message: "로그인 도중 에러가 발생했습니다" });
-      }
+      popuprHandler({ message: errorMessage ?? error.message });
     },
   });
 };

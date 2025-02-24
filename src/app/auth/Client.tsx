@@ -5,15 +5,6 @@ import { useForm } from "react-hook-form";
 import { InputTypes } from "@/static/types/common";
 import CommonInput from "@/components/atoms/CommonInput/CommonInput";
 import CommonButton from "@/components/atoms/CommonButton/CommonButton";
-<<<<<<< HEAD
-import { ChevronLeftIcon, EyeIcon, EyeOffIcon } from "lucide-react";
-import AgreementForm from "./component/AgreementForm";
-import useAuthHandler from "@/service/api-hooks/auth/hook/useAuthHook";
-import { DevTool } from "@hookform/devtools";
-import CommonCheckbox from "@/components/atoms/CommonCheckbox/CommonCheckbox";
-import Link from "next/link";
-import useNickNameQueryHook from "@/service/api-hooks/auth/hook/useGetNicknameHook";
-=======
 import AgreementForm from "@/app/auth/component/AgreementForm";
 import CommonCheckbox from "@/components/atoms/CommonCheckbox/CommonCheckbox";
 import Link from "next/link";
@@ -21,21 +12,16 @@ import useNickNameQueryHook from "@/apis/member/mypage/query/useGetNicknameQuery
 import useAuthMutation from "@/apis/auth/useMutation";
 import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
 import { FaChevronLeft } from "react-icons/fa";
->>>>>>> d333fc1963018e3847176f94d92528819df0a49d
 
 interface InputType extends InputTypes {
   nickNameRequired: string;
 }
 
-<<<<<<< HEAD
-const AuthPage = () => {
-=======
 interface LoginProps {
   onSubmit?: (data: InputType) => Promise<void>;
 }
 
 function AuthPage({ onSubmit }: LoginProps) {
->>>>>>> d333fc1963018e3847176f94d92528819df0a49d
   const {
     register,
     handleSubmit,
@@ -46,13 +32,10 @@ function AuthPage({ onSubmit }: LoginProps) {
   const [showInputBlind, setShowBlind] = useState(false);
 
   const { nicknameData } = useNickNameQueryHook();
-
-  const { mutate: createAccount } = useAuthMutation();
-
-  const { nicknameData } = useNickNameQueryHook();
+  const { mutate} = useAuthMutation();
 
   async function createAccountHandler(data: InputType) {
-    createAccount({
+    mutate({
       email: data.emailRequired,
       password: data.passwordRequired,
       nickname: data.nickNameRequired,

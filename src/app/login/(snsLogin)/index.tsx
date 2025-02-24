@@ -1,11 +1,7 @@
 import CommonButton from "@/components/atoms/CommonButton/CommonButton";
 import Image from "next/image";
 import "./style.scss";
-<<<<<<< HEAD
-import useGoogleHook from "@/service/api-hooks/login/loginType/google/useMutation";
-=======
 import useGoogleLoginHook from "@/apis/login/google/useMutation";
->>>>>>> d333fc1963018e3847176f94d92528819df0a49d
 
 export type objType = {
   id: string;

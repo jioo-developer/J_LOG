@@ -18,7 +18,7 @@ export async function AuthHandler({
     const error = await response.json();
     throw new Error(error.message);
   }
-  return response.json();
+  return response;
 }
 
 // 회원가입 계정 생성 로직

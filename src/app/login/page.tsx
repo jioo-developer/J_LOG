@@ -6,18 +6,11 @@ import CommonCheckbox from "@/components/atoms/CommonCheckbox/CommonCheckbox";
 import Image from "next/image";
 import SocialLoginPage from "./(snsLogin)";
 import { useForm } from "react-hook-form";
-<<<<<<< HEAD
-import { EyeOffIcon, EyeIcon } from "lucide-react";
-import { DevTool } from "@hookform/devtools";
-import useLoginHook from "@/service/api-hooks/login/loginType/firebase/useMutation";
-=======
 import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
 import useLoginHook from "@/apis/login/firebase/useMutation";
->>>>>>> d333fc1963018e3847176f94d92528819df0a49d
 import { useState } from "react";
 import { InputTypes } from "@/static/types/common";
 import Link from "next/link";
-import Head from "next/head";
 
 // jest 테스트를 위해 작성
 interface LoginProps {
@@ -42,20 +35,6 @@ function LoginPage({ onSubmit }: LoginProps) {
   }
 
   return (
-    <>
-      <Head>
-        <title>로그인 - J.log</title>
-        <meta
-          name="description"
-          content="J.log에 로그인하여 다양한 서비스를 이용하세요."
-        />
-        <meta property="og:title" content="J.log 로그인" />
-        <meta
-          property="og:description"
-          content="J.log에 로그인하여 다양한 서비스를 이용하세요."
-        />
-        <meta property="og:image" content="/images/logo.svg" />
-      </Head>
       <div className="page-Reset sign__Wrap flex-Set ">
         <div className="logo__Wrap">
           <Image
@@ -137,7 +116,6 @@ function LoginPage({ onSubmit }: LoginProps) {
           </CommonButton>
         </div>
       </div>
-    </>
   );
 }
 
