@@ -18,6 +18,7 @@ const useCreateMutation = () => {
     },
     onSuccess: (_, variables) => {
       router.push(`/detail/${variables.pageId}`);
+      router.refresh();
       queryClient.setQueryData<FirebaseData>(
         ["getPage", variables.pageId],
         () => {
