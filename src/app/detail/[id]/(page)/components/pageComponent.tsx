@@ -7,7 +7,7 @@ import CommonImage from "@/components/atoms/CommonImage";
 import { Skeleton } from "@mui/material";
 import usePageDeleteMutation from "@/apis/detail/action/delete/useMutation";
 import { askDeleteHandler } from "../handler/pageDeleteHandler";
-import useFavoriteMutation from "@/apis/detail/favorite/useMutation";
+import useFavoriteMutation from "@/apis/detail/action/favorite/useMutation";
 import useMediaQuery from "@/utils/useMediaQuery";
 
 type propsType = {

@@ -40,7 +40,7 @@ const DetailPage = ({ pageId }: propsType) => {
   }
 
   return (
-    <div className="page-Reset detail_wrap">
+    <div className="detail_wrap">
       <div className="in_wrap">
         {pageData && (
           <PageComponent

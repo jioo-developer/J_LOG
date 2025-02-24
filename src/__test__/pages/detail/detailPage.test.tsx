@@ -9,7 +9,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import DetailPage from "@/app/detail/[id]/(page)/Client";
 import useDetailQueryHook from "@/apis/detail/query/useDetailQuery";
 import { mockPageData } from "./utils";
-import useFavoriteMutation from "@/apis/detail/favorite/useMutation";
+import useFavoriteMutation from "@/apis/detail/action/favorite/useMutation";
 import { popuprHandler } from "@/utils/popupHandler";
 
 // Mock 정의

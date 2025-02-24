@@ -69,7 +69,7 @@ function Header({ pathName }: propsType) {
       <div css={UIWrap}>
         <CommonButton theme="none">
           <Link href="/search">
-            <IoIosSearch style={{ marginTop: 10 }} />
+            <IoIosSearch size={32} style={{ marginTop: 10 }} />
           </Link>
         </CommonButton>
         <label htmlFor="menuToggle" className="flex-Set">
@@ -91,7 +91,7 @@ function Header({ pathName }: propsType) {
               )}
             </Suspense>
           </figure>
-          <FaChevronDown size={18} />
+          <FaChevronDown size={16} />
         </label>
 
         <ul className="sub_menu" css={SubMenu}>

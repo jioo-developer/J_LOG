@@ -12,11 +12,7 @@
   "dependencies": {
     "@emotion/babel-plugin": "^11.13.5",
     "@emotion/react": "^11.14.0",
-<<<<<<< HEAD
-    "@mui/material": "^6.4.2",
-=======
     "@mui/material": "^6.4.5",
->>>>>>> d333fc1963018e3847176f94d92528819df0a49d
     "@tanstack/react-query": "^5.64.2",
     "@tanstack/react-query-devtools": "^5.65.0",
     "dotenv": "^16.4.7",

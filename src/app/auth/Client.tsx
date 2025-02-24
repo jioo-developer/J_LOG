@@ -32,7 +32,7 @@ function AuthPage({ onSubmit }: LoginProps) {
   const [showInputBlind, setShowBlind] = useState(false);
 
   const { nicknameData } = useNickNameQueryHook();
-  const { mutate} = useAuthMutation();
+  const { mutate } = useAuthMutation();
 
   async function createAccountHandler(data: InputType) {
     mutate({
@@ -47,7 +47,7 @@ function AuthPage({ onSubmit }: LoginProps) {
       <div className="title__Area flex-Set">
         <button type="button" className="flex-Set">
           <Link href="/login" className="close">
-            <FaChevronLeft size={22} />
+            <FaChevronLeft size={16} />
           </Link>
           회원가입
         </button>

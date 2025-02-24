@@ -1,10 +1,10 @@
 .profile_wrap {
   margin: 0 auto;
   width: 95%;
-  min-height: 100vh;
 
   @media all and (max-width: 1000px) {
     align-items: flex-start;
+    min-height: 100vh;
   }
 
   @media all and (max-width: 500px) {

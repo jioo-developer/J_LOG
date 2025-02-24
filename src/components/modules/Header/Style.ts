@@ -16,6 +16,9 @@ export const HeaderStyle = css`
 
   label {
     cursor: pointer;
+    svg {
+      margin-left: 10px;
+    }
   }
 
   /* input이 체크된 상태일 때 */
@@ -56,11 +59,7 @@ export const SubMenu = css`
   flex-direction: column;
   position: absolute;
   right: Calc(var(--gap-xlarge) * 2);
-<<<<<<< HEAD
-  top: Calc(var(--gap-xlarge) * 4);
-=======
   top: Calc(var(--gap-xlarge) * 3.3);
->>>>>>> d333fc1963018e3847176f94d92528819df0a49d
   background: #fff;
   box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.1);
   z-index: 10;
