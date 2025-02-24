@@ -1,4 +1,5 @@
 import { authService } from "@/lib/firebase";
+import { apiUrl } from "@/static/constants/common";
 import {
   browserSessionPersistence,
   setPersistence,
@@ -16,7 +17,7 @@ export async function Postlogin(id: string, password: string) {
   // 로그인
   const token = await userCredential.user.getIdToken();
   // 토큰
-  const response = await fetch(`/api/login`, {
+  const response = await fetch(`${apiUrl}/api/login`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

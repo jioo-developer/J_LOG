@@ -1,5 +1,7 @@
+import { apiUrl } from "@/static/constants/common";
+
 export async function getPostHandler() {
-  const response = await fetch(`/api/main`, {
+  const response = await fetch(`${apiUrl}/api/main`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

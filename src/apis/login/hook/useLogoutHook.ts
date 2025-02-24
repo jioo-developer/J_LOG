@@ -1,13 +1,14 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { LoginErrorHandler } from "../../../utils/errorHandler";
 import { useRouter } from "next/navigation";
+import { apiUrl } from "@/static/constants/common";
 import { authService } from "@/lib/firebase";
 import { popuprHandler } from "@/utils/popupHandler";
 
 async function LogoutHandler() {
   await authService.signOut();
 
-  await fetch(`/api/login`, {
+  await fetch(`${apiUrl}/api/login`, {
     method: "DELETE",
     credentials: "include",
   });

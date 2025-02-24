@@ -1,4 +1,5 @@
 import { authService } from "@/lib/firebase";
+import { apiUrl } from "@/static/constants/common";
 import { User } from "firebase/auth";
 
 type propsType = {
@@ -8,7 +9,7 @@ type propsType = {
 
 export async function setCashHandler({ cash, item }: propsType) {
   const user = authService.currentUser as User;
-  const response = await fetch(`/api/market`, {
+  const response = await fetch(`${apiUrl}/api/market`, {
     method: "POST",
     body: JSON.stringify({ user: user.uid, cash, item }),
   });

@@ -1,4 +1,5 @@
 import { authService } from "@/lib/firebase";
+import { apiUrl } from "@/static/constants/common";
 import {
   browserSessionPersistence,
   GoogleAuthProvider,
@@ -17,7 +18,7 @@ export async function GoogleLoginHandler() {
   const token = await result.user.getIdToken();
   // 토큰
 
-  const response = await fetch(`/api/login/snsLogin/google`, {
+  const response = await fetch(`${apiUrl}/api/login/snsLogin/google`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

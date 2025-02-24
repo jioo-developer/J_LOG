@@ -1,3 +1,5 @@
+import { authService } from "@/lib/firebase";
+import { apiUrl } from "@/static/constants/common";
 import { User } from "firebase/auth";
 
 type propsType = {
@@ -6,7 +8,7 @@ type propsType = {
 };
 
 async function ChangeNicknameHandler({ nickname, user }: propsType) {
-  const response = await fetch(`/api/member/mypage/nickname`, {
+  const response = await fetch(`${apiUrl}/api/member/mypage/nickname`, {
     method: "POST",
     body: JSON.stringify({ id: user.uid, nickname }),
   });

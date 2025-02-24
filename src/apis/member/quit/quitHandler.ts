@@ -1,8 +1,9 @@
 import { authService } from "@/lib/firebase";
+import { apiUrl } from "@/static/constants/common";
 
 async function QuitHandler() {
   const user = authService.currentUser;
-  const response = await fetch(`/api/member/quit`, {
+  const response = await fetch(`${apiUrl}/api/member/quit`, {
     method: "DELETE",
     credentials: "include",
     body: JSON.stringify({ user }),

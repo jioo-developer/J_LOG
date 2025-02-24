@@ -1,3 +1,5 @@
+import { apiUrl } from "@/static/constants/common";
+
 type propsType = {
   replyId: string;
   pageId: string;
@@ -5,7 +7,7 @@ type propsType = {
 };
 
 export async function updateReply({ pageId, replyId, comment }: propsType) {
-  const response = await fetch(`/api/reply`, {
+  const response = await fetch(`${apiUrl}/api/reply`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",

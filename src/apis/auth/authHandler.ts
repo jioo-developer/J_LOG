@@ -1,3 +1,4 @@
+import { apiUrl } from "@/static/constants/common";
 import { AuthPropsType } from "@/static/types/common";
 
 export async function AuthHandler({
@@ -5,7 +6,7 @@ export async function AuthHandler({
   password,
   nickname,
 }: AuthPropsType) {
-  const response = await fetch(`/api/auth`, {
+  const response = await fetch(`${apiUrl}/api/auth`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

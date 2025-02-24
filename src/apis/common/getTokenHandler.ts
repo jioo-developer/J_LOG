@@ -1,9 +1,11 @@
+import { apiUrl } from "@/static/constants/common";
+
 type ResponseData = {
   isToken: boolean; // 응답 객체에 isToken 프로퍼티가 있다
 };
 
 export async function getTokenHandler() {
-  const response = await fetch(`/api/common/token`, {
+  const response = await fetch(`${apiUrl}/api/common/token`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

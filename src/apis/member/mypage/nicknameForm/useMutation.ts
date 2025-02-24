@@ -1,7 +1,9 @@
-import { authService } from "@/lib/firebase";
+import { authService, db } from "@/lib/firebase";
+import { apiUrl } from "@/static/constants/common";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { updateProfile, User } from "firebase/auth";
 import ChangeNicknameHandler from "./ChangeNicknameHandler";
+import { usePopupStore } from "@/store/popupStore";
 import { popuprHandler } from "@/utils/popupHandler";
 
 export type changeHanlderType = {
