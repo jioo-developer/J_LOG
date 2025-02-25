@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import "@/app/_asset/css/404.css";
+import "@/asset/404.css";
 import { useRouter } from "next/navigation";
 import CommonButton from "@/components/atoms/CommonButton/CommonButton";
 
