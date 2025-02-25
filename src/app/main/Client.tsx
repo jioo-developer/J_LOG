@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import Item from "./component/Item";
 import usePostQueryHook from "@/apis/main/query/useGetQuery";
-import { css } from "@emotion/react";
 import { useSearchStore } from "@/store/searchStore";
 import { popuprHandler } from "@/utils/popupHandler";
 import { FirebaseData } from "@/static/types/common";

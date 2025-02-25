@@ -4,9 +4,8 @@ import Image from "next/image";
 import { Suspense, useEffect, useRef, useState } from "react";
 import CommonButton from "../../atoms/CommonButton/CommonButton";
 import Link from "next/link";
-import { GoPoster, HeaderStyle, SubMenu, UIWrap } from "./Style";
+import { HeaderStyle, SubMenu, UIWrap } from "./Style";
 import { Skeleton } from "@mui/material";
-import { usePageInfoStore } from "@/store/pageInfoStore";
 import { useSearchStore } from "@/store/searchStore";
 import useLogoutHook from "@/apis/login/hook/useLogoutHook";
 import useUserQueryHook from "@/apis/login/hook/useGetUserQuery";
@@ -24,7 +23,6 @@ function Header({ pathName }: propsType) {
   const [tokenState, setToken] = useState<boolean | null>(null);
   const { setSearch } = useSearchStore();
   const { mutate: logout } = useLogoutHook();
-  const isMobile = useMediaQuery("(max-width: 450px)");
 
   useEffect(() => {
     fetchToken();
