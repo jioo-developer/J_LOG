@@ -23,16 +23,10 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function ServerComponent() {
   const queryClient = new QueryClient();
 
-  await Promise.all([
-    queryClient.prefetchQuery({
-      queryKey: ["getuser"],
-      queryFn: getUser,
-    }),
-    queryClient.prefetchQuery({
-      queryKey: ["getPost"],
-      queryFn: getPostHandler,
-    }),
-  ]);
+  await queryClient.prefetchQuery({
+    queryKey: ["getPost"],
+    queryFn: getPostHandler,
+  });
 
   const dehydratedState = dehydrate(queryClient);
   return (
