@@ -25,7 +25,7 @@ describe("비밀번호 찾기 페이지에 대한 기능을 테스트합니다."
       </QueryClientProvider>
     );
   });
-  test("이메일 입력 필드가 렌더링된다", () => {
+  test("이메일 입력 필드가 정상적으로 랜더링 되는 지 테스트 합니다.", () => {
     // 이메일 입력 필드가 있는지 확인
     const emailInput = screen.getByTestId("emailRequired");
     expect(emailInput).toBeInTheDocument();

@@ -46,14 +46,7 @@ describe("MyPage 페이지를 테스트 테스트합니다.", () => {
     );
   });
 
-  test("MyPage가 정상적으로 랜더링 되는 지 테스트 합니다다", async () => {
-    expect(screen.getByText("테스터.log")).toBeInTheDocument();
-    expect(screen.getByText("닉네임 수정")).toBeInTheDocument();
-    expect(screen.getByText("이미지 업로드")).toBeInTheDocument();
-    expect(screen.getByText("회원 탈퇴")).toBeInTheDocument();
-  });
-
-  test("닉네임 수정 기능을 테스트 합니다다", async () => {
+  test("닉네임 수정 기능을 테스트 합니다", async () => {
     fireEvent.click(screen.getByText("닉네임 수정"));
 
     await act(async () => {

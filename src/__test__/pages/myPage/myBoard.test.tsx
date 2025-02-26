@@ -1,3 +1,4 @@
+import { mockMyData } from "./util";
 import useMyDataQueryHook from "@/apis/member/myboard/query/useGetMyPostQuery";
 import MyBoardPage from "@/app/member/myboard/Client";
 import { popuprHandler } from "@/utils/popupHandler";
@@ -28,6 +29,7 @@ describe("My Board 페이지가 정상적으로 랜더링 되는 지 테스트 �
   beforeEach(() => {
     jest.clearAllMocks();
   });
+
   test("작성한 글이 존재하지 않을 때 팝업이 정상적으로 출력 되는지 테스트 합니다", () => {
     render(
       <QueryClientProvider client={queryClient}>
@@ -41,22 +43,7 @@ describe("My Board 페이지가 정상적으로 랜더링 되는 지 테스트 �
 
   test("페이지 데이터가 있을 때 데이터가 랜더링 되는 지 테스트 합니다", async () => {
     (useMyDataQueryHook as jest.Mock).mockReturnValue({
-      myData: [
-        {
-          id: "1",
-          pageId: "1234",
-          writer: "user1",
-          text: "Post 1",
-          url: ["/img/no-image.jpg"],
-        },
-        {
-          id: "2",
-          pageId: "5678",
-          writer: "user2",
-          text: "Post 2",
-          url: ["/img/no-image.jpg"],
-        },
-      ],
+      myData: mockMyData,
       isLoading: false,
       error: null,
     });

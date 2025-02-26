@@ -1,19 +1,9 @@
 import { render, screen } from "@testing-library/react";
 import LoginPage from "@/app/login/Client";
-import "@testing-library/jest-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { getFormElementHandler } from "./utils";
 
-// Jest Mock
-
-jest.mock("@/apis/login/firebase/useMutation", () => ({
-  __esModule: true,
-  default: jest.fn(() => ({
-    mutate: jest.fn(),
-  })),
-}));
-
-describe("로그인 페이지가 정상적으로 렌더링 되었는 지 태스트 합니다.", () => {
+describe("로그인 페이지의 기능을 태스트 합니다.", () => {
   beforeEach(() => {
     jest.clearAllMocks();
     const queryClient = new QueryClient();

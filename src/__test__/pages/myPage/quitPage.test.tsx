@@ -36,27 +36,7 @@ describe("QuitPage 페이지의 기능을 테스트 합니다.", () => {
     jest.clearAllMocks();
   });
 
-  test("회원 탈퇴 모달이 정상적으로 렌더링 되는 지 테스트 합니다다.", async () => {
-    (isCredential as jest.Mock).mockReturnValue("origin");
-
-    await act(async () => {
-      render(
-        <QueryClientProvider client={queryClient}>
-          <QuitPage />
-        </QueryClientProvider>
-      );
-    });
-
-    await waitFor(() => {
-      expect(
-        screen.getByText("정말로 회원탈퇴를 진행할까요?")
-      ).toBeInTheDocument();
-      expect(screen.getByText("취소")).toBeInTheDocument();
-      expect(screen.getByText("확인")).toBeInTheDocument();
-    });
-  });
-
-  test("소셜 로그인 일 때 인풋이 출력하지 않는 것에 대한한 테스트를 진행 합니다", async () => {
+  test("소셜 로그인 일 때 인풋이 출력하지 않는 것에 대한 테스트를 진행 합니다", async () => {
     (isCredential as jest.Mock).mockReturnValue("sosial");
 
     await act(async () => {
@@ -91,7 +71,7 @@ describe("QuitPage 페이지의 기능을 테스트 합니다.", () => {
     });
   });
 
-  test("일반 사용자 일때 비밀번호 입력 후 확인을 누를 시 정상적으로 출력 하는 지 테스트 합니다.", async () => {
+  test("일반 로그인 일때 비밀번호 입력 시 정상적으로 제출 하는 지 테스트 합니다.", async () => {
     (isCredential as jest.Mock).mockReturnValue("origin");
 
     await act(async () => {

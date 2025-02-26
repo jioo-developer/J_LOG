@@ -1,7 +1,6 @@
 import { act, render, screen, waitFor } from "@testing-library/react";
 import { useSearchStore } from "@/store/searchStore";
 import { popuprHandler } from "@/utils/popupHandler";
-import "@testing-library/jest-dom";
 import mockPostData from "./utils";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import MainPage from "@/app/main/Client";
@@ -36,14 +35,14 @@ describe("", () => {
     expect(screen.getByText("Another test post.")).toBeInTheDocument();
   });
 
-  test("searchInfo.text 가 있을 때 테스트", async () => {
+  test("검색 결과가 있을 때 결과를 정상 적으로 출력 하는 지 테스트 합니다", async () => {
     await act(async () => {
-      useSearchStore.setState({ searchText: "This is a test post." }); // 상태를 ""로 변경
+      useSearchStore.setState({ searchText: "This is a test post." });
     });
 
     // 상태가 ""로 변경되었을 때 router.push가 호출되는지 확인
     await waitFor(() => {
-      const currentState = useSearchStore.getState(); // 현재 zustand 상태 가져오기
+      const currentState = useSearchStore.getState();
       expect(currentState.searchText).toBe("This is a test post.");
     });
 
@@ -53,7 +52,7 @@ describe("", () => {
 
   test("검색 결과가 없을 때 팝업 메시지가 표시되는 지 테스트 합니다", async () => {
     await act(async () => {
-      useSearchStore.setState({ searchText: "xxx" }); // 상태를 ""로 변경
+      useSearchStore.setState({ searchText: "xxx" });
     });
 
     // 상태가 ""로 변경되었을 때 router.push가 호출되는지 확인

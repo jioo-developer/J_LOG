@@ -5,68 +5,13 @@ import {
   waitFor,
   act,
 } from "@testing-library/react";
+import { mockReplyData } from "./util";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Reply from "@/app/detail/[id]/@reply/Client";
 import { popuprHandler } from "@/utils/popupHandler";
-import { useReplyMutation } from "@/apis/detail/reply/hook/create/useMutation";
 import TextAreaComponent from "@/app/detail/[id]/@reply/components/TextAreaComponent";
 
 // 모킹
-jest.mock("@/apis/login/hook/useGetUserQuery", () => ({
-  __esModule: true, // ES 모듈로 인식
-  default: jest.fn().mockReturnValue({
-    data: { uid: "테스터", displayName: "테스터" }, // 기본 테스트 데이터
-    error: null,
-    isLoading: false,
-  }),
-}));
-
-jest.mock("@/apis/detail/query/useDetailQuery", () => ({
-  __esModule: true, // ES 모듈로 인식되도록 설정
-  default: jest.fn().mockReturnValue({
-    pageData: null,
-    error: null,
-    isLoading: false,
-  }),
-}));
-
-jest.mock("@/apis/detail/reply/query/getReplyDataQuery", () => ({
-  __esModule: true, // ES 모듈로 인식
-  useReplyQueryHook: jest.fn().mockReturnValue({
-    replyData: [
-      {
-        id: "reply1",
-        comment: "This is a test comment",
-        uid: "테스터",
-        replyrer: "Test User 1",
-        date: "2024년11월14일",
-        timestamp: { second: 1699988400, nanoseconds: 123000000 },
-        profile: "/img/profile1.png",
-      },
-    ],
-    error: null,
-    isLoading: false,
-  }),
-}));
-
-jest.mock("@/apis/detail/reply/hook/create/useMutation", () => ({
-  useReplyMutation: jest.fn(() => ({
-    mutate: jest.fn(),
-  })),
-}));
-
-jest.mock("@/apis/detail/reply/hook/update/useMutation", () => ({
-  useUpdateMutation: jest.fn(() => ({
-    mutate: jest.fn(),
-  })),
-}));
-
-jest.mock("@/apis/detail/reply/hook/delete/useMutation", () => ({
-  useDeleteMutation: jest.fn(() => ({
-    mutate: jest.fn(),
-  })),
-}));
-
 jest.mock("react-hook-form", () => ({
   ...jest.requireActual("react-hook-form"),
   useForm: () => {
@@ -104,6 +49,51 @@ jest.mock("react-hook-form", () => ({
     const field = control.register(name); // mock register
     return render({ field });
   },
+}));
+
+jest.mock("@/apis/login/hook/useGetUserQuery", () => ({
+  __esModule: true, // ES 모듈로 인식
+  default: jest.fn().mockReturnValue({
+    data: { uid: "테스터", displayName: "테스터" }, // 기본 테스트 데이터
+    error: null,
+    isLoading: false,
+  }),
+}));
+
+jest.mock("@/apis/detail/query/useDetailQuery", () => ({
+  __esModule: true, // ES 모듈로 인식되도록 설정
+  default: jest.fn().mockReturnValue({
+    pageData: null,
+    error: null,
+    isLoading: false,
+  }),
+}));
+
+jest.mock("@/apis/detail/reply/query/getReplyDataQuery", () => ({
+  __esModule: true, // ES 모듈로 인식
+  useReplyQueryHook: jest.fn().mockReturnValue({
+    replyData: mockReplyData,
+    error: null,
+    isLoading: false,
+  }),
+}));
+
+jest.mock("@/apis/detail/reply/hook/create/useMutation", () => ({
+  useReplyMutation: jest.fn(() => ({
+    mutate: jest.fn(),
+  })),
+}));
+
+jest.mock("@/apis/detail/reply/hook/update/useMutation", () => ({
+  useUpdateMutation: jest.fn(() => ({
+    mutate: jest.fn(),
+  })),
+}));
+
+jest.mock("@/apis/detail/reply/hook/delete/useMutation", () => ({
+  useDeleteMutation: jest.fn(() => ({
+    mutate: jest.fn(),
+  })),
 }));
 
 // QueryClientProvider로 감싸서 쿼리 클라이언트 제공
@@ -166,9 +156,16 @@ describe("Reply 페이지에 대한 기능을 테스트 합니다", () => {
     });
     await waitFor(() => {
       // 댓글 수정 폼이 렌더링되는지 확인
-      const inputWrap = screen.getByTestId("currentTextArea");
+      const inputWrap = screen
+        .getByTestId("currentTextArea")
+        .querySelector("#textAreaRequired") as HTMLTextAreaElement;
 
       expect(inputWrap).toBeInTheDocument();
+
+      fireEvent.change(inputWrap, { target: { value: "aaa" } });
+
+      expect(inputWrap.value).toBe("aaa");
+      // value 검증 이후로 cypress로 테스트 해야함
     });
   });
 

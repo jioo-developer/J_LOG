@@ -38,7 +38,7 @@ const MainPage = ({}) => {
 
   const showDataHandler = () => {
     const array = searchInfo.isSearch ? postState : postData;
-    if (array.length === 0) {
+    if (searchInfo.isSearch && array.length === 0) {
       popuprHandler({ message: "검색 결과가 존재 하지 않습니다." });
       return null;
     }

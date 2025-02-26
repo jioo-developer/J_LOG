@@ -4,7 +4,7 @@ import CommonInput from "@/components/atoms/CommonInput/CommonInput";
 import useNameChangeHandler from "@/apis/member/mypage/nicknameForm/useMutation";
 import { Skeleton } from "@mui/material";
 import { User } from "firebase/auth";
-import { startTransition, Suspense, useEffect, useState } from "react";
+import { startTransition, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { FormEditorButton, NameWrap } from "./NicknameFormStyle";
@@ -89,7 +89,7 @@ function NicknameForm({ user, data }: propsType) {
               error={errors.nickNameRequired}
             />
             <div className="flex-Set" css={FormEditorButton}>
-              <CommonButton theme="none" size="rg">
+              <CommonButton theme="none" type="submit" size="rg">
                 수정완료
               </CommonButton>
               <CommonButton

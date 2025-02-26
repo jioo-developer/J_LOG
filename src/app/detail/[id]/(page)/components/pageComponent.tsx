@@ -6,9 +6,11 @@ import clipboardHanlder from "../handler/clipboardHanlder";
 import CommonImage from "@/components/atoms/CommonImage";
 import { Skeleton } from "@mui/material";
 import usePageDeleteMutation from "@/apis/detail/action/delete/useMutation";
-import { askDeleteHandler } from "../handler/pageDeleteHandler";
 import useFavoriteMutation from "@/apis/detail/action/favorite/useMutation";
 import useMediaQuery from "@/utils/useMediaQuery";
+import { popuprHandler } from "@/utils/popupHandler";
+import { deleteObject, ref } from "firebase/storage";
+import { storageService } from "@/lib/firebase";
 
 type propsType = {
   user: string;
@@ -26,16 +28,29 @@ export default function PageComponent({
   const isMobile = useMediaQuery("(max-width: 450px)");
 
   // handle delete
-  function handleDelete() {
-    askDeleteHandler({
-      data: {
-        writer: pageData.writer,
-        fileName: pageData.fileName,
-        pageId: pageData.pageId,
-      },
-      mutate,
+  function deletePagePopup() {
+    popuprHandler({
+      message: "정말로 해당 글을 삭제하시겠습니까?",
+      type: "confirm",
+      callback: () => deletePageHandler(),
     });
-    // handle delete
+  }
+
+  async function deletePageHandler() {
+    const files = pageData.fileName;
+    const writer = pageData.writer;
+    const pageId = pageData.pageId;
+
+    if (files.length > 0) {
+      await Promise.all(
+        files.map(async (item: string) => {
+          const imageRef = ref(storageService, `${writer}/${item}`);
+          await deleteObject(imageRef);
+        })
+      );
+    }
+
+    mutate(pageId);
   }
 
   function favoriteHandler() {
@@ -74,13 +89,14 @@ export default function PageComponent({
                 <CommonButton
                   theme="none"
                   size="rg"
+                  testId="updateButton"
                   padding={isMobile ? "none" : undefined}
                 >
                   <Link href="/updateEditor">수정</Link>
                 </CommonButton>
                 <CommonButton
                   theme="none"
-                  onClick={handleDelete}
+                  onClick={deletePagePopup}
                   padding={isMobile ? "none" : undefined}
                 >
                   삭제

@@ -1,3 +1,4 @@
+/** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import Image from "next/image";
 import { ChangeEvent } from "react";
@@ -50,30 +51,28 @@ function Uploader({ data, setImageHandler }: propsType) {
         <div className="uploaded-Image">
           {data.url.map((item, index) => {
             return (
-              <>
-                <div className="image_wrap">
-                  <button
-                    type="button"
-                    className="preview_delete"
-                    data-testid="delete-button"
-                    onClick={() => DeleteImageHanlder(index)}
-                  >
-                    <Image
-                      src="/images/close.png"
-                      width={30}
-                      height={30}
-                      alt="close"
-                    />
-                  </button>
+              <div className="image_wrap" key={index}>
+                <button
+                  type="button"
+                  className="preview_delete"
+                  data-testid="delete-button"
+                  onClick={() => DeleteImageHanlder(index)}
+                >
                   <Image
-                    src={item}
-                    fill={true}
-                    objectFit="cover"
-                    key={index}
-                    alt="업로드 된 이미지"
+                    src="/images/close.png"
+                    width={30}
+                    height={30}
+                    alt="close"
                   />
-                </div>
-              </>
+                </button>
+                <Image
+                  src={item}
+                  fill={true}
+                  style={{ objectFit: "cover" }}
+                  key={index}
+                  alt="업로드 된 이미지"
+                />
+              </div>
             );
           })}
         </div>

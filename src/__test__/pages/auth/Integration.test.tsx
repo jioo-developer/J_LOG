@@ -1,7 +1,7 @@
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
-import { getFormElementHandler } from "../login/utils";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import AuthPage from "@/app/auth/Client";
+import { getFormElementHandler } from "../Login/utils";
 
 jest.mock("@/apis/auth/useMutation", () => ({
   __esModule: true,
@@ -31,7 +31,7 @@ describe("회원가입입 onSubmit 실행시 mutation 호출을 테스트 합니
       </QueryClientProvider>
     );
   });
-  test("모든 유효성 검사를 통과 하는 지 확인합니다.", async () => {
+  test("모든 유효성 검사를 통과 하고 mutation을 호출 하는 지 테스트 합니다", async () => {
     const { form, emailInput, pwInput } = getFormElementHandler("회원가입");
 
     const nickNameInput = screen.getByTestId(

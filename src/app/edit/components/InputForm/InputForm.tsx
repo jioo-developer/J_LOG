@@ -44,6 +44,7 @@ const InputForm = forwardRef<HTMLFormElement, propsType>(
     return (
       <form
         role="form"
+        data-testid="form-test"
         ref={ref}
         css={Form}
         onSubmit={handleSubmit(formHandler)}
@@ -52,6 +53,7 @@ const InputForm = forwardRef<HTMLFormElement, propsType>(
           id="titleRequired"
           placeholder="제목을 입력해주세요"
           register={register}
+          testId="title-test"
           validation={{
             required: "제목을 입력해주세요.",
           }}
@@ -68,6 +70,7 @@ const InputForm = forwardRef<HTMLFormElement, propsType>(
               <ReactTextareaAutosize
                 css={TextArea}
                 {...field}
+                data-testid="textarea-test"
                 id="contentRequired"
                 placeholder="내용을 입력해주세요."
                 cacheMeasurements

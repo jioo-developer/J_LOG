@@ -5,9 +5,9 @@ import {
   screen,
   waitFor,
 } from "@testing-library/react";
-import { getFormElementHandler } from "../login/utils";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import AuthPage from "@/app/auth/Client";
+import { getFormElementHandler } from "../Login/utils";
 
 jest.mock("@/apis/auth/useMutation", () => ({
   __esModule: true,

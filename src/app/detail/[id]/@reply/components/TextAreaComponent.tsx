@@ -59,7 +59,9 @@ export default function TextAreaComponent({
       />
 
       <div css={buttonWrap}>
-        <CommonButton theme="success">댓글 작성</CommonButton>
+        <CommonButton theme="success" type="submit">
+          댓글 작성
+        </CommonButton>
       </div>
     </form>
   );

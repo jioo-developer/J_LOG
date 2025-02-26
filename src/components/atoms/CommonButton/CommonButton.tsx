@@ -28,7 +28,7 @@ function CommonButton({
       disabled={disabled}
       css={[themes[theme], buttonVariants[size]]}
       onClick={onClick}
-      type={type ? type : "submit"}
+      type={type ? type : "button"}
       style={padding && { padding: "0 !important" }}
     >
       {children}

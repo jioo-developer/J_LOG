@@ -1,6 +1,6 @@
+import "@testing-library/jest-dom";
 import { mockIcons } from "@/__mocks__/react-icons";
 import { authService } from "@/lib/firebase";
-import "@testing-library/jest-dom";
 
 jest.mock("react-icons/io5", () => ({
   IoEyeOutline: mockIcons.IoEyeOutline,
@@ -29,6 +29,7 @@ jest.mock("next/navigation", () => ({
     push: jest.fn(),
     refresh: jest.fn(),
   }),
+  usePathname: jest.fn(),
 }));
 
 jest.mock("@/apis/login/hook/useLogoutHook", () => {

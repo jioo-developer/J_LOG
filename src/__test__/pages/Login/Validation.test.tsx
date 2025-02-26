@@ -9,13 +9,6 @@ import { getFormElementHandler } from "./utils";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import LoginPage from "@/app/login/Client";
 
-jest.mock("@/apis/login/firebase/useMutation", () => ({
-  __esModule: true,
-  default: jest.fn(() => ({
-    mutate: jest.fn(),
-  })),
-}));
-
 const onSubmit = jest.fn();
 
 describe("로그인 form에 대한 유효성 검사를 테스트 합니다", () => {

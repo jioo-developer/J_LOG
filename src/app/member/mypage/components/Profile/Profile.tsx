@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import ChangeFileHanlder from "@/utils/onFileChangeHandler";
 import Image from "next/image";
-import { ChangeEvent, Suspense } from "react";
+import { ChangeEvent } from "react";
 import useImageChangeHandler from "@/apis/member/mypage/profile/useMutation";
 import Skeleton from "@mui/material/Skeleton";
 import CommonButton from "@/components/atoms/CommonButton/CommonButton";

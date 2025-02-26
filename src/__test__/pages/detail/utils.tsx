@@ -1,4 +1,3 @@
-import { replyType } from "@/apis/detail/reply/query/getReplyDataQuery";
 import { FirebaseData } from "@/static/types/common";
 import { Timestamp } from "firebase/firestore";
 
@@ -22,3 +21,5 @@ export const mockPageData = ({ user, name }: propsType): FirebaseData => {
     text: "테스트 본문",
   };
 };
+
+export const getUserQueryMock = { uid: "테스터", displayName: "테스터" };

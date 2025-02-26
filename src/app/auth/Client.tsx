@@ -121,6 +121,7 @@ function AuthPage({ onSubmit }: LoginProps) {
           theme={disable ? "disable" : "primary"}
           size="rg"
           disabled={disable}
+          type="submit"
         >
           회원가입
         </CommonButton>

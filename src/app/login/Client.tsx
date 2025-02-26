@@ -35,87 +35,87 @@ function LoginPage({ onSubmit }: LoginProps) {
   }
 
   return (
-      <div className="page-Reset sign__Wrap flex-Set ">
-        <div className="logo__Wrap">
-          <Image
-            src="/images/logo.svg"
-            width={300}
-            height={115}
-            alt="로고"
-            sizes="100vw"
-            priority
-            style={{
-              width: "100%",
-              height: "auto",
-            }}
-          />
-          <h1 className="logo__Title">J.log</h1>
-        </div>
-        <form
-          className="sign__Form"
-          data-testid="form-test"
-          onSubmit={handleSubmit(onSubmit || LoginHandler)}
-          // jest 테스트를 위해 작성
-        >
+    <div className="page-Reset sign__Wrap flex-Set ">
+      <div className="logo__Wrap">
+        <Image
+          src="/images/logo.svg"
+          width={300}
+          height={115}
+          alt="로고"
+          sizes="100vw"
+          priority
+          style={{
+            width: "100%",
+            height: "auto",
+          }}
+        />
+        <h1 className="logo__Title">J.log</h1>
+      </div>
+      <form
+        className="sign__Form"
+        data-testid="form-test"
+        onSubmit={handleSubmit(onSubmit || LoginHandler)}
+        // jest 테스트를 위해 작성
+      >
+        <CommonInput
+          id="emailRequired"
+          testId="emailRequired"
+          type="text"
+          placeholder="이메일을 입력하세요"
+          register={register}
+          validation={{
+            required: "이메일을 입력하세요.",
+            pattern: {
+              value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+              message: "올바른 이메일 형식이 아닙니다.",
+            },
+          }}
+          error={errors.emailRequired}
+        />
+        <div className="input__Blind__Wrap">
           <CommonInput
-            id="emailRequired"
-            testId="emailRequired"
-            type="text"
-            placeholder="이메일을 입력하세요"
+            id="passwordRequired"
+            testId="passwordRequired"
+            type={showInputBlind ? "text" : "password"}
+            placeholder="비밀번호를 8자리 이상 입력하세요"
             register={register}
             validation={{
-              required: "이메일을 입력하세요.",
-              pattern: {
-                value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                message: "올바른 이메일 형식이 아닙니다.",
+              required: "비밀번호를 입력하세요.",
+              minLength: {
+                value: 8,
+                message: "비밀번호가 짧습니다.",
               },
             }}
-            error={errors.emailRequired}
+            error={errors.passwordRequired}
           />
-          <div className="input__Blind__Wrap">
-            <CommonInput
-              id="passwordRequired"
-              testId="passwordRequired"
-              type={showInputBlind ? "text" : "password"}
-              placeholder="비밀번호를 8자리 이상 입력하세요"
-              register={register}
-              validation={{
-                required: "비밀번호를 입력하세요.",
-                minLength: {
-                  value: 8,
-                  message: "비밀번호가 짧습니다.",
-                },
-              }}
-              error={errors.passwordRequired}
-            />
-            <CommonCheckbox
-              testId={"pwBlind"}
-              stateValue={showInputBlind}
-              setStateHandler={setShowBlind}
-              childrens={[
-                <IoEyeOutline key="eye" size={20} />,
-                <IoEyeOffOutline key="eyeOff" size={20} />,
-              ]}
-            />
-          </div>
-          <CommonButton theme="primary" size="rg">
-            로그인
-          </CommonButton>
-        </form>
-        <SocialLoginPage />
-        <div className="assistance">
-          <CommonButton theme="none" size="sm">
-            <span>
-              <Link href="/resetPw"> 비밀번호 변경&amp;찾기</Link>
-            </span>
-          </CommonButton>
-          <CommonButton theme="none" size="sm">
-            <span>
-              <Link href="/auth">회원가입</Link>
-            </span>
-          </CommonButton>
+          <CommonCheckbox
+            testId={"pwBlind"}
+            stateValue={showInputBlind}
+            setStateHandler={setShowBlind}
+            childrens={[
+              <IoEyeOutline key="eye" size={20} />,
+              <IoEyeOffOutline key="eyeOff" size={20} />,
+            ]}
+          />
         </div>
+        <CommonButton theme="primary" type="submit" size="rg">
+          로그인
+        </CommonButton>
+      </form>
+      <SocialLoginPage />
+      <div className="assistance">
+        <CommonButton theme="none" size="sm">
+          <span>
+            <Link href="/resetPw"> 비밀번호 변경&amp;찾기</Link>
+          </span>
+        </CommonButton>
+        <CommonButton theme="none" size="sm">
+          <span>
+            <Link href="/auth">회원가입</Link>
+          </span>
+        </CommonButton>
       </div>
+    </div>
   );
 }
 
