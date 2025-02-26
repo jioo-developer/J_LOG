@@ -1,5 +1,4 @@
 /** @jsxImportSource @emotion/react */
-import ChangeFileHanlder from "@/utils/onFileChangeHandler";
 import Image from "next/image";
 import { ChangeEvent } from "react";
 import useImageChangeHandler from "@/apis/member/mypage/profile/useMutation";
@@ -7,6 +6,7 @@ import Skeleton from "@mui/material/Skeleton";
 import CommonButton from "@/components/atoms/CommonButton/CommonButton";
 import { User } from "firebase/auth";
 import { ImageWrap, ProfileImage } from "./ProfileStyle";
+import { onFileChange } from "@/app/edit/handler/imageHandler/fileChangeHandler";
 
 function ProfileComponent({ user }: { user: User }) {
   const { mutate } = useImageChangeHandler();
@@ -15,7 +15,7 @@ function ProfileComponent({ user }: { user: User }) {
     const theFiles = Array.from(e.target.files || []);
     if (theFiles.length > 0) {
       try {
-        const { result: url } = await ChangeFileHanlder(theFiles);
+        const { result: url } = await onFileChange(theFiles);
         mutate({ url, files: theFiles });
         // 업로드 한  파일을 URL로 변환하는 함수
         // Firebase에 등록 할 수 있게 URL 변환
