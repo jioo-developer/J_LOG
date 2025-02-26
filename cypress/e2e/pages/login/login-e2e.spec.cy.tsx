@@ -31,8 +31,6 @@ describe("로그인 e2e 테스트를 진행합니다.", () => {
     cy.get('[data-testid="passwordRequired"]')
       .type("123456789")
       .should("have.value", "123456789"); // 입력된 값 검증
-
-    cy.login({ email: "test@naver.com", password: "123456789" });
   });
 
   // it("잘못된 로그인 정보 입력 시, 에러 팝업이 정상적으로 출력 되는 지 테스트 합니다", () => {
