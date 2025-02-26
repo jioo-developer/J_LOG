@@ -25,6 +25,7 @@ function CommonButton({
   return (
     <button
       data-testid={testId}
+      data-cy={testId}
       disabled={disabled}
       css={[themes[theme], buttonVariants[size]]}
       onClick={onClick}

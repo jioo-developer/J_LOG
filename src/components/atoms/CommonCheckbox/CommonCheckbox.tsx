@@ -31,6 +31,7 @@ function CommonCheckbox({
       type="button"
       className="check__Toggle"
       data-testid={stateValue ? `${testId}-on` : `${testId}-off`}
+      data-cy={stateValue ? `${testId}-on` : `${testId}-off`}
       style={{ maxHeight: 25 }}
       onClick={() => {
         setStateHandler(!stateValue);

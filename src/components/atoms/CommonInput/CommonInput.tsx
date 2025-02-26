@@ -39,6 +39,7 @@ function CommonInput<T extends FieldValues>({
         value={value}
         id={String(id)}
         data-testid={testId}
+        data-cy={testId}
         type={type}
         placeholder={placeholder}
         css={inputStyle}

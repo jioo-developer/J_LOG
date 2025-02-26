@@ -36,7 +36,12 @@ const CommonPopup = ({
 
   return (
     <>
-      <div className="popup" css={[fullscreen, darkLayer]}></div>
+      <div
+        className="popup"
+        data-testid="popup-test"
+        data-cy="popup-test"
+        css={[fullscreen, darkLayer]}
+      ></div>
       <div css={[fullscreen, whiteBoxWrapper, top && { position: "relative" }]}>
         <div css={[whiteBox(width, height), flexDirection]}>
           <p
