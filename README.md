@@ -1,36 +1,39 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 벨로그 클론코딩
 
-## Getting Started
+<br />
 
-First, run the development server:
+본 프로젝트는 사이트 기획과 디자인 기간 단축을 위해 클론코딩으로 이루어져 있으며 다음과 같은 기술들을 사용합니다.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- 개발 언어 : Typescript & React
+- 개발 환경 : Next.js 14
+- UI 스타일링 : emotion & SCSS
+- 컴포넌트 관리 : Storybook
+- 클라이언트 상태관리 : zustand
+- 서버 상태관리 : React Query
+- 사용 DB : Firebase
+- API : Next.js Api Route
+- 테스트 : Jest + RTL
+- 형상관리 : github
+- 배포 : vercel
+  <br />
+  <br />
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Preview
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+  <img src="./public/images/preview.jpg" alt="" />
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## directory tree
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+📦 src
+├── 📂 mocks # 테스트용 목 데이터
+├── 📂 test # 테스트 코드
+├── 📂 apis # API 관련 코드
+├── 📂 app # 애플리케이션 관련 코드
+├── 📂 asset # 이미지, 폰트 등 정적 자산
+├── 📂 components # 재사용 가능한 컴포넌트
+├── 📂 lib # 라이브러리, 유틸 함수
+├── 📂 provider # Context 및 전역 상태 관리
+├── 📂 static # 정적 파일
+├── 📂 store # Zustand 상태 관리
+├── 📂 utils # 유틸리티 함수
+└── 📄 middleware.ts # Next.js 미들웨어
