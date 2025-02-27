@@ -1,6 +1,6 @@
 "use client";
 import { usePathname } from "next/navigation";
-import Component from "./Component";
+import UserProvider from "./UserProvider";
 
 const activePathName = [
   "/member/mypage",
@@ -12,7 +12,7 @@ const activePathName = [
   "/edit",
 ];
 
-function HeaderProvider() {
+function PathNameProvider() {
   const pathname = usePathname();
 
   function checkPathname(pathname: string) {
@@ -25,7 +25,7 @@ function HeaderProvider() {
     });
   }
 
-  return checkPathname(pathname) && <Component pathName={pathname} />;
+  return checkPathname(pathname) && <UserProvider pathName={pathname} />;
 }
 
-export default HeaderProvider;
+export default PathNameProvider;

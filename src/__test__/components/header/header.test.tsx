@@ -49,7 +49,7 @@ describe("헤더가 정상적으로 작동 하는 지 테스트 합니다", () =
     await act(async () => {
       render(
         <QueryClientProvider client={queryClient}>
-          <Header pathName={path} />
+          <Header />
         </QueryClientProvider>
       );
     });
@@ -64,7 +64,7 @@ describe("헤더가 정상적으로 작동 하는 지 테스트 합니다", () =
     await act(async () => {
       render(
         <QueryClientProvider client={queryClient}>
-          <Header pathName={path} />
+          <Header />
         </QueryClientProvider>
       );
     });
@@ -86,7 +86,7 @@ describe("헤더가 정상적으로 작동 하는 지 테스트 합니다", () =
     await act(async () => {
       render(
         <QueryClientProvider client={queryClient}>
-          <Header pathName={path} />
+          <Header />
         </QueryClientProvider>
       );
     });
