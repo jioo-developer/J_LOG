@@ -31,6 +31,7 @@
 │ ├── 📄 mutation # api요청을 관리하고 onSuccess와 onError를 담당합니다.<br />
 │ └── 📄 query hook # react-query의 useQuery를 hook으로 만들어 사용합니다.<br />
 ├── 📂 asset # 공용으로 사용하는 css와 scss 등이 있습니다.<br />
+<br />
 ├── 📂 app # 프로젝트의 Page가 있는 곳 입니다.<br />
 │ ├── 📂 @modal #page를 모달 팝업으로 사용 할 수 있도록 하는 인터셉팅 라우팅 역할을 합니다<br />
 │ ├── 📂 api # API route가 저장된 곳 입니다.<br />
@@ -47,6 +48,7 @@
 │ │ │ ├── 📄 component.tsx<br />
 │ │ │ ├── 📄 component.stories.tsx<br />
 │ │ │ ├── 📄 style.ts # component의 스타일을 구성하는 emotion 파일 입니다.<br />
+<br />
 ├── 📂 lib # 라이브러리에 관련된 파일을 저장하는 곳 입니다.<br />
 ├── 📂 provider #Provider 파일을 저장하는 곳 입니다.</br >
 ├── 📂 static # 정적 파일 (상수로 선언되는 변수들을 저장하는 곳 입니다)<br />
