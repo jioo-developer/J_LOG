@@ -1,22 +1,36 @@
+import { authService } from "@/lib/firebase";
 import { apiUrl } from "@/static/constants/common";
+import {
+  GoogleAuthProvider,
+  signInWithCredential,
+  signInWithCustomToken,
+  User,
+} from "firebase/auth";
 
-async function getUserHandler() {
+async function getUserHandler(): Promise<{ user: User | null }> {
   const response = await fetch(`${apiUrl}/api/login`, {
     method: "GET",
     credentials: "include",
   });
 
-  if (!response.ok) {
+  if (response.ok) {
+    const getUser = await response.json();
+    let login;
+    if (getUser.provider === "google.com") {
+      const credential = GoogleAuthProvider.credential(getUser.token);
+      login = await signInWithCredential(authService, credential);
+    } else {
+      login = await signInWithCustomToken(authService, getUser.token);
+    }
+    return { user: login.user };
+  } else {
     const text = await response.text();
-    console.error("Error response body:", text); // 응답 본문 출력
     try {
-      const errorData = JSON.parse(text); // 텍스트를 JSON으로 파싱 시도
+      const errorData = JSON.parse(text);
       throw new Error(errorData.error);
     } catch (error) {
-      throw new Error("Unexpected response format");
+      throw new Error((error as Error).message);
     }
   }
-
-  return response.json();
 }
 export default getUserHandler;

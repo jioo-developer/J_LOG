@@ -4,7 +4,6 @@ import {
   HydrationBoundary,
   QueryClient,
 } from "@tanstack/react-query";
-import { getUser } from "@/apis/login/hook/useGetUserQuery";
 import { getPostHandler } from "@/apis/main/query/getPostHanlder";
 import { Metadata } from "next";
 
