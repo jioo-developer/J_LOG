@@ -77,7 +77,7 @@
 3. **로그인 성공 시, HTTPOnly 쿠키 생성 (1시간 유효)**
 4. **메인 페이지로 이동**
 
-## 🔍 구현 시 기억에 남는 점
+## 🧑🏻‍💻 구현 시 기억에 남는 점
 
 - form 입력시 id(state),pw(state)가 존재해야하지만 react-hook-form을 도입하여 불필요한 state를 제거
 - Firebase를 이용하여 로그인할 경우, 기본적으로 로그인 정보가 `localStorage`에 저장됨.
