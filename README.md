@@ -33,7 +33,7 @@
 ├── 📂 asset # 공용으로 사용하는 css와 scss 등이 있습니다.<br />
 ├── 📂 app # 프로젝트의 페이지들이 있는 곳 입니다.<br />
 │ ├── 📂 api # API route가 저장된 곳 입니다.
-(이곳에서 api 요청에 대한 response를 return 합니다)
+(이곳에서 api 요청에 대한 response를 return 합니다)<br />
 ├── 📂 components # 재사용 가능한 컴포넌트<br />
 ├── 📂 lib # 라이브러리, 유틸 함수<br />
 ├── 📂 provider # Context 및 전역 상태 관리</br >
