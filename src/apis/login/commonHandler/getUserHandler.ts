@@ -14,15 +14,16 @@ async function getUserHandler(): Promise<{ user: User | null }> {
   });
 
   if (response.ok) {
-    const getUser = await response.json();
-    let login;
-    if (getUser.provider === "google.com") {
-      const credential = GoogleAuthProvider.credential(getUser.token);
-      login = await signInWithCredential(authService, credential);
+    let loginData;
+    const { user } = await response.json();
+    const providerRef = user.provider[0].providerId;
+    if (providerRef !== "password") {
+      const credential = GoogleAuthProvider.credential(user.token);
+      loginData = await signInWithCredential(authService, credential);
     } else {
-      login = await signInWithCustomToken(authService, getUser.token);
+      loginData = await signInWithCustomToken(authService, user.token);
     }
-    return { user: login.user };
+    return { user: loginData.user };
   } else {
     const text = await response.text();
     try {
