@@ -14,6 +14,7 @@
 - 사용 DB : Firebase
 - API : Next.js Api Route
 - 테스트 : Jest + RTL
+- e2e 테스트 : cypress (진행중)
 - 형상관리 : github
 - 배포 : vercel
   <br />
