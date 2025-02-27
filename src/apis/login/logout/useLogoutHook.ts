@@ -1,18 +1,8 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { LoginErrorHandler } from "../../../utils/errorHandler";
 import { useRouter } from "next/navigation";
-import { apiUrl } from "@/static/constants/common";
-import { authService } from "@/lib/firebase";
 import { popuprHandler } from "@/utils/popupHandler";
-
-async function LogoutHandler() {
-  await authService.signOut();
-
-  await fetch(`${apiUrl}/api/login`, {
-    method: "DELETE",
-    credentials: "include",
-  });
-}
+import { LogoutHandler } from "./logoutHandler";
 
 // 로그인 실행 관련 로직
 const useLogoutHook = () => {

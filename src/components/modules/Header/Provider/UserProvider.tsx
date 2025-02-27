@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import useLogoutHook from "@/apis/login/hook/useLogoutHook";
+import useLogoutHook from "@/apis/login/logout/useLogoutHook";
 import useUserQueryHook from "@/apis/login/hook/useGetUserQuery";
 import { getTokenHandler } from "@/apis/common/getTokenHandler";
 import HeaderUICompnent from "../UI/component";

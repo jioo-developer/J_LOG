@@ -1,6 +1,6 @@
 import { authService } from "@/lib/firebase";
 import { onAuthStateChanged, User } from "firebase/auth";
-import getUserHandler from "./getUserHandler";
+import getUserHandler from "../commonHandler/getUserHandler";
 
 export default async function getUserStatusHandler() {
   // Firebase Authentication 상태 변경 시 처리
