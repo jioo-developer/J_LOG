@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import TanstackProvider from "@/provider/TanstackProvider";
 import "./globals.css";
 import "@/asset/common.scss";
-import Header from "@/components/modules/Header/Header";
+import Header from "@/components/modules/Header/Component";
 import { ReturnPopup } from "@/utils/popupHandler";
 import { ReactNode } from "react";
 
