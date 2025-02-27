@@ -62,4 +62,4 @@
 
 ## 각 페이지 별 주요 로직 소개
 
-login :
+login : id/pw 입력 >> login api 요청 >> 로그인 & httponly 쿠키 생성 >> 메인페이지로 라우트
