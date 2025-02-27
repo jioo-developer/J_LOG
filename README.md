@@ -88,8 +88,8 @@
 
 ### [문제]
 
-- next.js 랜더링은 서버에서 api요청을 하여 데이터를 가져 온 후 완성된 html과 react에 필요한 js번들을 브라우저(Client)에 내림
-- 브라우저는 받은 html는 화면에 출력하고 js는 다운 후 실행시켜 hydration 작업을 함 이때 react-virtual dom가 만들어지며
+- next.js 랜더링은 서버에서 api요청을 하여 데이터를 가져 온 후 완성된 html과 react에 필요한 js번들을 브라우저에 내림
+- 브라우저는 받은 html는 화면에 출력하고 js는 다운 후 실행시켜 hydration 작업을 함 이때 react-virtual dom가<br/>만들어지며
   컴포넌트 활성화 및 클라이언트 로직 동작이 가능해짐
 
 ### 🧑🏻‍💻 구현 시 기억에 남는 점
