@@ -36,10 +36,20 @@
 │ ├── 📂 api # API route가 저장된 곳 입니다.<br />
 │ │ ├── 📄 route.ts # GET,POST,PUT,DELETE 메소드가 존재합니다,
 (이곳에서 api 요청에 대한 response를 return 합니다)<br />
-├── 📂 components # 재사용 가능한 컴포넌트<br />
-├── 📂 lib # 라이브러리, 유틸 함수<br />
-├── 📂 provider # Context 및 전역 상태 관리</br >
-├── 📂 static # 정적 파일<br />
-├── 📂 store # Zustand 상태 관리<br />
-├── 📂 utils # 유틸리티 함수<br />
+│ ├── 📂 page # 각 페이지의 파일이 있습니다<br />
+│ │ ├── 📄 page.tsx # react-query의 prefetch를 담당하는 서버컴포넌트와 seo 함수가 있습니다.<br />
+│ │ ├── 📄 Client.tsx # 파일에 useClient가 선언되며 파일의 전반적인 UI와 함수로직이 존재합니다.<br />
+│ │ ├── 📄 style.(scss || ts) # page의 스타일을 구성하는 scss 파일 입니다.<br />
+│ │ ├── 📂 components 페이지의 component가 저장된 곳 입니다.<br />
+├── 📂 components # 프로젝트에서 공용으로 사용하는 components를 저장하는 곳 입니다.<br />
+│ ├── 📂 atoms # 가장 작은 단계의 공용 컴포넌트를 저장하는 곳 입니다.<br />
+│ │ ├── 📂 (component) # input,checkbox,button,popup,,image 등이 존재합니다.<br />
+│ │ │ ├── 📄 component.tsx<br />
+│ │ │ ├── 📄 component.stories.tsx<br />
+│ │ │ ├── 📄 style.ts # component의 스타일을 구성하는 emotion 파일 입니다.<br />
+├── 📂 lib # 라이브러리에 관련된 파일을 저장하는 곳 입니다.<br />
+├── 📂 provider #Provider 파일을 저장하는 곳 입니다.</br >
+├── 📂 static # 정적 파일 (상수로 선언되는 변수들을 저장하는 곳 입니다)<br />
+├── 📂 store # 클라이언트로 사용되는 상태를 전역으로 관리 하는 곳 입니다.<br />
+├── 📂 utils # 유틸리티 함수를 저장하는 곳 입니다.<br />
 └── 📄 middleware.ts # Next.js 미들웨어
