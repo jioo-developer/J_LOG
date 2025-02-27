@@ -1,6 +1,6 @@
 import { QueryObserverResult, useQuery } from "@tanstack/react-query";
 import { User } from "firebase/auth";
-import getUserStatusHandler from "../commonHandler/getUserStatusHandler";
+import getUserStatusHandler from "./getUserStatusHandler";
 
 const useUserQueryHook = () => {
   // User | null을 반환하는 쿼리

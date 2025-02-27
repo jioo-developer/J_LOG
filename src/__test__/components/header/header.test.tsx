@@ -2,7 +2,7 @@ import { render, screen, fireEvent, act } from "@testing-library/react";
 import Header from "@/components/modules/Header/Component";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { usePathname } from "next/navigation";
-import useLogoutHook from "@/apis/login/hook/useLogoutHook";
+import useLogoutHook from "@/apis/login/logout/useLogoutHook";
 
 // Mocking necessary hooks
 
