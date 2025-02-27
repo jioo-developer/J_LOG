@@ -43,7 +43,7 @@
 │ │ ├── 📄 page.tsx # react-query의 prefetch를 담당하는 서버컴포넌트와 seo 함수가 있습니다.<br />
 │ │ ├── 📄 Client.tsx # 파일에 useClient가 선언되며 파일의 전반적인 UI와 함수로직이 존재합니다.<br />
 │ │ ├── 📄 style.(scss || ts) # page의 스타일을 구성하는 scss 파일 입니다.<br />
-│ │ ├── 📂 components 페이지의 component가 저장된 곳 입니다.<br />
+│ │ ├── 📂 components # 페이지의 component가 저장된 곳 입니다.<br />
 <br />
 ├── 📂 components # 프로젝트에서 공용으로 사용하는 components를 저장하는 곳 입니다.<br />
 │ ├── 📂 atoms # 가장 작은 단계의 공용 컴포넌트를 저장하는 곳 입니다.<br />
