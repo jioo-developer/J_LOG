@@ -32,7 +32,7 @@
 │ └── 📄 query hook # react-query의 useQuery를 hook으로 만들어 사용합니다.<br />
 ├── 📂 asset # 공용으로 사용하는 css와 scss 등이 있습니다.<br />
 ├── 📂 app # 프로젝트의 Page가 있는 곳 입니다.<br />
-│ ├── 📂 api # API route가 저장된 곳 입니다.
+│ ├── 📂 api # API route가 저장된 곳 입니다.<br />
 │ │ ├── 📄 route.ts # (GET,POST,PUT,DELETE 메소드가 존재합니다)<br />
 (이곳에서 api 요청에 대한 response를 return 합니다)<br />
 ├── 📂 components # 재사용 가능한 컴포넌트<br />
