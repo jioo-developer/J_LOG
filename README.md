@@ -38,7 +38,7 @@
 ├── 📂 app # 프로젝트의 Page가 있는 곳 입니다.<br />
 │ ├── 📂 @modal #page를 모달 팝업으로 사용 할 수 있도록 하는 인터셉팅 라우팅 역할을 합니다<br />
 │ ├── 📂 api # API route가 저장된 곳 입니다.<br />
-│ │ ├── 📄 route.ts # GET,POST,PUT,DELETE 메소드가 존재합니다,
+│ │ ├── 📄 route.ts # GET,POST,PUT,DELETE 메소드가 존재합니다<br />
 (이곳에서 api 요청에 대한 response를 return 합니다)<br />
 │ ├── 📂 page # 각 페이지의 파일이 있습니다<br />
 │ │ ├── 📄 page.tsx # react-query의 prefetch를 담당하는 서버컴포넌트와 seo 함수가 있습니다.<br />
@@ -58,7 +58,7 @@
 ├── 📂 static # 정적 파일 (상수로 선언되는 변수들을 저장하는 곳 입니다)<br />
 ├── 📂 store # 클라이언트로 사용되는 상태를 전역으로 관리 하는 곳 입니다.<br />
 ├── 📂 utils # 유틸리티 함수를 저장하는 곳 입니다.<br />
-└── 📄 middleware.ts # Next.js 자체 middleware로 로그인 상태에 따라 redirect를 담당합니다.
+└── 📄 middleware.ts # Next.js 자체 middleware로 로그인 토큰 쿠키에 존재 여부에 따라 redirect를 담당합니다.
 
 ### 📌 주요기능
 
