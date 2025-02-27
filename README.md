@@ -27,9 +27,13 @@
 📦 src<br />
 ├── 📂 test # jest로 만들어진 테스트 코드가 있습니다.<br />
 ├── 📂 apis # API 요청을 보내는 코드입니다
-(한 디렉터리당 handler와 mutation로 이루어져 있습니다)<br />
-├── 📂 app # 애플리케이션 관련 코드<br />
-├── 📂 asset # 이미지, 폰트 등 정적 자산<br />
+│ ├── 📄 api handler # api 요청을 하는 handler 입니다.
+│ ├── 📄 mutation # api요청을 관리하고 onSuccess와 onError를 담당합니다.
+│ └── 📄 query hook # react-query의 useQuery를 hook으로 만들어 사용합니다.
+├── 📂 asset # 공용으로 사용하는 css와 scss 등이 있습니다.<br />
+├── 📂 app # 프로젝트의 페이지들이 있는 곳 입니다.<br />
+│ ├── 📂 api # API route가 저장된 곳 입니다.
+(이곳에서 api 요청에 대한 response를 return 합니다)
 ├── 📂 components # 재사용 가능한 컴포넌트<br />
 ├── 📂 lib # 라이브러리, 유틸 함수<br />
 ├── 📂 provider # Context 및 전역 상태 관리</br >
