@@ -25,15 +25,14 @@
 ## directory tree
 
 📦 src
-├── 📂 mocks # 테스트용 목 데이터
-├── 📂 test # 테스트 코드
-├── 📂 apis # API 관련 코드
-├── 📂 app # 애플리케이션 관련 코드
-├── 📂 asset # 이미지, 폰트 등 정적 자산
-├── 📂 components # 재사용 가능한 컴포넌트
-├── 📂 lib # 라이브러리, 유틸 함수
-├── 📂 provider # Context 및 전역 상태 관리
-├── 📂 static # 정적 파일
-├── 📂 store # Zustand 상태 관리
-├── 📂 utils # 유틸리티 함수
+├── 📂 test # 테스트 코드<br />
+├── 📂 apis # API 관련 코드<br />
+├── 📂 app # 애플리케이션 관련 코드<br />
+├── 📂 asset # 이미지, 폰트 등 정적 자산<br />
+├── 📂 components # 재사용 가능한 컴포넌트<br />
+├── 📂 lib # 라이브러리, 유틸 함수<br />
+├── 📂 provider # Context 및 전역 상태 관리</br >
+├── 📂 static # 정적 파일<br />
+├── 📂 store # Zustand 상태 관리<br />
+├── 📂 utils # 유틸리티 함수<br />
 └── 📄 middleware.ts # Next.js 미들웨어
