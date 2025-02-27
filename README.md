@@ -57,4 +57,4 @@
 ├── 📂 static # 정적 파일 (상수로 선언되는 변수들을 저장하는 곳 입니다)<br />
 ├── 📂 store # 클라이언트로 사용되는 상태를 전역으로 관리 하는 곳 입니다.<br />
 ├── 📂 utils # 유틸리티 함수를 저장하는 곳 입니다.<br />
-└── 📄 middleware.ts # Next.js 미들웨어
+└── 📄 middleware.ts # Next.js 자체 middleware로 로그인 상태에 따라 redirect를 담당합니다.
