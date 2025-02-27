@@ -32,6 +32,7 @@
 │ └── 📄 query hook # react-query의 useQuery를 hook으로 만들어 사용합니다.<br />
 ├── 📂 asset # 공용으로 사용하는 css와 scss 등이 있습니다.<br />
 ├── 📂 app # 프로젝트의 Page가 있는 곳 입니다.<br />
+│ ├── 📂 @modal #page를 모달 팝업으로 사용 할 수 있도록 하는 인터셉팅 라우팅 역할을 합니다<br />
 │ ├── 📂 api # API route가 저장된 곳 입니다.<br />
 │ │ ├── 📄 route.ts # GET,POST,PUT,DELETE 메소드가 존재합니다,
 (이곳에서 api 요청에 대한 response를 return 합니다)<br />
