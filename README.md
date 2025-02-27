@@ -38,8 +38,7 @@
 ├── 📂 app # 프로젝트의 Page가 있는 곳 입니다.<br />
 │ ├── 📂 @modal #page를 모달 팝업으로 사용 할 수 있도록 하는 인터셉팅 라우팅 역할을 합니다<br />
 │ ├── 📂 api # API route가 저장된 곳 입니다.<br />
-│ │ ├── 📄 route.ts # GET,POST,PUT,DELETE 메소드가 존재합니다<br />
-(이곳에서 api 요청에 대한 response를 return 합니다)<br />
+│ │ ├── 📄 route.ts # api 요청에 대한 response를 return 합니다<br />
 │ ├── 📂 page # 각 페이지의 파일이 있습니다<br />
 │ │ ├── 📄 page.tsx # react-query의 prefetch를 담당하는 서버컴포넌트와 seo 함수가 있습니다.<br />
 │ │ ├── 📄 Client.tsx # 파일에 useClient가 선언되며 파일의 전반적인 UI와 함수로직이 존재합니다.<br />
