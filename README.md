@@ -25,8 +25,9 @@
 ## directory tree
 
 📦 src<br />
-├── 📂 test # 테스트 코드<br />
-├── 📂 apis # API 관련 코드<br />
+├── 📂 test # jest로 만들어진 테스트 코드가 있습니다.<br />
+├── 📂 apis # API 요청을 보내는 코드입니다
+(한 디렉터리당 handler와 mutation로 이루어져 있습니다)<br />
 ├── 📂 app # 애플리케이션 관련 코드<br />
 ├── 📂 asset # 이미지, 폰트 등 정적 자산<br />
 ├── 📂 components # 재사용 가능한 컴포넌트<br />
