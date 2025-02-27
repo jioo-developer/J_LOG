@@ -8,7 +8,7 @@
 - 개발 환경 : Next.js 14
 - UI 스타일링 : emotion & SCSS
 - 컴포넌트 관리 : Storybook
-- library : react-hook-form (form 전용 library)
+- library : react-hook-form, mutarial-ui(skeleton)
 - 클라이언트 상태관리 : zustand
 - 서버 상태관리 : React Query
 - 사용 DB : Firebase
@@ -77,7 +77,22 @@
 3. **로그인 성공 시, HTTPOnly 쿠키 생성 (1시간 유효)**
 4. **메인 페이지로 이동**
 
-## 🧑🏻‍💻 구현 시 기억에 남는 점
+### 🧑🏻‍💻 구현 시 기억에 남는 점
+
+- form 입력시 id(state),pw(state)가 존재해야하지만 react-hook-form을 도입하여 불필요한 state를 제거
+- Firebase를 이용하여 로그인할 경우, 기본적으로 로그인 정보가 `localStorage`에 저장됨.
+- `localStorage`에 저장된 로그인 정보는 삭제 전까지 유지되지만, 보안 강화를 위해 `localStorage`에 저장하는 것이 아닌 쿠키를 발급하여 저장하고 일정 시간이 지나면 자동 로그아웃되도록 설계.
+- 이를 위해 `HTTPOnly 쿠키`를 생성하여 1시간 동안 유효하게 유지하며, 쿠키가 삭제되면 자동 로그아웃되도록 구현함.
+
+## 📌 로그인 상태 유지
+
+### [문제]
+
+- next.js 랜더링은 서버에서 api요청을 하여 데이터를 가져 온 후 완성된 html과 react에 필요한 js번들을 브라우저(Client)에 내림
+- 브라우저는 받은 html는 화면에 출력하고 js는 다운 후 실행시켜 hydration 작업을 함 이때 react-virtual dom가 만들어지며
+  컴포넌트 활성화 및 클라이언트 로직 동작이 가능해짐
+
+### 🧑🏻‍💻 구현 시 기억에 남는 점
 
 - form 입력시 id(state),pw(state)가 존재해야하지만 react-hook-form을 도입하여 불필요한 state를 제거
 - Firebase를 이용하여 로그인할 경우, 기본적으로 로그인 정보가 `localStorage`에 저장됨.
