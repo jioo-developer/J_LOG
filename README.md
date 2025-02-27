@@ -26,10 +26,10 @@
 
 📦 src<br />
 ├── 📂 test # jest로 만들어진 테스트 코드가 있습니다.<br />
-├── 📂 apis # API 요청을 보내는 코드입니다
-│ ├── 📄 api handler # api 요청을 하는 handler 입니다.
-│ ├── 📄 mutation # api요청을 관리하고 onSuccess와 onError를 담당합니다.
-│ └── 📄 query hook # react-query의 useQuery를 hook으로 만들어 사용합니다.
+├── 📂 apis # API 요청을 보내는 코드입니다<br />
+│ ├── 📄 api handler # api 요청을 하는 handler 입니다.<br />
+│ ├── 📄 mutation # api요청을 관리하고 onSuccess와 onError를 담당합니다.<br />
+│ └── 📄 query hook # react-query의 useQuery를 hook으로 만들어 사용합니다.<br />
 ├── 📂 asset # 공용으로 사용하는 css와 scss 등이 있습니다.<br />
 ├── 📂 app # 프로젝트의 페이지들이 있는 곳 입니다.<br />
 │ ├── 📂 api # API route가 저장된 곳 입니다.
