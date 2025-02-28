@@ -16,7 +16,7 @@ type propsType = {
 const Reply = ({ pageId }: propsType) => {
   const { data: user } = useUserQueryHook();
 
-  const { replyData, isLoading } = useReplyQueryHook(pageId);
+  const { replyData } = useReplyQueryHook(pageId);
 
   const { mutate } = useReplyMutation();
 
@@ -30,10 +30,6 @@ const Reply = ({ pageId }: propsType) => {
       mutate(content);
     }
   };
-
-  if (isLoading) {
-    <div></div>;
-  }
 
   const isActive = replyData.length > 0;
 
