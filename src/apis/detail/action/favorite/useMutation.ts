@@ -1,7 +1,7 @@
 import { FirebaseData } from "@/static/types/common";
 import { popuprHandler } from "@/utils/popupHandler";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { HandleFavorite } from "./handler";
+import { HandleFavorite } from "./favoriteHandler";
 
 type favoriteType = {
   value: number;

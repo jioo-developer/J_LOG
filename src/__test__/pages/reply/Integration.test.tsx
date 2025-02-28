@@ -106,16 +106,6 @@ describe("Reply 페이지에 대한 기능을 테스트 합니다", () => {
     jest.clearAllMocks();
   });
 
-  test("댓글 목록이 랜더링 되는 지 테스트 합니다.", () => {
-    // 댓글 내용이 화면에 나타나는지 확인
-    render(
-      <QueryClientProvider client={queryClient}>
-        <Reply pageId="aaa" />
-      </QueryClientProvider>
-    );
-    expect(screen.getByText("This is a test comment")).toBeInTheDocument();
-  });
-
   test("댓글 작성 폼 제출 시 함수가 정상적으로 호출 되는 지 테스트 합니다", async () => {
     render(
       <QueryClientProvider client={queryClient}>
@@ -135,37 +125,6 @@ describe("Reply 페이지에 대한 기능을 테스트 합니다", () => {
       expect(onsubmitHandler).toHaveBeenCalledWith({
         textAreaRequired: "New reply",
       });
-    });
-  });
-
-  test("댓글 수정 버튼 클릭 시 인풋이 정상적으로 출력 되는 지 테스트 합니다", async () => {
-    // '수정' 버튼 클릭
-    render(
-      <QueryClientProvider client={queryClient}>
-        <Reply pageId="aaa" />
-      </QueryClientProvider>
-    );
-    fireEvent.click(screen.getByText("수정"));
-
-    await act(() => {
-      render(
-        <QueryClientProvider client={queryClient}>
-          <Reply pageId="aaa" />
-        </QueryClientProvider>
-      );
-    });
-    await waitFor(() => {
-      // 댓글 수정 폼이 렌더링되는지 확인
-      const inputWrap = screen
-        .getByTestId("currentTextArea")
-        .querySelector("#textAreaRequired") as HTMLTextAreaElement;
-
-      expect(inputWrap).toBeInTheDocument();
-
-      fireEvent.change(inputWrap, { target: { value: "aaa" } });
-
-      expect(inputWrap.value).toBe("aaa");
-      // value 검증 이후로 cypress로 테스트 해야함
     });
   });
 

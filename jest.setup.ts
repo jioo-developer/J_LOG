@@ -32,7 +32,7 @@ jest.mock("next/navigation", () => ({
   usePathname: jest.fn(),
 }));
 
-jest.mock("@/apis/login/hook/useLogoutHook", () => {
+jest.mock("@/apis/login/logout/useLogoutHook", () => {
   return jest.fn(() => ({
     mutate: jest.fn(async () => {
       await authService.signOut();

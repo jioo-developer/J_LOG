@@ -18,7 +18,7 @@ jest.mock("@/utils/popupHandler", () => ({
 
 const queryClient = new QueryClient();
 
-describe("", () => {
+describe("메인 페이지 기능이 정상적으로 작동 하는 지 테스트 합니다", () => {
   beforeEach(async () => {
     jest.clearAllMocks();
     await act(() => {

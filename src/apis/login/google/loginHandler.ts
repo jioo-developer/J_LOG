@@ -1,22 +1,10 @@
-import { authService } from "@/lib/firebase";
 import { apiUrl } from "@/static/constants/common";
-import {
-  browserSessionPersistence,
-  GoogleAuthProvider,
-  setPersistence,
-  signInWithPopup,
-} from "firebase/auth";
+import setGoogleTokenReturnHandler from "./subHandler/setTokenReutnHandler";
 
 export async function GoogleLoginHandler() {
   // onError이 없기 때문에 try/catch를 씀
-  await setPersistence(authService, browserSessionPersistence);
-  // 세션에 저장
 
-  const provider = new GoogleAuthProvider();
-  const result = await signInWithPopup(authService, provider);
-  // 로그인
-  const token = await result.user.getIdToken();
-  // 토큰
+  const token = await setGoogleTokenReturnHandler();
 
   const response = await fetch(`${apiUrl}/api/login/snsLogin/google`, {
     method: "POST",
@@ -28,13 +16,8 @@ export async function GoogleLoginHandler() {
 
   if (!response.ok) {
     const text = await response.text();
-    console.error("Error response body:", text); // 응답 본문 출력
-    try {
-      const errorData = JSON.parse(text); // 텍스트를 JSON으로 파싱 시도
-      throw new Error(errorData.error);
-    } catch (error) {
-      throw new Error("Unexpected response format");
-    }
+    const errorData = JSON.parse(text);
+    throw new Error(errorData.error);
   }
 
   return response;

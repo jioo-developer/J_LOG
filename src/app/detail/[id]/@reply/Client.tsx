@@ -7,7 +7,7 @@ import createReplyHandler from "./handler/createReplyHandler";
 import TextAreaComponent, {
   textAreaType,
 } from "./components/TextAreaComponent";
-import useUserQueryHook from "@/apis/login/hook/useGetUserQuery";
+import useUserQueryHook from "@/apis/login/query/useGetUserQuery";
 
 type propsType = {
   pageId: string;

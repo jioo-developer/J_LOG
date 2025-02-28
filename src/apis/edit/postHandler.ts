@@ -14,15 +14,12 @@ export default async function postHandler({ data, pageId }: propsType) {
     },
     body: JSON.stringify({ data, pageId }),
   });
+
   if (!response.ok) {
     const text = await response.text();
-    console.error("Error response body:", text); // 응답 본문 출력
-    try {
-      const errorData = JSON.parse(text); // 텍스트를 JSON으로 파싱 시도
-      throw new Error(errorData.error);
-    } catch (error) {
-      throw new Error("Unexpected response format");
-    }
+    const errorData = JSON.parse(text);
+    throw new Error(errorData.error);
   }
+
   return response;
 }

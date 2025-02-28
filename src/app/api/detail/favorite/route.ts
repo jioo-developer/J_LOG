@@ -19,17 +19,34 @@ export async function GET(request: NextRequest) {
 
   const likeRef = collection(db, "post", id, "like");
 
-  const likeSnapshot = await getDocs(likeRef);
+  try {
+    const likeSnapshot = await getDocs(likeRef);
 
-  if (likeSnapshot.empty) {
-    return NextResponse.json({ statusValue: false });
-  } else {
-    // like 컬렉션이 존재하는지 확인
-    const likeDocRef = doc(db, "post", id, "like", uid);
-    const likeDocSnap = await getDoc(likeDocRef);
+    if (likeSnapshot.empty) {
+      return NextResponse.json({ statusValue: false });
+    } else {
+      // like 컬렉션이 존재하는지 확인
+      const likeDocRef = doc(db, "post", id, "like", uid);
+      const likeDocSnap = await getDoc(likeDocRef);
 
-    // likeDocSnap이 존재하면 좋아요가 눌렸다는 의미
-    return NextResponse.json({ statusValue: likeDocSnap.exists() });
+      // likeDocSnap이 존재하면 좋아요가 눌렸다는 의미
+      return NextResponse.json(
+        {
+          statusValue: likeDocSnap.exists(),
+          message: likeDocSnap.exists()
+            ? "좋아요가 존재합니다."
+            : "좋아요가 존재하지 않습니다.",
+        },
+        { status: 200 }
+      );
+    }
+  } catch (error) {
+    return NextResponse.json(
+      {
+        message: (error as Error).message,
+      },
+      { status: 500 }
+    );
   }
 }
 
@@ -42,46 +59,60 @@ export async function POST(request: NextRequest) {
 
   // like collection이 있는지 검증
   const likeRef = collection(db, "post", id, "like");
-  const likeSnapshot = await getDocs(likeRef);
-  // like collection이 있는지 검증
+  try {
+    const likeSnapshot = await getDocs(likeRef);
+    // like collection이 있는지 검증
 
-  let newFavorite;
-  // favorite값 제어 변수
-
-  // like collection이 없을 때
-  if (likeSnapshot.empty) {
-    const likeDocRef = doc(likeRef, user);
-    // user.uid를 문서 ID로 사용
-
-    await setDoc(likeDocRef, {
-      likedAt: new Date(),
-      likedBy: user,
-    });
-    newFavorite = value + 1;
+    let newFavorite;
+    // favorite값 제어 변수
 
     // like collection이 없을 때
+    if (likeSnapshot.empty) {
+      const likeDocRef = doc(likeRef, user);
+      // user.uid를 문서 ID로 사용
 
-    // like collection이 있을 때
-  } else {
-    const likeDocRef = doc(likeRef, user); // user.uid를 문서 ID로 사용
-    const likeDocSnap = await getDoc(likeDocRef);
-    const isLiked = likeDocSnap.exists();
-    newFavorite = isLiked ? value - 1 : value + 1;
-    if (isLiked) {
-      // 좋아요 취소
-      await deleteDoc(likeDocRef);
-    } else {
-      // 좋아요 추가
       await setDoc(likeDocRef, {
         likedAt: new Date(),
-        likedBy: user.uid,
+        likedBy: user,
       });
-    }
-  }
-  // like collection이 있을 때
+      newFavorite = value + 1;
 
-  // 공통 적용
-  await updateDoc(postDocRef, { favorite: newFavorite });
-  return NextResponse.json({ message: "좋아요 반영이 완료되었습니다." });
-  // 공통 적용
+      // like collection이 없을 때
+
+      // like collection이 있을 때
+    } else {
+      const likeDocRef = doc(likeRef, user); // user.uid를 문서 ID로 사용
+      const likeDocSnap = await getDoc(likeDocRef);
+      const isLiked = likeDocSnap.exists();
+      newFavorite = isLiked ? value - 1 : value + 1;
+      if (isLiked) {
+        // 좋아요 취소
+        await deleteDoc(likeDocRef);
+      } else {
+        // 좋아요 추가
+        await setDoc(likeDocRef, {
+          likedAt: new Date(),
+          likedBy: user.uid,
+        });
+      }
+    }
+    // like collection이 있을 때
+
+    // 공통 적용
+    await updateDoc(postDocRef, { favorite: newFavorite });
+    return NextResponse.json(
+      {
+        message: "좋아요 반영이 완료되었습니다.",
+      },
+      { status: 204 }
+    );
+    // 공통 적용
+  } catch (error) {
+    return NextResponse.json(
+      {
+        message: (error as Error).message,
+      },
+      { status: 500 }
+    );
+  }
 }

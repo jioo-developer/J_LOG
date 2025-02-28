@@ -6,7 +6,7 @@ import { popuprHandler } from "@/utils/popupHandler";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import PageComponent from "./components/pageComponent";
-import useUserQueryHook from "@/apis/login/hook/useGetUserQuery";
+import useUserQueryHook from "@/apis/login/query/useGetUserQuery";
 type propsType = {
   pageId: string;
 };

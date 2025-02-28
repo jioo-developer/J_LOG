@@ -17,9 +17,8 @@ const usePostQueryHook = () => {
     const nonePriority = postData.filter((item) => !item.priority);
     const result = [...filterPriority, ...nonePriority];
     postData = result;
-  } else {
-    postData = [];
   }
+
   return { postData, isLoading, error };
 };
 

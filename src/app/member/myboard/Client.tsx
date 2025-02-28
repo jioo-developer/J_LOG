@@ -7,7 +7,7 @@ import Link from "next/link";
 import Item from "./components/Item";
 import { usePageInfoStore } from "@/store/pageInfoStore";
 import CommonButton from "@/components/atoms/CommonButton/CommonButton";
-import useUserQueryHook from "@/apis/login/hook/useGetUserQuery";
+import useUserQueryHook from "@/apis/login/query/useGetUserQuery";
 import { useEffect } from "react";
 import { popuprHandler } from "@/utils/popupHandler";
 

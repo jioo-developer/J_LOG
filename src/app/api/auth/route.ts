@@ -17,13 +17,13 @@ export async function POST(request: Request) {
       nickname: nickname,
     });
 
-    return NextResponse.json({ status: 200 });
+    return NextResponse.json(
+      { message: "회원가입에 성공하였습니다." },
+      { status: 201 }
+    );
   } catch (error) {
     return NextResponse.json(
-      {
-        success: false,
-        message: "회원가입 중 오류가 발생했습니다.",
-      },
+      { success: false, message: "회원가입 중 오류가 발생했습니다." },
       { status: 500 }
     );
   }

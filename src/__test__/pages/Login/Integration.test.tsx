@@ -14,30 +14,24 @@ jest.mock("@/apis/login/firebase/useMutation", () => ({
 
 const onSubmit = jest.fn();
 
-describe("로그인 onSubmit 실행시 mutation 호출을 테스트 합니다.", () => {
-  beforeEach(() => {
-    jest.clearAllMocks();
-    const queryClient = new QueryClient();
-    render(
-      <QueryClientProvider client={queryClient}>
-        <LoginPage onSubmit={onSubmit} />
-      </QueryClientProvider>
-    );
-  });
+test("onSubmit 실행 시 react-hook-form의 타입의 값을 가지고 mutation을 호출하는 지 테스트합니다.", async () => {
+  const queryClient = new QueryClient();
+  render(
+    <QueryClientProvider client={queryClient}>
+      <LoginPage onSubmit={onSubmit} />
+    </QueryClientProvider>
+  );
+  const { form, emailInput, pwInput } = getFormElementHandler();
 
-  test("onSubmit 실행 시 react-hook-form의 타입의 값을 가지고 mutation을 호출하는 지 테스트합니다.", async () => {
-    const { form, emailInput, pwInput } = getFormElementHandler();
+  fireEvent.change(emailInput, { target: { value: "user@test.com" } });
+  fireEvent.change(pwInput, { target: { value: "password123" } });
 
-    fireEvent.change(emailInput, { target: { value: "user@test.com" } });
-    fireEvent.change(pwInput, { target: { value: "password123" } });
+  fireEvent.submit(form);
 
-    fireEvent.submit(form);
-
-    await waitFor(() => {
-      expect(onSubmit).toHaveBeenCalledWith({
-        emailRequired: emailInput.value,
-        passwordRequired: pwInput.value,
-      });
+  await waitFor(() => {
+    expect(onSubmit).toHaveBeenCalledWith({
+      emailRequired: emailInput.value,
+      passwordRequired: pwInput.value,
     });
   });
 });

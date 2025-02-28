@@ -13,12 +13,12 @@ import useAuthMutation from "@/apis/auth/useMutation";
 import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
 import { FaChevronLeft } from "react-icons/fa";
 
-interface InputType extends InputTypes {
-  nickNameRequired: string;
-}
-
 interface LoginProps {
   onSubmit?: (data: InputType) => Promise<void>;
+}
+
+interface InputType extends InputTypes {
+  nickNameRequired: string;
 }
 
 function AuthPage({ onSubmit }: LoginProps) {

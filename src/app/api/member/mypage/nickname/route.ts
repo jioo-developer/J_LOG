@@ -12,19 +12,21 @@ export async function GET() {
   try {
     const snapshot = await getDocs(collection(db, "nickname"));
     if (snapshot.empty) {
-      return NextResponse.json({ data: [] }, { status: 200 });
+      return NextResponse.json(
+        { data: [], message: "댓글이 없습니다." },
+        { status: 204 }
+      );
     }
 
     const nicknameList = snapshot.docs.map((doc) => doc.data().nickname);
 
     return NextResponse.json(
-      { success: true, data: nicknameList },
+      { data: nicknameList, message: "닉네임 DB를 가져옵니다." },
       { status: 200 }
     );
   } catch (error) {
     return NextResponse.json(
       {
-        success: false,
         message: "닉네임 데이터를 가져오는 중 오류가 발생했습니다.",
       },
       { status: 500 }
@@ -54,12 +56,14 @@ export async function POST(request: NextRequest) {
     // 성공적으로 처리되면 응답을 반환
     return NextResponse.json(
       { message: "닉네임이 성공적으로 변경되었습니다" },
-      { status: 200 }
+      { status: 204 }
     );
   } catch (error) {
     // 오류 처리
     return NextResponse.json(
-      { error: "닉네임이 업데이트 되지 않았습니다." },
+      {
+        error: "닉네임이 업데이트 되지 않았습니다." + (error as Error).message,
+      },
       { status: 500 }
     );
   }

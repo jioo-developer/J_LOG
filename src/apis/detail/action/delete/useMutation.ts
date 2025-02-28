@@ -1,7 +1,7 @@
 import { QueryClient, useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { popuprHandler } from "@/utils/popupHandler";
-import { pageDelete } from "./pageDeleteHandler";
+import { pageDeleteHandler } from "./pageDeleteHandler";
 import { usePopupStore } from "@/store/popupStore";
 
 const usePageDeleteMutation = () => {
@@ -10,7 +10,7 @@ const usePageDeleteMutation = () => {
   const queryClient = new QueryClient();
   return useMutation({
     mutationFn: async (writer: string) => {
-      return await pageDelete(writer);
+      return await pageDeleteHandler(writer);
     },
     onSuccess: async () => {
       setMessage("");

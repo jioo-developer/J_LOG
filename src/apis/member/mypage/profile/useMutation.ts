@@ -1,10 +1,10 @@
-import { updateProfile, User } from "firebase/auth";
+import { User } from "firebase/auth";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { authService } from "@/lib/firebase";
 import { popuprHandler } from "@/utils/popupHandler";
-import { profileHandler } from "./handler";
+import profileHandler from "./profileHandler";
 
 type propsType = {
+  user: User;
   url: string[];
   files: File[];
 };
@@ -12,13 +12,8 @@ type propsType = {
 function useImageMutation() {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async ({ url, files }: propsType) => {
-      const user = authService.currentUser?.uid as string;
-      const resultUrl = await profileHandler({ user, url, files });
-      await updateProfile(authService.currentUser as User, {
-        photoURL: resultUrl,
-      });
-      return resultUrl;
+    mutationFn: async ({ user, url, files }: propsType) => {
+      return await profileHandler({ user, url, files });
     },
     onSuccess: async (imgurl) => {
       await queryClient.refetchQueries({

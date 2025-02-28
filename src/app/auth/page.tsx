@@ -1,4 +1,4 @@
-import { getNicknameHandler } from "@/apis/member/mypage/nicknameForm/getNicknameHandler";
+import { getNicknameHandler } from "@/apis/member/mypage/query/getNicknameHandler";
 import ClientComponent from "./Client";
 import {
   dehydrate,

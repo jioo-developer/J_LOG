@@ -21,23 +21,49 @@ export async function GET(request: NextRequest) {
         ...doc.data(),
         id: doc.id,
       }));
-      return NextResponse.json({ data: docData });
+      return NextResponse.json(
+        {
+          data: docData,
+          message: "데이터가 성공적으로 조회되었습니다.",
+        },
+        { status: 200 }
+      );
     } else {
-      return NextResponse.json({ data: null });
+      return NextResponse.json(
+        {
+          data: null,
+          message: "데이터 없습니다.",
+        },
+        { status: 200 }
+      );
     }
   } else {
-    return NextResponse.json({ data: null });
+    return NextResponse.json(
+      {
+        data: null,
+        message: "데이터 없습니다.",
+      },
+      { status: 200 }
+    );
   }
 }
 
 export async function POST(request: NextRequest) {
   const { data } = await request.json();
-
   const replyRef = collection(db, "post", data.id, "reply");
+  try {
+    await addDoc(replyRef, data);
 
-  await addDoc(replyRef, data);
-
-  return NextResponse.json({ success: true });
+    return NextResponse.json(
+      { message: "댓글이 성공적으로 추가되었습니다." },
+      { status: 201 }
+    );
+  } catch (error) {
+    return NextResponse.json(
+      { message: (error as Error).message },
+      { status: 500 }
+    );
+  }
 }
 
 export async function PUT(request: NextRequest) {
@@ -48,12 +74,18 @@ export async function PUT(request: NextRequest) {
     const snapshot = await getDocs(collectionRef);
     if (snapshot && !snapshot.empty) {
       const filterDocs = snapshot.docs.filter((item) => item.id === replyId);
-      const docRef = doc(collectionRef, filterDocs[0].id);
+      const docRef = doc(collectionRef, filterDocs[0]?.id);
       await updateDoc(docRef, { comment: comment });
-      return NextResponse.json({ success: true });
+      return NextResponse.json(
+        { message: "댓글이 성공적으로 업데이트되었습니다." },
+        { status: 204 }
+      );
     }
   } catch (error) {
-    return NextResponse.json({ error: (error as Error).message });
+    return NextResponse.json(
+      { message: (error as Error).message },
+      { status: 500 }
+    );
   }
 }
 
@@ -62,8 +94,14 @@ export async function DELETE(request: NextRequest) {
   const replyDocRef = doc(db, "post", id, "reply", replyId as string);
   try {
     await deleteDoc(replyDocRef);
-    return NextResponse.json({ success: true });
+    return NextResponse.json(
+      { message: "댓글이 성공적으로 삭제 되었습니다." },
+      { status: 204 }
+    );
   } catch (error) {
-    return NextResponse.json({ error: (error as Error).message });
+    return NextResponse.json(
+      { message: (error as Error).message },
+      { status: 500 }
+    );
   }
 }

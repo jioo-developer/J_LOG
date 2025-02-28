@@ -1,6 +1,5 @@
 import { QueryObserverResult, useQuery } from "@tanstack/react-query";
-import { getIsFavoriteHandler } from "./getIsFavorite";
-import { User } from "firebase/auth";
+import { getIsFavoriteHandler } from "./getIsFavoriteHandler";
 
 type propsType = {
   pageId: string;
@@ -17,6 +16,7 @@ const useFavoriteQueryHook = ({ pageId, user }: propsType) => {
     },
     staleTime: 5 * 60 * 1000,
     enabled: !!pageId && !!user,
+    initialData: false,
   });
 
   return { data, isLoading, error };

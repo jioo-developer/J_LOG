@@ -14,10 +14,14 @@ export async function GET(request: NextRequest) {
     const user = await firebaseVerifyHandler(authToken);
     // 유효한 토큰인지 검증
 
-    return NextResponse.json({ user });
+    return NextResponse.json(
+      { user, message: "로그인 정보를 가져옵니다" },
+      // user : user 라는 값이 있음
+      { status: 200 }
+    );
   } catch (error) {
     return NextResponse.json(
-      { success: false, error: (error as Error).message },
+      { message: (error as Error).message },
       { status: 401 }
     );
   }
@@ -27,9 +31,10 @@ export async function POST(request: Request) {
   try {
     const { token } = await request.json();
 
-    const response = NextResponse.json({
-      message: "로그인 쿠키를 생성합니다",
-    });
+    const response = NextResponse.json(
+      { message: "인증성공, 로그인 쿠키를 생성합니다" },
+      { status: 200 }
+    );
 
     response.cookies.set("authToken", token, {
       httpOnly: true, // 보안상 브라우저에서 쿠키 접근 금지
@@ -42,16 +47,18 @@ export async function POST(request: Request) {
   } catch (error) {
     // 인증 실패 시 401 상태 반환
     return NextResponse.json(
-      { success: false, error: (error as Error).message },
+      { message: (error as Error).message },
       { status: 401 }
     );
   }
 }
 
 export async function DELETE() {
-  const response = NextResponse.json({
-    message: "로그아웃 완료, 쿠키 삭제를 삭제합니다",
-  });
+  const response = NextResponse.json(
+    { message: "로그아웃 완료, 쿠키 삭제를 삭제합니다" },
+    { status: 204 }
+  );
+
   response.cookies.delete("authToken");
   response.cookies.delete("GoogleAuthToken");
 

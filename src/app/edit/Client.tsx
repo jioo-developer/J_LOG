@@ -12,9 +12,9 @@ import { useEditDetailStore } from "../updateEditor/store";
 import useCreateMutation from "@/apis/edit/useMutationHandler";
 import { usePageInfoStore } from "@/store/pageInfoStore";
 import { CreateImgUrl } from "./handler/imageHandler/storageUploadHandler";
-import useGetMyInfoQueryHandler from "@/apis/member/mypage/query/getMyDataQuery";
 import { User } from "firebase/auth";
 import createHandler from "./handler/postHandler/useCreateHandler";
+import useUserQueryHook from "@/apis/login/query/useGetUserQuery";
 
 export type InputType = {
   titleRequired: string;
@@ -40,7 +40,7 @@ function EditPage() {
     files: [],
     fileName: [],
   });
-  const { user } = useGetMyInfoQueryHandler();
+  const { data: user } = useUserQueryHook();
   const { pgId: pageId } = usePageInfoStore();
   const { checked, imageInfo } = useEditDetailStore();
   const { mutate } = useCreateMutation();

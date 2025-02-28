@@ -16,11 +16,10 @@ const useCashQueryHook = () => {
     queryKey: ["getCash"],
     queryFn: getCashHandler,
     staleTime: 5 * 60 * 1000,
+    initialData: { cash: 0, item: 0 },
   });
 
-  const cashData = data ? data : { cash: 0, item: 0 };
-
-  return { cashData, error, isLoading, refetch };
+  return { cashData: data, error, isLoading, refetch };
 };
 
 export default useCashQueryHook;
