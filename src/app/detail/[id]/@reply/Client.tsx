@@ -3,11 +3,12 @@ import "./Style.scss";
 import { useReplyQueryHook } from "@/apis/detail/reply/query/getReplyDataQuery";
 import { useReplyMutation } from "@/apis/detail/reply/hook/create/useMutation";
 import ReplyItem from "./components/ReplyItem";
-import createReplyHandler from "./handler/createReplyHandler";
 import TextAreaComponent, {
   textAreaType,
 } from "./components/TextAreaComponent";
 import useUserQueryHook from "@/apis/login/query/useGetUserQuery";
+import createReplyHandler from "./handler/createReplyHandler";
+import { User } from "firebase/auth";
 
 type propsType = {
   pageId: string;
@@ -20,15 +21,13 @@ const Reply = ({ pageId }: propsType) => {
 
   const { mutate } = useReplyMutation();
 
-  const HandleCreateReply = (data: textAreaType) => {
-    if (user) {
-      const content = createReplyHandler({
-        user,
-        id: pageId,
-        comment: data.textAreaRequired,
-      });
-      mutate(content);
-    }
+  const submitHandler = (data: textAreaType) => {
+    const content = createReplyHandler({
+      user: user as User,
+      id: pageId,
+      comment: data.textAreaRequired,
+    });
+    mutate(content);
   };
 
   const isActive = replyData.length > 0;
@@ -47,7 +46,7 @@ const Reply = ({ pageId }: propsType) => {
             />
           );
         })}
-      <TextAreaComponent submitHandler={HandleCreateReply} />
+      <TextAreaComponent submitHandler={submitHandler} />
     </div>
   );
 };

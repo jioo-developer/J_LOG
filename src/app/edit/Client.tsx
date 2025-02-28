@@ -29,12 +29,14 @@ export interface uploaderType extends imageInfo {
 function EditPage() {
   const checkRef = useRef<HTMLInputElement | null>(null);
   const formRef = useRef<HTMLFormElement>(null);
+
   const { data: user } = useUserQueryHook();
   const { pgId: pageId } = usePageInfoStore();
   const { mutate } = useCreateMutation();
 
   const { imageInfoArray, getUploadDataHandler, setImage } =
     useUploadDataHandler();
+
   const { getFormDataHandler } = useFormDataHandler(
     imageInfoArray,
     user,
