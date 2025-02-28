@@ -1,10 +1,11 @@
 /** @jsxImportSource @emotion/react */
 import { convertPrice } from "@/utils/convertPrice";
 import { itemStyle } from "./Style";
+import { Dispatch, SetStateAction } from "react";
 
 type propsType = {
   value: number;
-  setItem: (value: number) => void;
+  setItem: Dispatch<SetStateAction<number>>;
 };
 
 const Item = ({ value, setItem }: propsType) => {

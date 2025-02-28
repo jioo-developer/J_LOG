@@ -11,13 +11,13 @@ import { useForm } from "react-hook-form";
 import { Style, wrap } from "./style";
 
 const ResetPwPage = () => {
+  const router = useRouter();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<InputTypes>();
-
-  const router = useRouter();
 
   async function resetHandler(data: InputTypes) {
     try {
@@ -72,5 +72,3 @@ const ResetPwPage = () => {
 };
 
 export default ResetPwPage;
-
-

@@ -21,7 +21,7 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default async function ServerComponent() {
+export default async function Page() {
   const cookieStore = cookies();
 
   const queryClient = new QueryClient();

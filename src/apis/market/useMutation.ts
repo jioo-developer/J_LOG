@@ -12,8 +12,8 @@ const useCashMutation = () => {
   const router = useRouter();
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async ({ cash, item }: propsType) => {
-      return await setCashHandler({ cash, item });
+    mutationFn: ({ cash, item }: propsType) => {
+      return setCashHandler({ cash, item });
     },
     onSuccess: (_, variables) => {
       popuprHandler({ message: "구매가 완료 되었습니다" });

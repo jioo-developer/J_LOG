@@ -6,7 +6,7 @@ import {
 } from "@tanstack/react-query";
 import { getReplyHandler } from "@/apis/detail/reply/query/getQueryHandler";
 import { headers } from "next/headers";
-export default async function ServerComponent() {
+export default async function Page() {
   const headerUrl = headers().get("x-url") || "";
 
   // URL에서 "detail/" 이후의 부분을 추출
