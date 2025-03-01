@@ -48,10 +48,6 @@ export const UIWrap = css`
   @media all and (max-width: 1000px) {
     gap: var(--gap-large);
   }
-
-  button {
-    padding: 0;
-  }
 `;
 
 export const SubMenu = css`

@@ -1,29 +1,27 @@
 "use client";
-import { FaRegCheckSquare, FaRegSquare } from "react-icons/fa";
 import { ReactNode } from "react";
+import { defaultRenderContent } from "./default";
 
 export type PropsType = {
-  childrens?: ReactNode[];
+  childrens?: [ReactNode, ReactNode];
   stateValue: boolean;
   setStateHandler: (stateValue: boolean) => void;
   testId?: string;
 };
 
 function CommonCheckbox({
-  childrens,
   stateValue,
   setStateHandler,
   testId,
+  childrens,
 }: PropsType) {
-  const renderContent = () => {
+  // render 함수
+  const renderHandler = () => {
     if (childrens) {
       return stateValue ? childrens[0] : childrens[1];
+    } else {
+      return defaultRenderContent(stateValue);
     }
-    return stateValue ? (
-      <FaRegCheckSquare key="check-on" size={25} color="gray" />
-    ) : (
-      <FaRegSquare key="check-off" size={25} color="gray" />
-    );
   };
 
   return (
@@ -33,11 +31,9 @@ function CommonCheckbox({
       data-testid={stateValue ? `${testId}-on` : `${testId}-off`}
       data-cy={stateValue ? `${testId}-on` : `${testId}-off`}
       style={{ maxHeight: 25 }}
-      onClick={() => {
-        setStateHandler(!stateValue);
-      }}
+      onClick={() => setStateHandler(!stateValue)}
     >
-      {renderContent()}
+      {renderHandler()}
     </button>
   );
 }

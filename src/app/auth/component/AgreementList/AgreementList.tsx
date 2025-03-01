@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction } from "react";
 import { useAgreeMentHandler } from "../../useActions/useAgreeMentHandler";
 import AllChecker from "./AllChecker";
-import AgreementItem from "./AgreeMentItem";
+import AgreementItem from "./AgreementItem";
 
 const authData = [
   { index: 0, id: "auth", text: "회원가입 및 운영약관 동의", important: true },

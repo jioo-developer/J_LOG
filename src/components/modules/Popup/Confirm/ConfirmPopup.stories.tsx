@@ -15,11 +15,13 @@ export default {
 
 export const Default = {
   render: () => (
-    <CommonPopup type="confirm" top customText="제목" subText="내용">
-      <div className="button__group">
-        <CommonButton theme="white">취소</CommonButton>
-        <CommonButton theme="success">확인</CommonButton>
-      </div>
-    </CommonPopup>
+    <div style={{ position: "relative" }}>
+      <CommonPopup type="confirm">
+        <div className="button__group">
+          <CommonButton theme="white">취소</CommonButton>
+          <CommonButton theme="success">확인</CommonButton>
+        </div>
+      </CommonPopup>
+    </div>
   ),
 };
