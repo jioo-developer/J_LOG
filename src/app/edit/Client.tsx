@@ -1,3 +1,4 @@
+"use client";
 import { useRef } from "react";
 import InputForm from "./components/InputForm/InputForm";
 import Uploader from "./components/uploader/Uploader";
