@@ -7,6 +7,7 @@ import CommonButton from "@/components/atoms/CommonButton/CommonButton";
 import { User } from "firebase/auth";
 import { ImageWrap, ProfileImage } from "./ProfileStyle";
 import { onFileChange } from "@/app/edit/handler/imageHandler/fileChangeHandler";
+import { popuprHandler } from "@/utils/popupHandler";
 
 function ProfileComponent({ user }: { user: User }) {
   const { mutate } = useImageChangeHandler();
@@ -16,12 +17,11 @@ function ProfileComponent({ user }: { user: User }) {
     if (theFiles.length > 0) {
       try {
         const { result: url } = await onFileChange(theFiles);
-        mutate({ url, files: theFiles });
+        mutate({ user, url, files: theFiles });
         // 업로드 한  파일을 URL로 변환하는 함수
         // Firebase에 등록 할 수 있게 URL 변환
       } catch (error) {
-        // popuprHandler({ message: "프로필 업로드에 실패하였습니다." });
-        window.alert((error as Error).message);
+        popuprHandler({ message: (error as Error).message });
       }
     }
   }

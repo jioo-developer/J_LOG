@@ -1,4 +1,4 @@
-import { getNicknameHandler } from "@/apis/member/mypage/nicknameForm/getNicknameHandler";
+import { getNicknameHandler } from "@/apis/member/mypage/query/getNicknameHandler";
 import ClientComponent from "./Client";
 import {
   dehydrate,
@@ -19,7 +19,7 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default async function ServerComponent() {
+export default async function Page() {
   const queryClient = new QueryClient();
 
   await queryClient.prefetchQuery({

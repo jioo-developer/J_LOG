@@ -22,3 +22,12 @@ export const itemStyle = css`
     }
   }
 `;
+
+export const ActiveItem = css`
+  ${itemStyle}
+  background: #12b886;
+  border: 3px solid #12b886;
+  p {
+    color: #fff;
+  }
+`;

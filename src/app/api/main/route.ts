@@ -8,7 +8,7 @@ export async function GET() {
   try {
     const response = await getDocs(queryData);
     if (response.empty) {
-      return NextResponse.json({ postdata: [] });
+      return NextResponse.json({ postdata: [] }, { status: 200 });
     }
     const postArray = response.docs.map((doc) => ({
       ...doc.data(),
@@ -18,7 +18,6 @@ export async function GET() {
   } catch (error) {
     return NextResponse.json(
       {
-        success: false,
         message: (error as Error).message,
       },
       { status: 500 }

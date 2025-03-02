@@ -56,3 +56,10 @@ export const whiteBox = (
     color: #3d3d3e;
   }
 `;
+
+export const textStyle = (textAlign: string = "left") => css`
+  margin-bottom: 1.5rem !important;
+  text-align: ${textAlign} !important;
+  font-size: 16px !important;
+  font-weight: bold;
+`;

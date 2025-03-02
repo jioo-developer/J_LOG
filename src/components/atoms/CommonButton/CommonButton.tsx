@@ -1,12 +1,11 @@
 /** @jsxImportSource @emotion/react */
 import { buttonVariants, themes } from "./CommonButtonStyle";
-import { ReactNode } from "react";
-export interface CommonButtonProps {
+import { ButtonHTMLAttributes, ReactNode } from "react";
+
+export interface CommonButtonProps
+  extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
-  onClick?: () => void;
-  disabled?: boolean;
   size?: "sm" | "rg" | "md" | "lg";
-  type?: "button" | "submit";
   theme: "white" | "success" | "primary" | "disable" | "warnning" | "none";
   padding?: "none";
   testId?: string;
@@ -24,13 +23,13 @@ function CommonButton({
 }: CommonButtonProps) {
   return (
     <button
+      className={padding === "none" ? "no-padding" : undefined}
       data-testid={testId}
       data-cy={testId}
       disabled={disabled}
       css={[themes[theme], buttonVariants[size]]}
       onClick={onClick}
-      type={type ? type : "button"}
-      style={padding && { padding: "0 !important" }}
+      type={type}
     >
       {children}
     </button>

@@ -5,10 +5,10 @@ import { popuprHandler } from "@/utils/popupHandler";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { render, screen, act } from "@testing-library/react";
 
-jest.mock("@/apis/login/hook/useGetUserQuery", () => ({
-  __esModule: true, // ES 모듈로 인식되도록 설정
+jest.mock("@/apis/login/query/useGetUserQuery", () => ({
+  __esModule: true, // ES 모듈로 인식
   default: jest.fn().mockReturnValue({
-    data: { uid: "테스터" }, // 모의 데이터 반환
+    data: { uid: "테스터" }, // 기본 테스트 데이터
     error: null,
     isLoading: false,
   }),
@@ -17,7 +17,7 @@ jest.mock("@/apis/login/hook/useGetUserQuery", () => ({
 jest.mock("@/apis/member/myboard/query/useGetMyPostQuery", () => ({
   __esModule: true,
   default: jest.fn().mockReturnValue({
-    myData: [], // 빈 데이터
+    myData: undefined, // 빈 데이터
     isLoading: false,
     error: null,
   }),

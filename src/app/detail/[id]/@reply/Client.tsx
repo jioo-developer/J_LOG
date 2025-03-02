@@ -3,11 +3,12 @@ import "./Style.scss";
 import { useReplyQueryHook } from "@/apis/detail/reply/query/getReplyDataQuery";
 import { useReplyMutation } from "@/apis/detail/reply/hook/create/useMutation";
 import ReplyItem from "./components/ReplyItem";
-import createReplyHandler from "./handler/createReplyHandler";
 import TextAreaComponent, {
   textAreaType,
 } from "./components/TextAreaComponent";
-import useUserQueryHook from "@/apis/login/hook/useGetUserQuery";
+import useUserQueryHook from "@/apis/login/query/useGetUserQuery";
+import createReplyHandler from "./handler/createReplyHandler";
+import { User } from "firebase/auth";
 
 type propsType = {
   pageId: string;
@@ -16,24 +17,19 @@ type propsType = {
 const Reply = ({ pageId }: propsType) => {
   const { data: user } = useUserQueryHook();
 
-  const { replyData, isLoading } = useReplyQueryHook(pageId);
+  const { replyData } = useReplyQueryHook(pageId);
 
   const { mutate } = useReplyMutation();
 
-  const HandleCreateReply = (data: textAreaType) => {
-    if (user) {
-      const content = createReplyHandler({
-        user,
-        id: pageId,
-        comment: data.textAreaRequired,
-      });
-      mutate(content);
-    }
+  const submitHandler = (data: textAreaType, reset: any) => {
+    const content = createReplyHandler({
+      user: user as User,
+      id: pageId,
+      comment: data.textAreaRequired,
+    });
+    mutate(content);
+    reset();
   };
-
-  if (isLoading) {
-    <div></div>;
-  }
 
   const isActive = replyData.length > 0;
 
@@ -51,7 +47,7 @@ const Reply = ({ pageId }: propsType) => {
             />
           );
         })}
-      <TextAreaComponent submitHandler={HandleCreateReply} />
+      <TextAreaComponent submitHandler={submitHandler} />
     </div>
   );
 };

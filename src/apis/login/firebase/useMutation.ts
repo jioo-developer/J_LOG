@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { Postlogin } from "./loginHandler";
-import errorTypeHandler from "./errorTypeHandler";
+import errorTypeHandler from "./subHandler/errorTypeHandler";
 import { popuprHandler } from "@/utils/popupHandler";
 type propsType = {
   email: string;

@@ -1,5 +1,5 @@
 import { act, render, screen } from "@testing-library/react";
-import { mockPageData } from "./utils";
+import { getUserQueryMock, mockPageData } from "./utils";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import DetailPage from "@/app/detail/[id]/(page)/Client";
 import useDetailQueryHook from "@/apis/detail/query/useDetailQuery";
@@ -21,12 +21,10 @@ jest.mock("@/apis/detail/query/useDetailQuery", () => ({
   }),
 }));
 
-const getUserQueryMock = { uid: "테스터", displayName: "테스터" };
-
-jest.mock("@/apis/login/hook/useGetUserQuery", () => ({
+jest.mock("@/apis/login/query/useGetUserQuery", () => ({
   __esModule: true, // ES 모듈로 인식
   default: jest.fn().mockReturnValue({
-    data: { uid: "테스터", displayName: "테스터" }, // 기본 테스트 데이터
+    data: { uid: "테스터" }, // 기본 테스트 데이터
     error: null,
     isLoading: false,
   }),

@@ -1,22 +1,10 @@
-import { authService } from "@/lib/firebase";
 import { apiUrl } from "@/static/constants/common";
-import {
-  browserSessionPersistence,
-  setPersistence,
-  signInWithEmailAndPassword,
-} from "firebase/auth";
+import setTokenRenturnHandler from "./subHandler/setTokenHandler";
 
 export async function Postlogin(id: string, password: string) {
-  await setPersistence(authService, browserSessionPersistence);
-  // 세션에 저장
-  const userCredential = await signInWithEmailAndPassword(
-    authService,
-    id,
-    password
-  );
-  // 로그인
-  const token = await userCredential.user.getIdToken();
-  // 토큰
+  // 토큰 생성
+  const token = await setTokenRenturnHandler(id, password);
+
   const response = await fetch(`${apiUrl}/api/login`, {
     method: "POST",
     headers: {
@@ -27,13 +15,8 @@ export async function Postlogin(id: string, password: string) {
 
   if (!response.ok) {
     const text = await response.text();
-    console.error("Error response body:", text); // 응답 본문 출력
-    try {
-      const errorData = JSON.parse(text); // 텍스트를 JSON으로 파싱 시도
-      throw new Error(errorData.error);
-    } catch (error) {
-      throw new Error("Unexpected response format");
-    }
+    const errorData = JSON.parse(text);
+    throw new Error(errorData.error);
   }
 
   return response;

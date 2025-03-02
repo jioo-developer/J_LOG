@@ -1,7 +1,7 @@
 import { apiUrl } from "@/static/constants/common";
 
 type ResponseData = {
-  isToken: boolean; // 응답 객체에 isToken 프로퍼티가 있다
+  isToken: boolean;
 };
 
 export async function getTokenHandler() {
@@ -15,13 +15,12 @@ export async function getTokenHandler() {
 
   if (!response.ok) {
     const text = await response.text();
-    console.error("Error response body:", text); // 응답 본문 출력
-    try {
-      const errorData = JSON.parse(text); // 텍스트를 JSON으로 파싱 시도
-      throw new Error(errorData.error);
-    } catch (error) {
-      throw new Error("Unexpected response format");
-    }
+    const errorData = JSON.parse(text);
+    throw new Error(errorData.error);
+  }
+
+  if (response.status === 204) {
+    return null; // 204 응답에는 본문이 없으므로 null을 반환
   }
 
   const { isToken }: ResponseData = await response.json();

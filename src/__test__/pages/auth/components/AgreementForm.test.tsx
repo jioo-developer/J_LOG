@@ -1,4 +1,4 @@
-import AgreementForm from "@/app/auth/component/AgreementForm";
+import AgreementForm from "@/app/auth/component/AgreementList/AgreementList";
 import { fireEvent, render, screen } from "@testing-library/react";
 
 type CheckItemType = {

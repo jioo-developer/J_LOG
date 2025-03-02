@@ -6,6 +6,7 @@ import { AuthPropsType } from "@/static/types/common";
 import { AuthHandler } from "./authHandler";
 import { usePopupStore } from "@/store/popupStore";
 import { popuprHandler } from "@/utils/popupHandler";
+import defaultProfileHandler from "./subHandler/defaultProfileHandler";
 
 const useAuthMutation = () => {
   const router = useRouter();
@@ -14,17 +15,8 @@ const useAuthMutation = () => {
       return AuthHandler({ email, password, nickname });
     },
     onSuccess: async (_, variables) => {
+      await defaultProfileHandler(variables);
       // 사용자 프로필 업데이트
-      const { user } = await signInWithEmailAndPassword(
-        authService,
-        variables.email,
-        variables.password
-      );
-      await updateProfile(user, {
-        displayName: variables.nickname,
-        photoURL: "/images/default.svg",
-      }).then(() => authService.signOut());
-
       router.push("/login");
     },
     onError: (error) => {

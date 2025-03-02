@@ -15,8 +15,4 @@ export const addButton = css`
   bottom: 30px;
   right: 30px;
   z-index: 800;
-
-  button {
-    padding: 0;
-  }
 `;

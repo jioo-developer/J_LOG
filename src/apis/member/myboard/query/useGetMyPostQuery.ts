@@ -14,9 +14,7 @@ const useMyDataQueryHook = (user: string) => {
       retry: 3,
     });
 
-  const myData = data ? data : [];
-
-  return { myData, isLoading, error };
+  return { myData: data, isLoading, error };
 };
 
 export default useMyDataQueryHook;

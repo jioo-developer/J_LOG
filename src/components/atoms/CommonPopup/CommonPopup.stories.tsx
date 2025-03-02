@@ -29,7 +29,6 @@ export const Default: Story = {
     width: "25rem",
     height: "auto",
     textAlign: "left",
-    subText: "This is a subtext example",
   },
   render: (args) => {
     const { setMessage } = usePopupStore();
@@ -51,8 +50,6 @@ export const Alert: Story = {
     width: "30rem",
     height: "auto",
     textAlign: "center",
-    subText: "Alert Popup Example",
-    customText: "This is an alert message",
   },
   render: (args) => {
     const { setMessage } = usePopupStore();
@@ -74,7 +71,6 @@ export const Custom: Story = {
     width: "35rem",
     height: "auto",
     textAlign: "center",
-    subText: "Custom Popup Content",
   },
   render: (args) => {
     const { setMessage } = usePopupStore();

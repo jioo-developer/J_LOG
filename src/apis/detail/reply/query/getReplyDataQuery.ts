@@ -8,7 +8,7 @@ export type replyType = {
   date: string;
   timestamp: { second: number; nanoseconds: number };
   profile: string;
-  id: string; // REPLYID
+  id: string;
 };
 
 export const useReplyQueryHook = (pageId: string) => {
