@@ -18,6 +18,5 @@ export const filterDataHandler = (
   const result = postData.filter((item) => {
     return conditions.some((condition) => condition(item, searchText));
   });
-  console.log(result);
   return result;
 };

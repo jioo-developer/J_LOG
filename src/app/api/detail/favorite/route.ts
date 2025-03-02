@@ -84,7 +84,6 @@ export async function POST(request: NextRequest) {
       const likeDocRef = doc(likeRef, user); // user.uid를 문서 ID로 사용
       const likeDocSnap = await getDoc(likeDocRef);
       const isLiked = likeDocSnap.exists();
-      console.log(isLiked);
       newFavorite = isLiked ? value - 1 : value + 1;
       if (isLiked) {
         // 좋아요 취소

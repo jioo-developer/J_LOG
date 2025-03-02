@@ -15,8 +15,6 @@ const useSearchEffect = (postData: FirebaseData[], searchText: string) => {
     }),
     [searchText]
   );
-  console.log(params);
-  console.log(isSearch);
 
   useEffect(() => {
     let result: FirebaseData[];
