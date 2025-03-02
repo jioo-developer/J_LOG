@@ -14,7 +14,7 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ data: { cash: 0, item: 0 } }, { status: 200 });
     }
   } catch {
-    return NextResponse.json({ data: { cash: 0, item: 0 } }, { status: 204 });
+    return NextResponse.json({ data: { cash: 0, item: 0 } }, { status: 200 });
   }
 }
 
@@ -30,7 +30,7 @@ export async function POST(request: NextRequest) {
     });
     return NextResponse.json(
       { message: "우선권 구매가 완료 되었습니다." },
-      { status: 204 }
+      { status: 200 }
     );
   } catch (error) {
     return NextResponse.json(

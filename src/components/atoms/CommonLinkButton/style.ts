@@ -9,7 +9,6 @@ export const baseButton = css`
   justify-content: center;
   border-radius: 8px;
   box-sizing: border-box;
-
   a {
     color: #fff;
   }
@@ -76,5 +75,3 @@ export const buttonVariants = {
     padding: 1.2em 1.6em;
   `,
 };
-
-// 버튼 사이즈 설정

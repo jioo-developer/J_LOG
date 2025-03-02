@@ -4,10 +4,10 @@ import { FirebaseData } from "@/static/types/common";
 type FilterCondition = (item: FirebaseData, searchText: string) => boolean;
 
 const filterByTitle: FilterCondition = (item, searchText) =>
-  item.title === searchText;
+  item.title.includes(searchText);
 
 const filterByText: FilterCondition = (item, searchText) =>
-  item.text === searchText;
+  item.text.includes(searchText);
 
 const conditions: FilterCondition[] = [filterByTitle, filterByText];
 
@@ -15,7 +15,9 @@ export const filterDataHandler = (
   postData: FirebaseData[],
   searchText: string
 ) => {
-  return postData.filter((item) => {
+  const result = postData.filter((item) => {
     return conditions.some((condition) => condition(item, searchText));
   });
+  console.log(result);
+  return result;
 };

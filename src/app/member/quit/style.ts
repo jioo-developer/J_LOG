@@ -37,14 +37,14 @@ export const Style = css`
     align-items: center;
     flex-direction: column;
     width: 100%;
-    span {
+  }
+      span {
       width: 100%;
       text-align: left;
       font-size: 1.125rem;
       margin: 0px;
       color: rgb(61, 61, 62);
     }
-  }
 
   .button__group {
     display: flex;
@@ -52,5 +52,7 @@ export const Style = css`
     justify-content: flex-end;
     gap: 8px;
     margin-left: auto;
+
+
   }
 `;

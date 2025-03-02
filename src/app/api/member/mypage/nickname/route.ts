@@ -14,7 +14,7 @@ export async function GET() {
     if (snapshot.empty) {
       return NextResponse.json(
         { data: [], message: "댓글이 없습니다." },
-        { status: 204 }
+        { status: 200 }
       );
     }
 
@@ -56,7 +56,7 @@ export async function POST(request: NextRequest) {
     // 성공적으로 처리되면 응답을 반환
     return NextResponse.json(
       { message: "닉네임이 성공적으로 변경되었습니다" },
-      { status: 204 }
+      { status: 200 }
     );
   } catch (error) {
     // 오류 처리

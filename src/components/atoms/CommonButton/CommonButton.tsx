@@ -23,13 +23,13 @@ function CommonButton({
 }: CommonButtonProps) {
   return (
     <button
+      className={padding === "none" ? "no-padding" : undefined}
       data-testid={testId}
       data-cy={testId}
       disabled={disabled}
       css={[themes[theme], buttonVariants[size]]}
       onClick={onClick}
       type={type}
-      style={padding === "none" ? { padding: "0 !important" } : {}}
     >
       {children}
     </button>

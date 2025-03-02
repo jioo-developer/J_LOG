@@ -19,6 +19,7 @@ const SocialLoginPage = () => {
         size="rg"
         onClick={() => mutate()}
         testId="google-login"
+        padding="none"
       >
         <div className="button_in_Wrap">
           <Image
@@ -30,7 +31,12 @@ const SocialLoginPage = () => {
           <span>구글로 시작하기</span>
         </div>
       </CommonButton>
-      <CommonButton theme="none" size="rg" testId="facebook-login">
+      <CommonButton
+        theme="none"
+        size="rg"
+        testId="facebook-login"
+        padding="none"
+      >
         <div className="button_in_Wrap">
           <Image
             src="/images/facebook.svg"

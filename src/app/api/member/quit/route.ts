@@ -10,7 +10,7 @@ export async function DELETE(request: NextRequest) {
 
     return NextResponse.json(
       { message: "계정 삭제에 성공하였습니다" },
-      { status: 204 } // 상태 코드 200 - 성공
+      { status: 200 }
     );
   } catch (error) {
     return NextResponse.json(

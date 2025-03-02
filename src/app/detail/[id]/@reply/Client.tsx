@@ -21,13 +21,14 @@ const Reply = ({ pageId }: propsType) => {
 
   const { mutate } = useReplyMutation();
 
-  const submitHandler = (data: textAreaType) => {
+  const submitHandler = (data: textAreaType, reset: any) => {
     const content = createReplyHandler({
       user: user as User,
       id: pageId,
       comment: data.textAreaRequired,
     });
     mutate(content);
+    reset();
   };
 
   const isActive = replyData.length > 0;

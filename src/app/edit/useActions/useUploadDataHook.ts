@@ -1,12 +1,20 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { imageInfo, uploaderType } from "../Client";
+import { useEditDetailStore } from "@/app/updateEditor/store";
 
 export const useUploadDataHandler = () => {
+  const { imageInfo } = useEditDetailStore();
   const [imageInfoArray, setImage] = useState<imageInfo>({
     url: [],
     files: [],
     fileName: [],
   });
+
+  useEffect(() => {
+    if (imageInfo.url.length > 0) {
+      setImage(imageInfo);
+    }
+  }, [imageInfo.url]);
 
   const getUploadDataHandler = ({
     url,

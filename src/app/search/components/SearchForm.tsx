@@ -1,9 +1,11 @@
 /** @jsxImportSource @emotion/react */
 import { inputStyle } from "@/components/atoms/CommonInput/CommonInputStyle";
 import useSearchHandler from "../useActions/useSearchHandler";
+import { useEffect } from "react";
 
 export default function SearchForm() {
   const { value, setValue, keydownHandler } = useSearchHandler();
+
   return (
     <input
       value={value}

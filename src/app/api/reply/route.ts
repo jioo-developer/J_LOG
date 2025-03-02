@@ -56,7 +56,7 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json(
       { message: "댓글이 성공적으로 추가되었습니다." },
-      { status: 201 }
+      { status: 200 }
     );
   } catch (error) {
     return NextResponse.json(
@@ -78,7 +78,7 @@ export async function PUT(request: NextRequest) {
       await updateDoc(docRef, { comment: comment });
       return NextResponse.json(
         { message: "댓글이 성공적으로 업데이트되었습니다." },
-        { status: 204 }
+        { status: 200 }
       );
     }
   } catch (error) {
@@ -96,7 +96,7 @@ export async function DELETE(request: NextRequest) {
     await deleteDoc(replyDocRef);
     return NextResponse.json(
       { message: "댓글이 성공적으로 삭제 되었습니다." },
-      { status: 204 }
+      { status: 200 }
     );
   } catch (error) {
     return NextResponse.json(

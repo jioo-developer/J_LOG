@@ -36,7 +36,7 @@ export async function GET(request: NextRequest) {
             data: result,
             message: "게시글을 성공적으로 가져왔습니다.",
           },
-          { status: 200 } // 상태 코드 200
+          { status: 200 }
         );
       } else {
         return NextResponse.json(
@@ -44,7 +44,7 @@ export async function GET(request: NextRequest) {
             data: [],
             message: "해당 사용자의 게시글이 없습니다.",
           },
-          { status: 204 } // 상태 코드 404
+          { status: 200 }
         );
       }
     } else {
@@ -53,7 +53,7 @@ export async function GET(request: NextRequest) {
           data: [],
           message: "해당 사용자의 게시글이 없습니다.",
         },
-        { status: 204 } // 상태 코드 404
+        { status: 200 }
       );
     }
   } catch (error) {
@@ -62,7 +62,7 @@ export async function GET(request: NextRequest) {
       {
         message: (error as Error).message,
       },
-      { status: 500 } // 상태 코드 500 - 서버 오류
+      { status: 500 }
     );
   }
 }

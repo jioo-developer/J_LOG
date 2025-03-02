@@ -32,9 +32,9 @@ const QuitPage = () => {
   const { deleteHandler } = useQuitHook({ loginType });
 
   return (
-    <div className="flex-Set" css={wrap}>
+    <div className="flex-Set label__area" css={wrap}>
       <form
-        className="flex-Set label-area"
+        className="flex-Set"
         data-testid="form-test"
         css={Style}
         onSubmit={handleSubmit(deleteHandler)}

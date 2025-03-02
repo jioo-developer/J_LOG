@@ -6,12 +6,12 @@ type propsType = {
 };
 export const usePurchaseHandler = ({ value, cashData }: propsType) => {
   const { mutate } = useCashMutation();
-
+  const itemLength = value;
   const buyHandler = () => {
-    const money = cashData.cash;
-    const cash = money - value * 2500;
-    const length = cashData.item + value;
-    mutate({ cash, item: length });
+    mutate({
+      cash: cashData.cash - itemLength * 2500,
+      item: cashData.item + itemLength,
+    });
   };
 
   return buyHandler;

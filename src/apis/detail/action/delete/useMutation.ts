@@ -14,7 +14,7 @@ const usePageDeleteMutation = () => {
     },
     onSuccess: async () => {
       setMessage("");
-      router.push("/");
+      window.location.reload();
       await queryClient.refetchQueries({
         queryKey: ["getPost"], // 리페칭할 쿼리의 키를 지정
       });

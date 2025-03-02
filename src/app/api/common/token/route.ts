@@ -8,12 +8,12 @@ export async function GET() {
     cookiesStore.get("authToken")?.value ||
     cookiesStore.get("GoogleAuthToken")?.value;
 
-  const tokenStatus = token ?? false;
+  const tokenStatus = token ? true : false;
 
   console.log("is Tokened:" + tokenStatus);
 
   return NextResponse.json(
-    { isToken: tokenStatus, message: `is token : ${tokenStatus}` },
+    { isToken: token, message: `is token : ${tokenStatus}` },
     { status: 200 }
   );
 }

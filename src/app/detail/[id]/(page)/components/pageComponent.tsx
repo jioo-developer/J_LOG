@@ -11,7 +11,6 @@ import useMediaQuery from "@/utils/useMediaQuery";
 import { popuprHandler } from "@/utils/popupHandler";
 import { deleteObject, ref } from "firebase/storage";
 import { storageService } from "@/lib/firebase";
-import CommonLinkButton from "@/components/atoms/CommonLinkButton/CommonLinkButton";
 
 type propsType = {
   user: string;
@@ -87,13 +86,14 @@ export default function PageComponent({
           {pageData.writer === user && (
             <>
               <div className="right_wrap flex-Set">
-                <CommonLinkButton
+                <CommonButton
+                  theme="none"
                   size="rg"
                   testId="updateButton"
                   padding={isMobile ? "none" : undefined}
                 >
                   <Link href="/updateEditor">수정</Link>
-                </CommonLinkButton>
+                </CommonButton>
                 <CommonButton
                   theme="none"
                   onClick={deletePagePopup}

@@ -10,7 +10,7 @@ export type textAreaType = {
 };
 
 type propsType = {
-  submitHandler: (data: any) => void;
+  submitHandler: (data: textAreaType, reset: any) => void;
   defaultValue?: string;
 };
 
@@ -18,7 +18,7 @@ export default function TextAreaComponent({
   submitHandler,
   defaultValue = "",
 }: propsType) {
-  const { handleSubmit, control, setValue } = useForm<textAreaType>({
+  const { handleSubmit, control, setValue, reset } = useForm<textAreaType>({
     defaultValues: {
       textAreaRequired: defaultValue ?? "", // defaultValue를 명시적으로 설정
     },
@@ -36,7 +36,7 @@ export default function TextAreaComponent({
       data-testid="form-test"
       css={formWrap}
       onSubmit={handleSubmit((data) => {
-        submitHandler(data);
+        submitHandler(data, reset);
       })}
     >
       <Controller

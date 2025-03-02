@@ -19,7 +19,7 @@ export async function POST(request: Request) {
 
     return NextResponse.json(
       { message: "회원가입에 성공하였습니다." },
-      { status: 201 }
+      { status: 200 }
     );
   } catch (error) {
     return NextResponse.json(

@@ -29,6 +29,7 @@ const ReplyItem = ({ user, item, index, pageId }: propsType) => {
       comment: data.textAreaRequired,
     });
     setValue("");
+    setTarget(false);
   }
 
   function AskDeleteHandler() {

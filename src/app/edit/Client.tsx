@@ -37,8 +37,7 @@ function EditPage() {
   const { pgId: pageId } = usePageInfoStore();
   const { mutate } = useCreateMutation();
 
-  const { imageInfoArray, getUploadDataHandler, setImage } =
-    useUploadDataHandler();
+  const { imageInfoArray, getUploadDataHandler } = useUploadDataHandler();
 
   const { getFormDataHandler } = useFormDataHandler(
     imageInfoArray,
@@ -46,7 +45,7 @@ function EditPage() {
     pageId,
     checkRef
   );
-  usePageEffect(checkRef, setImage, imageInfoArray);
+  usePageEffect(checkRef);
 
   const handleSubmitForm = async (data: InputType) => {
     const content = await getFormDataHandler(data);

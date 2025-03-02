@@ -58,8 +58,8 @@ export async function POST(request: NextRequest) {
   // 페이지 정보의 favorite 개수 수정을 위해 페이지의 doc을 불러옴
 
   // like collection이 있는지 검증
-  const likeRef = collection(db, "post", id, "like");
   try {
+    const likeRef = collection(db, "post", id, "like");
     const likeSnapshot = await getDocs(likeRef);
     // like collection이 있는지 검증
 
@@ -84,6 +84,7 @@ export async function POST(request: NextRequest) {
       const likeDocRef = doc(likeRef, user); // user.uid를 문서 ID로 사용
       const likeDocSnap = await getDoc(likeDocRef);
       const isLiked = likeDocSnap.exists();
+      console.log(isLiked);
       newFavorite = isLiked ? value - 1 : value + 1;
       if (isLiked) {
         // 좋아요 취소
@@ -99,12 +100,14 @@ export async function POST(request: NextRequest) {
     // like collection이 있을 때
 
     // 공통 적용
-    await updateDoc(postDocRef, { favorite: newFavorite });
+    await updateDoc(postDocRef, {
+      favorite: newFavorite,
+    });
     return NextResponse.json(
       {
         message: "좋아요 반영이 완료되었습니다.",
       },
-      { status: 204 }
+      { status: 200 }
     );
     // 공통 적용
   } catch (error) {

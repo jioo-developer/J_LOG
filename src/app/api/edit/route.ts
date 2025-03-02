@@ -8,7 +8,7 @@ export async function POST(request: NextRequest) {
     await setDoc(doc(db, "post", pageId), data);
     return NextResponse.json(
       { message: "게시글 작성에 성공 하였습니다." },
-      { status: 201 }
+      { status: 200 }
     );
   } catch (error) {
     return NextResponse.json(

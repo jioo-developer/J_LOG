@@ -56,7 +56,7 @@ export async function POST(request: Request) {
 export async function DELETE() {
   const response = NextResponse.json(
     { message: "로그아웃 완료, 쿠키 삭제를 삭제합니다" },
-    { status: 204 }
+    { status: 200 }
   );
 
   response.cookies.delete("authToken");

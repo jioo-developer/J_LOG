@@ -13,7 +13,7 @@ export default function AuthLayout({ children }: AuthLayoutProps) {
   return (
     <div className="auth__Wrap">
       <div className="title__Area flex-Set">
-        <CommonLinkButton className="flex-Set">
+        <CommonLinkButton>
           <Link href="/login" className="close">
             <FaChevronLeft size={16} />
           </Link>

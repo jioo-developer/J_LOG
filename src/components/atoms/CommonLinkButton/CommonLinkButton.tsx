@@ -6,7 +6,7 @@ export interface CommonLinkButtonProps {
   children: ReactNode;
   size?: "sm" | "rg" | "md" | "lg";
   theme?: "white" | "success" | "primary" | "disable" | "warnning" | "none";
-  padding?: "none";
+  padding?: "none" | "";
   testId?: string;
   onClick?: () => void;
   className?: string;
@@ -17,18 +17,17 @@ function CommonLinkButton({
   onClick,
   size = "rg",
   theme = "none",
-  padding,
   testId,
-  className,
+  padding = "",
+  className = "",
 }: CommonLinkButtonProps) {
   return (
     <div
-      className={className ? className : undefined}
+      className={padding === "none" ? "no-padding" : undefined}
       data-testid={testId}
       data-cy={testId}
       css={[themes[theme], buttonVariants[size]]}
       onClick={onClick}
-      style={padding === "none" ? { padding: "0 !important" } : {}}
     >
       {children}
     </div>

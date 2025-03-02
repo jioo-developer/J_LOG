@@ -29,15 +29,13 @@ function HeaderUICompnent({ pathName, user, logout }: propsType) {
 
   return (
     <header className="flex-Set" data-testid="header-test" css={HeaderStyle}>
-      <CommonLinkButton>
-        <Link href="/" className="title" onClick={() => setSearch("")}>
-          {user ? (
-            user.displayName + ".log"
-          ) : (
-            <Skeleton variant="text" width={110} />
-          )}
-        </Link>
-      </CommonLinkButton>
+      <Link href="/" className="title" onClick={() => setSearch("")}>
+        {user ? (
+          user.displayName + ".log"
+        ) : (
+          <Skeleton variant="text" width={110} />
+        )}
+      </Link>
 
       <div css={UIWrap}>
         <CommonLinkButton testId="search-test">
