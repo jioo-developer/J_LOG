@@ -4,6 +4,7 @@ import Link from "next/link";
 import { postItemStyle, writeWrap } from "./Style";
 import { usePageInfoStore } from "@/store/pageInfoStore";
 import { FirebaseData } from "@/static/types/common";
+import CommonLinkButton from "@/components/atoms/CommonLinkButton/CommonLinkButton";
 
 interface ItemListProps {
   items: FirebaseData[];
@@ -17,7 +18,7 @@ const ItemList = ({ items }: ItemListProps) => {
   return (
     <>
       {items.map((item, index) => (
-        <div key={index} className="post" css={postItemStyle}>
+        <CommonLinkButton key={index} className="post" css={postItemStyle}>
           <Link
             href={`/detail/${item.pageId}`}
             onClick={() => setPgId(item.pageId)}
@@ -49,7 +50,7 @@ const ItemList = ({ items }: ItemListProps) => {
               <p className="favorite flex-Set">❤&nbsp;{item.favorite}</p>
             </div>
           </Link>
-        </div>
+        </CommonLinkButton>
       ))}
     </>
   );

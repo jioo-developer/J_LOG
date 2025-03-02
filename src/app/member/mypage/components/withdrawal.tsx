@@ -1,4 +1,4 @@
-import CommonButton from "@/components/atoms/CommonButton/CommonButton";
+import CommonLinkButton from "@/components/atoms/CommonLinkButton/CommonLinkButton";
 import Link from "next/link";
 
 export default function Withdrawal() {
@@ -11,17 +11,17 @@ export default function Withdrawal() {
       <div className="delete_wrap">
         <p className="withdrawal_title">회원 탈퇴</p>
         <div className="in_wrap">
-          <CommonButton theme="warnning" size="rg">
+          <CommonLinkButton theme="warnning" size="rg">
             <Link href="/member/quit">회원탈퇴</Link>
-          </CommonButton>
+          </CommonLinkButton>
         </div>
       </div>
       <div className="delete_wrap">
         <p className="withdrawal_title">우선권 구매</p>
         <div className="in_wrap">
-          <CommonButton theme="white" size="rg">
+          <CommonLinkButton theme="white" size="rg">
             <Link href="/market">구매하기</Link>
-          </CommonButton>
+          </CommonLinkButton>
         </div>
       </div>
 

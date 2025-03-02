@@ -2,7 +2,6 @@
 "use client";
 import Image from "next/image";
 import { useEffect, useRef } from "react";
-import CommonButton from "../../../atoms/CommonButton/CommonButton";
 import Link from "next/link";
 import { HeaderStyle, SubMenu, UIWrap } from "./Style";
 import { Skeleton } from "@mui/material";
@@ -10,6 +9,7 @@ import { useSearchStore } from "@/store/searchStore";
 import { FaChevronDown } from "react-icons/fa";
 import { IoIosSearch } from "react-icons/io";
 import { User } from "firebase/auth";
+import CommonLinkButton from "@/components/atoms/CommonLinkButton/CommonLinkButton";
 
 type propsType = {
   pathName: string;
@@ -29,19 +29,22 @@ function HeaderUICompnent({ pathName, user, logout }: propsType) {
 
   return (
     <header className="flex-Set" data-testid="header-test" css={HeaderStyle}>
-      <Link href="/" className="title" onClick={() => setSearch("")}>
-        {user ? (
-          user.displayName + ".log"
-        ) : (
-          <Skeleton variant="text" width={110} />
-        )}
-      </Link>
+      <CommonLinkButton>
+        <Link href="/" className="title" onClick={() => setSearch("")}>
+          {user ? (
+            user.displayName + ".log"
+          ) : (
+            <Skeleton variant="text" width={110} />
+          )}
+        </Link>
+      </CommonLinkButton>
+
       <div css={UIWrap}>
-        <CommonButton theme="none" testId="search-test">
+        <CommonLinkButton testId="search-test">
           <Link href="/search">
             <IoIosSearch size={32} style={{ marginTop: 10 }} />
           </Link>
-        </CommonButton>
+        </CommonLinkButton>
         <label htmlFor="menuToggle" className="flex-Set">
           <input type="checkbox" id="menuToggle" ref={ref} />
           <figure>
@@ -62,19 +65,17 @@ function HeaderUICompnent({ pathName, user, logout }: propsType) {
 
         <ul className="sub_menu" css={SubMenu}>
           <li>
-            <CommonButton theme="none" type="button">
+            <CommonLinkButton>
               <Link href="/member/mypage">마이페이지</Link>
-            </CommonButton>
+            </CommonLinkButton>
           </li>
           <li>
-            <CommonButton theme="none" type="button">
+            <CommonLinkButton>
               <Link href="/member/myboard">내 게시글</Link>
-            </CommonButton>
+            </CommonLinkButton>
           </li>
           <li>
-            <CommonButton theme="none" type="button" onClick={logout}>
-              로그아웃
-            </CommonButton>
+            <CommonLinkButton onClick={logout}>로그아웃</CommonLinkButton>
           </li>
         </ul>
       </div>

@@ -12,6 +12,7 @@ import useUserQueryHook from "@/apis/login/query/useGetUserQuery";
 import { useUploadDataHandler } from "./useActions/useUploadDataHook";
 import { useFormDataHandler } from "./useActions/useFormDataHook";
 import { usePageEffect } from "./useActions/usePageEffect";
+import CommonLinkButton from "@/components/atoms/CommonLinkButton/CommonLinkButton";
 
 export type InputType = {
   titleRequired: string;
@@ -61,9 +62,9 @@ function EditPage() {
       <Uploader data={imageInfoArray} setImageHandler={getUploadDataHandler} />
       <div className="bottom_wrap flex-Set">
         <div className="box_wrap">
-          <CommonButton theme="none" size="rg">
+          <CommonLinkButton size="rg">
             <Link href="/">← &nbsp;나가기</Link>
-          </CommonButton>
+          </CommonLinkButton>
         </div>
         <div className="box_wrap">
           <CommonButton

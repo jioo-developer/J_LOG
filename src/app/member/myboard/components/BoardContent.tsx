@@ -3,6 +3,7 @@ import CommonButton from "@/components/atoms/CommonButton/CommonButton";
 import { usePageInfoStore } from "@/store/pageInfoStore";
 import Link from "next/link";
 import Item from "./item/Item";
+import CommonLinkButton from "@/components/atoms/CommonLinkButton/CommonLinkButton";
 
 type BoardContentProps = {
   myData: any[];
@@ -23,14 +24,14 @@ const BoardContent = ({ myData }: BoardContentProps) => {
         {myData.length > 0 &&
           myData.map((item, index) => {
             return (
-              <CommonButton theme="none" key={index}>
+              <CommonLinkButton key={index}>
                 <Link
                   onClick={() => setPgId(item.pageId)}
                   href={`/detail/${item.pageId}`}
                 >
                   <Item item={item} />
                 </Link>
-              </CommonButton>
+              </CommonLinkButton>
             );
           })}
       </div>
