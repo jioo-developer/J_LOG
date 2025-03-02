@@ -11,10 +11,10 @@ import useNameChangeMutation from "@/apis/member/mypage/nicknameForm/useMutation
 import useImageMutation from "@/apis/member/mypage/profile/useMutation";
 import MyPage from "@/app/member/mypage/Client";
 
-jest.mock("@/apis/login/hook/useGetUserQuery", () => ({
+jest.mock("@/apis/login/query/useGetUserQuery", () => ({
   __esModule: true, // ES 모듈로 인식
   default: jest.fn().mockReturnValue({
-    data: { uid: "테스터", displayName: "테스터" }, // 기본 테스트 데이터
+    data: { uid: "테스터" }, // 기본 테스트 데이터
     error: null,
     isLoading: false,
   }),

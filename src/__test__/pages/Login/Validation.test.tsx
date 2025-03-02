@@ -8,6 +8,7 @@ import {
 import { getFormElementHandler } from "./utils";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import LoginPage from "@/app/login/Client";
+import LoginForm from "@/app/login/components/LoginForm";
 
 const onSubmit = jest.fn();
 
@@ -18,7 +19,7 @@ describe("로그인 form에 대한 유효성 검사를 테스트 합니다", () 
     await act(async () => {
       render(
         <QueryClientProvider client={queryClient}>
-          <LoginPage onSubmit={onSubmit} />
+          <LoginForm onSubmit={onSubmit} />
         </QueryClientProvider>
       );
     });

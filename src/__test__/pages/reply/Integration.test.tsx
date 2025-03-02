@@ -51,10 +51,10 @@ jest.mock("react-hook-form", () => ({
   },
 }));
 
-jest.mock("@/apis/login/hook/useGetUserQuery", () => ({
+jest.mock("@/apis/login/query/useGetUserQuery", () => ({
   __esModule: true, // ES 모듈로 인식
   default: jest.fn().mockReturnValue({
-    data: { uid: "테스터", displayName: "테스터" }, // 기본 테스트 데이터
+    data: { uid: "테스터" }, // 기본 테스트 데이터
     error: null,
     isLoading: false,
   }),
@@ -122,9 +122,12 @@ describe("Reply 페이지에 대한 기능을 테스트 합니다", () => {
 
     // mutate 함수가 호출되는지 확인
     await waitFor(() => {
-      expect(onsubmitHandler).toHaveBeenCalledWith({
-        textAreaRequired: "New reply",
-      });
+      expect(onsubmitHandler).toHaveBeenCalledWith(
+        expect.objectContaining({
+          textAreaRequired: "New reply",
+        }),
+        expect.any(Function)
+      );
     });
   });
 

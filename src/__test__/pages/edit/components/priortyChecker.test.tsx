@@ -22,5 +22,6 @@ test("노출 우선권 아이템의 기능을 테스트 합니다.", () => {
   expect(popuprHandler).toHaveBeenCalledWith({
     message: "아이템을 보유하고 있지 않습니다, 구매하러 가시겠습니까?",
     type: "confirm",
+    callback: expect.anything(),
   });
 });

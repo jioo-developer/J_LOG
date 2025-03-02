@@ -1,13 +1,14 @@
 import { MockCashData } from "./util";
 import useCashMutation from "@/apis/market/useMutation";
 import MarketPage from "@/app/market/Client";
+import { usePurchaseHandler } from "@/app/market/useActions/usePurchaseHandler";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { fireEvent, render, screen } from "@testing-library/react";
 
-jest.mock("@/apis/login/hook/useGetUserQuery", () => ({
-  __esModule: true, // ES 모듈로 인식되도록 설정
+jest.mock("@/apis/login/query/useGetUserQuery", () => ({
+  __esModule: true, // ES 모듈로 인식
   default: jest.fn().mockReturnValue({
-    data: { uid: "테스터" }, // 모의 데이터 반환
+    data: { uid: "테스터" }, // 기본 테스트 데이터
     error: null,
     isLoading: false,
   }),
@@ -22,10 +23,14 @@ jest.mock("@/apis/market/query/useGetCashQuery", () => ({
   }),
 }));
 
+jest.mock("@/app/market/useActions/usePurchaseHandler", () => ({
+  usePurchaseHandler: jest.fn(),
+}));
+
 jest.mock("@/apis/market/useMutation", () => ({
-  __esModule: true, // 이 부분은 모듈을 ES 모듈로 취급하게 합니다.
+  __esModule: true,
   default: jest.fn().mockReturnValue({
-    mutateAsync: jest.fn(),
+    mutate: jest.fn(),
   }),
 }));
 
@@ -59,10 +64,9 @@ describe("market 페이지 기능을 테스트 합니다.", () => {
     const confirmButton = screen.getByText("확인");
     fireEvent.click(confirmButton);
 
-    const mutation = useCashMutation();
-    expect(mutation.mutateAsync).toHaveBeenCalledWith({
-      cash: MockCashData.cash - itemLength * 2500,
-      item: 1,
+    expect(usePurchaseHandler).toHaveBeenCalledWith({
+      cashData: { cash: 2500, item: 0 },
+      value: 1,
     });
   });
 });

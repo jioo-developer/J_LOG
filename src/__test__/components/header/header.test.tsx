@@ -17,17 +17,16 @@ jest.mock("@/apis/common/getTokenHandler", () => ({
   getTokenHandler: jest.fn().mockReturnValue(true),
 }));
 
-jest.mock("@/apis/login/hook/useGetUserQuery", () => ({
+jest.mock("@/apis/login/query/useGetUserQuery", () => ({
   __esModule: true, // ES 모듈로 인식
   default: jest.fn().mockReturnValue({
-    data: null,
+    data: { uid: "테스터" }, // 기본 테스트 데이터
     error: null,
     isLoading: false,
-    refetch: jest.fn(), // refetch 함수 수정
   }),
 }));
 
-jest.mock("@/apis/login/hook/useLogoutHook", () => ({
+jest.mock("@/apis/login/logout/useLogoutHook", () => ({
   __esModule: true, // ES 모듈로 인식
   default: jest.fn().mockReturnValue({
     mutate: jest.fn(),
