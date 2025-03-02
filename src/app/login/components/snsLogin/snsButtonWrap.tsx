@@ -17,7 +17,7 @@ const SocialLoginPage = () => {
       <CommonButton
         theme="none"
         size="rg"
-        onClick={mutate}
+        onClick={() => mutate()}
         testId="google-login"
       >
         <div className="button_in_Wrap">
