@@ -4,6 +4,7 @@ import { useSearchStore } from "@/store/searchStore";
 import useSearchEffect from "./useActions/useSearchEffect";
 import ItemList from "./component/ItemList";
 import AddButton from "./component/AddPostButton";
+import { SectionStyle } from "./style";
 
 const MainPage = () => {
   const { searchText } = useSearchStore();
@@ -13,7 +14,7 @@ const MainPage = () => {
 
   return (
     <>
-      <div className="post_section">
+      <div className="post_section" css={SectionStyle}>
         <ItemList items={filteredData} />
       </div>
       <AddButton />

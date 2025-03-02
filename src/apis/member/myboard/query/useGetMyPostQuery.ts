@@ -12,7 +12,6 @@ const useMyDataQueryHook = (user: string) => {
       },
       staleTime: 5 * 60 * 1000,
       retry: 3,
-      initialData: [],
     });
 
   return { myData: data, isLoading, error };

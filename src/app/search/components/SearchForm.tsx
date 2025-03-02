@@ -1,3 +1,4 @@
+/** @jsxImportSource @emotion/react */
 import { inputStyle } from "@/components/atoms/CommonInput/CommonInputStyle";
 import useSearchHandler from "../useActions/useSearchHandler";
 

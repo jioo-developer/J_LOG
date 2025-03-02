@@ -13,24 +13,28 @@ const MyBoardPage = () => {
   const { myData, isLoading } = useMyDataQueryHook(user ? user.uid : "");
 
   useEffect(() => {
-    if (!isLoading && myData.length === 0) {
+    if (!isLoading && !myData) {
       popuprHandler({ message: "작성한 게시글이 없습니다." });
     }
-  }, [isLoading, myData.length]);
+  }, [isLoading, myData]);
 
   return (
-    <div className="wrap board_wrap">
-      {user && (
-        <>
-          <ProfileSection
-            photoURL={user.photoURL as string}
-            displayName={user.displayName as string}
-          />
-        </>
-      )}
+    <>
+      {myData && (
+        <div className="wrap board_wrap">
+          {user && (
+            <>
+              <ProfileSection
+                photoURL={user.photoURL as string}
+                displayName={user.displayName as string}
+              />
+            </>
+          )}
 
-      <BoardContent myData={myData} />
-    </div>
+          <BoardContent myData={myData} />
+        </div>
+      )}
+    </>
   );
 };
 

@@ -55,11 +55,12 @@ export const SubMenu = css`
   flex-direction: column;
   position: absolute;
   right: Calc(var(--gap-xlarge) * 2);
-  top: Calc(var(--gap-xlarge) * 3.3);
+  top: Calc(var(--gap-xlarge) * 4);
   background: #fff;
   box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.1);
   z-index: 10;
   visibility: hidden;
+  z-index: 1000;
 
   @media all and (max-width: 960px) {
     right: 10px;

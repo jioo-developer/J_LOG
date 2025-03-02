@@ -23,7 +23,7 @@ const MarketPage = () => {
             return <Item value={item} key={item} setItem={setValue} />;
           })}
         </div>
-        <span>현재 포인트 :&nbsp;${convertPrice(cashData.cash)} +</span>
+        <span>현재 포인트 :&nbsp;{convertPrice(cashData.cash)} +</span>
         <div className="button__group">
           <CommonButton theme="white" onClick={() => router.back()}>
             취소
