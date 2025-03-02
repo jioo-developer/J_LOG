@@ -29,7 +29,7 @@ function CommonButton({
       css={[themes[theme], buttonVariants[size]]}
       onClick={onClick}
       type={type}
-      style={!padding ? { padding: "0 !important" } : {}}
+      style={padding === "none" ? { padding: "0 !important" } : {}}
     >
       {children}
     </button>
