@@ -8,28 +8,31 @@ import HeaderUICompnent from "../UI/component";
 type propsType = {
   pathName: string;
 };
+
 export default function UserProvider({ pathName }: propsType) {
   const [tokenState, setToken] = useState<boolean | null>(null);
   const { data: user, refetch } = useUserQueryHook();
   const { mutate: logout } = useLogoutHook();
 
-  const fetchToken = async () => {
-    const isTokened = await getTokenHandler();
-    setToken(isTokened);
-  };
-
   useEffect(() => {
-    if ((tokenState && !user) || !user) {
-      refetch();
-    } else {
-      fetchToken();
-    }
-  }, [tokenState, user, pathName]);
+    const fetchToken = async () => {
+      const isTokened = await getTokenHandler();
+      setToken(isTokened);
+    };
+    fetchToken();
+  }, []);
 
   useEffect(() => {
     if (typeof tokenState === "boolean" && !tokenState && user) {
       logout();
+    } else if (tokenState && !user) {
+      refetch();
     }
   }, [tokenState, user]);
+
+  useEffect(() => {
+    refetch();
+  }, [pathName]);
+
   return <HeaderUICompnent pathName={pathName} user={user} logout={logout} />;
 }
